@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "name": "Run app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug"
+    }
+  ]
+}
