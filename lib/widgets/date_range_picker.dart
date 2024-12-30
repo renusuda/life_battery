@@ -49,7 +49,7 @@ class DateRangePicker extends StatelessWidget {
 }
 
 /// A circle of the date range.
-class DateRangePickerCircle extends StatelessWidget {
+class DateRangePickerCircle extends StatefulWidget {
   /// Constructor
   const DateRangePickerCircle({
     required this.isStart,
@@ -64,15 +64,43 @@ class DateRangePickerCircle extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
+  DateRangePickerCircleState createState() => DateRangePickerCircleState();
+}
+
+/// A state of the date range picker circle.
+class DateRangePickerCircleState extends State<DateRangePickerCircle>
+    with TickerProviderStateMixin {
+  late final _controller = AnimationController(
+    duration: const Duration(seconds: 1),
+    vsync: this,
+  )..repeat(reverse: true);
+  late final _animation = Tween<double>(begin: 0.7, end: 1.3).animate(
+    CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    ),
+  );
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Positioned(
-      left: (isStart ? 0.2 : 0.8) * MediaQuery.of(context).size.width - 10,
+      left:
+          (widget.isStart ? 0.2 : 0.8) * MediaQuery.of(context).size.width - 10,
       top: 40,
       child: GestureDetector(
-        onTap: onTap,
-        child: CircleAvatar(
-          radius: 10,
-          backgroundColor: Theme.of(context).primaryColor,
+        onTap: widget.onTap,
+        child: ScaleTransition(
+          scale: _animation,
+          child: CircleAvatar(
+            radius: 10,
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
         ),
       ),
     );
