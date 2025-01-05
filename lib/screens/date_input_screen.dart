@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:life_battery/widgets/date_range_picker.dart';
 
 /// Date input screen
@@ -10,14 +11,16 @@ class DateInputScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(),
       body: Center(
         child: Column(
           spacing: 30,
           children: <Widget>[
-            const Text(
-              '生年月日と目標とする寿命を入力してください。\nそこから、残りの時間を計算できます。',
+            Text(
+              l10n.dateInputInstruction,
             ),
             DateRangePicker(),
             const SaveButton(),
@@ -37,13 +40,15 @@ class SaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return ElevatedButton(
       onPressed: () {
         print('Save button tapped');
       },
-      child: const Text(
-        '保存',
-        style: TextStyle(fontWeight: FontWeight.bold),
+      child: Text(
+        l10n.save,
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }

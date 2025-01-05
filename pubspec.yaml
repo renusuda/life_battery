@@ -35,6 +35,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_datetime_picker_plus: ^2.2.0
+  flutter_localizations:
+    sdk: flutter
   intl: ^0.20.1
 
 dev_dependencies:
@@ -59,6 +61,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -90,3 +94,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+dependency_overrides:
+  intl: 0.20.1
