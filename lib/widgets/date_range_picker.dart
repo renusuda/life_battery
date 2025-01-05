@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:intl/intl.dart';
 
 /// A widget that allows users to select a date range.
@@ -40,19 +41,54 @@ class DateRangePicker extends StatelessWidget {
               DateRangePickerCircle(
                 isStart: true,
                 onTap: () {
-                  print('Tapped Start Circle');
+                  _showDatePicker(
+                    context: context,
+                    initialDate: _birthDate,
+                    isStart: true,
+                  );
                 },
               ),
               DateRangePickerCircle(
                 isStart: false,
                 onTap: () {
-                  print('Tapped End Circle');
+                  _showDatePicker(
+                    context: context,
+                    initialDate: _deathDate,
+                    isStart: false,
+                  );
                 },
               ),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  void _showDatePicker({
+    required BuildContext context,
+    required DateTime initialDate,
+    required bool isStart,
+  }) {
+    final initialYear = initialDate.year;
+    final initialMonth = initialDate.month;
+    final initialDay = initialDate.day;
+
+    final initialDateTime = DateTime(initialYear, initialMonth, initialDay);
+
+    final today = DateTime.now();
+    final todayYear = today.year;
+    final todayMonth = today.month;
+    final todayDay = today.day;
+
+    final todayDateTime = DateTime(todayYear, todayMonth, todayDay);
+
+    DatePicker.showDatePicker(
+      context,
+      minTime: isStart ? DateTime(1900) : todayDateTime,
+      maxTime: isStart ? todayDateTime : DateTime(2500),
+      currentTime: initialDateTime,
+      locale: LocaleType.jp,
     );
   }
 }
