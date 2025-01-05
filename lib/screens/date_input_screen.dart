@@ -12,15 +12,15 @@ class DateInputScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Center(
+      body: Center(
         child: Column(
           spacing: 30,
           children: <Widget>[
-            Text(
+            const Text(
               '生年月日と目標とする寿命を入力してください。\nそこから、残りの時間を計算できます。',
             ),
             DateRangePicker(),
-            SaveButton(),
+            const SaveButton(),
           ],
         ),
       ),
