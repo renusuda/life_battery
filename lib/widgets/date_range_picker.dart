@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
-import 'package:intl/intl.dart';
+import 'package:life_battery/utils/date_utils.dart';
 
 /// A widget that allows users to select a date range.
 class DateRangePicker extends StatelessWidget {
@@ -18,13 +18,13 @@ class DateRangePicker extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              DateFormat('yyyy/MM/dd').format(_birthDate),
+              formatDate(context, _birthDate),
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              DateFormat('yyyy/MM/dd').format(_deathDate),
+              formatDate(context, _deathDate),
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
