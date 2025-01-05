@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 /// A widget that allows users to select a date range.
 class DateRangePicker extends StatelessWidget {
   /// Constructor
-  const DateRangePicker({super.key});
+  DateRangePicker({super.key});
+
+  final _birthDate = DateTime(2000);
+  final _deathDate = DateTime(2100);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              '2000/01/01',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              DateFormat('yyyy/MM/dd').format(_birthDate),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(
-              '2100/01/01',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              DateFormat('yyyy/MM/dd').format(_deathDate),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
