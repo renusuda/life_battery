@@ -1,68 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:life_battery/providers/lifespan_range.dart';
 import 'package:life_battery/utils/context_extensions.dart';
 import 'package:life_battery/utils/date_utils.dart';
 
 /// A widget that allows users to select a date range.
-class DateRangePicker extends StatelessWidget {
+class DateRangePicker extends ConsumerWidget {
   /// Constructor
-  DateRangePicker({super.key});
-
-  final _birthDate = DateTime(2000);
-  final _deathDate = DateTime(2100);
+  const DateRangePicker({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lifespanRange = ref.watch(lifespanRangeProvider);
+
+    return switch (lifespanRange) {
+      AsyncData(:final value) => Column(
           children: [
-            Text(
-              formatDate(context, _birthDate),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  formatDate(context, value.birthDate),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  formatDate(context, value.deathDate),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              formatDate(context, _deathDate),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+            SizedBox(
+              height: 100,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  const DateRangePickerLine(),
+                  DateRangePickerCircle(
+                    isStart: true,
+                    onTap: () {
+                      _showDatePicker(
+                        context: context,
+                        initialDate: value.birthDate,
+                        isStart: true,
+                      );
+                    },
+                  ),
+                  DateRangePickerCircle(
+                    isStart: false,
+                    onTap: () {
+                      _showDatePicker(
+                        context: context,
+                        initialDate: value.deathDate,
+                        isStart: false,
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ],
         ),
-        SizedBox(
-          height: 100,
-          width: double.infinity,
-          child: Stack(
-            children: [
-              const DateRangePickerLine(),
-              DateRangePickerCircle(
-                isStart: true,
-                onTap: () {
-                  _showDatePicker(
-                    context: context,
-                    initialDate: _birthDate,
-                    isStart: true,
-                  );
-                },
-              ),
-              DateRangePickerCircle(
-                isStart: false,
-                onTap: () {
-                  _showDatePicker(
-                    context: context,
-                    initialDate: _deathDate,
-                    isStart: false,
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+      AsyncError() => const Text('エラーが発生しました。'),
+      _ => const CircularProgressIndicator(),
+    };
   }
 
   void _showDatePicker({

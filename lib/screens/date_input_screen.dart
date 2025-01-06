@@ -22,7 +22,7 @@ class DateInputScreen extends StatelessWidget {
             Text(
               l10n.dateInputInstruction,
             ),
-            DateRangePicker(),
+            const DateRangePicker(),
             const SaveButton(),
           ],
         ),
