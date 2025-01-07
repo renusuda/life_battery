@@ -123,30 +123,19 @@ class DateRangePickerContent extends ConsumerWidget {
     required DateTime deathDate,
     required bool isStart,
   }) {
-    final initialYear = initialDate.year;
-    final initialMonth = initialDate.month;
-    final initialDay = initialDate.day;
-
-    final initialDateTime = DateTime(initialYear, initialMonth, initialDay);
-
     final today = DateTime.now();
-    final todayYear = today.year;
-    final todayMonth = today.month;
-    final todayDay = today.day;
-
-    final todayDateTime = DateTime(todayYear, todayMonth, todayDay);
 
     DatePicker.showDatePicker(
       context,
-      minTime: isStart ? DateTime(1900) : todayDateTime,
-      maxTime: isStart ? todayDateTime : DateTime(2500),
+      minTime: isStart ? DateTime(1900) : today,
+      maxTime: isStart ? today : DateTime(2500),
       onConfirm: (date) {
         ref.read(lifespanRangeManagerProvider.notifier).updateLifespanRange(
               birthDate: isStart ? date : birthDate,
               deathDate: isStart ? deathDate : date,
             );
       },
-      currentTime: initialDateTime,
+      currentTime: initialDate,
       locale: context.isJapanese ? LocaleType.jp : LocaleType.en,
     );
   }
