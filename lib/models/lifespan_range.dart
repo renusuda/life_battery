@@ -8,8 +8,8 @@ part 'lifespan_range.g.dart';
 class LifespanRange with _$LifespanRange {
   /// Constructor
   factory LifespanRange({
-    required DateTime birthDate,
-    required DateTime deathDate,
+    required DateTime? birthDate,
+    required DateTime? deathDate,
   }) = _LifespanRange;
 
   /// Converts a JSON object to a [LifespanRange] instance.

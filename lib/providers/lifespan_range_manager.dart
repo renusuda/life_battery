@@ -15,8 +15,8 @@ class LifespanRangeManager extends _$LifespanRangeManager {
   Future<LifespanRange> fetch() {
     // TODO(me): Fetch the lifespan range from Local Storage
     final response = jsonEncode({
-      'birthDate': DateTime(2000).toIso8601String(),
-      'deathDate': DateTime(2100).toIso8601String(),
+      'birthDate': null,
+      'deathDate': null,
     });
     final json = jsonDecode(response) as Map<String, dynamic>;
     return Future.value(

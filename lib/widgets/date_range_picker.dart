@@ -18,65 +18,101 @@ class DateRangePicker extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return switch (lifespanRangeManager) {
-      AsyncData(:final value) => Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  formatDate(context, value.birthDate),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  formatDate(context, value.deathDate),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 100,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  const DateRangePickerLine(),
-                  DateRangePickerCircle(
-                    isStart: true,
-                    onTap: () {
-                      _showDatePicker(
-                        context: context,
-                        ref: ref,
-                        initialDate: value.birthDate,
-                        birthDate: value.birthDate,
-                        deathDate: value.deathDate,
-                        isStart: true,
-                      );
-                    },
-                  ),
-                  DateRangePickerCircle(
-                    isStart: false,
-                    onTap: () {
-                      _showDatePicker(
-                        context: context,
-                        ref: ref,
-                        initialDate: value.deathDate,
-                        birthDate: value.birthDate,
-                        deathDate: value.deathDate,
-                        isStart: false,
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
+      AsyncData(:final value) => DateRangePickerContent(
+          birthDate: value.birthDate,
+          deathDate: value.deathDate,
         ),
       AsyncError() => Text(l10n.generalError),
       _ => const CircularProgressIndicator(),
     };
+  }
+}
+
+/// A content of the date range picker.
+class DateRangePickerContent extends ConsumerWidget {
+  /// Constructor
+  const DateRangePickerContent({
+    required this.birthDate,
+    required this.deathDate,
+    super.key,
+  });
+
+  /// Birth date
+  final DateTime? birthDate;
+
+  /// Death date
+  final DateTime? deathDate;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final defaultBirthDate = DateTime(2000);
+    final defaultDeathDate = DateTime(2100);
+
+    final birthDate = this.birthDate ?? defaultBirthDate;
+    final deathDate = this.deathDate ?? defaultDeathDate;
+
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              formatDate(
+                context,
+                birthDate,
+              ),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              formatDate(
+                context,
+                deathDate,
+              ),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 100,
+          width: double.infinity,
+          child: Stack(
+            children: [
+              const DateRangePickerLine(),
+              DateRangePickerCircle(
+                isStart: true,
+                onTap: () {
+                  _showDatePicker(
+                    context: context,
+                    ref: ref,
+                    initialDate: birthDate,
+                    birthDate: birthDate,
+                    deathDate: deathDate,
+                    isStart: true,
+                  );
+                },
+              ),
+              DateRangePickerCircle(
+                isStart: false,
+                onTap: () {
+                  _showDatePicker(
+                    context: context,
+                    ref: ref,
+                    initialDate: deathDate,
+                    birthDate: birthDate,
+                    deathDate: deathDate,
+                    isStart: false,
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   void _showDatePicker({
