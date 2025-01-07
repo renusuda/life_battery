@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:life_battery/providers/lifespan_range.dart';
+import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/utils/context_extensions.dart';
 import 'package:life_battery/utils/date_utils.dart';
 
@@ -12,9 +12,9 @@ class DateRangePicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lifespanRange = ref.watch(lifespanRangeProvider);
+    final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
 
-    return switch (lifespanRange) {
+    return switch (lifespanRangeManager) {
       AsyncData(:final value) => Column(
           children: [
             Row(

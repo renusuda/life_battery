@@ -1,29 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'lifespan_range.dart';
+part of 'lifespan_range_manager.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$lifespanRangeHash() => r'857c300b20e50d55d730674ff41d1d2bdd6818d8';
+String _$lifespanRangeManagerHash() =>
+    r'cab11b63cfe7b63ff710e2166c7914372bb4be98';
 
-/// A provider that fetches the life span range from Local Storage.
+/// life span range manager
 ///
-/// Copied from [lifespanRange].
-@ProviderFor(lifespanRange)
-final lifespanRangeProvider = AutoDisposeFutureProvider<LifespanRange>.internal(
-  lifespanRange,
-  name: r'lifespanRangeProvider',
+/// Copied from [LifespanRangeManager].
+@ProviderFor(LifespanRangeManager)
+final lifespanRangeManagerProvider = AutoDisposeAsyncNotifierProvider<
+    LifespanRangeManager, LifespanRange>.internal(
+  LifespanRangeManager.new,
+  name: r'lifespanRangeManagerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$lifespanRangeHash,
+      : _$lifespanRangeManagerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef LifespanRangeRef = AutoDisposeFutureProviderRef<LifespanRange>;
+typedef _$LifespanRangeManager = AutoDisposeAsyncNotifier<LifespanRange>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
