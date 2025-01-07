@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'lifespan_range.freezed.dart';
 part 'lifespan_range.g.dart';
 
-/// A class that represents the range of a person's life span.
+/// A class that represents the range of a person's lifespan.
 @freezed
 class LifespanRange with _$LifespanRange {
   /// Constructor
