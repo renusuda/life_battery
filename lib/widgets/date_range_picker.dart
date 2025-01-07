@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/utils/context_extensions.dart';
@@ -13,6 +14,8 @@ class DateRangePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
+
+    final l10n = AppLocalizations.of(context)!;
 
     return switch (lifespanRangeManager) {
       AsyncData(:final value) => Column(
@@ -65,7 +68,7 @@ class DateRangePicker extends ConsumerWidget {
             ),
           ],
         ),
-      AsyncError() => const Text('エラーが発生しました。'),
+      AsyncError() => Text(l10n.generalError),
       _ => const CircularProgressIndicator(),
     };
   }
