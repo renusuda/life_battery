@@ -52,32 +52,56 @@ class DateRangePickerContent extends StatelessWidget {
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              formatDate(
-                context,
-                birthDate,
-              ),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              formatDate(
-                context,
-                deathDate,
-              ),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+        DateRangePickerLabels(
+          birthDate: birthDate,
+          deathDate: deathDate,
         ),
         DateRangePickerSelector(
           birthDate: birthDate,
           deathDate: deathDate,
+        ),
+      ],
+    );
+  }
+}
+
+/// A widget that displays the labels of the date range picker.
+class DateRangePickerLabels extends StatelessWidget {
+  /// Constructor
+  const DateRangePickerLabels({
+    required this.birthDate,
+    required this.deathDate,
+    super.key,
+  });
+
+  /// Birth date
+  final DateTime birthDate;
+
+  /// Death date
+  final DateTime deathDate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Text(
+          formatDate(
+            context,
+            birthDate,
+          ),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          formatDate(
+            context,
+            deathDate,
+          ),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );
