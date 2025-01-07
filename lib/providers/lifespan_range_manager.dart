@@ -23,4 +23,20 @@ class LifespanRangeManager extends _$LifespanRangeManager {
       LifespanRange.fromJson(json),
     );
   }
+
+  /// Updates the lifespan range in Local Storage.
+  Future<void> updateLifespanRange({
+    required DateTime birthDate,
+    required DateTime deathDate,
+  }) async {
+    // TODO(me): Update the lifespan range in Local Storage
+    final response = jsonEncode({
+      'birthDate': birthDate.toIso8601String(),
+      'deathDate': deathDate.toIso8601String(),
+    });
+    final json = jsonDecode(response) as Map<String, dynamic>;
+    state = AsyncData(
+      LifespanRange.fromJson(json),
+    );
+  }
 }

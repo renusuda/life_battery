@@ -48,7 +48,10 @@ class DateRangePicker extends ConsumerWidget {
                     onTap: () {
                       _showDatePicker(
                         context: context,
+                        ref: ref,
                         initialDate: value.birthDate,
+                        birthDate: value.birthDate,
+                        deathDate: value.deathDate,
                         isStart: true,
                       );
                     },
@@ -58,7 +61,10 @@ class DateRangePicker extends ConsumerWidget {
                     onTap: () {
                       _showDatePicker(
                         context: context,
+                        ref: ref,
                         initialDate: value.deathDate,
+                        birthDate: value.birthDate,
+                        deathDate: value.deathDate,
                         isStart: false,
                       );
                     },
@@ -75,7 +81,10 @@ class DateRangePicker extends ConsumerWidget {
 
   void _showDatePicker({
     required BuildContext context,
+    required WidgetRef ref,
     required DateTime initialDate,
+    required DateTime birthDate,
+    required DateTime deathDate,
     required bool isStart,
   }) {
     final initialYear = initialDate.year;
@@ -95,6 +104,12 @@ class DateRangePicker extends ConsumerWidget {
       context,
       minTime: isStart ? DateTime(1900) : todayDateTime,
       maxTime: isStart ? todayDateTime : DateTime(2500),
+      onConfirm: (date) {
+        ref.read(lifespanRangeManagerProvider.notifier).updateLifespanRange(
+              birthDate: isStart ? date : birthDate,
+              deathDate: isStart ? deathDate : date,
+            );
+      },
       currentTime: initialDateTime,
       locale: context.isJapanese ? LocaleType.jp : LocaleType.en,
     );
