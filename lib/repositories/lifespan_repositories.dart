@@ -11,7 +11,7 @@ class LifespanRepository {
   static const _columnBirthDate = 'birthDate';
   static const _columnDeathDate = 'deathDate';
 
-  /// Fetches th lifespan records from the database.
+  /// Fetches the lifespan record from the database.
   Future<LifespanRange> getLifespan() async {
     try {
       final db = await instance.database;
@@ -34,5 +34,33 @@ class LifespanRepository {
         deathDate: null,
       );
     }
+  }
+
+  /// Updates the lifespan record of the database.
+  Future<void> updateLifespan({
+    required DateTime birthDate,
+    required DateTime deathDate,
+  }) async {
+    try {
+      final db = await instance.database;
+      final response = await db.query(_tableName);
+      if (response.isEmpty) {
+        await db.insert(
+          _tableName,
+          {
+            _columnBirthDate: birthDate.toIso8601String(),
+            _columnDeathDate: deathDate.toIso8601String(),
+          },
+        );
+      } else {
+        await db.update(
+          _tableName,
+          {
+            _columnBirthDate: birthDate.toIso8601String(),
+            _columnDeathDate: deathDate.toIso8601String(),
+          },
+        );
+      }
+    } on DatabaseException catch (_) {}
   }
 }

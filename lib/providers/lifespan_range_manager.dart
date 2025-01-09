@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:life_battery/models/lifespan_range.dart';
 import 'package:life_battery/repositories/lifespan_repositories.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -26,14 +24,11 @@ class LifespanRangeManager extends _$LifespanRangeManager {
     required DateTime birthDate,
     required DateTime deathDate,
   }) async {
-    // TODO(me): Update the lifespan range in Local Storage
-    final response = jsonEncode({
-      'birthDate': birthDate.toIso8601String(),
-      'deathDate': deathDate.toIso8601String(),
-    });
-    final json = jsonDecode(response) as Map<String, dynamic>;
-    state = AsyncData(
-      LifespanRange.fromJson(json),
+    await _lifespanRepository.updateLifespan(
+      birthDate: birthDate,
+      deathDate: deathDate,
     );
+    final newLifespanRange = await fetchLifespanRange();
+    state = AsyncData(newLifespanRange);
   }
 }
