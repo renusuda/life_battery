@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:life_battery/repositories/local_database.dart';
 import 'package:life_battery/screens/date_input_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize the database
+  await LocalDatabase().database;
+
   runApp(
     const ProviderScope(
       child: App(),
