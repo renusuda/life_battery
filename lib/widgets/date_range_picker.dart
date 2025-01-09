@@ -60,6 +60,10 @@ class DateRangePickerContent extends StatelessWidget {
           birthDate: birthDate,
           deathDate: deathDate,
         ),
+        SaveButton(
+          birthDate: birthDate,
+          deathDate: deathDate,
+        ),
       ],
     );
   }
@@ -104,6 +108,40 @@ class DateRangePickerLabels extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// Save button
+class SaveButton extends ConsumerWidget {
+  /// Constructor
+  const SaveButton({
+    required this.birthDate,
+    required this.deathDate,
+    super.key,
+  });
+
+  /// Birth date
+  final DateTime birthDate;
+
+  /// Death date
+  final DateTime deathDate;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return ElevatedButton(
+      onPressed: () {
+        ref.read(lifespanRangeManagerProvider.notifier).updateLifespanRange(
+              birthDate: birthDate,
+              deathDate: deathDate,
+            );
+      },
+      child: Text(
+        l10n.save,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

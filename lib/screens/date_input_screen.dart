@@ -23,32 +23,8 @@ class DateInputScreen extends StatelessWidget {
               l10n.dateInputInstruction,
             ),
             const DateRangePicker(),
-            const SaveButton(),
           ],
         ),
-      ),
-    );
-  }
-}
-
-/// Save button
-class SaveButton extends StatelessWidget {
-  /// Constructor
-  const SaveButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
-    return ElevatedButton(
-      onPressed: () {
-        print('Save button tapped');
-      },
-      child: Text(
-        l10n.save,
-        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
