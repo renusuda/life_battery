@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
+import 'package:life_battery/screens/lifespan_progress_screen.dart';
 import 'package:life_battery/utils/date_utils.dart';
 import 'package:life_battery/widgets/date_range_picker_selector.dart';
 
@@ -137,6 +138,13 @@ class SaveButton extends ConsumerWidget {
               birthDate: birthDate,
               deathDate: deathDate,
             );
+        // Navigate to the lifespan progress screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute<void>(
+            builder: (context) => const LifespanProgressScreen(),
+          ),
+        );
       },
       child: Text(
         l10n.save,
