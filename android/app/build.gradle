@@ -8,7 +8,22 @@ plugins {
 android {
     namespace = "com.example.life_battery"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    /*
+        Fix this issue by using the highest Android NDK version from 「ndkVersion = flutter.ndkVersion」 to 「ndkVersion = "27.0.12077973"」 (they are backward compatible).
+        """
+        Your project is configured with Android NDK 26.1.10909125, but the following plugin(s) depend on a different Android NDK version:
+        - sqflite_android requires Android NDK 27.0.12077973
+        Fix this issue by using the highest Android NDK version (they are backward compatible).
+        Add the following to /Users/rulu/dev/projects/life_battery/android/app/build.gradle:
+
+            android {
+                ndkVersion = "27.0.12077973"
+                ...
+            }
+        """
+    */
+    ndkVersion = "27.0.12077973"
+
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
