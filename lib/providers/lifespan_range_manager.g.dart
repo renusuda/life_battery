@@ -7,7 +7,7 @@ part of 'lifespan_range_manager.dart';
 // **************************************************************************
 
 String _$lifespanRangeManagerHash() =>
-    r'58dcfd0a555834993376e87f0279c71f6cfdd0ef';
+    r'a7eab516ce09fd91eff0d6ab6e3f1f9435340012';
 
 /// lifespan range manager
 ///

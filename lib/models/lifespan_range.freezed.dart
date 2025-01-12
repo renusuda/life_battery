@@ -115,8 +115,9 @@ class __$$LifespanRangeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$LifespanRangeImpl implements _LifespanRange {
-  _$LifespanRangeImpl({required this.birthDate, required this.deathDate});
+class _$LifespanRangeImpl extends _LifespanRange {
+  _$LifespanRangeImpl({required this.birthDate, required this.deathDate})
+      : super._();
 
   factory _$LifespanRangeImpl.fromJson(Map<String, dynamic> json) =>
       _$$LifespanRangeImplFromJson(json);
@@ -162,10 +163,11 @@ class _$LifespanRangeImpl implements _LifespanRange {
   }
 }
 
-abstract class _LifespanRange implements LifespanRange {
+abstract class _LifespanRange extends LifespanRange {
   factory _LifespanRange(
       {required final DateTime? birthDate,
       required final DateTime? deathDate}) = _$LifespanRangeImpl;
+  _LifespanRange._() : super._();
 
   factory _LifespanRange.fromJson(Map<String, dynamic> json) =
       _$LifespanRangeImpl.fromJson;
