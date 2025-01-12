@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_battery/widgets/battery_indicator.dart';
 
 /// Screen for showing the remaining of lifespan
 class LifespanProgressScreen extends StatelessWidget {
@@ -10,14 +11,7 @@ class LifespanProgressScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: const Center(
-        child: Column(
-          spacing: 30,
-          children: <Widget>[
-            Text(
-              'Lifespan Progress',
-            ),
-          ],
-        ),
+        child: BatteryIndicator(value: 100),
       ),
     );
   }
