@@ -160,6 +160,7 @@ class BatteryText extends StatelessWidget {
           fontWeight: FontWeight.bold,
           color: Colors.black,
         ),
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
