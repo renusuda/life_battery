@@ -31,7 +31,7 @@ class LifespanProgressScreen extends ConsumerWidget {
 }
 
 /// Content of the battery indicator
-class LifeProgressContent extends StatelessWidget {
+class LifeProgressContent extends StatefulWidget {
   /// Constructor
   const LifeProgressContent({
     required this.lifespanRange,
@@ -42,7 +42,28 @@ class LifeProgressContent extends StatelessWidget {
   final LifespanRange lifespanRange;
 
   @override
+  State<LifeProgressContent> createState() => _LifeProgressContentState();
+}
+
+class _LifeProgressContentState extends State<LifeProgressContent> {
+  var _isPercentageMode = true;
+
+  void _toggleMode() {
+    setState(() {
+      _isPercentageMode = !_isPercentageMode;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final remainingLifePercentage =
+        widget.lifespanRange.remainingLifePercentage(
+      now: DateTime.now(),
+    );
+    final remainingLifeDays = widget.lifespanRange.remainingLifeDays(
+      now: DateTime.now(),
+    );
+
     return GestureDetector(
       onLongPress: () {
         Navigator.pushReplacement(
@@ -52,10 +73,12 @@ class LifeProgressContent extends StatelessWidget {
           ),
         );
       },
+      onTap: _toggleMode,
       child: BatteryIndicator(
-        value: lifespanRange.remainingLifePercentage(
-          now: DateTime.now(),
-        ),
+        value: remainingLifePercentage,
+        text: _isPercentageMode
+            ? '$remainingLifePercentage%'
+            : '$remainingLifeDays日',
       ),
     );
   }

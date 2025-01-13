@@ -47,4 +47,22 @@ class LifespanRange with _$LifespanRange {
 
     return (remainingLife / totalLife * 100).ceil();
   }
+
+  /// Returns the remaining life days.
+  int remainingLifeDays({
+    required DateTime now,
+  }) {
+    if (birthDate == null || deathDate == null) {
+      return 0;
+    }
+
+    final dateOnlyNow = now.toDateOnly;
+    final dateOnlyDeathDate = deathDate!.toDateOnly;
+
+    if (dateOnlyNow.isAfter(dateOnlyDeathDate)) {
+      return 0;
+    }
+
+    return dateOnlyDeathDate.difference(dateOnlyNow).inDays;
+  }
 }

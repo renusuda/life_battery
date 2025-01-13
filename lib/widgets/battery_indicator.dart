@@ -6,18 +6,25 @@ class BatteryIndicator extends StatelessWidget {
   /// Constructor
   const BatteryIndicator({
     required this.value,
+    required this.text,
     super.key,
   });
 
   /// battery value
   final int value;
 
+  /// battery text
+  final String text;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        BatteryBody(value: value),
+        BatteryBody(
+          value: value,
+          text: text,
+        ),
         const BatteryKnob(),
       ],
     );
@@ -29,11 +36,15 @@ class BatteryBody extends StatelessWidget {
   /// Constructor
   const BatteryBody({
     required this.value,
+    required this.text,
     super.key,
   });
 
   /// battery value
   final int value;
+
+  /// battery text
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +61,7 @@ class BatteryBody extends StatelessWidget {
             value: value,
             bodyWidth: bodyWidth,
           ),
-          BatteryText(value: value),
+          BatteryText(text: text),
         ],
       ),
     );
@@ -132,18 +143,18 @@ class _BatteryBarState extends State<BatteryBar> {
 class BatteryText extends StatelessWidget {
   /// Constructor
   const BatteryText({
-    required this.value,
+    required this.text,
     super.key,
   });
 
-  /// battery value
-  final int value;
+  /// battery text
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        '$value%',
+        text,
         style: const TextStyle(
           fontSize: 40,
           fontWeight: FontWeight.bold,
