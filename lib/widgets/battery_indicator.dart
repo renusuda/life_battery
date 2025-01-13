@@ -115,7 +115,7 @@ class _BatteryBarState extends State<BatteryBar> {
         begin: 100,
         end: widget.value,
       ),
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 1),
       builder: (_, value, __) {
         return Padding(
           padding: const EdgeInsets.all(10),
