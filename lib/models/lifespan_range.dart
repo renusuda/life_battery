@@ -19,6 +19,9 @@ class LifespanRange with _$LifespanRange {
   factory LifespanRange.fromJson(Map<String, dynamic> json) =>
       _$LifespanRangeFromJson(json);
 
+  /// Checks if the birth date and death date are entered.
+  bool get datesEntered => birthDate != null && deathDate != null;
+
   /// Returns the remaining life percentage.
   int remainingLifePercentage({
     required DateTime now,
