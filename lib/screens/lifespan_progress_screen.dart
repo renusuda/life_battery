@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/models/lifespan_range.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/screens/date_input_screen.dart';
+import 'package:life_battery/utils/extensions.dart';
 import 'package:life_battery/widgets/battery_indicator.dart';
 
 /// Screen for showing the remaining of lifespan
@@ -78,7 +79,7 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
         value: remainingLifePercentage,
         text: _isPercentageMode
             ? '$remainingLifePercentage%'
-            : '$remainingLifeDays日',
+            : '${remainingLifeDays.withCommaString}日',
       ),
     );
   }
