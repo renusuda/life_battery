@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
-import 'package:life_battery/utils/context_extensions.dart';
+import 'package:life_battery/utils/extensions.dart';
 
 /// A widget that allows users to select a date range.
 class DateRangePickerSelector extends ConsumerWidget {

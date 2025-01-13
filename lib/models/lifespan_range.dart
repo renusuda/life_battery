@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:life_battery/utils/extensions.dart';
 
 part 'lifespan_range.freezed.dart';
 part 'lifespan_range.g.dart';
@@ -19,19 +20,31 @@ class LifespanRange with _$LifespanRange {
       _$LifespanRangeFromJson(json);
 
   /// Returns the remaining life percentage.
-  int get remainingLifePercentage {
+  int remainingLifePercentage({
+    required DateTime now,
+  }) {
     if (birthDate == null || deathDate == null) {
       return 0;
     }
 
-    final now = DateTime.now();
-    if (now.isBefore(birthDate!) || now.isAfter(deathDate!)) {
+    final dateOnlyNow = now.toDateOnly;
+    final dateOnlyBirthDate = birthDate!.toDateOnly;
+    final dateOnlyDeathDate = deathDate!.toDateOnly;
+
+    if (dateOnlyNow.isBefore(dateOnlyBirthDate) ||
+        dateOnlyNow.isAfter(dateOnlyDeathDate)) {
       return 0;
     }
 
-    final totalLife = deathDate!.difference(birthDate!).inDays;
-    final remainingLife = deathDate!.difference(now).inDays;
+    if (dateOnlyNow.year == dateOnlyDeathDate.year &&
+        dateOnlyNow.month == dateOnlyDeathDate.month &&
+        dateOnlyNow.day == dateOnlyDeathDate.day) {
+      return 0;
+    }
 
-    return (remainingLife / totalLife * 100).round();
+    final totalLife = dateOnlyDeathDate.difference(dateOnlyBirthDate).inDays;
+    final remainingLife = dateOnlyDeathDate.difference(dateOnlyNow).inDays;
+
+    return (remainingLife / totalLife * 100).ceil();
   }
 }

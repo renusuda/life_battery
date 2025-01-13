@@ -8,3 +8,11 @@ extension ContextExtensions on BuildContext {
     return locale.languageCode == 'ja';
   }
 }
+
+/// Extensions for the [DateTime] class.
+extension DateTimeExtensions on DateTime {
+  /// Returns a new [DateTime] instance with the time set to 00:00:00.
+  DateTime get toDateOnly {
+    return DateTime(year, month, day);
+  }
+}

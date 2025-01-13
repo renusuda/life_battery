@@ -52,7 +52,11 @@ class LifeProgressContent extends StatelessWidget {
           ),
         );
       },
-      child: BatteryIndicator(value: lifespanRange.remainingLifePercentage),
+      child: BatteryIndicator(
+        value: lifespanRange.remainingLifePercentage(
+          now: DateTime.now(),
+        ),
+      ),
     );
   }
 }
