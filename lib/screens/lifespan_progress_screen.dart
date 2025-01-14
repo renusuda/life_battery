@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/models/lifespan_range.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/screens/date_input_screen.dart';
+import 'package:life_battery/screens/settings_screen.dart';
 import 'package:life_battery/utils/extensions.dart';
 import 'package:life_battery/widgets/battery_indicator.dart';
 
@@ -19,7 +20,21 @@ class LifespanProgressScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (context) => const SettingsScreen(),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: Center(
         child: switch (lifespanRangeManager) {
           AsyncData(:final value) => LifeProgressContent(lifespanRange: value),
