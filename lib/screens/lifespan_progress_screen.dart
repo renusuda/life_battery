@@ -80,6 +80,8 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
       now: DateTime.now(),
     );
 
+    final l10n = AppLocalizations.of(context)!;
+
     return GestureDetector(
       onLongPress: () {
         Navigator.pushReplacement(
@@ -94,7 +96,7 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
         value: remainingLifePercentage,
         text: _isPercentageMode
             ? '$remainingLifePercentage%'
-            : '${remainingLifeDays.withCommaString}日',
+            : '${remainingLifeDays.withCommaString}${l10n.dayUnit}',
       ),
     );
   }
