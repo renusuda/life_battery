@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// A screen that shows the settings.
 class SettingsScreen extends StatelessWidget {
@@ -7,6 +9,8 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
@@ -22,17 +26,27 @@ class SettingsScreen extends StatelessWidget {
             ),
             onTap: () {},
           ),
-          // TODO(me): Complete the privacy policy site
           ListTile(
-            leading: const Icon(Icons.security_outlined),
-            title: const Text(
-              'プライバシーポリシーサイト',
-              style: TextStyle(
+            leading: const Icon(Icons.lock_outline),
+            title: Text(
+              l10n.privacyPolicyLabel,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             trailing: const Icon(Icons.arrow_forward_ios),
-            onTap: () {},
+            onTap: () async {
+              final url = Uri.parse(
+                'https://ru2lu.github.io/life-battery-privacy-policy-site/',
+              );
+              if (await canLaunchUrl(url)) {
+                await launchUrl(
+                  url,
+                  // Launch the web page in the app itself
+                  mode: LaunchMode.inAppBrowserView,
+                );
+              }
+            },
           ),
           // TODO(me): Complete the display mode
           ListTile(
