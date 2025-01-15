@@ -135,7 +135,7 @@ class DateRangePickerCircleState extends State<DateRangePickerCircle>
           scale: _animation,
           child: CircleAvatar(
             radius: 10,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
           ),
         ),
       ),
@@ -155,7 +155,7 @@ class DateRangePickerLine extends StatelessWidget {
     return CustomPaint(
       size: const Size(double.infinity, 100),
       painter: DateRangePickerLinePainter(
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context).colorScheme.primary,
       ),
     );
   }

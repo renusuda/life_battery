@@ -51,10 +51,10 @@ class SettingsScreen extends StatelessWidget {
           // TODO(me): Complete the display mode
           ListTile(
             leading: const Icon(Icons.wb_sunny_outlined),
-            title: const Row(
+            title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   '表示モード',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
                   'システム',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
               ],
@@ -75,10 +75,10 @@ class SettingsScreen extends StatelessWidget {
           // TODO(me): Complete the data deletion
           ListTile(
             leading: const Icon(Icons.delete_outlined),
-            title: const Text(
+            title: Text(
               'データを削除',
               style: TextStyle(
-                color: Colors.red,
+                color: Theme.of(context).colorScheme.error,
                 fontWeight: FontWeight.bold,
               ),
             ),

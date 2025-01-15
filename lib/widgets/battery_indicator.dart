@@ -80,7 +80,10 @@ class BatteryFrame extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(35),
-        border: Border.all(width: 5),
+        border: Border.all(
+          width: 5,
+          color: Theme.of(context).colorScheme.tertiary,
+        ),
       ),
     );
   }
@@ -127,7 +130,7 @@ class _BatteryBarState extends State<BatteryBar> {
                 Container(
                   width: widget.bodyWidth * (value / 100),
                   decoration: BoxDecoration(
-                    color: LifeBatteryStatus(value).type.color,
+                    color: LifeBatteryStatus(value).getColor(context),
                   ),
                 ),
               ],
@@ -158,7 +161,6 @@ class BatteryText extends StatelessWidget {
         style: const TextStyle(
           fontSize: 40,
           fontWeight: FontWeight.bold,
-          color: Colors.black,
         ),
         overflow: TextOverflow.ellipsis,
       ),
@@ -182,10 +184,10 @@ class BatteryKnob extends StatelessWidget {
       width: knobWidth,
       height: knobHeight,
       margin: const EdgeInsets.only(left: 5),
-      child: const DecoratedBox(
+      child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.horizontal(
+          color: Theme.of(context).colorScheme.tertiary,
+          borderRadius: const BorderRadius.horizontal(
             right: Radius.circular(knobWidth),
           ),
         ),

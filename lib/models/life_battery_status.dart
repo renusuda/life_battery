@@ -10,24 +10,36 @@ class LifeBatteryStatus {
                 ? LifeBatteryStatusType.medium
                 : LifeBatteryStatusType.low;
 
-  /// type of battery status
+  /// Type of battery status
   final LifeBatteryStatusType type;
+
+  /// Get battery status type color
+  Color getColor(BuildContext context) {
+    switch (type) {
+      case LifeBatteryStatusType.high:
+        return Theme.of(context).brightness == Brightness.light
+            ? Colors.green
+            : Colors.green[600]!;
+      case LifeBatteryStatusType.medium:
+        return Theme.of(context).brightness == Brightness.light
+            ? Colors.yellow
+            : Colors.amber;
+      case LifeBatteryStatusType.low:
+        return Theme.of(context).brightness == Brightness.light
+            ? Colors.red
+            : Colors.deepOrange;
+    }
+  }
 }
 
 /// Type of battery status
 enum LifeBatteryStatusType {
   /// high status
-  high(Colors.green),
+  high(),
 
   /// medium status
-  medium(Colors.yellow),
+  medium(),
 
   /// low status
-  low(Colors.red);
-
-  /// Constructor
-  const LifeBatteryStatusType(this.color);
-
-  /// color
-  final Color color;
+  low();
 }
