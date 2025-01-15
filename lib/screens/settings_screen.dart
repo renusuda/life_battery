@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:life_battery/providers/app_theme_mode.dart';
+import 'package:life_battery/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// A screen that shows the settings.
@@ -84,60 +87,28 @@ class PrivacyPolicyListTile extends StatelessWidget {
   }
 }
 
-///  appearance mode
-enum AppearanceMode {
-  /// system mode
-  system,
-
-  /// light mode
-  light,
-
-  /// dark mode
-  dark;
-
-  /// label
-  String label(AppLocalizations l10n) {
-    switch (this) {
-      case AppearanceMode.system:
-        return l10n.systemLabel;
-      case AppearanceMode.light:
-        return l10n.lightLabel;
-      case AppearanceMode.dark:
-        return l10n.darkLabel;
-    }
-  }
-}
-
 /// Appearance row
-class AppearanceListTile extends StatefulWidget {
+class AppearanceListTile extends ConsumerWidget {
   /// Constructor
   const AppearanceListTile({
     super.key,
   });
 
   @override
-  State<AppearanceListTile> createState() => _AppearanceListTileState();
-}
-
-class _AppearanceListTileState extends State<AppearanceListTile> {
-  AppearanceMode selectedMode = AppearanceMode.system;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedMode = ref.watch(appThemeModeProvider);
     final l10n = AppLocalizations.of(context)!;
 
-    return PopupMenuButton<AppearanceMode>(
+    return PopupMenuButton<ThemeMode>(
       initialValue: selectedMode,
       position: PopupMenuPosition.over,
       offset: const Offset(100, 0),
-      onSelected: (AppearanceMode mode) {
-        setState(() {
-          selectedMode = mode;
-        });
+      onSelected: (ThemeMode mode) {
+        ref.read(appThemeModeProvider.notifier).updateThemeMode(mode);
       },
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<AppearanceMode>>[
-        PopupMenuItem<AppearanceMode>(
-          value: AppearanceMode.system,
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<ThemeMode>>[
+        PopupMenuItem<ThemeMode>(
+          value: ThemeMode.system,
           child: Text(
             l10n.systemLabel,
             style: const TextStyle(
@@ -145,8 +116,8 @@ class _AppearanceListTileState extends State<AppearanceListTile> {
             ),
           ),
         ),
-        PopupMenuItem<AppearanceMode>(
-          value: AppearanceMode.light,
+        PopupMenuItem<ThemeMode>(
+          value: ThemeMode.light,
           child: Text(
             l10n.lightLabel,
             style: const TextStyle(
@@ -154,8 +125,8 @@ class _AppearanceListTileState extends State<AppearanceListTile> {
             ),
           ),
         ),
-        PopupMenuItem<AppearanceMode>(
-          value: AppearanceMode.dark,
+        PopupMenuItem<ThemeMode>(
+          value: ThemeMode.dark,
           child: Text(
             l10n.darkLabel,
             style: const TextStyle(
