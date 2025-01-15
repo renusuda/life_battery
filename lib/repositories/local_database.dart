@@ -10,12 +10,13 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 1;
+  static const _databaseVersion = 2;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
   static const _columnBirthDate = 'birthDate';
   static const _columnDeathDate = 'deathDate';
+  static const _columnThemeMode = 'themeMode';
 
   Database? _database;
 
@@ -44,16 +45,18 @@ class LocalDatabase {
           CREATE TABLE $_tableName (
             $_columnId INTEGER PRIMARY KEY AUTOINCREMENT,
             $_columnBirthDate TEXT,
-            $_columnDeathDate TEXT
+            $_columnDeathDate TEXT,
+            $_columnThemeMode TEXT NOT NULL
           )
         ''');
 
-          // Insert a lifespan record that has a null birth date and death date
+          // Insert a lifespan record
           await db.insert(
             _tableName,
             {
               _columnBirthDate: null,
               _columnDeathDate: null,
+              _columnThemeMode: 'system',
             },
           );
         },

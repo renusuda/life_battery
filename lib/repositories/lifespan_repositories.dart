@@ -10,6 +10,7 @@ class LifespanRepository {
   static const _tableName = 'lifespan';
   static const _columnBirthDate = 'birthDate';
   static const _columnDeathDate = 'deathDate';
+  static const _columnThemeMode = 'themeMode';
 
   /// Fetches the lifespan record from the database.
   Future<LifespanRange> getLifespan() async {
@@ -36,7 +37,27 @@ class LifespanRepository {
     }
   }
 
-  /// Updates the lifespan record of the database.
+  /// Fetches the theme mode record from the database.
+  Future<String> getThemeMode() async {
+    try {
+      final db = await instance.database;
+      final result = await db.query(
+        _tableName,
+        columns: [_columnThemeMode],
+      );
+
+      if (result.isEmpty) {
+        return 'system';
+      } else {
+        final themeMode = result.first[_columnThemeMode]! as String;
+        return themeMode;
+      }
+    } on DatabaseException catch (_) {
+      return 'system';
+    }
+  }
+
+  /// Updates the lifespan record in the database.
   Future<void> updateLifespan({
     required DateTime birthDate,
     required DateTime deathDate,
@@ -58,6 +79,24 @@ class LifespanRepository {
           {
             _columnBirthDate: birthDate.toIso8601String(),
             _columnDeathDate: deathDate.toIso8601String(),
+          },
+        );
+      }
+    } on DatabaseException catch (_) {}
+  }
+
+  /// Updates the theme mode record in the database.
+  Future<void> updateThemeMode({
+    required String themeMode,
+  }) async {
+    try {
+      final db = await instance.database;
+      final response = await db.query(_tableName);
+      if (response.isNotEmpty) {
+        await db.update(
+          _tableName,
+          {
+            _columnThemeMode: themeMode,
           },
         );
       }
