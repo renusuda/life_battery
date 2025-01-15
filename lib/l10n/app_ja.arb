@@ -3,5 +3,9 @@
   "generalError": "エラーが発生しました。",
   "save": "保存",
   "dayUnit": "日",
-  "privacyPolicyLabel": "プライバシーポリシー"
+  "privacyPolicyLabel": "プライバシーポリシー",
+  "appearanceLabel": "表示モード",
+  "systemLabel": "システム",
+  "lightLabel": "ライト",
+  "darkLabel": "ダーク"
 }

@@ -3,5 +3,9 @@
   "generalError": "Error occurred.",
   "save": "Save",
   "dayUnit": "d",
-  "privacyPolicyLabel": "Privacy policy"
+  "privacyPolicyLabel": "Privacy policy",
+  "appearanceLabel": "Appearance",
+  "systemLabel": "System",
+  "lightLabel": "Light",
+  "darkLabel": "Dark"
 }
