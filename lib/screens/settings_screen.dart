@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/providers/app_theme_mode.dart';
+import 'package:life_battery/screens/tutorial_screen.dart';
 import 'package:life_battery/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,15 +38,24 @@ class TutorialListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return ListTile(
       leading: const Icon(Icons.info_outline),
-      title: const Text(
-        'アプリの使い方',
-        style: TextStyle(
+      title: Text(
+        l10n.tutorialLabel,
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        showBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return const TutorialScreen();
+          },
+        );
+      },
     );
   }
 }
