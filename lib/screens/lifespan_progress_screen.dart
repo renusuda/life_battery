@@ -87,7 +87,10 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute<void>(
-            builder: (context) => const DateInputScreen(),
+            builder: (context) => Scaffold(
+              appBar: AppBar(),
+              body: const DateInputScreen(showingTutorial: false),
+            ),
           ),
         );
       },

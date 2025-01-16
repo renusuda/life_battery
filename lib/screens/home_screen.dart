@@ -19,7 +19,10 @@ class HomeScreen extends ConsumerWidget {
     return switch (lifespanRangeManager) {
       AsyncData(:final value) => value.datesEntered
           ? const LifespanProgressScreen()
-          : const DateInputScreen(),
+          : Scaffold(
+              appBar: AppBar(),
+              body: const DateInputScreen(showingTutorial: true),
+            ),
       AsyncError() => Scaffold(
           appBar: AppBar(),
           body: Center(
