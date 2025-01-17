@@ -11,6 +11,7 @@ class LifespanRepository {
   static const _columnBirthDate = 'birthDate';
   static const _columnDeathDate = 'deathDate';
   static const _columnThemeMode = 'themeMode';
+  static const _columnIsInitialUser = 'isInitialUser';
 
   /// Fetches the lifespan record from the database.
   Future<LifespanRange> getLifespan() async {
@@ -23,16 +24,16 @@ class LifespanRepository {
 
       if (result.isEmpty) {
         return LifespanRange(
-          birthDate: null,
-          deathDate: null,
+          birthDate: DateTime(2000),
+          deathDate: DateTime(2100),
         );
       } else {
         return LifespanRange.fromJson(result.first);
       }
     } on DatabaseException catch (_) {
       return LifespanRange(
-        birthDate: null,
-        deathDate: null,
+        birthDate: DateTime(2000),
+        deathDate: DateTime(2100),
       );
     }
   }
@@ -54,6 +55,26 @@ class LifespanRepository {
       }
     } on DatabaseException catch (_) {
       return 'system';
+    }
+  }
+
+  /// Fetches whether the user is an initial user from the database.
+  Future<bool> getIsInitialUser() async {
+    try {
+      final db = await instance.database;
+      final result = await db.query(
+        _tableName,
+        columns: [_columnIsInitialUser],
+      );
+
+      if (result.isEmpty) {
+        return true;
+      } else {
+        final isInitialUser = result.first[_columnIsInitialUser]! as int;
+        return isInitialUser == 1;
+      }
+    } on DatabaseException catch (_) {
+      return true;
     }
   }
 
@@ -97,6 +118,22 @@ class LifespanRepository {
           _tableName,
           {
             _columnThemeMode: themeMode,
+          },
+        );
+      }
+    } on DatabaseException catch (_) {}
+  }
+
+  /// Updates the user is not an initial user in the database.
+  Future<void> updateUserIsNotInitialUser() async {
+    try {
+      final db = await instance.database;
+      final response = await db.query(_tableName);
+      if (response.isNotEmpty) {
+        await db.update(
+          _tableName,
+          {
+            _columnIsInitialUser: 0,
           },
         );
       }

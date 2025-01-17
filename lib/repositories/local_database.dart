@@ -10,13 +10,14 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 2;
+  static const _databaseVersion = 3;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
   static const _columnBirthDate = 'birthDate';
   static const _columnDeathDate = 'deathDate';
   static const _columnThemeMode = 'themeMode';
+  static const _columnIsInitialUser = 'isInitialUser';
 
   Database? _database;
 
@@ -44,9 +45,10 @@ class LocalDatabase {
           await db.execute('''
           CREATE TABLE $_tableName (
             $_columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-            $_columnBirthDate TEXT,
-            $_columnDeathDate TEXT,
-            $_columnThemeMode TEXT NOT NULL
+            $_columnBirthDate TEXT NOT NULL,
+            $_columnDeathDate TEXT NOT NULL,
+            $_columnThemeMode TEXT NOT NULL,
+            $_columnIsInitialUser INTEGER NOT NULL
           )
         ''');
 
@@ -54,9 +56,10 @@ class LocalDatabase {
           await db.insert(
             _tableName,
             {
-              _columnBirthDate: null,
-              _columnDeathDate: null,
+              _columnBirthDate: '2000-01-01T00:00:00.000',
+              _columnDeathDate: '2100-01-01T00:00:00.000',
               _columnThemeMode: 'system',
+              _columnIsInitialUser: 1,
             },
           );
         },

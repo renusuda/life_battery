@@ -20,8 +20,8 @@ LifespanRange _$LifespanRangeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LifespanRange {
-  DateTime? get birthDate => throw _privateConstructorUsedError;
-  DateTime? get deathDate => throw _privateConstructorUsedError;
+  DateTime get birthDate => throw _privateConstructorUsedError;
+  DateTime get deathDate => throw _privateConstructorUsedError;
 
   /// Serializes this LifespanRange to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $LifespanRangeCopyWith<$Res> {
           LifespanRange value, $Res Function(LifespanRange) then) =
       _$LifespanRangeCopyWithImpl<$Res, LifespanRange>;
   @useResult
-  $Res call({DateTime? birthDate, DateTime? deathDate});
+  $Res call({DateTime birthDate, DateTime deathDate});
 }
 
 /// @nodoc
@@ -57,18 +57,18 @@ class _$LifespanRangeCopyWithImpl<$Res, $Val extends LifespanRange>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? birthDate = freezed,
-    Object? deathDate = freezed,
+    Object? birthDate = null,
+    Object? deathDate = null,
   }) {
     return _then(_value.copyWith(
-      birthDate: freezed == birthDate
+      birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      deathDate: freezed == deathDate
+              as DateTime,
+      deathDate: null == deathDate
           ? _value.deathDate
           : deathDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ) as $Val);
   }
 }
@@ -81,7 +81,7 @@ abstract class _$$LifespanRangeImplCopyWith<$Res>
       __$$LifespanRangeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DateTime? birthDate, DateTime? deathDate});
+  $Res call({DateTime birthDate, DateTime deathDate});
 }
 
 /// @nodoc
@@ -97,18 +97,18 @@ class __$$LifespanRangeImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? birthDate = freezed,
-    Object? deathDate = freezed,
+    Object? birthDate = null,
+    Object? deathDate = null,
   }) {
     return _then(_$LifespanRangeImpl(
-      birthDate: freezed == birthDate
+      birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      deathDate: freezed == deathDate
+              as DateTime,
+      deathDate: null == deathDate
           ? _value.deathDate
           : deathDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
     ));
   }
 }
@@ -123,9 +123,9 @@ class _$LifespanRangeImpl extends _LifespanRange {
       _$$LifespanRangeImplFromJson(json);
 
   @override
-  final DateTime? birthDate;
+  final DateTime birthDate;
   @override
-  final DateTime? deathDate;
+  final DateTime deathDate;
 
   @override
   String toString() {
@@ -165,17 +165,17 @@ class _$LifespanRangeImpl extends _LifespanRange {
 
 abstract class _LifespanRange extends LifespanRange {
   factory _LifespanRange(
-      {required final DateTime? birthDate,
-      required final DateTime? deathDate}) = _$LifespanRangeImpl;
+      {required final DateTime birthDate,
+      required final DateTime deathDate}) = _$LifespanRangeImpl;
   _LifespanRange._() : super._();
 
   factory _LifespanRange.fromJson(Map<String, dynamic> json) =
       _$LifespanRangeImpl.fromJson;
 
   @override
-  DateTime? get birthDate;
+  DateTime get birthDate;
   @override
-  DateTime? get deathDate;
+  DateTime get deathDate;
 
   /// Create a copy of LifespanRange
   /// with the given fields replaced by the non-null parameter values.

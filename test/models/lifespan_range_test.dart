@@ -3,39 +3,6 @@ import 'package:test/test.dart';
 
 void main() {
   group('Test remainingLifePercentage', () {
-    test('returns 0 when birthDate is null', () {
-      final lifespanRange = LifespanRange(
-        birthDate: null,
-        deathDate: DateTime(2100),
-      );
-      expect(
-        lifespanRange.remainingLifePercentage(now: DateTime(2025)),
-        0,
-      );
-    });
-
-    test('returns 0 when deathDate is null', () {
-      final lifespanRange = LifespanRange(
-        birthDate: DateTime(2000),
-        deathDate: null,
-      );
-      expect(
-        lifespanRange.remainingLifePercentage(now: DateTime(2025)),
-        0,
-      );
-    });
-
-    test('returns 0 when birthDate and deathDate are null', () {
-      final lifespanRange = LifespanRange(
-        birthDate: null,
-        deathDate: null,
-      );
-      expect(
-        lifespanRange.remainingLifePercentage(now: DateTime(2025)),
-        0,
-      );
-    });
-
     test('returns 0 when now is before birthDate', () {
       final lifespanRange = LifespanRange(
         birthDate: DateTime(2000),
@@ -118,39 +85,6 @@ void main() {
   });
 
   group('Test remainingLifeDays', () {
-    test('returns 0 when birthDate is null', () {
-      final lifespanRange = LifespanRange(
-        birthDate: null,
-        deathDate: DateTime(2100),
-      );
-      expect(
-        lifespanRange.remainingLifeDays(now: DateTime(2025)),
-        0,
-      );
-    });
-
-    test('returns 0 when deathDate is null', () {
-      final lifespanRange = LifespanRange(
-        birthDate: DateTime(2000),
-        deathDate: null,
-      );
-      expect(
-        lifespanRange.remainingLifeDays(now: DateTime(2025)),
-        0,
-      );
-    });
-
-    test('returns 0 when birthDate and deathDate are null', () {
-      final lifespanRange = LifespanRange(
-        birthDate: null,
-        deathDate: null,
-      );
-      expect(
-        lifespanRange.remainingLifeDays(now: DateTime(2025)),
-        0,
-      );
-    });
-
     test('returns 0 when now is after deathDate', () {
       final lifespanRange = LifespanRange(
         birthDate: DateTime(2000),

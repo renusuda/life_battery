@@ -9,8 +9,8 @@ part 'lifespan_range.g.dart';
 class LifespanRange with _$LifespanRange {
   /// Constructor
   factory LifespanRange({
-    required DateTime? birthDate,
-    required DateTime? deathDate,
+    required DateTime birthDate,
+    required DateTime deathDate,
   }) = _LifespanRange;
 
   const LifespanRange._();
@@ -19,20 +19,13 @@ class LifespanRange with _$LifespanRange {
   factory LifespanRange.fromJson(Map<String, dynamic> json) =>
       _$LifespanRangeFromJson(json);
 
-  /// Checks if the birth date and death date are entered.
-  bool get datesEntered => birthDate != null && deathDate != null;
-
   /// Returns the remaining life percentage.
   int remainingLifePercentage({
     required DateTime now,
   }) {
-    if (birthDate == null || deathDate == null) {
-      return 0;
-    }
-
     final dateOnlyNow = now.toDateOnly;
-    final dateOnlyBirthDate = birthDate!.toDateOnly;
-    final dateOnlyDeathDate = deathDate!.toDateOnly;
+    final dateOnlyBirthDate = birthDate.toDateOnly;
+    final dateOnlyDeathDate = deathDate.toDateOnly;
 
     if (dateOnlyNow.isBefore(dateOnlyBirthDate) ||
         dateOnlyNow.isAfter(dateOnlyDeathDate)) {
@@ -55,12 +48,8 @@ class LifespanRange with _$LifespanRange {
   int remainingLifeDays({
     required DateTime now,
   }) {
-    if (birthDate == null || deathDate == null) {
-      return 0;
-    }
-
     final dateOnlyNow = now.toDateOnly;
-    final dateOnlyDeathDate = deathDate!.toDateOnly;
+    final dateOnlyDeathDate = deathDate.toDateOnly;
 
     if (dateOnlyNow.isAfter(dateOnlyDeathDate)) {
       return 0;

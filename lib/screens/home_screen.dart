@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:life_battery/providers/lifespan_range_manager.dart';
+import 'package:life_battery/providers/is_initial_user.dart';
 import 'package:life_battery/screens/lifespan_progress_screen.dart';
 import 'package:life_battery/screens/tutorial_screen.dart';
 
@@ -12,23 +12,27 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
+    final isInitialUser = ref.watch(isInitialUserProvider);
 
     final l10n = AppLocalizations.of(context)!;
 
-    return switch (lifespanRangeManager) {
-      AsyncData(:final value) => value.datesEntered
-          ? const LifespanProgressScreen()
-          : TutorialScreen(
+    return switch (isInitialUser) {
+      // If the user is initial user, show the tutorial screen
+      // Otherwise, show the lifespan progress screen
+      AsyncData(:final value) => value
+          ? TutorialScreen(
               onDone: () {
+                // Navigate to the lifespan progress screen
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute<void>(
-                    builder: (context) => const LifespanProgressScreen(),
+                    builder: (context) =>
+                        const LifespanProgressScreen(isInitialUser: true),
                   ),
                 );
               },
-            ),
+            )
+          : const LifespanProgressScreen(isInitialUser: false),
       AsyncError() => Scaffold(
           appBar: AppBar(),
           body: Center(

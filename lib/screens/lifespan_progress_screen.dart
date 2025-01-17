@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/models/lifespan_range.dart';
+import 'package:life_battery/providers/is_initial_user.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/screens/settings_screen.dart';
 import 'package:life_battery/utils/extensions.dart';
@@ -11,7 +12,13 @@ import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
 /// Screen for showing the remaining of lifespan
 class LifespanProgressScreen extends ConsumerWidget {
   /// Constructor
-  const LifespanProgressScreen({super.key});
+  const LifespanProgressScreen({
+    required this.isInitialUser,
+    super.key,
+  });
+
+  /// Whether the user is initial user
+  final bool isInitialUser;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,7 +44,15 @@ class LifespanProgressScreen extends ConsumerWidget {
       ),
       body: Center(
         child: switch (lifespanRangeManager) {
-          AsyncData(:final value) => LifeProgressContent(lifespanRange: value),
+          AsyncData(:final value) => LifeProgressContent(
+              lifespanRange: value,
+              isInitialUser: isInitialUser,
+              updateUserIsNotInitialUser: () async {
+                await ref
+                    .read(isInitialUserProvider.notifier)
+                    .updateUserIsNotInitialUser();
+              },
+            ),
           AsyncError() => Text(l10n.generalError),
           _ => const CircularProgressIndicator(),
         },
@@ -51,11 +66,19 @@ class LifeProgressContent extends StatefulWidget {
   /// Constructor
   const LifeProgressContent({
     required this.lifespanRange,
+    required this.isInitialUser,
+    required this.updateUserIsNotInitialUser,
     super.key,
   });
 
   /// the range of a person's lifespan.
   final LifespanRange lifespanRange;
+
+  /// Whether the user is initial user
+  final bool isInitialUser;
+
+  /// Callback to update the user is not initial user
+  final Future<void> Function() updateUserIsNotInitialUser;
 
   @override
   State<LifeProgressContent> createState() => _LifeProgressContentState();
@@ -82,12 +105,14 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
   @override
   void initState() {
     super.initState();
-    if (widget.lifespanRange.datesEntered) {
-      return;
+    // Show the date input bottom sheet if the user is initial user
+    if (widget.isInitialUser) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showDateInputBottomSheet();
+      });
     }
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showDateInputBottomSheet();
-    });
+    // Update the user is not initial user
+    widget.updateUserIsNotInitialUser();
   }
 
   @override
