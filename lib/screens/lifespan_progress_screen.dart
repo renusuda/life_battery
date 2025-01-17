@@ -3,10 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/models/lifespan_range.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
-import 'package:life_battery/screens/date_input_screen.dart';
 import 'package:life_battery/screens/settings_screen.dart';
 import 'package:life_battery/utils/extensions.dart';
 import 'package:life_battery/widgets/battery_indicator.dart';
+import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
 
 /// Screen for showing the remaining of lifespan
 class LifespanProgressScreen extends ConsumerWidget {
@@ -70,6 +70,26 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
     });
   }
 
+  void _showDateInputBottomSheet() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return const DateInputBottomSheet();
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.lifespanRange.datesEntered) {
+      return;
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showDateInputBottomSheet();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final remainingLifePercentage =
@@ -83,17 +103,7 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
     final l10n = AppLocalizations.of(context)!;
 
     return GestureDetector(
-      onLongPress: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute<void>(
-            builder: (context) => Scaffold(
-              appBar: AppBar(),
-              body: const DateInputScreen(showingTutorial: false),
-            ),
-          ),
-        );
-      },
+      onLongPress: _showDateInputBottomSheet,
       onTap: _toggleMode,
       child: BatteryIndicator(
         value: remainingLifePercentage,

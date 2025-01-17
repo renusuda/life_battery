@@ -49,12 +49,15 @@ class TutorialListTile extends StatelessWidget {
         ),
       ),
       onTap: () {
-        showModalBottomSheet<void>(
-          isScrollControlled: true,
-          context: context,
-          builder: (BuildContext context) {
-            return const TutorialScreen();
-          },
+        Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (context) => TutorialScreen(
+              onDone: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
         );
       },
     );
