@@ -23,10 +23,49 @@ class TutorialScreen extends StatelessWidget {
             image: AssetImage('assets/images/test.png'),
           ),
         ),
+        PageViewModel(
+          title: '日付入力2',
+          body: '生年月日と目標とする寿命を入力できます。',
+          image: const Image(
+            image: AssetImage('assets/images/test.png'),
+          ),
+        ),
+        PageViewModel(
+          title: '日付入力3',
+          body: '生年月日と目標とする寿命を入力できます。',
+          image: const Image(
+            image: AssetImage('assets/images/test.png'),
+          ),
+        ),
       ],
-      next: const Icon(Icons.arrow_forward),
-      done: const Icon(Icons.check),
+      dotsDecorator: DotsDecorator(
+        activeColor: Theme.of(context).colorScheme.primary,
+      ),
+      showBackButton: true,
+      back: const PageTransitionIcon(icon: Icons.arrow_back),
+      next: const PageTransitionIcon(icon: Icons.arrow_forward),
+      done: const PageTransitionIcon(icon: Icons.check),
       onDone: onDone,
+    );
+  }
+}
+
+/// A widget that shows a page transition icon.
+class PageTransitionIcon extends StatelessWidget {
+  /// Constructor
+  const PageTransitionIcon({
+    required this.icon,
+    super.key,
+  });
+
+  /// Icon
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      icon,
+      color: Theme.of(context).colorScheme.tertiary,
     );
   }
 }
