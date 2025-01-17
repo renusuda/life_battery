@@ -13,13 +13,15 @@ class DateInputBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return Center(
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.35,
       child: Column(
-        spacing: 30,
         children: <Widget>[
+          const SizedBox(height: 30),
           Text(
             l10n.dateInputInstruction,
           ),
+          const SizedBox(height: 30),
           const DateRangePicker(),
         ],
       ),

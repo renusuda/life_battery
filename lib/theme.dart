@@ -9,11 +9,6 @@ final lightModeTheme = ThemeData(
     tertiary: Colors.black,
     error: Colors.red,
   ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.white,
-    ),
-  ),
 );
 
 /// Dark mode theme
@@ -24,10 +19,5 @@ final darkModeTheme = ThemeData(
     secondary: Colors.grey[400]!,
     tertiary: Colors.white,
     error: Colors.red,
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.grey[900],
-    ),
   ),
 );

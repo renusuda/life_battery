@@ -1,7 +1,6 @@
 {
   "dateInputInstruction": "生年月日と目標とする寿命を入力してください。\nそこから、残りの時間を計算できます。",
   "generalError": "エラーが発生しました。",
-  "save": "保存",
   "dayUnit": "日",
   "tutorialLabel": "アプリの使い方",
   "privacyPolicyLabel": "プライバシーポリシー",
