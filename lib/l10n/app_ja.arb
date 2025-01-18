@@ -13,5 +13,10 @@
   "appearanceLabel": "表示モード",
   "systemLabel": "システム",
   "lightLabel": "ライト",
-  "darkLabel": "ダーク"
+  "darkLabel": "ダーク",
+  "deleteAllLabel": "データを削除",
+  "deleteTitle": "全てのデータを削除",
+  "deleteContent": "本当にデータを削除しますか？\n一度削除されたデータは元に戻すことができません。",
+  "cancelLabel": "キャンセル",
+  "deleteLabel": "削除"
 }

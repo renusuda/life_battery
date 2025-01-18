@@ -13,5 +13,10 @@
   "appearanceLabel": "Appearance",
   "systemLabel": "System",
   "lightLabel": "Light",
-  "darkLabel": "Dark"
+  "darkLabel": "Dark",
+  "deleteAllLabel": "Delete Data",
+  "deleteTitle": "Delete All Data",
+  "deleteContent": "Are you sure you want to delete the data?\nDeleted data cannot be restored.",
+  "cancelLabel": "Cancel",
+  "deleteLabel": "Delete"
 }
