@@ -4,6 +4,7 @@ import 'package:life_battery/providers/app_theme_mode.dart';
 import 'package:life_battery/repositories/local_database.dart';
 import 'package:life_battery/screens/home_screen.dart';
 import 'package:life_battery/widgets/common_material_app.dart';
+import 'package:life_battery/widgets/restart_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +13,9 @@ void main() async {
 
   runApp(
     const ProviderScope(
-      child: App(),
+      child: RestartWidget(
+        child: App(),
+      ),
     ),
   );
 }
