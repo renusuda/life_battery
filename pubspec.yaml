@@ -35,6 +35,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_datetime_picker_plus: ^2.2.0
+  flutter_launcher_icons: ^0.14.3
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.6.1
