@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 /// A screen that shows the tutorial.
@@ -14,27 +15,43 @@ class TutorialScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    final locale = Localizations.localeOf(context);
+    final isJapanese = locale.languageCode == 'ja';
+    final languageCode = isJapanese ? 'ja' : 'en';
+
     return IntroductionScreen(
       pages: [
         PageViewModel(
-          title: '日付入力',
-          body: '生年月日と目標とする寿命を入力できます。',
-          image: const Image(
-            image: AssetImage('assets/images/test.png'),
+          title: l10n.firstTutorialPageTitle,
+          body: l10n.firstTutorialPageBody,
+          image: Image(
+            image: AssetImage('assets/images/first_tutorial_$languageCode.gif'),
+          ),
+          decoration: const PageDecoration(
+            imageFlex: 2,
           ),
         ),
         PageViewModel(
-          title: '日付入力2',
-          body: '生年月日と目標とする寿命を入力できます。',
-          image: const Image(
-            image: AssetImage('assets/images/test.png'),
+          title: l10n.secondTutorialPageTitle,
+          body: l10n.secondTutorialPageBody,
+          image: Image(
+            image:
+                AssetImage('assets/images/second_tutorial_$languageCode.gif'),
+          ),
+          decoration: const PageDecoration(
+            imageFlex: 2,
           ),
         ),
         PageViewModel(
-          title: '日付入力3',
-          body: '生年月日と目標とする寿命を入力できます。',
-          image: const Image(
-            image: AssetImage('assets/images/test.png'),
+          title: l10n.thirdTutorialPageTitle,
+          body: l10n.thirdTutorialPageBody,
+          image: Image(
+            image: AssetImage('assets/images/third_tutorial_$languageCode.gif'),
+          ),
+          decoration: const PageDecoration(
+            imageFlex: 2,
           ),
         ),
       ],
@@ -44,7 +61,10 @@ class TutorialScreen extends StatelessWidget {
       showBackButton: true,
       back: const PageTransitionIcon(icon: Icons.arrow_back),
       next: const PageTransitionIcon(icon: Icons.arrow_forward),
-      done: const PageTransitionIcon(icon: Icons.check),
+      done: PageTransitionIcon(
+        icon: Icons.check,
+        color: Theme.of(context).colorScheme.primary,
+      ),
       onDone: onDone,
     );
   }
@@ -55,17 +75,21 @@ class PageTransitionIcon extends StatelessWidget {
   /// Constructor
   const PageTransitionIcon({
     required this.icon,
+    this.color,
     super.key,
   });
 
   /// Icon
   final IconData icon;
 
+  /// Color
+  final Color? color;
+
   @override
   Widget build(BuildContext context) {
     return Icon(
       icon,
-      color: Theme.of(context).colorScheme.tertiary,
+      color: color ?? Theme.of(context).colorScheme.tertiary,
     );
   }
 }

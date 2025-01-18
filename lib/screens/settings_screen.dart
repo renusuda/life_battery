@@ -17,7 +17,6 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(),
       body: ListView(
         children: const <Widget>[
-          // TODO(me): Complete how to use the app
           TutorialListTile(),
           PrivacyPolicyListTile(),
           AppearanceListTile(),
