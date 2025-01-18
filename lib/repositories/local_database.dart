@@ -75,4 +75,11 @@ class LocalDatabase {
       await _database!.close();
     }
   }
+
+  /// Deletes the database.
+  Future<void> clearDatabase() async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, _databaseName);
+    await deleteDatabase(path);
+  }
 }

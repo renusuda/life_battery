@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/providers/app_theme_mode.dart';
+import 'package:life_battery/providers/local_database.dart';
 import 'package:life_battery/screens/tutorial_screen.dart';
 import 'package:life_battery/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,7 +21,6 @@ class SettingsScreen extends StatelessWidget {
           TutorialListTile(),
           PrivacyPolicyListTile(),
           AppearanceListTile(),
-          // TODO(me): Complete the data deletion
           DeleteAllListTile(),
         ],
       ),
@@ -188,14 +188,14 @@ class AppearanceListTile extends ConsumerWidget {
 }
 
 /// Data deletion row
-class DeleteAllListTile extends StatelessWidget {
+class DeleteAllListTile extends ConsumerWidget {
   /// Constructor
   const DeleteAllListTile({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
 
     return ListTile(
@@ -235,6 +235,7 @@ class DeleteAllListTile extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  ref.read(clearDatabaseProvider);
                 },
                 child: Text(
                   l10n.deleteLabel,
