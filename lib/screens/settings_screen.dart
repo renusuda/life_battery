@@ -85,8 +85,12 @@ class PrivacyPolicyListTile extends StatelessWidget {
       ),
       trailing: const Icon(Icons.arrow_forward_ios),
       onTap: () async {
+        final locale = Localizations.localeOf(context);
+        final isJapanese = locale.languageCode == 'ja';
+        final queryParameter = isJapanese ? '' : '?lang=en';
+
         final url = Uri.parse(
-          'https://ru2lu.github.io/life-battery-privacy-policy-site/',
+          'https://ru2lu.github.io/life_battery_privacy_policy/$queryParameter',
         );
         if (await canLaunchUrl(url)) {
           await launchUrl(
