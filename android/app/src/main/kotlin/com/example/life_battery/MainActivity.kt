@@ -1,4 +1,4 @@
-package com.example.life_battery
+package com.rururu.lifebt
 
 import io.flutter.embedding.android.FlutterActivity
 
