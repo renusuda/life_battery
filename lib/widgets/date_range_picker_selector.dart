@@ -23,8 +23,9 @@ class DateRangePickerSelector extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       height: 100,
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width * 0.75,
       child: Stack(
+        alignment: Alignment.center,
         children: [
           const DateRangePickerLine(),
           DateRangePickerCircle(
@@ -127,18 +128,29 @@ class DateRangePickerCircleState extends State<DateRangePickerCircle>
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      left:
-          (widget.isStart ? 0.2 : 0.8) * MediaQuery.of(context).size.width - 10,
-      top: 40,
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: ScaleTransition(
-          scale: _animation,
-          child: CircleAvatar(
-            radius: 10,
-            backgroundColor: Theme.of(context).colorScheme.primary,
+      left: widget.isStart ? 0 : null,
+      right: widget.isStart ? null : 0,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          ScaleTransition(
+            scale: _animation,
+            child: CircleAvatar(
+              radius: 10,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+            ),
           ),
-        ),
+          // Add a transparent container to make tap area bigger
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: widget.onTap,
+            child: Container(
+              width: 60,
+              height: 60,
+              color: Colors.transparent,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -153,44 +165,13 @@ class DateRangePickerLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      size: const Size(double.infinity, 100),
-      painter: DateRangePickerLinePainter(
+    return Positioned(
+      left: 30,
+      right: 30,
+      child: Container(
+        height: 4,
         color: Theme.of(context).colorScheme.primary,
       ),
     );
-  }
-}
-
-/// A custom painter for the date range picker UI.
-class DateRangePickerLinePainter extends CustomPainter {
-  /// Constructor
-  DateRangePickerLinePainter({
-    required this.color,
-  });
-
-  /// Color
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 4.0;
-
-    final startX = 0.2 * size.width;
-    final endX = 0.8 * size.width;
-
-    canvas.drawLine(
-      Offset(startX, size.height / 2),
-      Offset(endX, size.height / 2),
-      paint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
   }
 }
