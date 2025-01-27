@@ -72,7 +72,8 @@ class DateRangePickerSelector extends ConsumerWidget {
       context,
       minTime: isStart ? DateTime(1900) : today,
       maxTime: isStart ? today : DateTime(2500),
-      onConfirm: (date) {
+      showTitleActions: false,
+      onChanged: (date) {
         ref.read(lifespanRangeManagerProvider.notifier).updateLifespanRange(
               birthDate: isStart ? date : birthDate,
               deathDate: isStart ? deathDate : date,
