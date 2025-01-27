@@ -90,7 +90,7 @@ class PrivacyPolicyListTile extends StatelessWidget {
         final queryParameter = isJapanese ? '' : '?lang=en';
 
         final url = Uri.parse(
-          'https://ru2lu.github.io/life_battery_privacy_policy/$queryParameter',
+          'https://renusuda.github.io/life_battery_privacy_policy/$queryParameter',
         );
         if (await canLaunchUrl(url)) {
           await launchUrl(
