@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:life_battery/providers/lifespan_range_manager.dart';
-import 'package:life_battery/utils/extensions.dart';
+import 'package:life_battery/utils/date_utils.dart';
 
 /// A widget that allows users to select a date range.
 class DateRangePickerSelector extends ConsumerWidget {
@@ -31,57 +29,27 @@ class DateRangePickerSelector extends ConsumerWidget {
           DateRangePickerCircle(
             isStart: true,
             onTap: () {
-              _showDatePicker(
+              showPickerForBirthDate(
                 context: context,
                 ref: ref,
-                initialDate: birthDate,
                 birthDate: birthDate,
                 deathDate: deathDate,
-                isStart: true,
               );
             },
           ),
           DateRangePickerCircle(
             isStart: false,
             onTap: () {
-              _showDatePicker(
+              showPickerForDeathDate(
                 context: context,
                 ref: ref,
-                initialDate: deathDate,
                 birthDate: birthDate,
                 deathDate: deathDate,
-                isStart: false,
               );
             },
           ),
         ],
       ),
-    );
-  }
-
-  void _showDatePicker({
-    required BuildContext context,
-    required WidgetRef ref,
-    required DateTime initialDate,
-    required DateTime birthDate,
-    required DateTime deathDate,
-    required bool isStart,
-  }) {
-    final today = DateTime.now();
-
-    DatePicker.showDatePicker(
-      context,
-      minTime: isStart ? DateTime(1900) : today,
-      maxTime: isStart ? today : DateTime(2500),
-      showTitleActions: false,
-      onChanged: (date) {
-        ref.read(lifespanRangeManagerProvider.notifier).updateLifespanRange(
-              birthDate: isStart ? date : birthDate,
-              deathDate: isStart ? deathDate : date,
-            );
-      },
-      currentTime: initialDate,
-      locale: context.isJapanese ? LocaleType.jp : LocaleType.en,
     );
   }
 }

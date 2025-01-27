@@ -85,25 +85,109 @@ class DateRangePickerLabels extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Text(
-          formatDate(
-            context,
-            birthDate,
-          ),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+        BirthDateText(
+          birthDate: birthDate,
+          deathDate: deathDate,
         ),
-        Text(
-          formatDate(
-            context,
-            deathDate,
-          ),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+        DeathDateText(
+          birthDate: birthDate,
+          deathDate: deathDate,
         ),
       ],
+    );
+  }
+}
+
+/// A common date text.
+class CommonDateText extends StatelessWidget {
+  /// Constructor
+  const CommonDateText({
+    required this.date,
+    required this.onTap,
+    super.key,
+  });
+
+  /// Date
+  final DateTime date;
+
+  /// Callback when tapped
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Text(
+        formatDate(
+          context,
+          date,
+        ),
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
+
+/// A birth date text.
+class BirthDateText extends ConsumerWidget {
+  /// Constructor
+  const BirthDateText({
+    required this.birthDate,
+    required this.deathDate,
+    super.key,
+  });
+
+  /// Birth date
+  final DateTime birthDate;
+
+  /// Death date
+  final DateTime deathDate;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return CommonDateText(
+      date: birthDate,
+      onTap: () {
+        showPickerForBirthDate(
+          context: context,
+          ref: ref,
+          birthDate: birthDate,
+          deathDate: deathDate,
+        );
+      },
+    );
+  }
+}
+
+/// A death date text.
+class DeathDateText extends ConsumerWidget {
+  /// Constructor
+  const DeathDateText({
+    required this.birthDate,
+    required this.deathDate,
+    super.key,
+  });
+
+  /// Birth date
+  final DateTime birthDate;
+
+  /// Death date
+  final DateTime deathDate;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return CommonDateText(
+      date: deathDate,
+      onTap: () {
+        showPickerForDeathDate(
+          context: context,
+          ref: ref,
+          birthDate: birthDate,
+          deathDate: deathDate,
+        );
+      },
     );
   }
 }
