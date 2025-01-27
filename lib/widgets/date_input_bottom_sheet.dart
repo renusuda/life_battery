@@ -17,11 +17,15 @@ class DateInputBottomSheet extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.35,
       child: Column(
         children: <Widget>[
-          const SizedBox(height: 30),
-          Text(
-            l10n.dateInputInstruction,
-          ),
-          const SizedBox(height: 30),
+          // Display an instruction text only in portrait mode
+          // because of the limited space
+          if (MediaQuery.of(context).orientation == Orientation.portrait)
+            const SizedBox(height: 25),
+          if (MediaQuery.of(context).orientation == Orientation.portrait)
+            Text(
+              l10n.dateInputInstruction,
+            ),
+          const SizedBox(height: 25),
           const DateRangePicker(),
         ],
       ),
