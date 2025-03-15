@@ -11,10 +11,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
+      - name: Set up Flutter using FVM
+        uses: kuhnroyal/flutter-fvm-config-action/setup@v3
       - name: Fetches and resolves project dependencies
         run: flutter pub get
       - name: Run tests
