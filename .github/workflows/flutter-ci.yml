@@ -15,5 +15,7 @@ jobs:
         uses: kuhnroyal/flutter-fvm-config-action/setup@v3
       - name: Fetches and resolves project dependencies
         run: flutter pub get
+      - name: Run linter
+        run: flutter analyze
       - name: Run tests
         run: flutter test
