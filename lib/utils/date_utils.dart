@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
@@ -57,18 +56,30 @@ void _showPickerForDates({
 }) {
   final today = DateTime.now();
 
-  DatePicker.showDatePicker(
-    context,
-    minTime: isStart ? DateTime(1900) : today,
-    maxTime: isStart ? today : DateTime(2500),
-    showTitleActions: false,
-    onChanged: (date) {
-      ref.read(lifespanRangeManagerProvider.notifier).updateLifespanRange(
-            birthDate: isStart ? date : birthDate,
-            deathDate: isStart ? deathDate : date,
-          );
-    },
-    currentTime: isStart ? birthDate : deathDate,
-    locale: context.isJapanese ? LocaleType.jp : LocaleType.en,
+  showCupertinoModalPopup<void>(
+    context: context,
+    builder: (BuildContext context) => Container(
+      height: 216,
+      padding: const EdgeInsets.only(top: 6),
+      margin: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      color: CupertinoColors.systemBackground.resolveFrom(context),
+      child: SafeArea(
+        top: false,
+        child: CupertinoDatePicker(
+          initialDateTime: isStart ? birthDate : deathDate,
+          minimumDate: isStart ? DateTime(1900) : today,
+          maximumDate: isStart ? today : DateTime(2500),
+          mode: CupertinoDatePickerMode.date,
+          onDateTimeChanged: (DateTime date) {
+            ref.read(lifespanRangeManagerProvider.notifier).updateLifespanRange(
+                  birthDate: isStart ? date : birthDate,
+                  deathDate: isStart ? deathDate : date,
+                );
+          },
+        ),
+      ),
+    ),
   );
 }
