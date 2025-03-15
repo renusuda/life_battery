@@ -1,6 +1,6 @@
 {
-  "dart.flutterSdkPath": ".fvm/versions/3.27.1",
-  // Fix for https://github.com/flutter/flutter/issues/160442
-  // TODO: Remove this line the issue is fixed
-  "dart.flutterRunAdditionalArgs": ["--no-enable-impeller"]
+  "dart.flutterSdkPath": ".fvm/versions/3.29.2",
+  "dart.flutterRunAdditionalArgs": [
+    "--no-enable-impeller"
+  ]
 }

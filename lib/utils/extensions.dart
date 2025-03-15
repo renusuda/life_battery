@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:life_battery/l10n/app_localizations.dart';
 
 /// Extensions for the [BuildContext] class.
 extension ContextExtensions on BuildContext {

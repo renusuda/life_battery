@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:life_battery/l10n/app_localizations.dart';
 import 'package:life_battery/providers/is_initial_user.dart';
 import 'package:life_battery/screens/lifespan_progress_screen.dart';
 import 'package:life_battery/screens/tutorial_screen.dart';
