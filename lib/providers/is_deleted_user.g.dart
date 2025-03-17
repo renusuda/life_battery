@@ -1,29 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'local_database.dart';
+part of 'is_deleted_user.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$deleteAllDataHash() => r'14b5c561dfe60776912811e88c7a99cc435a37e5';
+String _$isDeletedUserHash() => r'e01b403f6138e85f7741976f6cdc1b2e796d8388';
 
-/// Deletes all data from the database.
+/// Whether the user is deleted.
 ///
-/// Copied from [deleteAllData].
-@ProviderFor(deleteAllData)
-final deleteAllDataProvider = AutoDisposeFutureProvider<void>.internal(
-  deleteAllData,
-  name: r'deleteAllDataProvider',
+/// Copied from [IsDeletedUser].
+@ProviderFor(IsDeletedUser)
+final isDeletedUserProvider =
+    AutoDisposeAsyncNotifierProvider<IsDeletedUser, bool>.internal(
+  IsDeletedUser.new,
+  name: r'isDeletedUserProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$deleteAllDataHash,
+      : _$isDeletedUserHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef DeleteAllDataRef = AutoDisposeFutureProviderRef<void>;
+typedef _$IsDeletedUser = AutoDisposeAsyncNotifier<bool>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

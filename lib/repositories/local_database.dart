@@ -10,7 +10,7 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 3;
+  static const _databaseVersion = 4;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
@@ -18,6 +18,7 @@ class LocalDatabase {
   static const _columnDeathDate = 'deathDate';
   static const _columnThemeMode = 'themeMode';
   static const _columnIsInitialUser = 'isInitialUser';
+  static const _columnIsDeletedUser = 'isDeletedUser';
 
   Database? _database;
 
@@ -48,7 +49,8 @@ class LocalDatabase {
             $_columnBirthDate TEXT NOT NULL,
             $_columnDeathDate TEXT NOT NULL,
             $_columnThemeMode TEXT NOT NULL,
-            $_columnIsInitialUser INTEGER NOT NULL
+            $_columnIsInitialUser INTEGER NOT NULL,
+            $_columnIsDeletedUser INTEGER NOT NULL
           )
         ''');
 
@@ -60,6 +62,7 @@ class LocalDatabase {
               _columnDeathDate: '2100-01-01T00:00:00.000',
               _columnThemeMode: 'system',
               _columnIsInitialUser: 1,
+              _columnIsDeletedUser: 0,
             },
           );
         },
@@ -69,17 +72,24 @@ class LocalDatabase {
     }
   }
 
+  /// Deletes all data.
+  Future<void> deleteAllData() async {
+    final db = await database;
+    await db.update(
+      _tableName,
+      {
+        _columnBirthDate: '2000-01-01T00:00:00.000',
+        _columnDeathDate: '2100-01-01T00:00:00.000',
+        _columnIsInitialUser: 0,
+        _columnIsDeletedUser: 1,
+      },
+    );
+  }
+
   /// Closes the database.
   Future<void> closeDatabase() async {
     if (_database != null) {
       await _database!.close();
     }
-  }
-
-  /// Deletes the database.
-  Future<void> clearDatabase() async {
-    final dbPath = await getDatabasesPath();
-    final path = join(dbPath, _databaseName);
-    await deleteDatabase(path);
   }
 }

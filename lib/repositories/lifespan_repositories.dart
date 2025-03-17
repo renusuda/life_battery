@@ -12,6 +12,7 @@ class LifespanRepository {
   static const _columnDeathDate = 'deathDate';
   static const _columnThemeMode = 'themeMode';
   static const _columnIsInitialUser = 'isInitialUser';
+  static const _columnIsDeletedUser = 'isDeletedUser';
 
   /// Fetches the lifespan record from the database.
   Future<LifespanRange> getLifespan() async {
@@ -75,6 +76,26 @@ class LifespanRepository {
       }
     } on DatabaseException catch (_) {
       return true;
+    }
+  }
+
+  /// Fetches whether user is deleted from the database.
+  Future<bool> getIsDeletedUser() async {
+    try {
+      final db = await instance.database;
+      final result = await db.query(
+        _tableName,
+        columns: [_columnIsDeletedUser],
+      );
+
+      if (result.isEmpty) {
+        return false;
+      } else {
+        final isDeletedUser = result.first[_columnIsDeletedUser]! as int;
+        return isDeletedUser == 1;
+      }
+    } on DatabaseException catch (_) {
+      return false;
     }
   }
 

@@ -214,6 +214,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete'**
   String get deleteLabel;
+
+  /// No description provided for @userDeletionSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data has been successfully deleted.\nThank you for using our app.\nWe hope to see you again in the future.😊'**
+  String get userDeletionSuccess;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

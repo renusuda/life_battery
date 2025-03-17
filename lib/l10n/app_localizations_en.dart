@@ -67,4 +67,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteLabel => 'Delete';
+
+  @override
+  String get userDeletionSuccess => 'Your data has been successfully deleted.\nThank you for using our app.\nWe hope to see you again in the future.😊';
 }

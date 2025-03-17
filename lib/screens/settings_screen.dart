@@ -4,8 +4,8 @@ import 'package:life_battery/l10n/app_localizations.dart';
 import 'package:life_battery/providers/app_theme_mode.dart';
 import 'package:life_battery/providers/local_database.dart';
 import 'package:life_battery/screens/tutorial_screen.dart';
+import 'package:life_battery/screens/user_deleted_screen.dart';
 import 'package:life_battery/utils/extensions.dart';
-import 'package:life_battery/widgets/restart_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// A screen that shows the settings.
@@ -240,10 +240,16 @@ class DeleteAllListTile extends ConsumerWidget {
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  // Delete all data from the database
-                  ref.read(clearDatabaseProvider);
-                  // Restart the app
-                  RestartWidget.restartApp(context);
+                  // Delete all data from database
+                  ref.read(deleteAllDataProvider);
+                  // Navigate to user deleted screen
+                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (context) => const UserDeletedScreen(),
+                    ),
+                  );
                 },
                 child: Text(
                   l10n.deleteLabel,

@@ -18,5 +18,6 @@
   "deleteTitle": "全てのデータを削除",
   "deleteContent": "本当にデータを削除しますか？\n一度削除されたデータは元に戻すことができません。",
   "cancelLabel": "キャンセル",
-  "deleteLabel": "削除"
+  "deleteLabel": "削除",
+  "userDeletionSuccess": "データを削除できました。\nアプリを使用してくださりありがとうございます。\nまたいつかお会いしましょう😊"
 }
