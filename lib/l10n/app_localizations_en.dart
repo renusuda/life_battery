@@ -22,6 +22,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tutorialLabel => 'App tutorial';
 
   @override
+  String get reviewAppLabel => 'Rate this app';
+
+  @override
   String get firstTutorialPageTitle => 'Date Input';
 
   @override

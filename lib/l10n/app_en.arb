@@ -3,6 +3,7 @@
   "generalError": "Error occurred.",
   "dayUnit": "d",
   "tutorialLabel": "App tutorial",
+  "reviewAppLabel": "Rate this app",
   "firstTutorialPageTitle": "Date Input",
   "firstTutorialPageBody": "To use the app, set your birth date and your desired lifespan.",
   "secondTutorialPageTitle": "Visualize Your Life's Time",

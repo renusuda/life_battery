@@ -3,6 +3,7 @@
   "generalError": "エラーが発生しました。",
   "dayUnit": "日",
   "tutorialLabel": "アプリの使い方",
+  "reviewAppLabel": "アプリをレビューする",
   "firstTutorialPageTitle": "日付入力",
   "firstTutorialPageBody": "アプリを使うには、あなたの生年月日と目標とする寿命を設定しましょう。",
   "secondTutorialPageTitle": "人生の時間を可視化",

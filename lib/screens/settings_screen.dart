@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:life_battery/l10n/app_localizations.dart';
 import 'package:life_battery/providers/app_theme_mode.dart';
 import 'package:life_battery/providers/local_database.dart';
@@ -20,6 +21,7 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         children: const <Widget>[
           TutorialListTile(),
+          ReviewAppListTile(),
           PrivacyPolicyListTile(),
           AppearanceListTile(),
           DeleteAllListTile(),
@@ -59,6 +61,35 @@ class TutorialListTile extends StatelessWidget {
             ),
           ),
         );
+      },
+    );
+  }
+}
+
+/// Review app row
+class ReviewAppListTile extends StatelessWidget {
+  /// Constructor
+  const ReviewAppListTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return ListTile(
+      leading: const Icon(Icons.favorite_outline),
+      title: Text(
+        l10n.reviewAppLabel,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      onTap: () async {
+        final inAppReview = InAppReview.instance;
+        if (await inAppReview.isAvailable()) {
+          await inAppReview.requestReview();
+        }
       },
     );
   }

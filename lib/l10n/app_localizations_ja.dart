@@ -22,6 +22,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tutorialLabel => 'アプリの使い方';
 
   @override
+  String get reviewAppLabel => 'アプリをレビューする';
+
+  @override
   String get firstTutorialPageTitle => '日付入力';
 
   @override

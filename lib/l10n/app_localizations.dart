@@ -122,6 +122,12 @@ abstract class AppLocalizations {
   /// **'App tutorial'**
   String get tutorialLabel;
 
+  /// No description provided for @reviewAppLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate this app'**
+  String get reviewAppLabel;
+
   /// No description provided for @firstTutorialPageTitle.
   ///
   /// In en, this message translates to:
