@@ -9,7 +9,8 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get dateInputInstruction => 'Please enter your birthdate and target lifespan.\nFrom there, the remaining time can be calculated.';
+  String get dateInputInstruction =>
+      'Please enter your birthdate and target lifespan.\nFrom there, the remaining time can be calculated.';
 
   @override
   String get generalError => 'Error occurred.';
@@ -24,19 +25,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get firstTutorialPageTitle => 'Date Input';
 
   @override
-  String get firstTutorialPageBody => 'To use the app, set your birth date and your desired lifespan.';
+  String get firstTutorialPageBody =>
+      'To use the app, set your birth date and your desired lifespan.';
 
   @override
   String get secondTutorialPageTitle => 'Visualize Your Life\'s Time';
 
   @override
-  String get secondTutorialPageBody => 'Based on the information you entered, the remaining time is displayed as a percentage.\nTap the battery icon to see the remaining number of days.';
+  String get secondTutorialPageBody =>
+      'Based on the information you entered, the remaining time is displayed as a percentage.\nTap the battery icon to see the remaining number of days.';
 
   @override
   String get thirdTutorialPageTitle => 'How to Update Date Information';
 
   @override
-  String get thirdTutorialPageBody => 'Press and hold the battery icon to reopen the date input screen.';
+  String get thirdTutorialPageBody =>
+      'Press and hold the battery icon to reopen the date input screen.';
 
   @override
   String get privacyPolicyLabel => 'Privacy policy';
@@ -60,7 +64,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteTitle => 'Delete All Data';
 
   @override
-  String get deleteContent => 'Are you sure you want to delete the data?\nDeleted data cannot be restored.';
+  String get deleteContent =>
+      'Are you sure you want to delete the data?\nDeleted data cannot be restored.';
 
   @override
   String get cancelLabel => 'Cancel';
@@ -69,5 +74,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteLabel => 'Delete';
 
   @override
-  String get userDeletionSuccess => 'Your data has been successfully deleted.\nThank you for using our app.\nWe hope to see you again in the future.😊';
+  String get userDeletionSuccess =>
+      'Your data has been successfully deleted.\nThank you for using our app.\nWe hope to see you again in the future.😊';
 }

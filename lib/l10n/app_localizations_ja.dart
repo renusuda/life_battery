@@ -9,7 +9,8 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
-  String get dateInputInstruction => '生年月日と目標とする寿命を入力してください。\nそこから、残りの時間を計算できます。';
+  String get dateInputInstruction =>
+      '生年月日と目標とする寿命を入力してください。\nそこから、残りの時間を計算できます。';
 
   @override
   String get generalError => 'エラーが発生しました。';
@@ -30,7 +31,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get secondTutorialPageTitle => '人生の時間を可視化';
 
   @override
-  String get secondTutorialPageBody => '入力した情報をもとに、残りの時間を%で表示します。\nバッテリーアイコンをタップすると、残りの日数も確認できます。';
+  String get secondTutorialPageBody =>
+      '入力した情報をもとに、残りの時間を%で表示します。\nバッテリーアイコンをタップすると、残りの日数も確認できます。';
 
   @override
   String get thirdTutorialPageTitle => '日付情報の更新方法';
@@ -69,5 +71,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get deleteLabel => '削除';
 
   @override
-  String get userDeletionSuccess => 'データを削除できました。\nアプリを使用してくださりありがとうございます。\nまたいつかお会いしましょう😊';
+  String get userDeletionSuccess =>
+      'データを削除できました。\nアプリを使用してくださりありがとうございます。\nまたいつかお会いしましょう😊';
 }
