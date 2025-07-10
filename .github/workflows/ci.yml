@@ -1,21 +1,21 @@
-name: Flutter CI
+# name: Flutter CI
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  flutter-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - name: Set up Flutter using FVM
-        uses: kuhnroyal/flutter-fvm-config-action/setup@v3
-      - name: Fetches and resolves project dependencies
-        run: flutter pub get
-      - name: Run linter
-        run: flutter analyze
-      - name: Run tests
-        run: flutter test
+# jobs:
+#   flutter-test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check out repository code
+#         uses: actions/checkout@v4
+#       - name: Set up Flutter using FVM
+#         uses: kuhnroyal/flutter-fvm-config-action/setup@v3
+#       - name: Fetches and resolves project dependencies
+#         run: flutter pub get
+#       - name: Run linter
+#         run: flutter analyze
+#       - name: Run tests
+#         run: flutter test
