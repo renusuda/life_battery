@@ -89,6 +89,10 @@ class ReviewAppListTile extends StatelessWidget {
         final inAppReview = InAppReview.instance;
         if (await inAppReview.isAvailable()) {
           await inAppReview.requestReview();
+        } else {
+          await inAppReview.openStoreListing(
+            appStoreId: '6449723058',
+          );
         }
       },
     );
