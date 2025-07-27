@@ -1,12 +1,12 @@
-name: Android CI
+name: Android CD
 
 on: workflow_dispatch
 
 jobs:
-  flutter-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout code
         uses: actions/checkout@v4
 # on:
 #   push:
