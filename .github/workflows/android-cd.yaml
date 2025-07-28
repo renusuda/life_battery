@@ -20,6 +20,9 @@ jobs:
 
       - name: Fetches and resolves project dependencies
         run: flutter pub get
+
+      - name: Build app bundle
+        run: flutter build appbundle
 # on:
 #   push:
 #     branches:
