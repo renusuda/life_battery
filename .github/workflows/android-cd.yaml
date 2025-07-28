@@ -14,13 +14,13 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+
+      - name: Set up Flutter using FVM
+        uses: kuhnroyal/flutter-fvm-config-action/setup@v3
 # on:
 #   push:
 #     branches:
 #       - main
-
-#       - name: Set up Flutter using FVM
-#         uses: kuhnroyal/flutter-fvm-config-action/setup@v3
 #       - name: Fetches and resolves project dependencies
 #         run: flutter pub get
 #       - name: Run linter
