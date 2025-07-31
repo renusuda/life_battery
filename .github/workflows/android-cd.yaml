@@ -21,15 +21,15 @@ jobs:
       - name: Fetches and resolves project dependencies
         run: flutter pub get
 
-      - name: Create key.jks
+      - name: Create release.jks
         run: echo -n ${{ secrets.KEYSTORE_BASE64 }} | base64 -d > android/release.jks
 
       - name: Create key.properties
         run: |
-          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' > android/key.properties
+          echo 'storeFile=release.jks' > android/key.properties
+          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> android/key.properties
           echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
-          echo 'storeFile=release.jks' >> android/key.properties
 
       - name: Build app bundle
         run: flutter build appbundle
