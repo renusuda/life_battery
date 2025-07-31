@@ -22,14 +22,16 @@ jobs:
         run: flutter pub get
 
       - name: Create release.jks
-        run: echo -n ${{ secrets.KEYSTORE_BASE64 }} | base64 -d > android/app/release.jks
+        run: echo -n ${{ secrets.KEYSTORE_BASE64 }} | base64 -d > release.jks
+        working-directory: ./android/app
 
       - name: Create key.properties
         run: |
-          echo 'storeFile=release.jks' > android/key.properties
-          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> android/key.properties
-          echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
-          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
+          echo 'storeFile=release.jks' > key.properties
+          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> key.properties
+          echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> key.properties
+          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> key.properties
+        working-directory: ./android/app
 
       - name: Build app bundle
         run: flutter build appbundle
