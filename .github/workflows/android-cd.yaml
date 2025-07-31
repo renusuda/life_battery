@@ -22,7 +22,12 @@ jobs:
         run: flutter pub get
 
       - name: Create key.jks
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/key.jks
+        run: echo '${{ secrets.KEYSTORE_BASE64 }}' | base64 -d > android/key.jks
+
+      - name: Verify keystore exists
+        run: |
+          echo "Listing files in android directory"
+          ls -l android/key.jks
 
       - name: Create key.properties
         run: |
@@ -30,6 +35,11 @@ jobs:
           echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
           echo 'storeFile=../key.jks' >> android/key.properties
+
+      - name: Verify key.properties exists
+        run: |
+          echo "Listing files in android directory"
+          ls -l android/key.properties
 
       - name: Build app bundle
         run: flutter build appbundle
