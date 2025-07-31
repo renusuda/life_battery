@@ -31,10 +31,15 @@ jobs:
 
       - name: Create key.properties
         run: |
-          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' > android/key.properties
-          echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
-          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
-          echo 'storeFile=key.jks' >> android/key.properties
+          echo 'storePassword=test1' > android/key.properties
+          echo 'keyPassword=test2' >> android/key.properties
+          echo 'keyAlias=test3' >> android/key.properties
+          echo 'storeFile=test4' >> android/key.properties
+          cat android/key.properties
+      # echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' > android/key.properties
+      # echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
+      # echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
+      # echo 'storeFile=key.jks' >> android/key.properties
 
       - name: Verify key.properties exists
         run: |
