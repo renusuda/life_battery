@@ -23,14 +23,14 @@ jobs:
 
       - name: Create key.jks
         run: |
-          echo '${{ secrets.KEYSTORE_BASE64 }}' | base64 -d > android/release.jks
+          echo '${{ secrets.KEYSTORE_BASE64 }}' | base64 -d > android/app/release.jks
 
       - name: Create key.properties
         run: |
-          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' > android/key.properties
-          echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
-          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
-          echo 'storeFile=release.jks' >> android/key.properties
+          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' > android/app/key.properties
+          echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/app/key.properties
+          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/app/key.properties
+          echo 'storeFile=android/app/release.jks' >> android/app/key.properties
 
       - name: Build app bundle
         run: flutter build appbundle
