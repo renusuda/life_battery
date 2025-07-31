@@ -27,7 +27,7 @@ jobs:
 
       - name: Create key.properties
         run: |
-          echo 'storeFile=app/release.jks' > key.properties
+          echo 'storeFile=release.jks' > key.properties
           echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> key.properties
           echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> key.properties
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> key.properties
