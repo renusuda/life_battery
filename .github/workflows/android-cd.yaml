@@ -23,8 +23,7 @@ jobs:
 
       - name: Create key.jks
         run: |
-          echo '${{ secrets.KEYSTORE_BASE64 }}' | base64 -d > android/key.jks
-          cat android/key.jks
+          echo '${{ secrets.KEYSTORE_BASE64 }}' | base64 -d > android/release.jks
 
       - name: Create key.properties
         run: |
@@ -32,7 +31,6 @@ jobs:
           echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
           echo 'storeFile=key.jks' >> android/key.properties
-          cat android/key.properties
 
       - name: Build app bundle
         run: flutter build appbundle
