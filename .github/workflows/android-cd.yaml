@@ -32,4 +32,4 @@ jobs:
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
 
       - name: Build app bundle
-        run: flutter build appbundle
+        run: flutter build appbundle --release
