@@ -1,3 +1,5 @@
+# Implemented following the reference below
+# https://medium.com/lodgify-technology-blog/deploy-your-flutter-app-to-google-play-with-github-actions-f13a11c4492e
 name: Android CD
 
 on: workflow_dispatch
