@@ -30,7 +30,6 @@ jobs:
           echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> android/key.properties
           echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
-        working-directory: ./android
 
       - name: Build app bundle
         run: flutter build appbundle
