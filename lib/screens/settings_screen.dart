@@ -269,13 +269,13 @@ class DeleteAllListTile extends ConsumerWidget {
 
               /// Delete button
               TextButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pop(context);
                   // Delete all data from database
                   ref.read(deleteAllDataProvider);
                   // Navigate to user deleted screen
                   Navigator.pop(context);
-                  Navigator.pushReplacement(
+                  await Navigator.pushReplacement(
                     context,
                     MaterialPageRoute<void>(
                       builder: (context) => const UserDeletedScreen(),
