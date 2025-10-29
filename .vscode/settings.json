@@ -8,6 +8,9 @@
   },
   "files.exclude": {
     "**/*.freezed.dart": true,
-    "**/*.g.dart": true
+    "**/*.g.dart": true,
+    "**/*_localizations.dart": true,
+    "**/*_localizations_en.dart": true,
+    "**/*_localizations_ja.dart": true
   }
 }
