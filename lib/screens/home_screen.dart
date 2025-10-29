@@ -25,9 +25,9 @@ class HomeScreen extends ConsumerWidget {
           : isInitialUser.when(
               data: (isInitial) => isInitial
                   ? TutorialScreen(
-                      onDone: () {
+                      onDone: () async {
                         // Navigate to the lifespan progress screen
-                        Navigator.pushReplacement(
+                        await Navigator.pushReplacement(
                           context,
                           MaterialPageRoute<void>(
                             builder: (context) => const LifespanProgressScreen(
