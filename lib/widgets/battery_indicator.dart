@@ -119,7 +119,7 @@ class _BatteryBarState extends State<BatteryBar> {
         end: widget.value,
       ),
       duration: const Duration(seconds: 1),
-      builder: (_, value, __) {
+      builder: (_, value, _) {
         return Padding(
           padding: const EdgeInsets.all(10),
           child: ClipRRect(
