@@ -243,8 +243,8 @@ class DeleteAllListTile extends ConsumerWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {
-        showDialog<void>(
+      onTap: () async {
+        await showDialog<void>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
             title: Text(
