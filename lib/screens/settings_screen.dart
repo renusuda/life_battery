@@ -152,8 +152,8 @@ class AppearanceListTile extends ConsumerWidget {
           initialValue: value,
           position: PopupMenuPosition.over,
           offset: const Offset(100, 0),
-          onSelected: (ThemeMode mode) {
-            ref.read(appThemeModeProvider.notifier).updateThemeMode(mode);
+          onSelected: (ThemeMode mode) async {
+            await ref.read(appThemeModeProvider.notifier).updateThemeMode(mode);
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<ThemeMode>>[
             PopupMenuItem<ThemeMode>(
