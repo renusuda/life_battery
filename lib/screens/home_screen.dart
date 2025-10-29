@@ -4,7 +4,6 @@ import 'package:life_battery/l10n/app_localizations.dart';
 import 'package:life_battery/providers/is_deleted_user.dart';
 import 'package:life_battery/providers/is_initial_user.dart';
 import 'package:life_battery/screens/lifespan_progress_screen.dart';
-import 'package:life_battery/screens/tutorial_screen.dart';
 import 'package:life_battery/screens/user_deleted_screen.dart';
 
 /// Home screen
@@ -20,27 +19,15 @@ class HomeScreen extends ConsumerWidget {
     return switch (isDeletedUser) {
       // If the user is initial user, show the tutorial screen
       // Otherwise, show the lifespan progress screen
-      AsyncData(:final value) => value
-          ? const UserDeletedScreen()
-          : isInitialUser.when(
-              data: (isInitial) => isInitial
-                  ? TutorialScreen(
-                      onDone: () async {
-                        // Navigate to the lifespan progress screen
-                        await Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (context) => const LifespanProgressScreen(
-                              isInitialUser: true,
-                            ),
-                          ),
-                        );
-                      },
-                    )
-                  : const LifespanProgressScreen(isInitialUser: false),
-              error: (error, _) => const ErrorScreen(),
-              loading: () => const LoadingScreen(),
-            ),
+      AsyncData(:final value) =>
+        value
+            ? const UserDeletedScreen()
+            : isInitialUser.when(
+                data: (isInitial) =>
+                    LifespanProgressScreen(isInitialUser: isInitial),
+                error: (error, _) => const ErrorScreen(),
+                loading: () => const LoadingScreen(),
+              ),
       AsyncError() => const ErrorScreen(),
       _ => const LoadingScreen(),
     };
