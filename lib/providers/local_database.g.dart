@@ -20,15 +20,15 @@ final class DeleteAllDataProvider
     with $FutureModifier<void>, $FutureProvider<void> {
   /// Deletes all data from the database.
   const DeleteAllDataProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'deleteAllDataProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'deleteAllDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$deleteAllDataHash();

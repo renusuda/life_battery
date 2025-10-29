@@ -18,15 +18,15 @@ final class IsDeletedUserProvider
     extends $AsyncNotifierProvider<IsDeletedUser, bool> {
   /// Whether the user is deleted.
   const IsDeletedUserProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'isDeletedUserProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isDeletedUserProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$isDeletedUserHash();
@@ -47,11 +47,14 @@ abstract class _$IsDeletedUser extends $AsyncNotifier<bool> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<AsyncValue<bool>, bool>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<AsyncValue<bool>, bool>,
-        AsyncValue<bool>,
-        Object?,
-        Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<bool>, bool>,
+              AsyncValue<bool>,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }

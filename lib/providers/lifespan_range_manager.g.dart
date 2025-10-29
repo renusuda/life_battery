@@ -18,15 +18,15 @@ final class LifespanRangeManagerProvider
     extends $AsyncNotifierProvider<LifespanRangeManager, LifespanRange> {
   /// lifespan range manager
   const LifespanRangeManagerProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'lifespanRangeManagerProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'lifespanRangeManagerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$lifespanRangeManagerHash();
@@ -48,11 +48,14 @@ abstract class _$LifespanRangeManager extends $AsyncNotifier<LifespanRange> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<AsyncValue<LifespanRange>, LifespanRange>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<AsyncValue<LifespanRange>, LifespanRange>,
-        AsyncValue<LifespanRange>,
-        Object?,
-        Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<LifespanRange>, LifespanRange>,
+              AsyncValue<LifespanRange>,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }
