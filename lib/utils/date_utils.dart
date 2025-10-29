@@ -72,8 +72,10 @@ void _showPickerForDates({
           minimumDate: isStart ? DateTime(1900) : today,
           maximumDate: isStart ? today : DateTime(2500),
           mode: CupertinoDatePickerMode.date,
-          onDateTimeChanged: (DateTime date) {
-            ref.read(lifespanRangeManagerProvider.notifier).updateLifespanRange(
+          onDateTimeChanged: (DateTime date) async {
+            await ref
+                .read(lifespanRangeManagerProvider.notifier)
+                .updateLifespanRange(
                   birthDate: isStart ? date : birthDate,
                   deathDate: isStart ? deathDate : date,
                 );
