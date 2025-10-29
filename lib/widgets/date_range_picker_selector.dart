@@ -28,8 +28,8 @@ class DateRangePickerSelector extends ConsumerWidget {
           const DateRangePickerLine(),
           DateRangePickerCircle(
             isStart: true,
-            onTap: () {
-              showPickerForBirthDate(
+            onTap: () async {
+              await showPickerForBirthDate(
                 context: context,
                 ref: ref,
                 birthDate: birthDate,
@@ -39,8 +39,8 @@ class DateRangePickerSelector extends ConsumerWidget {
           ),
           DateRangePickerCircle(
             isStart: false,
-            onTap: () {
-              showPickerForDeathDate(
+            onTap: () async {
+              await showPickerForDeathDate(
                 context: context,
                 ref: ref,
                 birthDate: birthDate,

@@ -149,8 +149,8 @@ class BirthDateText extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return CommonDateText(
       date: birthDate,
-      onTap: () {
-        showPickerForBirthDate(
+      onTap: () async {
+        await showPickerForBirthDate(
           context: context,
           ref: ref,
           birthDate: birthDate,
@@ -180,8 +180,8 @@ class DeathDateText extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return CommonDateText(
       date: deathDate,
-      onTap: () {
-        showPickerForDeathDate(
+      onTap: () async {
+        await showPickerForDeathDate(
           context: context,
           ref: ref,
           birthDate: birthDate,

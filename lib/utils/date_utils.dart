@@ -15,13 +15,13 @@ String formatDate(
 }
 
 /// Shows a date picker for updating the birth date.
-void showPickerForBirthDate({
+Future<void> showPickerForBirthDate({
   required BuildContext context,
   required WidgetRef ref,
   required DateTime birthDate,
   required DateTime deathDate,
-}) {
-  _showPickerForDates(
+}) async {
+  await _showPickerForDates(
     context: context,
     ref: ref,
     birthDate: birthDate,
@@ -31,13 +31,13 @@ void showPickerForBirthDate({
 }
 
 /// Shows a date picker for updating the death date.
-void showPickerForDeathDate({
+Future<void> showPickerForDeathDate({
   required BuildContext context,
   required WidgetRef ref,
   required DateTime birthDate,
   required DateTime deathDate,
-}) {
-  _showPickerForDates(
+}) async {
+  await _showPickerForDates(
     context: context,
     ref: ref,
     birthDate: birthDate,
@@ -47,16 +47,16 @@ void showPickerForDeathDate({
 }
 
 /// Shows a date picker for updating the date.
-void _showPickerForDates({
+Future<void> _showPickerForDates({
   required BuildContext context,
   required WidgetRef ref,
   required DateTime birthDate,
   required DateTime deathDate,
   required bool isStart,
-}) {
+}) async {
   final today = DateTime.now();
 
-  showCupertinoModalPopup<void>(
+  await showCupertinoModalPopup<void>(
     context: context,
     builder: (BuildContext context) => Container(
       height: 216,
