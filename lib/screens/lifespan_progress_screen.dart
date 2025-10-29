@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/l10n/app_localizations.dart';
@@ -112,7 +114,7 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
       });
     }
     // Update the user is not initial user
-    widget.updateUserIsNotInitialUser();
+    unawaited(widget.updateUserIsNotInitialUser());
   }
 
   @override
