@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,134 +10,30 @@ part of 'lifespan_range.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-LifespanRange _$LifespanRangeFromJson(Map<String, dynamic> json) {
-  return _LifespanRange.fromJson(json);
-}
 
 /// @nodoc
 mixin _$LifespanRange {
-  DateTime get birthDate => throw _privateConstructorUsedError;
-  DateTime get deathDate => throw _privateConstructorUsedError;
-
-  /// Serializes this LifespanRange to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  DateTime get birthDate;
+  DateTime get deathDate;
 
   /// Create a copy of LifespanRange
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $LifespanRangeCopyWith<LifespanRange> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$LifespanRangeCopyWithImpl<LifespanRange>(
+          this as LifespanRange, _$identity);
 
-/// @nodoc
-abstract class $LifespanRangeCopyWith<$Res> {
-  factory $LifespanRangeCopyWith(
-          LifespanRange value, $Res Function(LifespanRange) then) =
-      _$LifespanRangeCopyWithImpl<$Res, LifespanRange>;
-  @useResult
-  $Res call({DateTime birthDate, DateTime deathDate});
-}
-
-/// @nodoc
-class _$LifespanRangeCopyWithImpl<$Res, $Val extends LifespanRange>
-    implements $LifespanRangeCopyWith<$Res> {
-  _$LifespanRangeCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of LifespanRange
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? birthDate = null,
-    Object? deathDate = null,
-  }) {
-    return _then(_value.copyWith(
-      birthDate: null == birthDate
-          ? _value.birthDate
-          : birthDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      deathDate: null == deathDate
-          ? _value.deathDate
-          : deathDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$LifespanRangeImplCopyWith<$Res>
-    implements $LifespanRangeCopyWith<$Res> {
-  factory _$$LifespanRangeImplCopyWith(
-          _$LifespanRangeImpl value, $Res Function(_$LifespanRangeImpl) then) =
-      __$$LifespanRangeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({DateTime birthDate, DateTime deathDate});
-}
-
-/// @nodoc
-class __$$LifespanRangeImplCopyWithImpl<$Res>
-    extends _$LifespanRangeCopyWithImpl<$Res, _$LifespanRangeImpl>
-    implements _$$LifespanRangeImplCopyWith<$Res> {
-  __$$LifespanRangeImplCopyWithImpl(
-      _$LifespanRangeImpl _value, $Res Function(_$LifespanRangeImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of LifespanRange
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? birthDate = null,
-    Object? deathDate = null,
-  }) {
-    return _then(_$LifespanRangeImpl(
-      birthDate: null == birthDate
-          ? _value.birthDate
-          : birthDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      deathDate: null == deathDate
-          ? _value.deathDate
-          : deathDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$LifespanRangeImpl extends _LifespanRange {
-  _$LifespanRangeImpl({required this.birthDate, required this.deathDate})
-      : super._();
-
-  factory _$LifespanRangeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$LifespanRangeImplFromJson(json);
-
-  @override
-  final DateTime birthDate;
-  @override
-  final DateTime deathDate;
-
-  @override
-  String toString() {
-    return 'LifespanRange(birthDate: $birthDate, deathDate: $deathDate)';
-  }
+  /// Serializes this LifespanRange to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LifespanRangeImpl &&
+            other is LifespanRange &&
             (identical(other.birthDate, birthDate) ||
                 other.birthDate == birthDate) &&
             (identical(other.deathDate, deathDate) ||
@@ -147,40 +44,137 @@ class _$LifespanRangeImpl extends _LifespanRange {
   @override
   int get hashCode => Object.hash(runtimeType, birthDate, deathDate);
 
-  /// Create a copy of LifespanRange
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$LifespanRangeImplCopyWith<_$LifespanRangeImpl> get copyWith =>
-      __$$LifespanRangeImplCopyWithImpl<_$LifespanRangeImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$LifespanRangeImplToJson(
-      this,
-    );
+  String toString() {
+    return 'LifespanRange(birthDate: $birthDate, deathDate: $deathDate)';
   }
 }
 
-abstract class _LifespanRange extends LifespanRange {
-  factory _LifespanRange(
-      {required final DateTime birthDate,
-      required final DateTime deathDate}) = _$LifespanRangeImpl;
-  _LifespanRange._() : super._();
+/// @nodoc
+abstract mixin class $LifespanRangeCopyWith<$Res> {
+  factory $LifespanRangeCopyWith(
+          LifespanRange value, $Res Function(LifespanRange) _then) =
+      _$LifespanRangeCopyWithImpl;
+  @useResult
+  $Res call({DateTime birthDate, DateTime deathDate});
+}
 
-  factory _LifespanRange.fromJson(Map<String, dynamic> json) =
-      _$LifespanRangeImpl.fromJson;
+/// @nodoc
+class _$LifespanRangeCopyWithImpl<$Res>
+    implements $LifespanRangeCopyWith<$Res> {
+  _$LifespanRangeCopyWithImpl(this._self, this._then);
+
+  final LifespanRange _self;
+  final $Res Function(LifespanRange) _then;
+
+  /// Create a copy of LifespanRange
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? birthDate = null,
+    Object? deathDate = null,
+  }) {
+    return _then(_self.copyWith(
+      birthDate: null == birthDate
+          ? _self.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      deathDate: null == deathDate
+          ? _self.deathDate
+          : deathDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _LifespanRange extends LifespanRange {
+  _LifespanRange({required this.birthDate, required this.deathDate})
+      : super._();
+  factory _LifespanRange.fromJson(Map<String, dynamic> json) =>
+      _$LifespanRangeFromJson(json);
 
   @override
-  DateTime get birthDate;
+  final DateTime birthDate;
   @override
-  DateTime get deathDate;
+  final DateTime deathDate;
 
   /// Create a copy of LifespanRange
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LifespanRangeImplCopyWith<_$LifespanRangeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$LifespanRangeCopyWith<_LifespanRange> get copyWith =>
+      __$LifespanRangeCopyWithImpl<_LifespanRange>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$LifespanRangeToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _LifespanRange &&
+            (identical(other.birthDate, birthDate) ||
+                other.birthDate == birthDate) &&
+            (identical(other.deathDate, deathDate) ||
+                other.deathDate == deathDate));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, birthDate, deathDate);
+
+  @override
+  String toString() {
+    return 'LifespanRange(birthDate: $birthDate, deathDate: $deathDate)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$LifespanRangeCopyWith<$Res>
+    implements $LifespanRangeCopyWith<$Res> {
+  factory _$LifespanRangeCopyWith(
+          _LifespanRange value, $Res Function(_LifespanRange) _then) =
+      __$LifespanRangeCopyWithImpl;
+  @override
+  @useResult
+  $Res call({DateTime birthDate, DateTime deathDate});
+}
+
+/// @nodoc
+class __$LifespanRangeCopyWithImpl<$Res>
+    implements _$LifespanRangeCopyWith<$Res> {
+  __$LifespanRangeCopyWithImpl(this._self, this._then);
+
+  final _LifespanRange _self;
+  final $Res Function(_LifespanRange) _then;
+
+  /// Create a copy of LifespanRange
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? birthDate = null,
+    Object? deathDate = null,
+  }) {
+    return _then(_LifespanRange(
+      birthDate: null == birthDate
+          ? _self.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      deathDate: null == deathDate
+          ? _self.deathDate
+          : deathDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+// dart format on
