@@ -6,24 +6,53 @@ part of 'lifespan_range_manager.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// lifespan range manager
+
+@ProviderFor(LifespanRangeManager)
+const lifespanRangeManagerProvider = LifespanRangeManagerProvider._();
+
+/// lifespan range manager
+final class LifespanRangeManagerProvider
+    extends $AsyncNotifierProvider<LifespanRangeManager, LifespanRange> {
+  /// lifespan range manager
+  const LifespanRangeManagerProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'lifespanRangeManagerProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$lifespanRangeManagerHash();
+
+  @$internal
+  @override
+  LifespanRangeManager create() => LifespanRangeManager();
+}
+
 String _$lifespanRangeManagerHash() =>
     r'a7eab516ce09fd91eff0d6ab6e3f1f9435340012';
 
 /// lifespan range manager
-///
-/// Copied from [LifespanRangeManager].
-@ProviderFor(LifespanRangeManager)
-final lifespanRangeManagerProvider = AutoDisposeAsyncNotifierProvider<
-    LifespanRangeManager, LifespanRange>.internal(
-  LifespanRangeManager.new,
-  name: r'lifespanRangeManagerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$lifespanRangeManagerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-typedef _$LifespanRangeManager = AutoDisposeAsyncNotifier<LifespanRange>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$LifespanRangeManager extends $AsyncNotifier<LifespanRange> {
+  FutureOr<LifespanRange> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<LifespanRange>, LifespanRange>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<AsyncValue<LifespanRange>, LifespanRange>,
+        AsyncValue<LifespanRange>,
+        Object?,
+        Object?>;
+    element.handleValue(ref, created);
+  }
+}
