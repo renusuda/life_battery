@@ -96,11 +96,13 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
   }
 
   void _showDateInputBottomSheet() {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return const DateInputBottomSheet();
-      },
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return const DateInputBottomSheet();
+        },
+      ),
     );
   }
 
