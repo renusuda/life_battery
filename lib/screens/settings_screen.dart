@@ -50,8 +50,8 @@ class TutorialListTile extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {
-        Navigator.push(
+      onTap: () async {
+        await Navigator.push(
           context,
           MaterialPageRoute<void>(
             builder: (context) => TutorialScreen(
