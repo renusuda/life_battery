@@ -149,76 +149,70 @@ class AppearanceListTile extends ConsumerWidget {
 
     return switch (appThemeMode) {
       AsyncData(:final value) => PopupMenuButton<ThemeMode>(
-          initialValue: value,
-          position: PopupMenuPosition.over,
-          offset: const Offset(100, 0),
-          onSelected: (ThemeMode mode) async {
-            await ref.read(appThemeModeProvider.notifier).updateThemeMode(mode);
-          },
-          itemBuilder: (BuildContext context) => <PopupMenuEntry<ThemeMode>>[
-            PopupMenuItem<ThemeMode>(
-              value: ThemeMode.system,
-              child: Text(
-                l10n.systemLabel,
+        initialValue: value,
+        position: PopupMenuPosition.over,
+        offset: const Offset(100, 0),
+        onSelected: (ThemeMode mode) async {
+          await ref.read(appThemeModeProvider.notifier).updateThemeMode(mode);
+        },
+        itemBuilder: (BuildContext context) => <PopupMenuEntry<ThemeMode>>[
+          PopupMenuItem<ThemeMode>(
+            value: ThemeMode.system,
+            child: Text(
+              l10n.systemLabel,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          PopupMenuItem<ThemeMode>(
+            value: ThemeMode.light,
+            child: Text(
+              l10n.lightLabel,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          PopupMenuItem<ThemeMode>(
+            value: ThemeMode.dark,
+            child: Text(
+              l10n.darkLabel,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+        child: ListTile(
+          leading: const Icon(Icons.wb_sunny_outlined),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                l10n.appearanceLabel,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            PopupMenuItem<ThemeMode>(
-              value: ThemeMode.light,
-              child: Text(
-                l10n.lightLabel,
-                style: const TextStyle(
+              Text(
+                value.label(l10n),
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
-            ),
-            PopupMenuItem<ThemeMode>(
-              value: ThemeMode.dark,
-              child: Text(
-                l10n.darkLabel,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-          child: ListTile(
-            leading: const Icon(Icons.wb_sunny_outlined),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  l10n.appearanceLabel,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  value.label(l10n),
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ],
-            ),
-            trailing: const Icon(Icons.unfold_more),
+            ],
           ),
+          trailing: const Icon(Icons.unfold_more),
         ),
-      AsyncError() => Scaffold(
-          appBar: AppBar(),
-          body: Center(
-            child: Text(l10n.generalError),
-          ),
-        ),
-      _ => Scaffold(
-          appBar: AppBar(),
-          body: const Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
+      ),
+      AsyncError() => Center(
+        child: Text(l10n.generalError),
+      ),
+      _ => const Center(
+        child: CircularProgressIndicator(),
+      ),
     };
   }
 }
