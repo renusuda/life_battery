@@ -13,6 +13,14 @@ void main() {
       );
       expect(find.text('App tutorial'), findsOneWidget);
     });
+    testWidgets('Device locale is Japanese when set to Japanese', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        const LocalizedSettingsScreen(locale: Locale('ja')),
+      );
+      expect(find.text('アプリの使い方'), findsOneWidget);
+    });
   });
 }
 
