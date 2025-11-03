@@ -13,6 +13,13 @@ void main() {
       );
       expect(find.text('App tutorial'), findsOneWidget);
     });
+    testWidgets('Device locale is Chinese when set to English', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('zh')];
+      await tester.pumpWidget(
+        const TestSettingsScreen(),
+      );
+      expect(find.text('App tutorial'), findsOneWidget);
+    });
     testWidgets('Device locale is Japanese when set to Japanese', (
       tester,
     ) async {
