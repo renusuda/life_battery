@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:life_battery/l10n/app_localizations.dart';
@@ -36,6 +37,14 @@ class CommonMaterialApp extends StatelessWidget {
         Locale('ja'), // Japanese
         Locale('en'), // English
       ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        const defaultLocale = Locale('en');
+        return supportedLocales.firstWhereOrNull(
+              (supportedLocale) =>
+                  supportedLocale.languageCode == locale?.languageCode,
+            ) ??
+            defaultLocale;
+      },
       home: home,
     );
   }
