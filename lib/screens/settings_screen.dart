@@ -89,9 +89,7 @@ class ReviewAppListTile extends StatelessWidget {
       ),
       onTap: () async {
         final inAppReview = InAppReview.instance;
-        if (await inAppReview.isAvailable()) {
-          await inAppReview.requestReview();
-        } else if (Platform.isIOS) {
+        if (Platform.isIOS) {
           await inAppReview.openStoreListing(appStoreId: '6449723058');
         } else if (Platform.isAndroid) {
           await inAppReview.openStoreListing();
