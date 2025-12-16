@@ -28,25 +28,25 @@ class App extends ConsumerWidget {
 
     return switch (appThemeMode) {
       AsyncData(:final value) => CommonMaterialApp(
-          themeMode: value,
-          home: const HomeScreen(),
-        ),
+        themeMode: value,
+        home: const HomeScreen(),
+      ),
       AsyncError() => CommonMaterialApp(
-          home: Scaffold(
-            appBar: AppBar(),
-            body: const Center(
-              child: Text(''),
-            ),
+        home: Scaffold(
+          appBar: AppBar(),
+          body: const Center(
+            child: Text(''),
           ),
         ),
+      ),
       _ => CommonMaterialApp(
-          home: Scaffold(
-            appBar: AppBar(),
-            body: const Center(
-              child: CircularProgressIndicator(),
-            ),
+        home: Scaffold(
+          appBar: AppBar(),
+          body: const Center(
+            child: CircularProgressIndicator(),
           ),
         ),
+      ),
     };
   }
 }

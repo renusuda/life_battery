@@ -25,17 +25,19 @@ void main() {
       );
     });
 
-    test('returns 1 when the current date is the day before the death date',
-        () {
-      final lifespanRange = LifespanRange(
-        birthDate: DateTime(2000),
-        deathDate: DateTime(2000, 12, 31),
-      );
-      expect(
-        lifespanRange.remainingLifePercentage(now: DateTime(2000, 12, 30)),
-        1,
-      );
-    });
+    test(
+      'returns 1 when the current date is the day before the death date',
+      () {
+        final lifespanRange = LifespanRange(
+          birthDate: DateTime(2000),
+          deathDate: DateTime(2000, 12, 31),
+        );
+        expect(
+          lifespanRange.remainingLifePercentage(now: DateTime(2000, 12, 30)),
+          1,
+        );
+      },
+    );
 
     test('returns 100 when the current date is the birth date', () {
       final lifespanRange = LifespanRange(
@@ -59,18 +61,21 @@ void main() {
       );
     });
 
-    test('''
+    test(
+      '''
         returns 0 when the current date, the birth date and the death date are same
-        ''', () {
-      final lifespanRange = LifespanRange(
-        birthDate: DateTime(2000),
-        deathDate: DateTime(2000),
-      );
-      expect(
-        lifespanRange.remainingLifePercentage(now: DateTime(2000)),
-        0,
-      );
-    });
+        ''',
+      () {
+        final lifespanRange = LifespanRange(
+          birthDate: DateTime(2000),
+          deathDate: DateTime(2000),
+        );
+        expect(
+          lifespanRange.remainingLifePercentage(now: DateTime(2000)),
+          0,
+        );
+      },
+    );
 
     test('returns correct value with random dates', () {
       final lifespanRange = LifespanRange(

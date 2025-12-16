@@ -80,13 +80,13 @@ class DateRangePickerCircleState extends State<DateRangePickerCircle>
     duration: const Duration(seconds: 1),
     vsync: this,
   )..repeat(reverse: true);
-  late final Animation<double> _animation =
-      Tween<double>(begin: 0.7, end: 1.3).animate(
-    CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ),
-  );
+  late final Animation<double> _animation = Tween<double>(begin: 0.7, end: 1.3)
+      .animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Curves.easeInOut,
+        ),
+      );
 
   @override
   void dispose() {

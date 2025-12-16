@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 class LifeBatteryStatus {
   /// Constructor
   LifeBatteryStatus(int value)
-      : type = (value > 50)
-            ? LifeBatteryStatusType.high
-            : (value >= 20)
-                ? LifeBatteryStatusType.medium
-                : LifeBatteryStatusType.low;
+    : type = (value > 50)
+          ? LifeBatteryStatusType.high
+          : (value >= 20)
+          ? LifeBatteryStatusType.medium
+          : LifeBatteryStatusType.low;
 
   /// Type of battery status
   final LifeBatteryStatusType type;
@@ -41,5 +41,5 @@ enum LifeBatteryStatusType {
   medium(),
 
   /// low status
-  low();
+  low(),
 }

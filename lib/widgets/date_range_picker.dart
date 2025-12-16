@@ -18,9 +18,9 @@ class DateRangePicker extends ConsumerWidget {
 
     return switch (lifespanRangeManager) {
       AsyncData(:final value) => DateRangePickerContent(
-          birthDate: value.birthDate,
-          deathDate: value.deathDate,
-        ),
+        birthDate: value.birthDate,
+        deathDate: value.deathDate,
+      ),
       AsyncError() => Text(l10n.generalError),
       _ => const CircularProgressIndicator(),
     };

@@ -37,8 +37,9 @@ class TutorialScreen extends StatelessWidget {
           title: l10n.secondTutorialPageTitle,
           body: l10n.secondTutorialPageBody,
           image: Image(
-            image:
-                AssetImage('assets/images/second_tutorial_$languageCode.gif'),
+            image: AssetImage(
+              'assets/images/second_tutorial_$languageCode.gif',
+            ),
           ),
           decoration: const PageDecoration(
             imageFlex: 2,

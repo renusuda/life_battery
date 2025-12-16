@@ -47,14 +47,14 @@ class LifespanProgressScreen extends ConsumerWidget {
       body: Center(
         child: switch (lifespanRangeManager) {
           AsyncData(:final value) => LifeProgressContent(
-              lifespanRange: value,
-              isInitialUser: isInitialUser,
-              updateUserIsNotInitialUser: () async {
-                await ref
-                    .read(isInitialUserProvider.notifier)
-                    .updateUserIsNotInitialUser();
-              },
-            ),
+            lifespanRange: value,
+            isInitialUser: isInitialUser,
+            updateUserIsNotInitialUser: () async {
+              await ref
+                  .read(isInitialUserProvider.notifier)
+                  .updateUserIsNotInitialUser();
+            },
+          ),
           AsyncError() => Text(l10n.generalError),
           _ => const CircularProgressIndicator(),
         },
@@ -121,10 +121,10 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
 
   @override
   Widget build(BuildContext context) {
-    final remainingLifePercentage =
-        widget.lifespanRange.remainingLifePercentage(
-      now: DateTime.now(),
-    );
+    final remainingLifePercentage = widget.lifespanRange
+        .remainingLifePercentage(
+          now: DateTime.now(),
+        );
     final remainingLifeDays = widget.lifespanRange.remainingLifeDays(
       now: DateTime.now(),
     );
