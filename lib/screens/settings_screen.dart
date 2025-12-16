@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -89,6 +91,8 @@ class ReviewAppListTile extends StatelessWidget {
         final inAppReview = InAppReview.instance;
         if (await inAppReview.isAvailable()) {
           await inAppReview.requestReview();
+        } else if (Platform.isIOS) {
+          await inAppReview.openStoreListing(appStoreId: '6449723058');
         }
       },
     );
