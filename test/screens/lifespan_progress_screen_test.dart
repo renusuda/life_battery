@@ -26,6 +26,23 @@ void main() {
       expect(find.textContaining('d'), findsOneWidget);
       expect(find.textContaining('%'), findsNothing);
     });
+
+    testWidgets('Switches back to percentage display when tapped again', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestLifeProgressContent());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(LifeProgressContent));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(LifeProgressContent));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining('%'), findsOneWidget);
+      expect(find.textContaining('d'), findsNothing);
+    });
   });
 }
 
