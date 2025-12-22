@@ -9,22 +9,7 @@ void main() {
   group('Battery indicator', () {
     testWidgets('Initially displays percentage', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
-      await tester.pumpWidget(
-        ProviderScope(
-          child: CommonMaterialApp(
-            home: Scaffold(
-              body: LifeProgressContent(
-                lifespanRange: LifespanRange(
-                  birthDate: DateTime(1990),
-                  deathDate: DateTime(2080),
-                ),
-                isInitialUser: false,
-                updateUserIsNotInitialUser: () async {},
-              ),
-            ),
-          ),
-        ),
-      );
+      await tester.pumpWidget(const TestLifeProgressContent());
       await tester.pumpAndSettle();
 
       expect(find.textContaining('%'), findsOneWidget);
@@ -32,22 +17,7 @@ void main() {
 
     testWidgets('Switches to days display when tapped', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
-      await tester.pumpWidget(
-        ProviderScope(
-          child: CommonMaterialApp(
-            home: Scaffold(
-              body: LifeProgressContent(
-                lifespanRange: LifespanRange(
-                  birthDate: DateTime(1990),
-                  deathDate: DateTime(2080),
-                ),
-                isInitialUser: false,
-                updateUserIsNotInitialUser: () async {},
-              ),
-            ),
-          ),
-        ),
-      );
+      await tester.pumpWidget(const TestLifeProgressContent());
       await tester.pumpAndSettle();
 
       await tester.tap(find.byType(LifeProgressContent));
@@ -57,4 +27,26 @@ void main() {
       expect(find.textContaining('%'), findsNothing);
     });
   });
+}
+
+class TestLifeProgressContent extends StatelessWidget {
+  const TestLifeProgressContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ProviderScope(
+      child: CommonMaterialApp(
+        home: Scaffold(
+          body: LifeProgressContent(
+            lifespanRange: LifespanRange(
+              birthDate: DateTime(1990),
+              deathDate: DateTime(2080),
+            ),
+            isInitialUser: false,
+            updateUserIsNotInitialUser: () async {},
+          ),
+        ),
+      ),
+    );
+  }
 }
