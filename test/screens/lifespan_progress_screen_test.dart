@@ -29,5 +29,32 @@ void main() {
 
       expect(find.textContaining('%'), findsOneWidget);
     });
+
+    testWidgets('Switches to days display when tapped', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(
+        ProviderScope(
+          child: CommonMaterialApp(
+            home: Scaffold(
+              body: LifeProgressContent(
+                lifespanRange: LifespanRange(
+                  birthDate: DateTime(1990),
+                  deathDate: DateTime(2080),
+                ),
+                isInitialUser: false,
+                updateUserIsNotInitialUser: () async {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(LifeProgressContent));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining('d'), findsOneWidget);
+      expect(find.textContaining('%'), findsNothing);
+    });
   });
 }
