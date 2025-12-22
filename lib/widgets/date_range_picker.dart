@@ -37,19 +37,13 @@ class DateRangePickerContent extends StatelessWidget {
   });
 
   /// Birth date
-  final DateTime? birthDate;
+  final DateTime birthDate;
 
   /// Death date
-  final DateTime? deathDate;
+  final DateTime deathDate;
 
   @override
   Widget build(BuildContext context) {
-    final defaultBirthDate = DateTime(2000);
-    final defaultDeathDate = DateTime(2100);
-
-    final birthDate = this.birthDate ?? defaultBirthDate;
-    final deathDate = this.deathDate ?? defaultDeathDate;
-
     return Column(
       children: [
         DateRangePickerLabels(
