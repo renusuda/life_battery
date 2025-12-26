@@ -24,7 +24,10 @@ class SettingsScreen extends StatelessWidget {
         children: const <Widget>[
           TutorialListTile(),
           ReviewAppListTile(),
-          PrivacyPolicyListTile(),
+          PrivacyPolicyListTile(
+            canLaunchUrl: canLaunchUrl,
+            onLaunchUrl: launchUrl,
+          ),
           AppearanceListTile(),
           DeleteAllListTile(),
         ],
@@ -103,8 +106,16 @@ class ReviewAppListTile extends StatelessWidget {
 class PrivacyPolicyListTile extends StatelessWidget {
   /// Constructor
   const PrivacyPolicyListTile({
+    required this.canLaunchUrl,
+    required this.onLaunchUrl,
     super.key,
   });
+
+  /// Callback for checking if URL can be launched.
+  final Future<bool> Function(Uri url) canLaunchUrl;
+
+  /// Callback for launching URL.
+  final Future<bool> Function(Uri url, {LaunchMode mode}) onLaunchUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +139,7 @@ class PrivacyPolicyListTile extends StatelessWidget {
           'https://renusuda.github.io/life_battery_privacy_policy/$queryParameter',
         );
         if (await canLaunchUrl(url)) {
-          await launchUrl(
+          await onLaunchUrl(
             url,
             // Launch the web page in the app itself
             mode: LaunchMode.inAppBrowserView,
