@@ -13,7 +13,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// A screen that shows the settings.
 class SettingsScreen extends StatelessWidget {
-  /// Constructor
   const SettingsScreen({super.key});
 
   @override
@@ -38,7 +37,6 @@ class SettingsScreen extends StatelessWidget {
 
 /// Tutorial row
 class TutorialListTile extends StatelessWidget {
-  /// Constructor
   const TutorialListTile({
     super.key,
   });
@@ -73,7 +71,6 @@ class TutorialListTile extends StatelessWidget {
 
 /// Review app row
 class ReviewAppListTile extends StatelessWidget {
-  /// Constructor
   const ReviewAppListTile({
     super.key,
   });
@@ -104,7 +101,6 @@ class ReviewAppListTile extends StatelessWidget {
 
 /// Privacy policy row
 class PrivacyPolicyListTile extends StatelessWidget {
-  /// Constructor
   const PrivacyPolicyListTile({
     required this.canLaunchUrl,
     required this.onLaunchUrl,
@@ -152,7 +148,6 @@ class PrivacyPolicyListTile extends StatelessWidget {
 
 /// Appearance row
 class AppearanceListTile extends ConsumerWidget {
-  /// Constructor
   const AppearanceListTile({
     super.key,
   });
@@ -234,7 +229,6 @@ class AppearanceListTile extends ConsumerWidget {
 
 /// Data deletion row
 class DeleteAllListTile extends ConsumerWidget {
-  /// Constructor
   const DeleteAllListTile({
     super.key,
   });

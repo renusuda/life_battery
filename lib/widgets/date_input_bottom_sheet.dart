@@ -4,7 +4,6 @@ import 'package:life_battery/widgets/date_range_picker.dart';
 
 /// Date input bottom sheet
 class DateInputBottomSheet extends StatelessWidget {
-  /// Constructor
   const DateInputBottomSheet({
     super.key,
   });

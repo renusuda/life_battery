@@ -4,7 +4,6 @@ import 'package:life_battery/l10n/app_localizations.dart';
 
 /// A screen that shows the tutorial.
 class TutorialScreen extends StatelessWidget {
-  /// Constructor
   const TutorialScreen({
     required this.onDone,
     super.key,
@@ -73,7 +72,6 @@ class TutorialScreen extends StatelessWidget {
 
 /// A widget that shows a page transition icon.
 class PageTransitionIcon extends StatelessWidget {
-  /// Constructor
   const PageTransitionIcon({
     required this.icon,
     this.color,

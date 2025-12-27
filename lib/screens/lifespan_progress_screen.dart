@@ -13,7 +13,6 @@ import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
 
 /// Screen for showing the remaining of lifespan
 class LifespanProgressScreen extends ConsumerWidget {
-  /// Constructor
   const LifespanProgressScreen({
     required this.isInitialUser,
     super.key,
@@ -65,7 +64,6 @@ class LifespanProgressScreen extends ConsumerWidget {
 
 /// Content of the battery indicator
 class LifeProgressContent extends StatefulWidget {
-  /// Constructor
   const LifeProgressContent({
     required this.lifespanRange,
     required this.isInitialUser,

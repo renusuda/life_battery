@@ -6,7 +6,6 @@ import 'package:life_battery/theme.dart';
 
 /// Common Material App
 class CommonMaterialApp extends StatelessWidget {
-  /// Constructor
   const CommonMaterialApp({
     required this.home,
     this.themeMode = ThemeMode.system,

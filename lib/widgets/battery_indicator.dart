@@ -3,7 +3,6 @@ import 'package:life_battery/models/life_battery_status.dart';
 
 /// A widget that shows the remaining of battery.
 class BatteryIndicator extends StatelessWidget {
-  /// Constructor
   const BatteryIndicator({
     required this.value,
     required this.text,
@@ -33,7 +32,6 @@ class BatteryIndicator extends StatelessWidget {
 
 /// A widget that shows the body of battery.
 class BatteryBody extends StatelessWidget {
-  /// Constructor
   const BatteryBody({
     required this.value,
     required this.text,
@@ -70,7 +68,6 @@ class BatteryBody extends StatelessWidget {
 
 /// A widget that shows the frame of battery.
 class BatteryFrame extends StatelessWidget {
-  /// Constructor
   const BatteryFrame({
     super.key,
   });
@@ -91,7 +88,6 @@ class BatteryFrame extends StatelessWidget {
 
 /// A widget that shows the bar of battery.
 class BatteryBar extends StatefulWidget {
-  /// Constructor
   const BatteryBar({
     required this.value,
     required this.bodyWidth,
@@ -144,7 +140,6 @@ class _BatteryBarState extends State<BatteryBar> {
 
 /// A widget that shows the text of battery.
 class BatteryText extends StatelessWidget {
-  /// Constructor
   const BatteryText({
     required this.text,
     super.key,
@@ -170,7 +165,6 @@ class BatteryText extends StatelessWidget {
 
 /// A widget that shows the knob of battery.
 class BatteryKnob extends StatelessWidget {
-  /// Constructor
   const BatteryKnob({
     super.key,
   });

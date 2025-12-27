@@ -4,7 +4,6 @@ import 'package:life_battery/utils/date_utils.dart';
 
 /// A widget that allows users to select a date range.
 class DateRangePickerSelector extends ConsumerWidget {
-  /// Constructor
   const DateRangePickerSelector({
     required this.birthDate,
     required this.deathDate,
@@ -56,7 +55,6 @@ class DateRangePickerSelector extends ConsumerWidget {
 
 /// A circle of the date range.
 class DateRangePickerCircle extends StatefulWidget {
-  /// Constructor
   const DateRangePickerCircle({
     required this.isStart,
     required this.onTap,
@@ -127,7 +125,6 @@ class DateRangePickerCircleState extends State<DateRangePickerCircle>
 
 /// A line of the date range.
 class DateRangePickerLine extends StatelessWidget {
-  /// Constructor
   const DateRangePickerLine({
     super.key,
   });

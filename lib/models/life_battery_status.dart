@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 /// A class that represents the status of a battery.
 class LifeBatteryStatus {
-  /// Constructor
   LifeBatteryStatus(int value)
     : type = (value > 50)
           ? LifeBatteryStatusType.high

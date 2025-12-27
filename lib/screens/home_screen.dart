@@ -8,7 +8,6 @@ import 'package:life_battery/screens/user_deleted_screen.dart';
 
 /// Home screen
 class HomeScreen extends ConsumerWidget {
-  /// Constructor
   const HomeScreen({super.key});
 
   @override
@@ -36,7 +35,6 @@ class HomeScreen extends ConsumerWidget {
 
 /// Error screen
 class ErrorScreen extends StatelessWidget {
-  /// Constructor
   const ErrorScreen({
     super.key,
   });
@@ -56,7 +54,6 @@ class ErrorScreen extends StatelessWidget {
 
 /// Loading screen
 class LoadingScreen extends StatelessWidget {
-  /// Constructor
   const LoadingScreen({
     super.key,
   });

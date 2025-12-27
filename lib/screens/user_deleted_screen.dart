@@ -3,7 +3,6 @@ import 'package:life_battery/l10n/app_localizations.dart';
 
 /// User deleted screen
 class UserDeletedScreen extends StatelessWidget {
-  /// Constructor
   const UserDeletedScreen({
     super.key,
   });

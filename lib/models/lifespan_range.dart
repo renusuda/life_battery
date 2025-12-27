@@ -7,7 +7,6 @@ part 'lifespan_range.g.dart';
 /// A class that represents the range of a person's lifespan.
 @freezed
 abstract class LifespanRange with _$LifespanRange {
-  /// Constructor
   factory LifespanRange({
     required DateTime birthDate,
     required DateTime deathDate,

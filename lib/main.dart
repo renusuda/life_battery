@@ -19,7 +19,6 @@ void main() async {
 
 /// Application
 class App extends ConsumerWidget {
-  /// Constructor
   const App({super.key});
 
   @override

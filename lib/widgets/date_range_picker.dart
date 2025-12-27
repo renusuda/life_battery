@@ -7,7 +7,6 @@ import 'package:life_battery/widgets/date_range_picker_selector.dart';
 
 /// A widget that allows users to select a date range.
 class DateRangePicker extends ConsumerWidget {
-  /// Constructor
   const DateRangePicker({super.key});
 
   @override
@@ -29,7 +28,6 @@ class DateRangePicker extends ConsumerWidget {
 
 /// A content of the date range picker.
 class DateRangePickerContent extends StatelessWidget {
-  /// Constructor
   const DateRangePickerContent({
     required this.birthDate,
     required this.deathDate,
@@ -61,7 +59,6 @@ class DateRangePickerContent extends StatelessWidget {
 
 /// A widget that displays the labels of the date range picker.
 class DateRangePickerLabels extends StatelessWidget {
-  /// Constructor
   const DateRangePickerLabels({
     required this.birthDate,
     required this.deathDate,
@@ -94,7 +91,6 @@ class DateRangePickerLabels extends StatelessWidget {
 
 /// A common date text.
 class CommonDateText extends StatelessWidget {
-  /// Constructor
   const CommonDateText({
     required this.date,
     required this.onTap,
@@ -126,7 +122,6 @@ class CommonDateText extends StatelessWidget {
 
 /// A birth date text.
 class BirthDateText extends ConsumerWidget {
-  /// Constructor
   const BirthDateText({
     required this.birthDate,
     required this.deathDate,
@@ -157,7 +152,6 @@ class BirthDateText extends ConsumerWidget {
 
 /// A death date text.
 class DeathDateText extends ConsumerWidget {
-  /// Constructor
   const DeathDateText({
     required this.birthDate,
     required this.deathDate,
