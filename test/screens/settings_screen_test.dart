@@ -76,6 +76,16 @@ void main() {
 
       expect(find.text('Delete Data'), findsOneWidget);
     });
+
+    testWidgets('Shows confirmation dialog when tapped', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestSettingsScreen());
+
+      await tester.tap(find.text('Delete Data'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(AlertDialog), findsOneWidget);
+    });
   });
 
   group('Localization tests', () {
