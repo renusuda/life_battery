@@ -86,6 +86,19 @@ void main() {
 
       expect(find.byType(AlertDialog), findsOneWidget);
     });
+
+    testWidgets('Dismisses dialog when cancel is tapped', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestSettingsScreen());
+
+      await tester.tap(find.text('Delete Data'));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Cancel'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(AlertDialog), findsNothing);
+    });
   });
 
   group('Localization tests', () {
