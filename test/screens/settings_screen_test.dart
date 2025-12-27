@@ -69,6 +69,15 @@ void main() {
     });
   });
 
+  group('Delete data', () {
+    testWidgets('Displays delete all label', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestSettingsScreen());
+
+      expect(find.text('Delete Data'), findsOneWidget);
+    });
+  });
+
   group('Localization tests', () {
     testWidgets('Device locale is English when set to English', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
