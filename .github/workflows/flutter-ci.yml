@@ -34,9 +34,23 @@ jobs:
           api-level: 36
           arch: x86_64
           script: flutter test integration_test
+  integration-test-ios:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
+      - name: Start iOS simulator
+        uses: futureware-tech/simulator-action@v4
+        with:
+          model: iPhone Air
+          os_version: '>=26.2'
+      - name: Run integration tests
+        run: flutter test integration_test
   notify-slack:
     runs-on: ubuntu-latest
-    needs: [flutter-test, integration-test-android]
+    needs: [flutter-test, integration-test-android, integration-test-ios]
     if: always()
     steps:
       - name: Notify CI result to Slack
@@ -46,5 +60,5 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "Unit Test ${{ needs.flutter-test.result == 'success' && '✅' || '❌' }}\nAndroid Integration Test ${{ needs.integration-test-android.result == 'success' && '✅' || '❌' }}"
+              "text": "Unit Test ${{ needs.flutter-test.result == 'success' && '✅' || '❌' }}\nAndroid Integration Test ${{ needs.integration-test-android.result == 'success' && '✅' || '❌' }}\niOS Integration Test ${{ needs.integration-test-ios.result == 'success' && '✅' || '❌' }}"
             }
