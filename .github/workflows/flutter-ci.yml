@@ -18,7 +18,7 @@ jobs:
         run: flutter pub get
       - name: Run tests
         run: flutter test
-      - name: Notify CI result to Slack
+      - name: Notify unit test result to Slack
         if: always()
         uses: slackapi/slack-github-action@v2.1.1
         with:
@@ -26,5 +26,35 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "${{ job.status == 'success' && 'Success✅' || 'Failed❌' }}"
+              "text": "Unit Test: ${{ job.status == 'success' && 'Success✅' || 'Failed❌' }}"
+            }
+  integration-test-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Set up Flutter using FVM
+        uses: kuhnroyal/flutter-fvm-config-action/setup@v3
+      - name: Fetches and resolves project dependencies
+        run: flutter pub get
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Run integration tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 36
+          arch: x86_64
+          script: flutter test integration_test
+      - name: Notify Android integration test result to Slack
+        if: always()
+        uses: slackapi/slack-github-action@v2.1.1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "Android Integration Test: ${{ job.status == 'success' && 'Success✅' || 'Failed❌' }}"
             }
