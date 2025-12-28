@@ -45,7 +45,7 @@ jobs:
         uses: futureware-tech/simulator-action@v4
         with:
           model: iPhone Air
-          os_version: '>=26.2'
+          os_version: '>=26.1'
       - name: Run integration tests
         run: flutter test integration_test
   notify-slack:
