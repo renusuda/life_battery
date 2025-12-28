@@ -1,0 +1,11 @@
+name: Setup Flutter
+description: Set up Flutter using FVM and install dependencies
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Flutter using FVM
+      uses: kuhnroyal/flutter-fvm-config-action/setup@v3
+    - name: Fetches and resolves project dependencies
+      shell: bash
+      run: flutter pub get

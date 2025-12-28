@@ -12,10 +12,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Set up Flutter using FVM
-        uses: kuhnroyal/flutter-fvm-config-action/setup@v3
-      - name: Fetches and resolves project dependencies
-        run: flutter pub get
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
       - name: Run tests
         run: flutter test
       - name: Notify unit test result to Slack
@@ -33,10 +31,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Set up Flutter using FVM
-        uses: kuhnroyal/flutter-fvm-config-action/setup@v3
-      - name: Fetches and resolves project dependencies
-        run: flutter pub get
+      - name: Setup Flutter
+        uses: ./.github/actions/setup-flutter
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
