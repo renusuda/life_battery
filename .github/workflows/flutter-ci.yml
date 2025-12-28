@@ -16,16 +16,6 @@ jobs:
         uses: ./.github/actions/setup-flutter
       - name: Run tests
         run: flutter test
-      - name: Notify unit test result to Slack
-        if: always()
-        uses: slackapi/slack-github-action@v2.1.1
-        with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          webhook-type: incoming-webhook
-          payload: |
-            {
-              "text": "Unit Test: ${{ job.status == 'success' && 'Success✅' || 'Failed❌' }}"
-            }
   integration-test-android:
     runs-on: ubuntu-latest
     steps:
@@ -44,13 +34,17 @@ jobs:
           api-level: 36
           arch: x86_64
           script: flutter test integration_test
-      - name: Notify Android integration test result to Slack
-        if: always()
+  notify-slack:
+    runs-on: ubuntu-latest
+    needs: [flutter-test, integration-test-android]
+    if: always()
+    steps:
+      - name: Notify CI result to Slack
         uses: slackapi/slack-github-action@v2.1.1
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "Android Integration Test: ${{ job.status == 'success' && 'Success✅' || 'Failed❌' }}"
+              "text": "Unit Test ${{ needs.flutter-test.result == 'success' && '✅' || '❌' }}\nAndroid Integration Test ${{ needs.integration-test-android.result == 'success' && '✅' || '❌' }}"
             }
