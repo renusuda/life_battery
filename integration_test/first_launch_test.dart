@@ -11,7 +11,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('First launch', () {
-    testWidgets('Date input bottom sheet is shown', (tester) async {
+    testWidgets('Shows date input with default values', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(
         const ProviderScope(
@@ -22,6 +22,8 @@ void main() {
       await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
       expect(find.byType(DateInputBottomSheet), findsOneWidget);
+      expect(find.text('1/1/2000'), findsOneWidget);
+      expect(find.text('1/1/2100'), findsOneWidget);
     });
   });
 }
