@@ -6,6 +6,18 @@ import 'package:life_battery/widgets/common_material_app.dart';
 import 'package:life_battery/widgets/date_range_picker.dart';
 
 void main() {
+  group('Date range picker text interactions', () {
+    testWidgets('Tapping birth date text shows date picker', (tester) async {
+      await tester.pumpWidget(const TestDateRangePickerContent());
+      await tester.pump();
+
+      await tester.tap(find.byType(BirthDateText));
+      await tester.pump();
+
+      expect(find.byType(CupertinoDatePicker), findsOneWidget);
+    });
+  });
+
   group('Date range picker circle interactions', () {
     testWidgets('Tapping birth date circle shows date picker', (
       tester,
