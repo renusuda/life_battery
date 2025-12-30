@@ -26,6 +26,7 @@ class DateRangePickerSelector extends ConsumerWidget {
         children: [
           const DateRangePickerLine(),
           DateRangePickerCircle(
+            key: const Key('birthDateCircle'),
             isStart: true,
             onTap: () async {
               await showPickerForBirthDate(
