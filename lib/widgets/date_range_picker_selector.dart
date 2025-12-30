@@ -38,6 +38,7 @@ class DateRangePickerSelector extends ConsumerWidget {
             },
           ),
           DateRangePickerCircle(
+            key: const Key('deathDateCircle'),
             isStart: false,
             onTap: () async {
               await showPickerForDeathDate(
