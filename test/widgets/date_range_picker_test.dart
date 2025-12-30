@@ -18,6 +18,18 @@ void main() {
 
       expect(find.byType(CupertinoDatePicker), findsOneWidget);
     });
+
+    testWidgets('Tapping death date circle shows date picker', (
+      tester,
+    ) async {
+      await tester.pumpWidget(const TestDateRangePickerContent());
+      await tester.pump();
+
+      await tester.tap(find.byKey(const Key('deathDateCircle')));
+      await tester.pump();
+
+      expect(find.byType(CupertinoDatePicker), findsOneWidget);
+    });
   });
 }
 
