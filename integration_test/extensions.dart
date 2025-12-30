@@ -28,4 +28,33 @@ extension WidgetTesterExtension on WidgetTester {
       'pumpUntilFound timed out after $timeout waiting for: $finder',
     );
   }
+
+  /// Pumps frames until the [finder] finds no widgets.
+  ///
+  /// Throws a [TestFailure] if the widget is still found after [timeout].
+  ///
+  /// Example:
+  /// ```dart
+  /// await tester.pumpUntilGone(find.byType(CupertinoDatePicker));
+  /// ```
+  Future<void> pumpUntilGone(
+    Finder finder, {
+    Duration timeout = const Duration(seconds: 5),
+    Duration interval = const Duration(milliseconds: 50),
+  }) async {
+    if (finder.evaluate().isEmpty) return;
+
+    final stopwatch = Stopwatch()..start();
+
+    while (stopwatch.elapsed < timeout) {
+      await pump(interval);
+
+      if (finder.evaluate().isEmpty) return;
+    }
+
+    throw TestFailure(
+      'pumpUntilGone timed out after $timeout '
+      'waiting for: $finder to disappear',
+    );
+  }
 }
