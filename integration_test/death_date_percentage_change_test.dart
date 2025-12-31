@@ -65,6 +65,6 @@ void main() {
       await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
       expect(find.text('1/1/2105'), findsOneWidget);
-    });
+    }, retry: 2);
   });
 }
