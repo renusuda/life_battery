@@ -11,7 +11,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Birth date change', () {
-    testWidgets('Changing birth date updates the displayed value', (
+    testWidgets('Changing birth date updates displayed value and percentage', (
       tester,
     ) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
@@ -22,6 +22,10 @@ void main() {
       );
 
       await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
+
+      // Get the initial percentage value
+      final percentFinder = find.textContaining('%');
+      final initialPercent = tester.widget<Text>(percentFinder).data ?? '';
 
       final birthDateCircle = find.byKey(const Key('birthDateCircle'));
       await tester.ensureVisible(birthDateCircle);
@@ -44,7 +48,12 @@ void main() {
       await tester.tap(find.byType(ModalBarrier).last);
       await tester.pumpUntilGone(find.byType(CupertinoDatePicker));
 
+      // Verify the displayed date changed
       expect(find.text('1/1/2000'), findsNothing);
+
+      // Verify the percentage value changed
+      final newPercent = tester.widget<Text>(percentFinder).data ?? '';
+      expect(newPercent, isNot(equals(initialPercent)));
     });
   });
 }
