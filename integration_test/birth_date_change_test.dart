@@ -43,13 +43,14 @@ void main() {
         touchSlopY: 0,
         warnIfMissed: false,
       );
-      await tester.pumpUntilGone(find.text('2000'));
+      await tester.pumpUntilFound(find.text('1995'));
 
       // Close the date picker modal
       await tester.tap(find.byType(ModalBarrier).last);
       await tester.pumpUntilGone(find.byType(CupertinoDatePicker));
 
       // Verify the displayed date changed
+      expect(find.text('1/1/1995'), findsOneWidget);
       expect(find.text('1/1/2000'), findsNothing);
 
       // Verify the percentage value changed
