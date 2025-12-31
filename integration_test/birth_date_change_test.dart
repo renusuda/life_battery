@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/main.dart';
+import 'package:life_battery/widgets/battery_indicator.dart';
 import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
 import 'package:life_battery/widgets/date_range_picker.dart';
 
@@ -56,6 +57,15 @@ void main() {
       // Verify the percentage value changed
       final newPercent = tester.widget<Text>(percentFinder).data ?? '';
       expect(newPercent, isNot(equals(initialPercent)));
+
+      // Close the DateInputBottomSheet
+      await tester.tap(find.byType(ModalBarrier).last);
+      await tester.pumpUntilGone(find.byType(DateInputBottomSheet));
+
+      await tester.longPress(find.byType(BatteryIndicator));
+      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
+
+      expect(find.text('1/1/1995'), findsOneWidget);
     });
   });
 }
