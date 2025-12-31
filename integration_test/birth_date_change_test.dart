@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/main.dart';
 import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/widgets/date_range_picker.dart';
 
 import 'extensions.dart';
 
@@ -27,12 +28,12 @@ void main() {
       final percentFinder = find.textContaining('%');
       final initialPercent = tester.widget<Text>(percentFinder).data ?? '';
 
-      final birthDateCircle = find.byKey(const Key('birthDateCircle'));
-      await tester.ensureVisible(birthDateCircle);
+      final birthDateText = find.byType(BirthDateText);
+      await tester.ensureVisible(birthDateText);
       await tester.pump();
 
       // Open the date picker
-      await tester.tap(birthDateCircle);
+      await tester.tap(birthDateText);
       await tester.pumpUntilFound(find.byType(CupertinoDatePicker));
 
       // Drag the year picker down to decrease year by 5 (2000 -> 1995)
