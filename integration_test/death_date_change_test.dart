@@ -23,6 +23,10 @@ void main() {
 
       await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
+      // Get the initial percentage value
+      final percentFinder = find.textContaining('%');
+      final initialPercent = tester.widget<Text>(percentFinder).data ?? '';
+
       // Find and tap the death date text to open the date picker
       final deathDateText = find.byType(DeathDateText);
       await tester.ensureVisible(deathDateText);
@@ -48,6 +52,10 @@ void main() {
       // Verify the displayed date changed
       expect(find.text('1/1/2105'), findsOneWidget);
       expect(find.text('1/1/2100'), findsNothing);
+
+      // Verify the percentage value changed
+      final newPercent = tester.widget<Text>(percentFinder).data ?? '';
+      expect(newPercent, isNot(equals(initialPercent)));
 
       // Close the DateInputBottomSheet
       await tester.tap(find.byType(ModalBarrier).last);
