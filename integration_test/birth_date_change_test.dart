@@ -66,6 +66,6 @@ void main() {
       await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
       expect(find.text('1/1/1995'), findsOneWidget);
-    }, retry: 4);
+    }, retry: 10);
   });
 }

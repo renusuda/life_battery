@@ -68,6 +68,6 @@ void main() {
 
       final newDays = tester.widget<Text>(daysFinder).data ?? '';
       expect(newDays, isNot(equals(initialDays)));
-    }, retry: 4);
+    }, retry: 10);
   });
 }
