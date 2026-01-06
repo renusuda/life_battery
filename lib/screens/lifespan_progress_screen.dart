@@ -28,6 +28,7 @@ class LifespanProgressScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         actions: [
           IconButton(
