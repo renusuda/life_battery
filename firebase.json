@@ -1,0 +1,30 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "life-battery-16006",
+          "appId": "1:660317530962:android:01a0d2421e39c9b6e5a88b",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "life-battery-16006",
+          "appId": "1:660317530962:ios:953585c1e44d4ca8e5a88b",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "life-battery-16006",
+          "configurations": {
+            "android": "1:660317530962:android:01a0d2421e39c9b6e5a88b",
+            "ios": "1:660317530962:ios:953585c1e44d4ca8e5a88b"
+          }
+        }
+      }
+    }
+  }
+}
