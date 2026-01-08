@@ -54,7 +54,8 @@ Future<void> _showPickerForDates({
   required DateTime deathDate,
   required bool isStart,
 }) async {
-  final today = DateTime.now();
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
 
   await showCupertinoModalPopup<void>(
     context: context,
