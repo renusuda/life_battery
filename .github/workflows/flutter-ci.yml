@@ -14,6 +14,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
+      - name: Create firebase_options.dart
+        run: echo "${{ secrets.FIREBASE_OPTIONS_DART }}" > lib/firebase_options.dart
       - name: Run tests
         run: flutter test
   integration-test-ios:
@@ -23,6 +25,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
+      - name: Create firebase_options.dart
+        run: echo "${{ secrets.FIREBASE_OPTIONS_DART }}" > lib/firebase_options.dart
       - name: Start iOS simulator
         uses: futureware-tech/simulator-action@v4
         with:
@@ -37,6 +41,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
+      - name: Create firebase_options.dart
+        run: echo "${{ secrets.FIREBASE_OPTIONS_DART }}" > lib/firebase_options.dart
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
