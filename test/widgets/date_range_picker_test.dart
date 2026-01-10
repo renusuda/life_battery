@@ -27,32 +27,6 @@ void main() {
       expect(find.byType(CupertinoDatePicker), findsOneWidget);
     });
   });
-
-  group('Date range picker circle interactions', () {
-    testWidgets('Tapping birth date circle shows date picker', (
-      tester,
-    ) async {
-      await tester.pumpWidget(const TestDateRangePickerContent());
-      await tester.pump();
-
-      await tester.tap(find.byKey(const Key('birthDateCircle')));
-      await tester.pump();
-
-      expect(find.byType(CupertinoDatePicker), findsOneWidget);
-    });
-
-    testWidgets('Tapping death date circle shows date picker', (
-      tester,
-    ) async {
-      await tester.pumpWidget(const TestDateRangePickerContent());
-      await tester.pump();
-
-      await tester.tap(find.byKey(const Key('deathDateCircle')));
-      await tester.pump();
-
-      expect(find.byType(CupertinoDatePicker), findsOneWidget);
-    });
-  });
 }
 
 class TestDateRangePickerContent extends StatelessWidget {

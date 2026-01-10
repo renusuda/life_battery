@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/l10n/app_localizations.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/utils/date_utils.dart';
-import 'package:life_battery/widgets/date_range_picker_selector.dart';
 
 /// A widget that allows users to select a date range.
 class DateRangePicker extends ConsumerWidget {
@@ -45,10 +44,6 @@ class DateRangePickerContent extends StatelessWidget {
     return Column(
       children: [
         DateRangePickerLabels(
-          birthDate: birthDate,
-          deathDate: deathDate,
-        ),
-        DateRangePickerSelector(
           birthDate: birthDate,
           deathDate: deathDate,
         ),
