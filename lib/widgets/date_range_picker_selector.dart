@@ -24,7 +24,6 @@ class DateRangePickerSelector extends ConsumerWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          const DateRangePickerLine(),
           DateRangePickerCircle(
             key: const Key('birthDateCircle'),
             isStart: true,
@@ -120,25 +119,6 @@ class DateRangePickerCircleState extends State<DateRangePickerCircle>
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-/// A line of the date range.
-class DateRangePickerLine extends StatelessWidget {
-  const DateRangePickerLine({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      left: 30,
-      right: 30,
-      child: Container(
-        height: 4,
-        color: Theme.of(context).colorScheme.primary,
       ),
     );
   }
