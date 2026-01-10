@@ -1,5 +1,4 @@
 {
-  "dateInputInstruction": "Please enter your birthdate and target lifespan.\nFrom there, the remaining time can be calculated.",
   "generalError": "Error occurred.",
   "dayUnit": "d",
   "tutorialLabel": "App tutorial",

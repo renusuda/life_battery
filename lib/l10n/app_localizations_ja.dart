@@ -9,10 +9,6 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
-  String get dateInputInstruction =>
-      '生年月日と目標とする寿命を入力してください。\nそこから、残りの時間を計算できます。';
-
-  @override
   String get generalError => 'エラーが発生しました。';
 
   @override

@@ -98,12 +98,6 @@ abstract class AppLocalizations {
     Locale('ja'),
   ];
 
-  /// No description provided for @dateInputInstruction.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter your birthdate and target lifespan.\nFrom there, the remaining time can be calculated.'**
-  String get dateInputInstruction;
-
   /// No description provided for @generalError.
   ///
   /// In en, this message translates to:

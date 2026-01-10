@@ -9,10 +9,6 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get dateInputInstruction =>
-      'Please enter your birthdate and target lifespan.\nFrom there, the remaining time can be calculated.';
-
-  @override
   String get generalError => 'Error occurred.';
 
   @override
