@@ -15,6 +15,8 @@ final lightModeTheme = ThemeData(
     secondary: Colors.grey[600]!,
     tertiary: Colors.black,
     error: Colors.red,
+    surfaceContainerHighest: const Color(0xFFF8FAFC),
+    outlineVariant: const Color(0xFFE2E8F0),
   ),
 );
 
@@ -33,5 +35,7 @@ final darkModeTheme = ThemeData(
     secondary: Colors.grey[400]!,
     tertiary: Colors.white,
     error: Colors.red,
+    surfaceContainerHighest: const Color(0xFF161E33),
+    outlineVariant: const Color(0xFF1E293B),
   ),
 );

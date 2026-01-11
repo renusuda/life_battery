@@ -68,18 +68,21 @@ class DateRangePickerLabels extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        BirthDateText(
-          birthDate: birthDate,
-          deathDate: deathDate,
-        ),
-        DeathDateText(
-          birthDate: birthDate,
-          deathDate: deathDate,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: [
+          BirthDateField(
+            birthDate: birthDate,
+            deathDate: deathDate,
+          ),
+          const SizedBox(height: 20),
+          DeathDateText(
+            birthDate: birthDate,
+            deathDate: deathDate,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -115,9 +118,9 @@ class CommonDateText extends StatelessWidget {
   }
 }
 
-/// A birth date text.
-class BirthDateText extends ConsumerWidget {
-  const BirthDateText({
+/// A birth date field with label.
+class BirthDateField extends ConsumerWidget {
+  const BirthDateField({
     required this.birthDate,
     required this.deathDate,
     super.key,
@@ -131,16 +134,59 @@ class BirthDateText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CommonDateText(
-      date: birthDate,
-      onTap: () async {
-        await showPickerForBirthDate(
-          context: context,
-          ref: ref,
-          birthDate: birthDate,
-          deathDate: deathDate,
-        );
-      },
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text(
+            l10n.birthDateLabel,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        GestureDetector(
+          onTap: () async {
+            await showPickerForBirthDate(
+              context: context,
+              ref: ref,
+              birthDate: birthDate,
+              deathDate: deathDate,
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
+            ),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.surfaceContainerHighest,
+              border: Border.all(
+                color: theme.colorScheme.outlineVariant,
+              ),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  formatDate(context, birthDate),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Icon(Icons.calendar_today),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

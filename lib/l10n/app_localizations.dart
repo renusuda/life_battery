@@ -104,6 +104,12 @@ abstract class AppLocalizations {
   /// **'Error occurred.'**
   String get generalError;
 
+  /// No description provided for @birthDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Date'**
+  String get birthDateLabel;
+
   /// No description provided for @dayUnit.
   ///
   /// In en, this message translates to:

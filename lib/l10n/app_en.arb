@@ -1,5 +1,6 @@
 {
   "generalError": "Error occurred.",
+  "birthDateLabel": "Birth Date",
   "dayUnit": "d",
   "tutorialLabel": "App tutorial",
   "reviewAppLabel": "Rate this app",

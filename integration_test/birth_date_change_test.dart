@@ -28,12 +28,12 @@ void main() {
       final percentFinder = find.textContaining('%');
       final initialPercent = tester.widget<Text>(percentFinder).data ?? '';
 
-      final birthDateText = find.byType(BirthDateText);
-      await tester.ensureVisible(birthDateText);
+      final birthDateField = find.byType(BirthDateField);
+      await tester.ensureVisible(birthDateField);
       await tester.pump();
 
       // Open the date picker
-      await tester.tap(birthDateText);
+      await tester.tap(birthDateField);
       await tester.pumpAndSettle();
 
       // Drag the year picker down to decrease year by 5 (2000 -> 1995)

@@ -1,5 +1,6 @@
 {
   "generalError": "エラーが発生しました。",
+  "birthDateLabel": "生年月日",
   "dayUnit": "日",
   "tutorialLabel": "アプリの使い方",
   "reviewAppLabel": "アプリをレビューする",

@@ -12,6 +12,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get generalError => 'エラーが発生しました。';
 
   @override
+  String get birthDateLabel => '生年月日';
+
+  @override
   String get dayUnit => '日';
 
   @override

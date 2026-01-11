@@ -7,11 +7,11 @@ import 'package:life_battery/widgets/date_range_picker.dart';
 
 void main() {
   group('Date range picker text interactions', () {
-    testWidgets('Tapping birth date text shows date picker', (tester) async {
+    testWidgets('Tapping birth date field shows date picker', (tester) async {
       await tester.pumpWidget(const TestDateRangePickerContent());
       await tester.pump();
 
-      await tester.tap(find.byType(BirthDateText));
+      await tester.tap(find.byType(BirthDateField));
       await tester.pump();
 
       expect(find.byType(CupertinoDatePicker), findsOneWidget);

@@ -12,6 +12,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get generalError => 'Error occurred.';
 
   @override
+  String get birthDateLabel => 'Birth Date';
+
+  @override
   String get dayUnit => 'd';
 
   @override

@@ -10,7 +10,7 @@ class DateInputBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.35,
+      height: MediaQuery.of(context).size.height * 0.40,
       child: const Column(
         children: <Widget>[
           SizedBox(height: 25),
