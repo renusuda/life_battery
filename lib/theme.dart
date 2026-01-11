@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 /// Light mode theme
 final lightModeTheme = ThemeData(
   brightness: Brightness.light,
+  scaffoldBackgroundColor: const Color(0xFFF1F5F9),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xFFF1F5F9),
+  ),
+  bottomSheetTheme: const BottomSheetThemeData(
+    backgroundColor: Color(0xFFF1F5F9),
+  ),
   colorScheme: ColorScheme.light(
     primary: const Color(0xFF4CAF50),
     secondary: Colors.grey[600]!,
