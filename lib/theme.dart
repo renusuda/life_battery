@@ -21,6 +21,13 @@ final lightModeTheme = ThemeData(
 /// Dark mode theme
 final darkModeTheme = ThemeData(
   brightness: Brightness.dark,
+  scaffoldBackgroundColor: const Color(0xFF020617),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xFF020617),
+  ),
+  bottomSheetTheme: const BottomSheetThemeData(
+    backgroundColor: Color(0xFF020617),
+  ),
   colorScheme: ColorScheme.dark(
     primary: const Color(0xFF4CAF50),
     secondary: Colors.grey[400]!,
