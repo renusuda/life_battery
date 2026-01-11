@@ -6,8 +6,6 @@ import 'package:life_battery/main.dart';
 import 'package:life_battery/screens/lifespan_progress_screen.dart';
 import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
 
-import 'extensions.dart';
-
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -21,8 +19,7 @@ void main() {
             child: App(),
           ),
         );
-
-        await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
+        await tester.pumpAndSettle();
 
         // Close the date input bottom sheet
         await tester.tap(find.byType(ModalBarrier).last);
@@ -36,7 +33,7 @@ void main() {
             child: App(),
           ),
         );
-        await tester.pumpUntilFound(find.byType(LifeProgressContent));
+        await tester.pumpAndSettle();
 
         // Verify battery screen shows first (not DateInputBottomSheet)
         expect(find.byType(LifeProgressContent), findsOneWidget);

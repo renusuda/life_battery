@@ -5,8 +5,6 @@ import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/main.dart';
 import 'package:life_battery/screens/home_screen.dart';
 
-import 'extensions.dart';
-
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -21,8 +19,7 @@ void main() {
           child: App(),
         ),
       );
-
-      await tester.pumpUntilFound(find.byType(HomeScreen));
+      await tester.pumpAndSettle();
 
       final context = tester.element(find.byType(HomeScreen));
 
@@ -39,8 +36,7 @@ void main() {
           child: App(),
         ),
       );
-
-      await tester.pumpUntilFound(find.byType(HomeScreen));
+      await tester.pumpAndSettle();
 
       final context = tester.element(find.byType(HomeScreen));
 

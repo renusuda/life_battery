@@ -4,9 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/main.dart';
 import 'package:life_battery/screens/user_deleted_screen.dart';
-import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
-
-import 'extensions.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -19,8 +16,7 @@ void main() {
           child: App(),
         ),
       );
-
-      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
+      await tester.pumpAndSettle();
 
       // Close the date input bottom sheet
       await tester.tap(find.byType(ModalBarrier).last);
@@ -45,8 +41,7 @@ void main() {
           child: App(),
         ),
       );
-
-      await tester.pumpUntilFound(find.byType(UserDeletedScreen));
+      await tester.pumpAndSettle();
 
       // Verify UserDeletedScreen is still shown after restart
       expect(find.byType(UserDeletedScreen), findsOneWidget);
