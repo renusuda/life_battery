@@ -15,6 +15,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get birthDateLabel => '生年月日';
 
   @override
+  String get idealLifespanLabel => '理想の寿命';
+
+  @override
+  String get ageUnit => '歳';
+
+  @override
   String get dayUnit => '日';
 
   @override

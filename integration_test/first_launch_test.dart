@@ -20,7 +20,10 @@ void main() {
 
       expect(find.byType(DateInputBottomSheet), findsOneWidget);
       expect(find.text('1/1/2000'), findsOneWidget);
-      expect(find.text('1/1/2100'), findsOneWidget);
+      // Verify default ideal lifespan is 100 years
+      final idealAgeFinder = find.byKey(const Key('idealAgeText'));
+      final idealAge = tester.widget<Text>(idealAgeFinder).data ?? '';
+      expect(idealAge, equals('100'));
     });
   });
 }

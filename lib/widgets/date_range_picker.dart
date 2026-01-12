@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/l10n/app_localizations.dart';
@@ -77,42 +79,11 @@ class DateRangePickerLabels extends StatelessWidget {
             deathDate: deathDate,
           ),
           const SizedBox(height: 20),
-          DeathDateText(
+          IdealLifespanField(
             birthDate: birthDate,
             deathDate: deathDate,
           ),
         ],
-      ),
-    );
-  }
-}
-
-/// A common date text.
-class CommonDateText extends StatelessWidget {
-  const CommonDateText({
-    required this.date,
-    required this.onTap,
-    super.key,
-  });
-
-  /// Date
-  final DateTime date;
-
-  /// Callback when tapped
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Text(
-        formatDate(
-          context,
-          date,
-        ),
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
       ),
     );
   }
@@ -191,9 +162,9 @@ class BirthDateField extends ConsumerWidget {
   }
 }
 
-/// A death date text.
-class DeathDateText extends ConsumerWidget {
-  const DeathDateText({
+/// An ideal lifespan field with label and slider.
+class IdealLifespanField extends ConsumerWidget {
+  const IdealLifespanField({
     required this.birthDate,
     required this.deathDate,
     super.key,
@@ -207,16 +178,99 @@ class DeathDateText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CommonDateText(
-      date: deathDate,
-      onTap: () async {
-        await showPickerForDeathDate(
-          context: context,
-          ref: ref,
-          birthDate: birthDate,
-          deathDate: deathDate,
-        );
-      },
+    final l10n = AppLocalizations.of(context)!;
+    final idealAge = deathDate.year - birthDate.year;
+    // Ensure minimum age is current age + 1
+    // to prevent remaining lifespan from reaching 0%
+    final minAge = _getCurrentAge() + 1;
+    // Clamp idealAge to minAge to avoid Slider value < min error
+    final safeIdealAge = idealAge < minAge ? minAge : idealAge;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text(
+            l10n.idealLifespanLabel,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        IdealAgeLabel(idealAge: safeIdealAge),
+        Slider(
+          value: safeIdealAge.toDouble(),
+          min: minAge.toDouble(),
+          max: 500,
+          onChanged: (value) {
+            final newDeathDate = DateTime(
+              birthDate.year + value.toInt(),
+              birthDate.month,
+              birthDate.day,
+            );
+            unawaited(
+              ref
+                  .read(lifespanRangeManagerProvider.notifier)
+                  .updateLifespanRange(
+                    birthDate: birthDate,
+                    deathDate: newDeathDate,
+                  ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  int _getCurrentAge() {
+    final now = DateTime.now();
+    var age = now.year - birthDate.year;
+    final thisYearBirthday = DateTime(now.year, birthDate.month, birthDate.day);
+    if (now.isBefore(thisYearBirthday)) {
+      age--;
+    }
+    return age;
+  }
+}
+
+/// A widget that displays the ideal age with unit.
+class IdealAgeLabel extends StatelessWidget {
+  const IdealAgeLabel({
+    required this.idealAge,
+    super.key,
+  });
+
+  /// The ideal age to display
+  final int idealAge;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
+      children: [
+        Text(
+          key: const Key('idealAgeText'),
+          '$idealAge',
+          style: const TextStyle(
+            fontSize: 48,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          l10n.ageUnit,
+          style: TextStyle(
+            fontSize: 16,
+            color: theme.colorScheme.secondary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }

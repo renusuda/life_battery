@@ -1,19 +1,18 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/main.dart';
 import 'package:life_battery/widgets/battery_indicator.dart';
 import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
-import 'package:life_battery/widgets/date_range_picker.dart';
 
 import 'extensions.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('Death date change in days display mode', () {
-    testWidgets('Changing death date updates displayed days value', (
+  group('Ideal lifespan change in days display mode', () {
+    testWidgets('Changing ideal lifespan updates displayed days value', (
       tester,
     ) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
@@ -39,32 +38,24 @@ void main() {
       await tester.longPress(find.byType(BatteryIndicator));
       await tester.pumpAndSettle();
 
-      // Find and tap the death date text to open the date picker
-      final deathDateText = find.byType(DeathDateText);
-      await tester.ensureVisible(deathDateText);
-      await tester.pump();
+      // Get the initial ideal age value
+      final idealAgeFinder = find.byKey(const Key('idealAgeText'));
+      final initialAge = tester.widget<Text>(idealAgeFinder).data ?? '';
 
-      // Open the date picker
-      await tester.tap(deathDateText);
+      // Drag the slider to change the ideal lifespan
+      final sliderFinder = find.byType(Slider);
+      await tester.drag(sliderFinder, const Offset(100, 0));
       await tester.pumpAndSettle();
 
-      // Drag the year picker up to increase year by 5 (2100 -> 2105)
-      await tester.drag(
-        find.text('2100'),
-        const Offset(0, -32 * 5),
-        touchSlopY: 0,
-        warnIfMissed: false,
-      );
-      await tester.pumpAndSettle();
-
-      // Close the date picker modal
-      await tester.tap(find.byType(ModalBarrier).last);
-      await tester.pumpUntilGone(find.byType(CupertinoDatePicker));
+      // Verify the ideal age changed
+      final newAge = tester.widget<Text>(idealAgeFinder).data ?? '';
+      expect(newAge, isNot(equals(initialAge)));
 
       // Close the DateInputBottomSheet
       await tester.tap(find.byType(ModalBarrier).last);
       await tester.pumpUntilGone(find.byType(DateInputBottomSheet));
 
+      // Verify the days value changed
       final newDays = tester.widget<Text>(daysFinder).data ?? '';
       expect(newDays, isNot(equals(initialDays)));
     }, retry: 10);

@@ -15,6 +15,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get birthDateLabel => 'Birth Date';
 
   @override
+  String get idealLifespanLabel => 'Ideal Lifespan';
+
+  @override
+  String get ageUnit => 'years';
+
+  @override
   String get dayUnit => 'd';
 
   @override

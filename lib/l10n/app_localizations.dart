@@ -110,6 +110,18 @@ abstract class AppLocalizations {
   /// **'Birth Date'**
   String get birthDateLabel;
 
+  /// No description provided for @idealLifespanLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Ideal Lifespan'**
+  String get idealLifespanLabel;
+
+  /// No description provided for @ageUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'years'**
+  String get ageUnit;
+
   /// No description provided for @dayUnit.
   ///
   /// In en, this message translates to:

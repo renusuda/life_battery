@@ -30,22 +30,6 @@ Future<void> showPickerForBirthDate({
   );
 }
 
-/// Shows a date picker for updating the death date.
-Future<void> showPickerForDeathDate({
-  required BuildContext context,
-  required WidgetRef ref,
-  required DateTime birthDate,
-  required DateTime deathDate,
-}) async {
-  await _showPickerForDates(
-    context: context,
-    ref: ref,
-    birthDate: birthDate,
-    deathDate: deathDate,
-    isStart: false,
-  );
-}
-
 /// Shows a date picker for updating the date.
 Future<void> _showPickerForDates({
   required BuildContext context,

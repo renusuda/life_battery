@@ -1,6 +1,8 @@
 {
   "generalError": "Error occurred.",
   "birthDateLabel": "Birth Date",
+  "idealLifespanLabel": "Ideal Lifespan",
+  "ageUnit": "years",
   "dayUnit": "d",
   "tutorialLabel": "App tutorial",
   "reviewAppLabel": "Rate this app",

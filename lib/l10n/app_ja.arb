@@ -1,6 +1,8 @@
 {
   "generalError": "エラーが発生しました。",
   "birthDateLabel": "生年月日",
+  "idealLifespanLabel": "理想の寿命",
+  "ageUnit": "歳",
   "dayUnit": "日",
   "tutorialLabel": "アプリの使い方",
   "reviewAppLabel": "アプリをレビューする",
