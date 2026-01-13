@@ -65,6 +65,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('1/1/1995'), findsOneWidget);
-    }, retry: 10);
+    });
   });
 }

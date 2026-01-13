@@ -54,6 +54,6 @@ void main() {
       // Verify the new ideal age is still displayed
       final persistedAge = tester.widget<Text>(idealAgeFinder).data ?? '';
       expect(persistedAge, equals(newAge));
-    }, retry: 10);
+    });
   });
 }
