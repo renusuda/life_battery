@@ -25,6 +25,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
+      - name: Install FlutterFire CLI
+        run: dart pub global activate flutterfire_cli
       - name: Create firebase_options.dart
         run: echo "${{ secrets.FIREBASE_OPTIONS_DART_BASE64 }}" | base64 --decode > lib/firebase_options.dart
       - name: Create GoogleService-Info.plist
