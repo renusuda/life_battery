@@ -200,25 +200,30 @@ class IdealLifespanField extends ConsumerWidget {
         ),
         const SizedBox(height: 8),
         IdealAgeLabel(idealAge: safeIdealAge),
-        Slider(
-          value: safeIdealAge.toDouble(),
-          min: minAge.toDouble(),
-          max: 500,
-          onChanged: (value) {
-            final newDeathDate = DateTime(
-              birthDate.year + value.toInt(),
-              birthDate.month,
-              birthDate.day,
-            );
-            unawaited(
-              ref
-                  .read(lifespanRangeManagerProvider.notifier)
-                  .updateLifespanRange(
-                    birthDate: birthDate,
-                    deathDate: newDeathDate,
-                  ),
-            );
-          },
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            trackHeight: 12,
+          ),
+          child: Slider(
+            value: safeIdealAge.toDouble(),
+            min: minAge.toDouble(),
+            max: 500,
+            onChanged: (value) {
+              final newDeathDate = DateTime(
+                birthDate.year + value.toInt(),
+                birthDate.month,
+                birthDate.day,
+              );
+              unawaited(
+                ref
+                    .read(lifespanRangeManagerProvider.notifier)
+                    .updateLifespanRange(
+                      birthDate: birthDate,
+                      deathDate: newDeathDate,
+                    ),
+              );
+            },
+          ),
         ),
       ],
     );
