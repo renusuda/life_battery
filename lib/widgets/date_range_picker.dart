@@ -206,6 +206,13 @@ class IdealLifespanField extends ConsumerWidget {
             inactiveTrackColor: Theme.of(
               context,
             ).colorScheme.outlineVariant,
+            thumbShape: _CustomSliderThumb(
+              thumbRadius: 18,
+              borderWidth: 5,
+              dotRadius: 3,
+              thumbColor: Colors.white,
+              borderColor: Theme.of(context).colorScheme.primary,
+            ),
           ),
           child: Slider(
             value: safeIdealAge.toDouble(),
@@ -280,5 +287,64 @@ class IdealAgeLabel extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+/// Custom slider thumb with border and center dot.
+class _CustomSliderThumb extends SliderComponentShape {
+  const _CustomSliderThumb({
+    required this.thumbRadius,
+    required this.borderWidth,
+    required this.dotRadius,
+    required this.thumbColor,
+    required this.borderColor,
+  });
+
+  final double thumbRadius;
+  final double borderWidth;
+  final double dotRadius;
+  final Color thumbColor;
+  final Color borderColor;
+
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
+    return Size.fromRadius(thumbRadius);
+  }
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    required bool isDiscrete,
+    required TextPainter labelPainter,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required double value,
+    required double textScaleFactor,
+    required Size sizeWithOverflow,
+  }) {
+    final canvas = context.canvas;
+
+    // Draw white background circle
+    final fillPaint = Paint()
+      ..color = thumbColor
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(center, thumbRadius, fillPaint);
+
+    // Draw outside border
+    final borderPaint = Paint()
+      ..color = borderColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = borderWidth;
+    canvas.drawCircle(center, thumbRadius - borderWidth / 2, borderPaint);
+
+    // Draw center dot
+    final dotPaint = Paint()
+      ..color = borderColor
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(center, dotRadius, dotPaint);
   }
 }
