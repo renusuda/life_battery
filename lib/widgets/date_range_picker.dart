@@ -218,7 +218,7 @@ class IdealLifespanField extends ConsumerWidget {
           child: Slider(
             value: safeIdealAge.toDouble(),
             min: minAge.toDouble(),
-            max: 500,
+            max: 150,
             onChanged: (value) {
               final newDeathDate = DateTime(
                 birthDate.year + value.toInt(),
