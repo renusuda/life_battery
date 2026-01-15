@@ -11,7 +11,7 @@ final lightModeTheme = ThemeData(
     backgroundColor: Colors.white,
   ),
   colorScheme: ColorScheme.light(
-    primary: const Color(0xFF4CAF50),
+    primary: const Color(0xFF10B981),
     secondary: Colors.grey[600]!,
     tertiary: Colors.black,
     error: Colors.red,
@@ -31,7 +31,7 @@ final darkModeTheme = ThemeData(
     backgroundColor: Color(0xFF0F172A),
   ),
   colorScheme: ColorScheme.dark(
-    primary: const Color(0xFF4CAF50),
+    primary: const Color(0xFF10B981),
     secondary: Colors.grey[400]!,
     tertiary: Colors.white,
     error: Colors.red,
