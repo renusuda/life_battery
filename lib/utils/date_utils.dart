@@ -21,23 +21,6 @@ Future<void> showPickerForBirthDate({
   required DateTime birthDate,
   required DateTime deathDate,
 }) async {
-  await _showPickerForDates(
-    context: context,
-    ref: ref,
-    birthDate: birthDate,
-    deathDate: deathDate,
-    isStart: true,
-  );
-}
-
-/// Shows a date picker for updating the date.
-Future<void> _showPickerForDates({
-  required BuildContext context,
-  required WidgetRef ref,
-  required DateTime birthDate,
-  required DateTime deathDate,
-  required bool isStart,
-}) async {
   final now = DateTime.now();
   final today = DateTime(now.year, now.month, now.day);
 
@@ -53,16 +36,16 @@ Future<void> _showPickerForDates({
       child: SafeArea(
         top: false,
         child: CupertinoDatePicker(
-          initialDateTime: isStart ? birthDate : deathDate,
-          minimumDate: isStart ? DateTime(1900) : today,
-          maximumDate: isStart ? today : DateTime(2500),
+          initialDateTime: birthDate,
+          minimumDate: DateTime(1900),
+          maximumDate: today,
           mode: CupertinoDatePickerMode.date,
           onDateTimeChanged: (DateTime date) async {
             await ref
                 .read(lifespanRangeManagerProvider.notifier)
                 .updateLifespanRange(
-                  birthDate: isStart ? date : birthDate,
-                  deathDate: isStart ? deathDate : date,
+                  birthDate: date,
+                  deathDate: deathDate,
                 );
           },
         ),
