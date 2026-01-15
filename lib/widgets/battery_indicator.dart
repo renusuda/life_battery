@@ -126,7 +126,7 @@ class _BatteryBarState extends State<BatteryBar> {
                 Container(
                   width: widget.bodyWidth * (value / 100),
                   decoration: BoxDecoration(
-                    color: LifeBatteryStatus(value).getColor(context),
+                    color: LifeBatteryStatus(value).getColor,
                   ),
                 ),
               ],

@@ -13,20 +13,14 @@ class LifeBatteryStatus {
   final LifeBatteryStatusType type;
 
   /// Get battery status type color
-  Color getColor(BuildContext context) {
+  Color get getColor {
     switch (type) {
       case LifeBatteryStatusType.high:
-        return Theme.of(context).brightness == Brightness.light
-            ? Colors.green
-            : Colors.green[600]!;
+        return const Color(0xFF10B981);
       case LifeBatteryStatusType.medium:
-        return Theme.of(context).brightness == Brightness.light
-            ? Colors.yellow
-            : Colors.amber;
+        return const Color(0xFFFBBF24);
       case LifeBatteryStatusType.low:
-        return Theme.of(context).brightness == Brightness.light
-            ? Colors.red
-            : Colors.deepOrange;
+        return const Color(0xFFF43F5E);
     }
   }
 }
