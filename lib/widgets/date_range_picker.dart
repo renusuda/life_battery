@@ -203,6 +203,9 @@ class IdealLifespanField extends ConsumerWidget {
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: 12,
+            inactiveTrackColor: Theme.of(
+              context,
+            ).colorScheme.outlineVariant,
           ),
           child: Slider(
             value: safeIdealAge.toDouble(),
