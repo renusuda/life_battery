@@ -13,7 +13,7 @@ class LifeBatteryStatus {
   final LifeBatteryStatusType type;
 
   /// Get battery status type color
-  Color get getColor {
+  Color get color {
     switch (type) {
       case LifeBatteryStatusType.high:
         return const Color(0xFF10B981);
