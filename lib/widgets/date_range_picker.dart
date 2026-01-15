@@ -328,23 +328,34 @@ class _CustomSliderThumb extends SliderComponentShape {
   }) {
     final canvas = context.canvas;
 
+    // Scale up when activated (pressed/dragged)
+    const scaleAmount = 0.10;
+    final scale = 1.0 + (activationAnimation.value * scaleAmount);
+    final scaledThumbRadius = thumbRadius * scale;
+    final scaledBorderWidth = borderWidth * scale;
+    final scaledDotRadius = dotRadius * scale;
+
     // Draw white background circle
     final fillPaint = Paint()
       ..color = thumbColor
       ..style = PaintingStyle.fill;
-    canvas.drawCircle(center, thumbRadius, fillPaint);
+    canvas.drawCircle(center, scaledThumbRadius, fillPaint);
 
     // Draw outside border
     final borderPaint = Paint()
       ..color = borderColor
       ..style = PaintingStyle.stroke
-      ..strokeWidth = borderWidth;
-    canvas.drawCircle(center, thumbRadius - borderWidth / 2, borderPaint);
+      ..strokeWidth = scaledBorderWidth;
+    canvas.drawCircle(
+      center,
+      scaledThumbRadius - scaledBorderWidth / 2,
+      borderPaint,
+    );
 
     // Draw center dot
     final dotPaint = Paint()
       ..color = borderColor
       ..style = PaintingStyle.fill;
-    canvas.drawCircle(center, dotRadius, dotPaint);
+    canvas.drawCircle(center, scaledDotRadius, dotPaint);
   }
 }
