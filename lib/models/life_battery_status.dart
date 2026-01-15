@@ -23,6 +23,17 @@ class LifeBatteryStatus {
         return const Color(0xFFF43F5E);
     }
   }
+
+  /// Get battery status glow effect
+  List<BoxShadow> boxShadow(BuildContext context) {
+    final isLightMode = Theme.of(context).brightness == Brightness.light;
+    return [
+      BoxShadow(
+        color: color.withValues(alpha: isLightMode ? 0.3 : 0.5),
+        blurRadius: isLightMode ? 20 : 30,
+      ),
+    ];
+  }
 }
 
 /// Type of battery status
