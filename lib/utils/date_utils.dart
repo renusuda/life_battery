@@ -40,12 +40,19 @@ Future<void> showPickerForBirthDate({
           minimumDate: DateTime(1900),
           maximumDate: today,
           mode: CupertinoDatePickerMode.date,
-          onDateTimeChanged: (DateTime date) async {
+          onDateTimeChanged: (DateTime newBirthDate) async {
+            // Maintain the same ideal age when birth date changes
+            final idealAge = deathDate.year - birthDate.year;
+            final newDeathDate = DateTime(
+              newBirthDate.year + idealAge,
+              newBirthDate.month,
+              newBirthDate.day,
+            );
             await ref
                 .read(lifespanRangeManagerProvider.notifier)
                 .updateLifespanRange(
-                  birthDate: date,
-                  deathDate: deathDate,
+                  birthDate: newBirthDate,
+                  deathDate: newDeathDate,
                 );
           },
         ),
