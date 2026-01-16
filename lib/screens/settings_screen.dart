@@ -6,7 +6,6 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:life_battery/l10n/app_localizations.dart';
 import 'package:life_battery/providers/app_theme_mode.dart';
 import 'package:life_battery/providers/local_database.dart';
-import 'package:life_battery/screens/tutorial_screen.dart';
 import 'package:life_battery/screens/user_deleted_screen.dart';
 import 'package:life_battery/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,7 +20,6 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(),
       body: ListView(
         children: const <Widget>[
-          TutorialListTile(),
           ReviewAppListTile(),
           PrivacyPolicyListTile(
             canLaunchUrl: canLaunchUrl,
@@ -31,40 +29,6 @@ class SettingsScreen extends StatelessWidget {
           DeleteAllListTile(),
         ],
       ),
-    );
-  }
-}
-
-/// Tutorial row
-class TutorialListTile extends StatelessWidget {
-  const TutorialListTile({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
-    return ListTile(
-      leading: const Icon(Icons.info_outline),
-      title: Text(
-        l10n.tutorialLabel,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      onTap: () async {
-        await Navigator.push(
-          context,
-          MaterialPageRoute<void>(
-            builder: (context) => TutorialScreen(
-              onDone: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-        );
-      },
     );
   }
 }

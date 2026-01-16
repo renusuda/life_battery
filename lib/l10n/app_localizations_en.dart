@@ -24,31 +24,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dayUnit => 'd';
 
   @override
-  String get tutorialLabel => 'App tutorial';
-
-  @override
   String get reviewAppLabel => 'Rate this app';
-
-  @override
-  String get firstTutorialPageTitle => 'Date Input';
-
-  @override
-  String get firstTutorialPageBody =>
-      'To use the app, set your birth date and your desired lifespan.';
-
-  @override
-  String get secondTutorialPageTitle => 'Visualize Your Life\'s Time';
-
-  @override
-  String get secondTutorialPageBody =>
-      'Based on the information you entered, the remaining time is displayed as a percentage.\nTap the battery icon to see the remaining number of days.';
-
-  @override
-  String get thirdTutorialPageTitle => 'How to Update Date Information';
-
-  @override
-  String get thirdTutorialPageBody =>
-      'Press and hold the battery icon to reopen the date input screen.';
 
   @override
   String get privacyPolicyLabel => 'Privacy policy';

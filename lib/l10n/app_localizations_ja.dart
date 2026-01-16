@@ -24,29 +24,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dayUnit => '日';
 
   @override
-  String get tutorialLabel => 'アプリの使い方';
-
-  @override
   String get reviewAppLabel => 'アプリをレビューする';
-
-  @override
-  String get firstTutorialPageTitle => '日付入力';
-
-  @override
-  String get firstTutorialPageBody => 'アプリを使うには、あなたの生年月日と目標とする寿命を設定しましょう。';
-
-  @override
-  String get secondTutorialPageTitle => '人生の時間を可視化';
-
-  @override
-  String get secondTutorialPageBody =>
-      '入力した情報をもとに、残りの時間を%で表示します。\nバッテリーアイコンをタップすると、残りの日数も確認できます。';
-
-  @override
-  String get thirdTutorialPageTitle => '日付情報の更新方法';
-
-  @override
-  String get thirdTutorialPageBody => 'バッテリーアイコンを長押しすると、日付入力画面が再度開きます。';
 
   @override
   String get privacyPolicyLabel => 'プライバシーポリシー';

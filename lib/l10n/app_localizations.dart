@@ -128,53 +128,11 @@ abstract class AppLocalizations {
   /// **'d'**
   String get dayUnit;
 
-  /// No description provided for @tutorialLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'App tutorial'**
-  String get tutorialLabel;
-
   /// No description provided for @reviewAppLabel.
   ///
   /// In en, this message translates to:
   /// **'Rate this app'**
   String get reviewAppLabel;
-
-  /// No description provided for @firstTutorialPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Date Input'**
-  String get firstTutorialPageTitle;
-
-  /// No description provided for @firstTutorialPageBody.
-  ///
-  /// In en, this message translates to:
-  /// **'To use the app, set your birth date and your desired lifespan.'**
-  String get firstTutorialPageBody;
-
-  /// No description provided for @secondTutorialPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Visualize Your Life\'s Time'**
-  String get secondTutorialPageTitle;
-
-  /// No description provided for @secondTutorialPageBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Based on the information you entered, the remaining time is displayed as a percentage.\nTap the battery icon to see the remaining number of days.'**
-  String get secondTutorialPageBody;
-
-  /// No description provided for @thirdTutorialPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'How to Update Date Information'**
-  String get thirdTutorialPageTitle;
-
-  /// No description provided for @thirdTutorialPageBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Press and hold the battery icon to reopen the date input screen.'**
-  String get thirdTutorialPageBody;
 
   /// No description provided for @privacyPolicyLabel.
   ///
