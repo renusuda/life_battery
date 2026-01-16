@@ -87,14 +87,14 @@ void main() {
       await tester.pumpWidget(
         const TestSettingsScreen(),
       );
-      expect(find.text('App tutorial'), findsOneWidget);
+      expect(find.text('Rate this app'), findsOneWidget);
     });
     testWidgets('Device locale is Chinese when set to English', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('zh')];
       await tester.pumpWidget(
         const TestSettingsScreen(),
       );
-      expect(find.text('App tutorial'), findsOneWidget);
+      expect(find.text('Rate this app'), findsOneWidget);
     });
     testWidgets('Device locale is Japanese when set to Japanese', (
       tester,
@@ -103,7 +103,7 @@ void main() {
       await tester.pumpWidget(
         const TestSettingsScreen(),
       );
-      expect(find.text('アプリの使い方'), findsOneWidget);
+      expect(find.text('アプリをレビューする'), findsOneWidget);
     });
   });
 }
