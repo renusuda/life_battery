@@ -87,10 +87,29 @@ class LifeProgressContent extends StatefulWidget {
 
 class _LifeProgressContentState extends State<LifeProgressContent> {
   var _isPercentageMode = true;
+  var _isPressed = false;
 
   void _toggleMode() {
     setState(() {
       _isPercentageMode = !_isPercentageMode;
+    });
+  }
+
+  void _onTapDown(TapDownDetails details) {
+    setState(() {
+      _isPressed = true;
+    });
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    setState(() {
+      _isPressed = false;
+    });
+  }
+
+  void _onTapCancel() {
+    setState(() {
+      _isPressed = false;
     });
   }
 
@@ -133,11 +152,18 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
     return GestureDetector(
       onLongPress: _showDateInputBottomSheet,
       onTap: _toggleMode,
-      child: BatteryIndicator(
-        value: remainingLifePercentage,
-        text: _isPercentageMode
-            ? '$remainingLifePercentage%'
-            : '${remainingLifeDays.withCommaString}${l10n.dayUnit}',
+      onTapDown: _onTapDown,
+      onTapUp: _onTapUp,
+      onTapCancel: _onTapCancel,
+      child: AnimatedScale(
+        scale: _isPressed ? 0.90 : 1.0,
+        duration: const Duration(milliseconds: 100),
+        child: BatteryIndicator(
+          value: remainingLifePercentage,
+          text: _isPercentageMode
+              ? '$remainingLifePercentage%'
+              : '${remainingLifeDays.withCommaString}${l10n.dayUnit}',
+        ),
       ),
     );
   }
