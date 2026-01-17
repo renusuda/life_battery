@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
@@ -32,7 +33,7 @@ Future<void> showPickerForBirthDate({
       margin: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
-      color: CupertinoColors.systemBackground.resolveFrom(context),
+      color: Theme.of(context).bottomSheetTheme.backgroundColor,
       child: SafeArea(
         top: false,
         child: CupertinoDatePicker(
