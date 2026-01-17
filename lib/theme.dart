@@ -13,6 +13,9 @@ final lightModeTheme = ThemeData(
   popupMenuTheme: const PopupMenuThemeData(
     color: Colors.white,
   ),
+  dialogTheme: const DialogThemeData(
+    backgroundColor: Colors.white,
+  ),
   colorScheme: ColorScheme.light(
     primary: const Color(0xFF10B981),
     secondary: Colors.grey[600]!,
@@ -35,6 +38,9 @@ final darkModeTheme = ThemeData(
   ),
   popupMenuTheme: const PopupMenuThemeData(
     color: Color(0xFF161E33),
+  ),
+  dialogTheme: const DialogThemeData(
+    backgroundColor: Color(0xFF161E33),
   ),
   colorScheme: ColorScheme.dark(
     primary: const Color(0xFF10B981),
