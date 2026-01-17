@@ -10,6 +10,9 @@ final lightModeTheme = ThemeData(
   bottomSheetTheme: const BottomSheetThemeData(
     backgroundColor: Colors.white,
   ),
+  popupMenuTheme: const PopupMenuThemeData(
+    color: Colors.white,
+  ),
   colorScheme: ColorScheme.light(
     primary: const Color(0xFF10B981),
     secondary: Colors.grey[600]!,
@@ -29,6 +32,9 @@ final darkModeTheme = ThemeData(
   ),
   bottomSheetTheme: const BottomSheetThemeData(
     backgroundColor: Color(0xFF0F172A),
+  ),
+  popupMenuTheme: const PopupMenuThemeData(
+    color: Color(0xFF161E33),
   ),
   colorScheme: ColorScheme.dark(
     primary: const Color(0xFF10B981),
