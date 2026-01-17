@@ -10,12 +10,12 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 4;
+  static const _databaseVersion = 5;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
   static const _columnBirthDate = 'birthDate';
-  static const _columnDeathDate = 'deathDate';
+  static const _columnIdealAge = 'idealAge';
   static const _columnThemeMode = 'themeMode';
   static const _columnIsInitialUser = 'isInitialUser';
   static const _columnIsDeletedUser = 'isDeletedUser';
@@ -47,7 +47,7 @@ class LocalDatabase {
           CREATE TABLE $_tableName (
             $_columnId INTEGER PRIMARY KEY AUTOINCREMENT,
             $_columnBirthDate TEXT NOT NULL,
-            $_columnDeathDate TEXT NOT NULL,
+            $_columnIdealAge INTEGER NOT NULL,
             $_columnThemeMode TEXT NOT NULL,
             $_columnIsInitialUser INTEGER NOT NULL,
             $_columnIsDeletedUser INTEGER NOT NULL
@@ -59,12 +59,30 @@ class LocalDatabase {
             _tableName,
             {
               _columnBirthDate: '2000-01-01T00:00:00.000',
-              _columnDeathDate: '2100-01-01T00:00:00.000',
+              _columnIdealAge: 100,
               _columnThemeMode: 'system',
               _columnIsInitialUser: 1,
               _columnIsDeletedUser: 0,
             },
           );
+        },
+        onUpgrade: (db, oldVersion, newVersion) async {
+          if (oldVersion < 5) {
+            // Replace deathDate with idealAge so users can specify their
+            // target lifespan as a number of years rather than a specific date.
+            // Reset isInitialUser to true so existing users see the new age
+            // slider UI.
+            await db.execute(
+              'ALTER TABLE $_tableName ADD COLUMN $_columnIdealAge INTEGER',
+            );
+            await db.update(
+              _tableName,
+              {
+                _columnIdealAge: 100,
+                _columnIsInitialUser: 1,
+              },
+            );
+          }
         },
       );
     } catch (e) {
@@ -79,7 +97,7 @@ class LocalDatabase {
       _tableName,
       {
         _columnBirthDate: '2000-01-01T00:00:00.000',
-        _columnDeathDate: '2100-01-01T00:00:00.000',
+        _columnIdealAge: 100,
         _columnIsInitialUser: 0,
         _columnIsDeletedUser: 1,
       },

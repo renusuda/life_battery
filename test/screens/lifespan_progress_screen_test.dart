@@ -57,7 +57,7 @@ class TestLifeProgressContent extends StatelessWidget {
           body: LifeProgressContent(
             lifespanRange: LifespanRange(
               birthDate: DateTime(1990),
-              deathDate: DateTime(2080),
+              idealAge: 90,
             ),
             isInitialUser: false,
             updateUserIsNotInitialUser: () async {},

@@ -9,7 +9,7 @@ part 'lifespan_range.g.dart';
 abstract class LifespanRange with _$LifespanRange {
   factory LifespanRange({
     required DateTime birthDate,
-    required DateTime deathDate,
+    required int idealAge,
   }) = _LifespanRange;
 
   const LifespanRange._();
@@ -17,6 +17,13 @@ abstract class LifespanRange with _$LifespanRange {
   /// Converts a JSON object to a [LifespanRange] instance.
   factory LifespanRange.fromJson(Map<String, dynamic> json) =>
       _$LifespanRangeFromJson(json);
+
+  /// Returns the calculated death date based on birthDate and idealAge.
+  DateTime get deathDate => DateTime(
+        birthDate.year + idealAge,
+        birthDate.month,
+        birthDate.day,
+      );
 
   /// Returns the remaining life percentage.
   int remainingLifePercentage({

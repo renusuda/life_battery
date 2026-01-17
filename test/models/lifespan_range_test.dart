@@ -6,7 +6,7 @@ void main() {
     test('returns 0 when now is before birthDate', () {
       final lifespanRange = LifespanRange(
         birthDate: DateTime(2000),
-        deathDate: DateTime(2100),
+        idealAge: 100,
       );
       expect(
         lifespanRange.remainingLifePercentage(now: DateTime(1900)),
@@ -17,7 +17,7 @@ void main() {
     test('returns 0 when now is after deathDate', () {
       final lifespanRange = LifespanRange(
         birthDate: DateTime(2000),
-        deathDate: DateTime(2100),
+        idealAge: 100,
       );
       expect(
         lifespanRange.remainingLifePercentage(now: DateTime(2200)),
@@ -30,10 +30,10 @@ void main() {
       () {
         final lifespanRange = LifespanRange(
           birthDate: DateTime(2000),
-          deathDate: DateTime(2000, 12, 31),
+          idealAge: 1,
         );
         expect(
-          lifespanRange.remainingLifePercentage(now: DateTime(2000, 12, 30)),
+          lifespanRange.remainingLifePercentage(now: DateTime(2000, 12, 31)),
           1,
         );
       },
@@ -42,7 +42,7 @@ void main() {
     test('returns 100 when the current date is the birth date', () {
       final lifespanRange = LifespanRange(
         birthDate: DateTime(2000),
-        deathDate: DateTime(2100),
+        idealAge: 100,
       );
       expect(
         lifespanRange.remainingLifePercentage(now: DateTime(2000)),
@@ -53,7 +53,7 @@ void main() {
     test('returns 0 when the current date is the death date', () {
       final lifespanRange = LifespanRange(
         birthDate: DateTime(2000),
-        deathDate: DateTime(2100),
+        idealAge: 100,
       );
       expect(
         lifespanRange.remainingLifePercentage(now: DateTime(2100)),
@@ -68,7 +68,7 @@ void main() {
       () {
         final lifespanRange = LifespanRange(
           birthDate: DateTime(2000),
-          deathDate: DateTime(2000),
+          idealAge: 0,
         );
         expect(
           lifespanRange.remainingLifePercentage(now: DateTime(2000)),
@@ -80,7 +80,7 @@ void main() {
     test('returns correct value with random dates', () {
       final lifespanRange = LifespanRange(
         birthDate: DateTime(1984, 4, 7),
-        deathDate: DateTime(2120, 9, 8),
+        idealAge: 136,
       );
       expect(
         lifespanRange.remainingLifePercentage(now: DateTime(2025, 1, 12)),
@@ -93,7 +93,7 @@ void main() {
     test('returns 0 when now is after deathDate', () {
       final lifespanRange = LifespanRange(
         birthDate: DateTime(2000),
-        deathDate: DateTime(2100),
+        idealAge: 100,
       );
       expect(
         lifespanRange.remainingLifeDays(now: DateTime(2200)),
@@ -104,11 +104,11 @@ void main() {
     test('returns correct value with random dates', () {
       final lifespanRange = LifespanRange(
         birthDate: DateTime(1984, 4, 7),
-        deathDate: DateTime(2120, 9, 8),
+        idealAge: 136,
       );
       expect(
         lifespanRange.remainingLifeDays(now: DateTime(2025, 1, 12)),
-        34937,
+        34783,
       );
     });
   });

@@ -19,7 +19,7 @@ class DateRangePicker extends ConsumerWidget {
     return switch (lifespanRangeManager) {
       AsyncData(:final value) => DateRangePickerContent(
         birthDate: value.birthDate,
-        deathDate: value.deathDate,
+        idealAge: value.idealAge,
       ),
       AsyncError() => Text(l10n.generalError),
       _ => const CircularProgressIndicator(),
@@ -31,15 +31,15 @@ class DateRangePicker extends ConsumerWidget {
 class DateRangePickerContent extends StatelessWidget {
   const DateRangePickerContent({
     required this.birthDate,
-    required this.deathDate,
+    required this.idealAge,
     super.key,
   });
 
   /// Birth date
   final DateTime birthDate;
 
-  /// Death date
-  final DateTime deathDate;
+  /// Ideal age
+  final int idealAge;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class DateRangePickerContent extends StatelessWidget {
       children: [
         DateRangePickerLabels(
           birthDate: birthDate,
-          deathDate: deathDate,
+          idealAge: idealAge,
         ),
       ],
     );
@@ -58,15 +58,15 @@ class DateRangePickerContent extends StatelessWidget {
 class DateRangePickerLabels extends StatelessWidget {
   const DateRangePickerLabels({
     required this.birthDate,
-    required this.deathDate,
+    required this.idealAge,
     super.key,
   });
 
   /// Birth date
   final DateTime birthDate;
 
-  /// Death date
-  final DateTime deathDate;
+  /// Ideal age
+  final int idealAge;
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +76,12 @@ class DateRangePickerLabels extends StatelessWidget {
         children: [
           BirthDateField(
             birthDate: birthDate,
-            deathDate: deathDate,
+            idealAge: idealAge,
           ),
           const SizedBox(height: 20),
           IdealLifespanField(
             birthDate: birthDate,
-            deathDate: deathDate,
+            idealAge: idealAge,
           ),
         ],
       ),
@@ -93,15 +93,15 @@ class DateRangePickerLabels extends StatelessWidget {
 class BirthDateField extends ConsumerWidget {
   const BirthDateField({
     required this.birthDate,
-    required this.deathDate,
+    required this.idealAge,
     super.key,
   });
 
   /// Birth date
   final DateTime birthDate;
 
-  /// Death date
-  final DateTime deathDate;
+  /// Ideal age
+  final int idealAge;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -127,7 +127,7 @@ class BirthDateField extends ConsumerWidget {
               context: context,
               ref: ref,
               birthDate: birthDate,
-              deathDate: deathDate,
+              idealAge: idealAge,
             );
           },
           child: Container(
@@ -166,25 +166,24 @@ class BirthDateField extends ConsumerWidget {
 class IdealLifespanField extends ConsumerWidget {
   const IdealLifespanField({
     required this.birthDate,
-    required this.deathDate,
+    required this.idealAge,
     super.key,
   });
 
   /// Birth date
   final DateTime birthDate;
 
-  /// Death date
-  final DateTime deathDate;
+  /// Ideal age
+  final int idealAge;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    final idealAge = deathDate.year - birthDate.year;
     // Ensure minimum age is current age + 1
     // to prevent remaining lifespan from reaching 0%
     final minAge = _getCurrentAge() + 1;
-    // Clamp idealAge to minAge to avoid Slider value < min error
-    final safeIdealAge = idealAge < minAge ? minAge : idealAge;
+    // Clamp idealAge to valid range to avoid Slider value errors
+    final safeIdealAge = idealAge.clamp(minAge, 150);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,17 +219,12 @@ class IdealLifespanField extends ConsumerWidget {
             min: minAge.toDouble(),
             max: 150,
             onChanged: (value) {
-              final newDeathDate = DateTime(
-                birthDate.year + value.toInt(),
-                birthDate.month,
-                birthDate.day,
-              );
               unawaited(
                 ref
                     .read(lifespanRangeManagerProvider.notifier)
                     .updateLifespanRange(
                       birthDate: birthDate,
-                      deathDate: newDeathDate,
+                      idealAge: value.toInt(),
                     ),
               );
             },

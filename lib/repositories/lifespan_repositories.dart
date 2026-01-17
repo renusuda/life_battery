@@ -9,7 +9,7 @@ class LifespanRepository {
 
   static const _tableName = 'lifespan';
   static const _columnBirthDate = 'birthDate';
-  static const _columnDeathDate = 'deathDate';
+  static const _columnIdealAge = 'idealAge';
   static const _columnThemeMode = 'themeMode';
   static const _columnIsInitialUser = 'isInitialUser';
   static const _columnIsDeletedUser = 'isDeletedUser';
@@ -20,13 +20,13 @@ class LifespanRepository {
       final db = await instance.database;
       final result = await db.query(
         _tableName,
-        columns: [_columnBirthDate, _columnDeathDate],
+        columns: [_columnBirthDate, _columnIdealAge],
       );
 
       if (result.isEmpty) {
         return LifespanRange(
           birthDate: DateTime(2000),
-          deathDate: DateTime(2100),
+          idealAge: 100,
         );
       } else {
         return LifespanRange.fromJson(result.first);
@@ -34,7 +34,7 @@ class LifespanRepository {
     } on DatabaseException catch (_) {
       return LifespanRange(
         birthDate: DateTime(2000),
-        deathDate: DateTime(2100),
+        idealAge: 100,
       );
     }
   }
@@ -102,7 +102,7 @@ class LifespanRepository {
   /// Updates the lifespan record in the database.
   Future<void> updateLifespan({
     required DateTime birthDate,
-    required DateTime deathDate,
+    required int idealAge,
   }) async {
     try {
       final db = await instance.database;
@@ -112,7 +112,7 @@ class LifespanRepository {
           _tableName,
           {
             _columnBirthDate: birthDate.toIso8601String(),
-            _columnDeathDate: deathDate.toIso8601String(),
+            _columnIdealAge: idealAge,
           },
         );
       } else {
@@ -120,7 +120,7 @@ class LifespanRepository {
           _tableName,
           {
             _columnBirthDate: birthDate.toIso8601String(),
-            _columnDeathDate: deathDate.toIso8601String(),
+            _columnIdealAge: idealAge,
           },
         );
       }

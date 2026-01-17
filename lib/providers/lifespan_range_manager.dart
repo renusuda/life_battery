@@ -22,11 +22,11 @@ class LifespanRangeManager extends _$LifespanRangeManager {
   /// Updates the lifespan range in Local Storage.
   Future<void> updateLifespanRange({
     required DateTime birthDate,
-    required DateTime deathDate,
+    required int idealAge,
   }) async {
     await _lifespanRepository.updateLifespan(
       birthDate: birthDate,
-      deathDate: deathDate,
+      idealAge: idealAge,
     );
     final newLifespanRange = await fetchLifespanRange();
     state = AsyncData(newLifespanRange);

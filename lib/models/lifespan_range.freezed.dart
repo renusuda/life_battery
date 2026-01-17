@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LifespanRange {
 
- DateTime get birthDate; DateTime get deathDate;
+ DateTime get birthDate; int get idealAge;
 /// Create a copy of LifespanRange
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $LifespanRangeCopyWith<LifespanRange> get copyWith => _$LifespanRangeCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LifespanRange&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.deathDate, deathDate) || other.deathDate == deathDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LifespanRange&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.idealAge, idealAge) || other.idealAge == idealAge));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,birthDate,deathDate);
+int get hashCode => Object.hash(runtimeType,birthDate,idealAge);
 
 @override
 String toString() {
-  return 'LifespanRange(birthDate: $birthDate, deathDate: $deathDate)';
+  return 'LifespanRange(birthDate: $birthDate, idealAge: $idealAge)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $LifespanRangeCopyWith<$Res>  {
   factory $LifespanRangeCopyWith(LifespanRange value, $Res Function(LifespanRange) _then) = _$LifespanRangeCopyWithImpl;
 @useResult
 $Res call({
- DateTime birthDate, DateTime deathDate
+ DateTime birthDate, int idealAge
 });
 
 
@@ -65,11 +65,11 @@ class _$LifespanRangeCopyWithImpl<$Res>
 
 /// Create a copy of LifespanRange
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? birthDate = null,Object? deathDate = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? birthDate = null,Object? idealAge = null,}) {
   return _then(_self.copyWith(
 birthDate: null == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
-as DateTime,deathDate: null == deathDate ? _self.deathDate : deathDate // ignore: cast_nullable_to_non_nullable
-as DateTime,
+as DateTime,idealAge: null == idealAge ? _self.idealAge : idealAge // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -154,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime birthDate,  DateTime deathDate)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime birthDate,  int idealAge)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LifespanRange() when $default != null:
-return $default(_that.birthDate,_that.deathDate);case _:
+return $default(_that.birthDate,_that.idealAge);case _:
   return orElse();
 
 }
@@ -175,10 +175,10 @@ return $default(_that.birthDate,_that.deathDate);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime birthDate,  DateTime deathDate)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime birthDate,  int idealAge)  $default,) {final _that = this;
 switch (_that) {
 case _LifespanRange():
-return $default(_that.birthDate,_that.deathDate);case _:
+return $default(_that.birthDate,_that.idealAge);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +195,10 @@ return $default(_that.birthDate,_that.deathDate);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime birthDate,  DateTime deathDate)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime birthDate,  int idealAge)?  $default,) {final _that = this;
 switch (_that) {
 case _LifespanRange() when $default != null:
-return $default(_that.birthDate,_that.deathDate);case _:
+return $default(_that.birthDate,_that.idealAge);case _:
   return null;
 
 }
@@ -210,11 +210,11 @@ return $default(_that.birthDate,_that.deathDate);case _:
 @JsonSerializable()
 
 class _LifespanRange extends LifespanRange {
-   _LifespanRange({required this.birthDate, required this.deathDate}): super._();
+   _LifespanRange({required this.birthDate, required this.idealAge}): super._();
   factory _LifespanRange.fromJson(Map<String, dynamic> json) => _$LifespanRangeFromJson(json);
 
 @override final  DateTime birthDate;
-@override final  DateTime deathDate;
+@override final  int idealAge;
 
 /// Create a copy of LifespanRange
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +229,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LifespanRange&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.deathDate, deathDate) || other.deathDate == deathDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LifespanRange&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.idealAge, idealAge) || other.idealAge == idealAge));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,birthDate,deathDate);
+int get hashCode => Object.hash(runtimeType,birthDate,idealAge);
 
 @override
 String toString() {
-  return 'LifespanRange(birthDate: $birthDate, deathDate: $deathDate)';
+  return 'LifespanRange(birthDate: $birthDate, idealAge: $idealAge)';
 }
 
 
@@ -249,7 +249,7 @@ abstract mixin class _$LifespanRangeCopyWith<$Res> implements $LifespanRangeCopy
   factory _$LifespanRangeCopyWith(_LifespanRange value, $Res Function(_LifespanRange) _then) = __$LifespanRangeCopyWithImpl;
 @override @useResult
 $Res call({
- DateTime birthDate, DateTime deathDate
+ DateTime birthDate, int idealAge
 });
 
 
@@ -266,11 +266,11 @@ class __$LifespanRangeCopyWithImpl<$Res>
 
 /// Create a copy of LifespanRange
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? birthDate = null,Object? deathDate = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? birthDate = null,Object? idealAge = null,}) {
   return _then(_LifespanRange(
 birthDate: null == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
-as DateTime,deathDate: null == deathDate ? _self.deathDate : deathDate // ignore: cast_nullable_to_non_nullable
-as DateTime,
+as DateTime,idealAge: null == idealAge ? _self.idealAge : idealAge // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

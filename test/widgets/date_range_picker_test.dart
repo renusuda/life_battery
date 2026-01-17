@@ -29,7 +29,7 @@ class TestDateRangePickerContent extends StatelessWidget {
         home: Scaffold(
           body: DateRangePickerContent(
             birthDate: DateTime(1990),
-            deathDate: DateTime(2080),
+            idealAge: 90,
           ),
         ),
       ),

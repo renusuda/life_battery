@@ -9,11 +9,11 @@ part of 'lifespan_range.dart';
 _LifespanRange _$LifespanRangeFromJson(Map<String, dynamic> json) =>
     _LifespanRange(
       birthDate: DateTime.parse(json['birthDate'] as String),
-      deathDate: DateTime.parse(json['deathDate'] as String),
+      idealAge: (json['idealAge'] as num).toInt(),
     );
 
 Map<String, dynamic> _$LifespanRangeToJson(_LifespanRange instance) =>
     <String, dynamic>{
       'birthDate': instance.birthDate.toIso8601String(),
-      'deathDate': instance.deathDate.toIso8601String(),
+      'idealAge': instance.idealAge,
     };
