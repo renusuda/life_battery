@@ -179,9 +179,7 @@ class IdealLifespanField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    // Ensure minimum age is current age + 1
-    // to prevent remaining lifespan from reaching 0%
-    final minAge = _getCurrentAge() + 1;
+    final minAge = _getCurrentAge();
     // Clamp idealAge to valid range to avoid Slider value errors
     final safeIdealAge = idealAge.clamp(minAge, 150);
 
