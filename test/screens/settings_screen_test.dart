@@ -43,7 +43,7 @@ void main() {
 
       expect(
         launchedUrl.toString(),
-        'https://renusuda.github.io/life_battery_privacy_policy/?lang=en',
+        'https://renusuda.github.io/life_battery_privacy_policy/en',
       );
       expect(launchMode, LaunchMode.inAppBrowserView);
     });

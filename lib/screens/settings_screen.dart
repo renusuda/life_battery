@@ -93,10 +93,10 @@ class PrivacyPolicyListTile extends StatelessWidget {
       onTap: () async {
         final locale = Localizations.localeOf(context);
         final isJapanese = locale.languageCode == 'ja';
-        final queryParameter = isJapanese ? '' : '?lang=en';
+        final langPath = isJapanese ? 'ja' : 'en';
 
         final url = Uri.parse(
-          'https://renusuda.github.io/life_battery_privacy_policy/$queryParameter',
+          'https://renusuda.github.io/life_battery_privacy_policy/$langPath',
         );
         if (await canLaunchUrl(url)) {
           await onLaunchUrl(
