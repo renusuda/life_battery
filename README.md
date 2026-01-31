@@ -10,8 +10,8 @@
 [<img src="assets/images/app_store_badge.png" height="50">](https://apps.apple.com/us/app/life-battery/id6449723058?platform=iphone) [<img src="assets/images/google_play_badge.png" height="50">](https://play.google.com/store/apps/details?id=com.rururu.lifebt&hl=en)
 
 Life Battery tells you what percentage of your life remains⚡️  
-![RocketSim_Recording_iPhone_16_Pro_Max_6 9_2025-03-14_23 50 18](https://github.com/user-attachments/assets/1ae8485e-50eb-4247-bd76-827bfd08d1ac)
-![RocketSim_Recording_iPhone_16_Pro_Max_6 9_2025-03-15_15 00 27](https://github.com/user-attachments/assets/d970f643-9f5d-479a-a9e8-42ab14d1a281)
+![1](https://github.com/user-attachments/assets/df3a3503-c8b1-4e89-ac8a-3d9f96c889aa)
+![2](https://github.com/user-attachments/assets/15aeacde-393e-4970-afef-e3b375dc3b29)
 
 Future features:  
 - A widget to check battery life without opening the app📲
