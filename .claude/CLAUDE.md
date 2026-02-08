@@ -95,6 +95,12 @@ fvm flutter analyze
 
 # Code generation
 fvm dart run build_runner build --delete-conflicting-outputs
+
+# Release build for iOS
+fvm flutter build ipa
+
+# Release build for Android
+fvm flutter build appbundle
 ```
 
 ## Git Workflow
