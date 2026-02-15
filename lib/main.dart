@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:home_widget/home_widget.dart';
 import 'package:life_battery/firebase_options.dart';
 import 'package:life_battery/providers/app_theme_mode.dart';
 import 'package:life_battery/repositories/local_database.dart';
@@ -13,6 +14,9 @@ import 'package:life_battery/widgets/common_material_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Set App Group ID for iOS widget data sharing
+  await HomeWidget.setAppGroupId('group.com.rururu.lifebt');
 
   // Initialize Firebase
   await Firebase.initializeApp(

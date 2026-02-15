@@ -1,3 +1,4 @@
+import 'package:home_widget/home_widget.dart';
 import 'package:life_battery/models/lifespan_range.dart';
 import 'package:life_battery/repositories/local_database.dart';
 import 'package:sqflite/sqflite.dart';
@@ -159,5 +160,16 @@ class LifespanRepository {
         );
       }
     } on DatabaseException catch (_) {}
+  }
+
+  /// Syncs the remaining life percentage to the iOS home screen widget.
+  Future<void> syncWidgetData({
+    required int percentage,
+  }) async {
+    await HomeWidget.saveWidgetData('percentage', percentage);
+    await HomeWidget.updateWidget(
+      name: 'LifeBatteryWidget',
+      iOSName: 'LifeBatteryWidget',
+    );
   }
 }

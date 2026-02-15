@@ -1,0 +1,54 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "widget.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See your remaining life at a glance."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "残りの人生をひと目で確認"
+          }
+        }
+      }
+    },
+    "widget.displayName" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ライフバッテリー"
+          }
+        }
+      }
+    },
+    "widget.titleLabel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LIFE LEFT"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "残りの人生"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}

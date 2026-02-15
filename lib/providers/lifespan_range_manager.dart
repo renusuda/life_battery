@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:life_battery/models/lifespan_range.dart';
 import 'package:life_battery/repositories/lifespan_repositories.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -11,7 +13,17 @@ class LifespanRangeManager extends _$LifespanRangeManager {
   static final _lifespanRepository = LifespanRepository();
 
   @override
-  Future<LifespanRange> build() => fetchLifespanRange();
+  Future<LifespanRange> build() async {
+    final lifespanRange = await fetchLifespanRange();
+    unawaited(
+      _lifespanRepository.syncWidgetData(
+        percentage: lifespanRange.remainingLifePercentage(
+          now: DateTime.now(),
+        ),
+      ),
+    );
+    return lifespanRange;
+  }
 
   /// Fetches the lifespan range from Local Storage.
   Future<LifespanRange> fetchLifespanRange() async {
@@ -30,5 +42,13 @@ class LifespanRangeManager extends _$LifespanRangeManager {
     );
     final newLifespanRange = await fetchLifespanRange();
     state = AsyncData(newLifespanRange);
+
+    unawaited(
+      _lifespanRepository.syncWidgetData(
+        percentage: newLifespanRange.remainingLifePercentage(
+          now: DateTime.now(),
+        ),
+      ),
+    );
   }
 }

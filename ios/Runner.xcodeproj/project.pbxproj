@@ -16,6 +16,9 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		B5A9A4662F3769AF00F4C082 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B5A9A4652F3769AF00F4C082 /* InfoPlist.xcstrings */; };
+		B5A9A4D32F40334E00F4C082 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A9A4D22F40334E00F4C082 /* WidgetKit.framework */; };
+		B5A9A4D52F40334E00F4C082 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A9A4D42F40334E00F4C082 /* SwiftUI.framework */; };
+		B5A9A4E02F40335000F4C082 /* LifeBatteryWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B5A9A4D12F40334E00F4C082 /* LifeBatteryWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B5AA52F02EF2FCBB004484CD /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = B5AA52EF2EF2FCBB004484CD /* AppIcon.icon */; };
 		BE244E5019DA32EC98AF9FC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC36663C6075842BAE851D23 /* GoogleService-Info.plist */; };
 		E01E7BDD05A39AF755E174FD /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB2BA25316FA5B1CFA450AB /* Pods_RunnerTests.framework */; };
@@ -29,6 +32,13 @@
 			remoteGlobalIDString = 97C146ED1CF9000F007C117D;
 			remoteInfo = Runner;
 		};
+		B5A9A4DE2F40335000F4C082 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5A9A4D02F40334E00F4C082;
+			remoteInfo = LifeBatteryWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +50,17 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5A9A4E12F40335000F4C082 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B5A9A4E02F40335000F4C082 /* LifeBatteryWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -68,6 +89,10 @@
 		B5A9A4652F3769AF00F4C082 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		B5A9A4672F3769DE00F4C082 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		B5A9A4682F3769DE00F4C082 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B5A9A4D12F40334E00F4C082 /* LifeBatteryWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeBatteryWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5A9A4D22F40334E00F4C082 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B5A9A4D42F40334E00F4C082 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B5A9A59F2F4096D400F4C082 /* LifeBatteryWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeBatteryWidgetExtension.entitlements; sourceTree = "<group>"; };
 		B5AA52EF2EF2FCBB004484CD /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		C37EC1072728A593701DA940 /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFB375B06250D48770C3C430 /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +100,31 @@
 		EC36663C6075842BAE851D23 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FBD36A28A113900FD348694E /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B5A9A4E52F40335000F4C082 /* Exceptions for "LifeBatteryWidget" folder in "LifeBatteryWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B5A9A4D02F40334E00F4C082 /* LifeBatteryWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B5A9A4D62F40334E00F4C082 /* LifeBatteryWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B5A9A4E52F40335000F4C082 /* Exceptions for "LifeBatteryWidget" folder in "LifeBatteryWidgetExtension" target */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = LifeBatteryWidget;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		18A70ACECA6550068FADD638 /* Frameworks */ = {
@@ -90,6 +140,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				082893D4C22D25FF477E6EDD /* Pods_Runner.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5A9A4CE2F40334E00F4C082 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5A9A4D52F40334E00F4C082 /* SwiftUI.framework in Frameworks */,
+				B5A9A4D32F40334E00F4C082 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +168,8 @@
 			children = (
 				FBD36A28A113900FD348694E /* Pods_Runner.framework */,
 				5CB2BA25316FA5B1CFA450AB /* Pods_RunnerTests.framework */,
+				B5A9A4D22F40334E00F4C082 /* WidgetKit.framework */,
+				B5A9A4D42F40334E00F4C082 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,9 +188,11 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				B5A9A59F2F4096D400F4C082 /* LifeBatteryWidgetExtension.entitlements */,
 				B5A9A4652F3769AF00F4C082 /* InfoPlist.xcstrings */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
+				B5A9A4D62F40334E00F4C082 /* LifeBatteryWidget */,
 				97C146EF1CF9000F007C117D /* Products */,
 				331C8082294A63A400263BE5 /* RunnerTests */,
 				DF0EF4529CE61F027A6BD987 /* Pods */,
@@ -143,6 +206,7 @@
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
+				B5A9A4D12F40334E00F4C082 /* LifeBatteryWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,18 +273,40 @@
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
-				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				B5A9A4E12F40335000F4C082 /* Embed Foundation Extensions */,
 				6A3EEECE667C8D44DDC8D81F /* [CP] Embed Pods Frameworks */,
 				C00CA57686D489A79EC7B105 /* FlutterFire: "flutterfire upload-crashlytics-symbols" */,
+				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B5A9A4DF2F40335000F4C082 /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B5A9A4D02F40334E00F4C082 /* LifeBatteryWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5A9A4E62F40335000F4C082 /* Build configuration list for PBXNativeTarget "LifeBatteryWidgetExtension" */;
+			buildPhases = (
+				B5A9A4CD2F40334E00F4C082 /* Sources */,
+				B5A9A4CE2F40334E00F4C082 /* Frameworks */,
+				B5A9A4CF2F40334E00F4C082 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B5A9A4D62F40334E00F4C082 /* LifeBatteryWidget */,
+			);
+			name = LifeBatteryWidgetExtension;
+			productName = LifeBatteryWidgetExtension;
+			productReference = B5A9A4D12F40334E00F4C082 /* LifeBatteryWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -229,6 +315,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
@@ -239,6 +326,9 @@
 					97C146ED1CF9000F007C117D = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1100;
+					};
+					B5A9A4D02F40334E00F4C082 = {
+						CreatedOnToolsVersion = 26.2;
 					};
 				};
 			};
@@ -258,6 +348,7 @@
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
+				B5A9A4D02F40334E00F4C082 /* LifeBatteryWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -284,6 +375,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B5A9A4CF2F40334E00F4C082 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -301,7 +399,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin\n";
 		};
 		6A3EEECE667C8D44DDC8D81F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -417,6 +515,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B5A9A4CD2F40334E00F4C082 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -424,6 +529,11 @@
 			isa = PBXTargetDependency;
 			target = 97C146ED1CF9000F007C117D /* Runner */;
 			targetProxy = 331C8085294A63A400263BE5 /* PBXContainerItemProxy */;
+		};
+		B5A9A4DF2F40335000F4C082 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5A9A4D02F40334E00F4C082 /* LifeBatteryWidgetExtension */;
+			targetProxy = B5A9A4DE2F40335000F4C082 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -750,6 +860,141 @@
 			};
 			name = Release;
 		};
+		B5A9A4E22F40335000F4C082 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeBatteryWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 982WTPZFCF;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LifeBatteryWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LifeBatteryWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rururu.lifebt.LifeBatteryWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B5A9A4E32F40335000F4C082 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeBatteryWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 982WTPZFCF;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LifeBatteryWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LifeBatteryWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rururu.lifebt.LifeBatteryWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B5A9A4E42F40335000F4C082 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeBatteryWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 982WTPZFCF;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LifeBatteryWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LifeBatteryWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rururu.lifebt.LifeBatteryWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Profile;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -779,6 +1024,16 @@
 				97C147061CF9000F007C117D /* Debug */,
 				97C147071CF9000F007C117D /* Release */,
 				249021D4217E4FDB00AE95B9 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5A9A4E62F40335000F4C082 /* Build configuration list for PBXNativeTarget "LifeBatteryWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5A9A4E22F40335000F4C082 /* Debug */,
+				B5A9A4E32F40335000F4C082 /* Release */,
+				B5A9A4E42F40335000F4C082 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
