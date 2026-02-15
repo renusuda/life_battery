@@ -50,6 +50,9 @@ app.*.map.json
 # Exclude memo folder
 memo/
 
+# Claude Code
+.claude/settings.local.json
+
 # Firebase
 /android/app/google-services.json
 /ios/Runner/GoogleService-Info.plist
