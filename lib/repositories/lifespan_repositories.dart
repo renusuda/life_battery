@@ -162,11 +162,16 @@ class LifespanRepository {
     } on DatabaseException catch (_) {}
   }
 
-  /// Syncs the remaining life percentage to the iOS home screen widget.
+  /// Syncs birth date and ideal age to the iOS home screen widget.
   Future<void> syncWidgetData({
-    required int percentage,
+    required DateTime birthDate,
+    required int idealAge,
   }) async {
-    await HomeWidget.saveWidgetData('percentage', percentage);
+    await HomeWidget.saveWidgetData(
+      'birthDate',
+      birthDate.toIso8601String(),
+    );
+    await HomeWidget.saveWidgetData('idealAge', idealAge);
     await HomeWidget.updateWidget(
       name: 'LifeBatteryWidget',
       iOSName: 'LifeBatteryWidget',

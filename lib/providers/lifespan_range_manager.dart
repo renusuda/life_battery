@@ -17,9 +17,8 @@ class LifespanRangeManager extends _$LifespanRangeManager {
     final lifespanRange = await fetchLifespanRange();
     unawaited(
       _lifespanRepository.syncWidgetData(
-        percentage: lifespanRange.remainingLifePercentage(
-          now: DateTime.now(),
-        ),
+        birthDate: lifespanRange.birthDate,
+        idealAge: lifespanRange.idealAge,
       ),
     );
     return lifespanRange;
@@ -45,9 +44,8 @@ class LifespanRangeManager extends _$LifespanRangeManager {
 
     unawaited(
       _lifespanRepository.syncWidgetData(
-        percentage: newLifespanRange.remainingLifePercentage(
-          now: DateTime.now(),
-        ),
+        birthDate: newLifespanRange.birthDate,
+        idealAge: newLifespanRange.idealAge,
       ),
     );
   }

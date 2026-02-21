@@ -2,31 +2,112 @@ import SwiftUI
 import WidgetKit
 
 struct Provider: TimelineProvider {
-  func placeholder(in context: Context) -> SimpleEntry {
-    SimpleEntry(date: Date(), percentage: 100)
+  func placeholder(in context: Context) -> LifeBatteryEntry {
+    LifeBatteryEntry(date: Date(), percentage: 100)
   }
 
-  func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-    let entry = entryFromUserDefaults()
+  func getSnapshot(in context: Context, completion: @escaping (LifeBatteryEntry) -> Void) {
+    let entry = createEntry(date: Date(), userData: loadUserData())
     completion(entry)
   }
 
   func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-    let entry = entryFromUserDefaults()
-    let timeline = Timeline(entries: [entry], policy: .atEnd)
+    let calendar = Calendar.current
+    let now = Date()
+    let startOfToday = calendar.startOfDay(for: now)
+    let userData = loadUserData()
+
+    var entries: [LifeBatteryEntry] = []
+    for dayOffset in 0..<7 {
+      guard let entryDate = calendar.date(byAdding: .day, value: dayOffset, to: startOfToday) else {
+        continue
+      }
+      entries.append(createEntry(date: entryDate, userData: userData))
+    }
+
+    let timeline = Timeline(entries: entries, policy: .atEnd)
     completion(timeline)
   }
 
-  private func entryFromUserDefaults() -> SimpleEntry {
+  private func loadUserData() -> (birthDate: Date, idealAge: Int)? {
     let defaults = UserDefaults(suiteName: "group.com.rururu.lifebt")
-    let percentage = defaults?.integer(forKey: "percentage") ?? 100
-    return SimpleEntry(date: Date(), percentage: percentage)
+    guard let birthDateString = defaults?.string(forKey: "birthDate"),
+      let birthDate = parseISO8601Date(birthDateString),
+      let idealAge = defaults?.object(forKey: "idealAge") as? Int,
+      idealAge > 0
+    else { return nil }
+    return (birthDate, idealAge)
+  }
+
+  private func createEntry(date: Date, userData: (birthDate: Date, idealAge: Int)?) -> LifeBatteryEntry {
+    guard let userData else {
+      return LifeBatteryEntry(date: date, percentage: 100)
+    }
+
+    let percentage = remainingLifePercentage(
+      birthDate: userData.birthDate,
+      idealAge: userData.idealAge,
+      now: date
+    )
+    return LifeBatteryEntry(date: date, percentage: percentage)
   }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct LifeBatteryEntry: TimelineEntry {
   let date: Date
   let percentage: Int
+}
+
+private func parseISO8601Date(_ string: String) -> Date? {
+  let truncated = string.components(separatedBy: ".").first ?? string
+
+  let formatter = ISO8601DateFormatter()
+  formatter.timeZone = TimeZone.current
+  formatter.formatOptions = [.withFullDate, .withTime, .withColonSeparatorInTime]
+  return formatter.date(from: truncated)
+}
+
+private func computeDeathDate(
+  birthDate: Date,
+  idealAge: Int,
+  calendar: Calendar
+) -> Date {
+  let birthComponents = calendar.dateComponents([.year, .month, .day], from: birthDate)
+  var deathComponents = DateComponents()
+  deathComponents.year = (birthComponents.year ?? 0) + idealAge
+  deathComponents.month = birthComponents.month
+  deathComponents.day = birthComponents.day
+  return calendar.date(from: deathComponents) ?? birthDate
+}
+
+private func remainingLifePercentage(
+  birthDate: Date,
+  idealAge: Int,
+  now: Date
+) -> Int {
+  let calendar = Calendar.current
+
+  let birthOnly = calendar.startOfDay(for: birthDate)
+  let nowOnly = calendar.startOfDay(for: now)
+  let deathDate = computeDeathDate(
+    birthDate: birthDate,
+    idealAge: idealAge,
+    calendar: calendar
+  )
+  let deathOnly = calendar.startOfDay(for: deathDate)
+
+  if nowOnly < birthOnly || nowOnly >= deathOnly {
+    return 0
+  }
+
+  let totalDays = calendar.dateComponents([.day], from: birthOnly, to: deathOnly).day ?? 0
+  let remainingDays = calendar.dateComponents([.day], from: nowOnly, to: deathOnly).day ?? 0
+
+  if totalDays <= 0 {
+    return 0
+  }
+
+  return Int(ceil(Double(remainingDays) / Double(totalDays) * 100))
 }
 
 func batteryColor(for percentage: Int) -> Color {
@@ -110,9 +191,9 @@ struct LifeBatteryWidget: Widget {
 #Preview(as: .systemSmall) {
   LifeBatteryWidget()
 } timeline: {
-  SimpleEntry(date: .now, percentage: 100)
-  SimpleEntry(date: .now, percentage: 65)
-  SimpleEntry(date: .now, percentage: 35)
-  SimpleEntry(date: .now, percentage: 10)
-  SimpleEntry(date: .now, percentage: 0)
+  LifeBatteryEntry(date: .now, percentage: 100)
+  LifeBatteryEntry(date: .now, percentage: 65)
+  LifeBatteryEntry(date: .now, percentage: 35)
+  LifeBatteryEntry(date: .now, percentage: 10)
+  LifeBatteryEntry(date: .now, percentage: 0)
 }
