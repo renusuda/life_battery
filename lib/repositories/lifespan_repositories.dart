@@ -162,7 +162,7 @@ class LifespanRepository {
     } on DatabaseException catch (_) {}
   }
 
-  /// Syncs birth date and ideal age to the iOS home screen widget.
+  /// Syncs birth date and ideal age to the home screen widget.
   Future<void> syncWidgetData({
     required DateTime birthDate,
     required int idealAge,
@@ -175,6 +175,7 @@ class LifespanRepository {
     await HomeWidget.updateWidget(
       name: 'LifeBatteryWidget',
       iOSName: 'LifeBatteryWidget',
+      androidName: 'LifeBatteryWidgetReceiver',
     );
   }
 }
