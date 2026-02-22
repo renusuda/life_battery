@@ -9,12 +9,12 @@
 
 [<img src="assets/images/app_store_badge.png" height="50">](https://apps.apple.com/us/app/life-battery/id6449723058?platform=iphone) [<img src="assets/images/google_play_badge.png" height="50">](https://play.google.com/store/apps/details?id=com.rururu.lifebt&hl=en)
 
-Life Battery tells you what percentage of your life remains⚡️  
+Life Battery tells you what percentage of your life remains⚡️
 ![1](https://github.com/user-attachments/assets/df3a3503-c8b1-4e89-ac8a-3d9f96c889aa)
 ![2](https://github.com/user-attachments/assets/15aeacde-393e-4970-afef-e3b375dc3b29)
 
-Future features:  
-- A widget to check battery life without opening the app📲
+Future features:
+
 - Push notifications when battery life decreases🪫
 - Customizable battery UI design🎨
 - Night sky starry feature⭐️
