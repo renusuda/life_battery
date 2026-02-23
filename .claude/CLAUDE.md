@@ -102,8 +102,3 @@ fvm flutter build ipa
 # Release build for Android
 fvm flutter build appbundle
 ```
-
-## Git Workflow
-
-- Conventional commits: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `chore:`, `ci:`
-- Keep commit messages concise (1-2 sentences)
