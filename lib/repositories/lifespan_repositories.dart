@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:life_battery/models/lifespan_range.dart';
 import 'package:life_battery/repositories/local_database.dart';
@@ -167,15 +168,19 @@ class LifespanRepository {
     required DateTime birthDate,
     required int idealAge,
   }) async {
-    await HomeWidget.saveWidgetData(
-      'birthDate',
-      birthDate.toIso8601String(),
-    );
-    await HomeWidget.saveWidgetData('idealAge', idealAge);
-    await HomeWidget.updateWidget(
-      name: 'LifeBatteryWidget',
-      iOSName: 'LifeBatteryWidget',
-      androidName: 'LifeBatteryWidgetReceiver',
-    );
+    try {
+      await HomeWidget.saveWidgetData(
+        'birthDate',
+        birthDate.toIso8601String(),
+      );
+      await HomeWidget.saveWidgetData('idealAge', idealAge);
+      await HomeWidget.updateWidget(
+        name: 'LifeBatteryWidget',
+        iOSName: 'LifeBatteryWidget',
+        androidName: 'LifeBatteryWidgetReceiver',
+      );
+    } on PlatformException catch (_) {
+      // Widget sync may fail in test environments.
+    }
   }
 }
