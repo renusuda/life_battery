@@ -15,5 +15,14 @@
   "deleteContent": "Are you sure you want to delete the data?\nDeleted data cannot be restored.",
   "cancelLabel": "Cancel",
   "deleteLabel": "Delete",
-  "userDeletionSuccess": "Your data has been successfully deleted.\nThank you for using our app.\nWe hope to see you again in the future.😊"
+  "userDeletionSuccess": "Your data has been successfully deleted.\nThank you for using our app.\nWe hope to see you again in the future.😊",
+  "notificationTitle": "{percentage}% of your life remaining.",
+  "@notificationTitle": {
+    "placeholders": {
+      "percentage": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationBody": "Let's make the next 1% your best chapter yet!"
 }

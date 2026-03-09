@@ -10,7 +10,9 @@ import 'package:life_battery/firebase_options.dart';
 import 'package:life_battery/providers/app_theme_mode.dart';
 import 'package:life_battery/repositories/local_database.dart';
 import 'package:life_battery/screens/home_screen.dart';
+import 'package:life_battery/services/local_notification_service.dart';
 import 'package:life_battery/widgets/common_material_app.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +35,10 @@ void main() async {
     );
     return true;
   };
+
+  tz.initializeTimeZones();
+
+  await LocalNotificationService.initialize();
 
   // Initialize the database
   await LocalDatabase().database;

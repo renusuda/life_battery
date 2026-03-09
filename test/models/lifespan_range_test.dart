@@ -112,4 +112,52 @@ void main() {
       );
     });
   });
+
+  group('Test nextDropDate', () {
+    test('returns null when idealAge is 0', () {
+      final lifespanRange = LifespanRange(
+        birthDate: DateTime(2000),
+        idealAge: 0,
+      );
+      expect(
+        lifespanRange.nextDropDate(now: DateTime(2000)),
+        isNull,
+      );
+    });
+
+    test('returns null when now is after deathDate', () {
+      final lifespanRange = LifespanRange(
+        birthDate: DateTime(2000),
+        idealAge: 100,
+      );
+      expect(
+        lifespanRange.nextDropDate(now: DateTime(2200)),
+        isNull,
+      );
+    });
+
+    test('returns correct next drop date', () {
+      final lifespanRange = LifespanRange(
+        birthDate: DateTime(2000),
+        idealAge: 1,
+      );
+      final now = DateTime(2000, 7);
+      expect(
+        lifespanRange.nextDropDate(now: now),
+        DateTime(2000, 7, 2),
+      );
+    });
+
+    test('returns correct next drop date with realistic lifespan', () {
+      final lifespanRange = LifespanRange(
+        birthDate: DateTime(1980, 3, 14),
+        idealAge: 84,
+      );
+      final now = DateTime(2026, 2, 2);
+      expect(
+        lifespanRange.nextDropDate(now: now),
+        DateTime(2026, 5, 27),
+      );
+    });
+  });
 }

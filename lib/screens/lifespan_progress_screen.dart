@@ -7,6 +7,7 @@ import 'package:life_battery/models/lifespan_range.dart';
 import 'package:life_battery/providers/is_initial_user.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/screens/settings_screen.dart';
+import 'package:life_battery/services/local_notification_service.dart';
 import 'package:life_battery/utils/extensions.dart';
 import 'package:life_battery/widgets/battery_indicator.dart';
 import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
@@ -88,6 +89,7 @@ class LifeProgressContent extends StatefulWidget {
 class _LifeProgressContentState extends State<LifeProgressContent> {
   var _isPercentageMode = true;
   var _isPressed = false;
+  Timer? _notificationTimer;
 
   void _toggleMode() {
     setState(() {
@@ -113,28 +115,58 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
     });
   }
 
-  void _showDateInputBottomSheet() {
-    unawaited(
-      showModalBottomSheet<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return const DateInputBottomSheet();
-        },
-      ),
+  Future<void> _showDateInputBottomSheet() {
+    return showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return const DateInputBottomSheet();
+      },
+    );
+  }
+
+  Future<void> _scheduleNotification() async {
+    if (!mounted) return;
+    final now = DateTime.now();
+    final dropDate = widget.lifespanRange.nextDropDate(now: now);
+    if (dropDate == null) return;
+
+    final l10n = AppLocalizations.of(context)!;
+    final percentage =
+        widget.lifespanRange.remainingLifePercentage(now: now) - 1;
+    // Schedule at 9:00 AM on the drop date.
+    final scheduledDate = DateTime(
+      dropDate.year,
+      dropDate.month,
+      dropDate.day,
+      9,
+    );
+    await LocalNotificationService.scheduleNotification(
+      title: l10n.notificationTitle(percentage),
+      body: l10n.notificationBody,
+      scheduledDate: scheduledDate,
     );
   }
 
   @override
   void initState() {
     super.initState();
-    // Show the date input bottom sheet if the user is initial user
-    if (widget.isInitialUser) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showDateInputBottomSheet();
-      });
-    }
-    // Update the user is not initial user
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (widget.isInitialUser) {
+        await _showDateInputBottomSheet();
+        if (!mounted) return;
+      }
+      _notificationTimer = Timer(
+        const Duration(seconds: 3),
+        () => unawaited(_scheduleNotification()),
+      );
+    });
     unawaited(widget.updateUserIsNotInitialUser());
+  }
+
+  @override
+  void dispose() {
+    _notificationTimer?.cancel();
+    super.dispose();
   }
 
   @override

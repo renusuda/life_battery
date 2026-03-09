@@ -52,6 +52,7 @@ lib/
 |-- providers/            # Riverpod providers (with code generation)
 |-- repositories/         # Data access layer (sqflite)
 |-- screens/              # Full-page screens
+|-- services/             # OS/platform service wrappers
 |-- utils/                # Utility functions and extensions
 |-- widgets/              # Reusable UI components
 |-- firebase_options.dart # Auto-generated Firebase config

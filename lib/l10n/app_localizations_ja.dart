@@ -59,4 +59,12 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get userDeletionSuccess =>
       'データを削除できました。\nアプリを使用してくださりありがとうございます。\nまたいつかお会いしましょう😊';
+
+  @override
+  String notificationTitle(int percentage) {
+    return '人生が残り$percentage%になりました';
+  }
+
+  @override
+  String get notificationBody => '次の1%を、最高の物語にしましょう！';
 }

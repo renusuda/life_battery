@@ -199,6 +199,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your data has been successfully deleted.\nThank you for using our app.\nWe hope to see you again in the future.😊'**
   String get userDeletionSuccess;
+
+  /// No description provided for @notificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{percentage}% of your life remaining.'**
+  String notificationTitle(int percentage);
+
+  /// No description provided for @notificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s make the next 1% your best chapter yet!'**
+  String get notificationBody;
 }
 
 class _AppLocalizationsDelegate

@@ -63,4 +63,21 @@ abstract class LifespanRange with _$LifespanRange {
 
     return dateOnlyDeathDate.difference(dateOnlyNow).inDays;
   }
+
+  /// Returns the next date when the battery percentage drops by 1.
+  DateTime? nextDropDate({
+    required DateTime now,
+  }) {
+    final currentPercent = remainingLifePercentage(now: now);
+    if (currentPercent <= 0) return null;
+
+    final nextPercent = currentPercent - 1;
+    final dateOnlyBirthDate = birthDate.toDateOnly;
+    final dateOnlyDeathDate = deathDate.toDateOnly;
+    final totalDays = dateOnlyDeathDate.difference(dateOnlyBirthDate).inDays;
+    final dropDays = (totalDays * nextPercent) ~/ 100;
+    final dropDate = dateOnlyDeathDate.subtract(Duration(days: dropDays));
+
+    return dropDate;
+  }
 }
