@@ -9,6 +9,7 @@ class LocalNotificationService {
   static Future<void> initialize() async {
     await _plugin.initialize(
       settings: const InitializationSettings(
+        android: AndroidInitializationSettings('@mipmap/launcher_icon'),
         iOS: DarwinInitializationSettings(
           requestAlertPermission: false,
           requestBadgePermission: false,
@@ -36,6 +37,14 @@ class LocalNotificationService {
       body: body,
       scheduledDate: tz.TZDateTime.from(scheduledDate, tz.local),
       notificationDetails: const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'life_battery_notifications',
+          'Life Battery Notifications',
+          channelDescription:
+              'Notifications for life battery percentage drops',
+          importance: Importance.high,
+          priority: Priority.high,
+        ),
         iOS: DarwinNotificationDetails(),
       ),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
@@ -43,16 +52,25 @@ class LocalNotificationService {
   }
 
   static Future<bool> _requestPermission() async {
-    final result = await _plugin
-        .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin
-        >()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
-    return result ?? false;
+    final androidPlugin = _plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    if (androidPlugin != null) {
+      final granted = await androidPlugin.requestNotificationsPermission();
+      return granted ?? false;
+    }
+
+    final iosPlugin = _plugin.resolvePlatformSpecificImplementation<
+        IOSFlutterLocalNotificationsPlugin>();
+    if (iosPlugin != null) {
+      final granted = await iosPlugin.requestPermissions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      return granted ?? false;
+    }
+
+    return false;
   }
 
   static Future<void> _cancelAll() async {
