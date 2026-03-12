@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -33,23 +34,28 @@ class LocalNotificationService {
 
     await _cancelAll();
 
-    await _plugin.zonedSchedule(
-      id: 0,
-      title: title,
-      body: body,
-      scheduledDate: tz.TZDateTime.from(scheduledDate, tz.local),
-      notificationDetails: const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'life_battery_notifications',
-          'Life Battery Notifications',
-          channelDescription: 'Notifications for life battery percentage drops',
-          importance: Importance.high,
-          priority: Priority.high,
+    try {
+      await _plugin.zonedSchedule(
+        id: 0,
+        title: title,
+        body: body,
+        scheduledDate: tz.TZDateTime.from(scheduledDate, tz.local),
+        notificationDetails: const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'life_battery_notifications',
+            'Life Battery Notifications',
+            channelDescription:
+                'Notifications for life battery percentage drops',
+            importance: Importance.high,
+            priority: Priority.high,
+          ),
+          iOS: DarwinNotificationDetails(),
         ),
-        iOS: DarwinNotificationDetails(),
-      ),
-      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-    );
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      );
+    } on Object catch (error, stack) {
+      await FirebaseCrashlytics.instance.recordError(error, stack);
+    }
   }
 
   static Future<bool> _requestPermission() async {
