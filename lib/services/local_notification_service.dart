@@ -9,7 +9,9 @@ class LocalNotificationService {
   static Future<void> initialize() async {
     await _plugin.initialize(
       settings: const InitializationSettings(
-        android: AndroidInitializationSettings('@drawable/ic_stat_life_battery'),
+        android: AndroidInitializationSettings(
+          '@drawable/ic_stat_life_battery',
+        ),
         iOS: DarwinInitializationSettings(
           requestAlertPermission: false,
           requestBadgePermission: false,
@@ -40,8 +42,7 @@ class LocalNotificationService {
         android: AndroidNotificationDetails(
           'life_battery_notifications',
           'Life Battery Notifications',
-          channelDescription:
-              'Notifications for life battery percentage drops',
+          channelDescription: 'Notifications for life battery percentage drops',
           importance: Importance.high,
           priority: Priority.high,
         ),
@@ -52,15 +53,19 @@ class LocalNotificationService {
   }
 
   static Future<bool> _requestPermission() async {
-    final androidPlugin = _plugin.resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>();
+    final androidPlugin = _plugin
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
     if (androidPlugin != null) {
       final granted = await androidPlugin.requestNotificationsPermission();
       return granted ?? false;
     }
 
-    final iosPlugin = _plugin.resolvePlatformSpecificImplementation<
-        IOSFlutterLocalNotificationsPlugin>();
+    final iosPlugin = _plugin
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >();
     if (iosPlugin != null) {
       final granted = await iosPlugin.requestPermissions(
         alert: true,

@@ -20,10 +20,10 @@ abstract class LifespanRange with _$LifespanRange {
 
   /// Returns the calculated death date based on birthDate and idealAge.
   DateTime get deathDate => DateTime(
-        birthDate.year + idealAge,
-        birthDate.month,
-        birthDate.day,
-      );
+    birthDate.year + idealAge,
+    birthDate.month,
+    birthDate.day,
+  );
 
   /// Returns the remaining life percentage.
   int remainingLifePercentage({
