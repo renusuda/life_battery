@@ -1,39 +1,37 @@
-# Life Battery
+# Critical Rules
 
-## Critical Rules
-
-### 1. Code Organization
+## Code Organization
 
 - Many small files over few large files
 - Organize by layer: screens, models, providers, repositories
 - Keep files under 200 lines (400 max)
 
-### 2. Code Style
+## Code Style
 
 - No emojis in code, comments, or documentation
 
-### 3. Testing
+## Testing
 
 - Unit tests for models, utils, and providers in `test/`
 - Integration tests for user flows in `integration_test/`
 - Run unit tests: `fvm flutter test`
 - Run integration tests: `fvm flutter test integration_test/`
 
-### 4. Security
+## Security
 
 - No hardcoded secrets
 
-### 5. Localization
+## Localization
 
 - All user-facing strings must be localized
 - Always add to both `lib/l10n/app_en.arb` and `lib/l10n/app_ja.arb`
 - Access via `AppLocalizations.of(context)`
 
-## Code Generation
+# Code Generation
 
 Generated files (`*.g.dart`, `*.freezed.dart`) should NOT be edited manually.
 
-## Available Commands
+# Available Commands
 
 ```bash
 # Install dependencies and generate localization files
