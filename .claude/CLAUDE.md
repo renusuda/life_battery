@@ -11,7 +11,6 @@
 ### 2. Code Style
 
 - No emojis in code, comments, or documentation
-- Use Dart 3 patterns: switch expressions, records, pattern matching
 
 ### 3. Testing
 
