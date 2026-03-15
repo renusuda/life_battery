@@ -89,7 +89,9 @@ class LifeProgressContent extends StatefulWidget {
 class _LifeProgressContentState extends State<LifeProgressContent> {
   var _isPercentageMode = true;
   var _isPressed = false;
+  var _isNotificationScheduled = false;
   Timer? _notificationTimer;
+  Timer? _debounceTimer;
 
   void _toggleMode() {
     setState(() {
@@ -145,6 +147,7 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
       body: l10n.notificationBody,
       scheduledDate: scheduledDate,
     );
+    _isNotificationScheduled = true;
   }
 
   @override
@@ -164,8 +167,22 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
   }
 
   @override
+  void didUpdateWidget(covariant LifeProgressContent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!_isNotificationScheduled) return;
+    if (widget.lifespanRange != oldWidget.lifespanRange) {
+      _debounceTimer?.cancel();
+      _debounceTimer = Timer(
+        const Duration(seconds: 1),
+        () => unawaited(_scheduleNotification()),
+      );
+    }
+  }
+
+  @override
   void dispose() {
     _notificationTimer?.cancel();
+    _debounceTimer?.cancel();
     super.dispose();
   }
 
