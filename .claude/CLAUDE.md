@@ -14,23 +14,18 @@
 - Follow `very_good_analysis` lint rules strictly
 - Use Dart 3 patterns: switch expressions, records, pattern matching
 
-### 3. State Management
-
-- Riverpod for shared state management
-- setState for local UI state
-
-### 4. Testing
+### 3. Testing
 
 - Unit tests for models, utils, and providers in `test/`
 - Integration tests for user flows in `integration_test/`
 - Run unit tests: `fvm flutter test`
 - Run integration tests: `fvm flutter test integration_test/`
 
-### 5. Security
+### 4. Security
 
 - No hardcoded secrets
 
-### 6. Localization
+### 5. Localization
 
 - All user-facing strings must be localized
 - Always add to both `lib/l10n/app_en.arb` and `lib/l10n/app_ja.arb`
