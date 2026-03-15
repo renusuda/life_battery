@@ -1,12 +1,5 @@
 # Life Battery
 
-## Project Overview
-
-- iOS / Android cross-platform mobile app.
-- Visualizes remaining life as a battery percentage.
-- Built with Flutter + Riverpod + Freezed + sqflite + Firebase (Analytics/Crashlytics).
-- Supports English and Japanese localization.
-
 ## Critical Rules
 
 ### 1. Code Organization
