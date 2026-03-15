@@ -36,25 +36,6 @@
 - Always add to both `lib/l10n/app_en.arb` and `lib/l10n/app_ja.arb`
 - Access via `AppLocalizations.of(context)`
 
-## File Structure
-
-```
-lib/
-|-- l10n/                 # Localization (ARB files + generated)
-|-- models/               # Data models (Freezed)
-|-- providers/            # Riverpod providers (with code generation)
-|-- repositories/         # Data access layer (sqflite)
-|-- screens/              # Full-page screens
-|-- services/             # OS/platform service wrappers
-|-- utils/                # Utility functions and extensions
-|-- widgets/              # Reusable UI components
-|-- firebase_options.dart # Auto-generated Firebase config
-|-- main.dart             # App entry point
-|-- theme.dart            # App theme definitions
-test/                     # Unit tests (mirrors lib/ structure)
-integration_test/         # Integration/E2E tests
-```
-
 ## Code Generation
 
 This project uses `build_runner` for code generation (Freezed, Riverpod, JSON serialization).
