@@ -31,16 +31,6 @@
 
 ## Code Generation
 
-This project uses `build_runner` for code generation (Freezed, Riverpod, JSON serialization).
-
-```bash
-# Run code generation
-fvm dart run build_runner build --delete-conflicting-outputs
-
-# Watch mode
-fvm dart run build_runner watch --delete-conflicting-outputs
-```
-
 Generated files (`*.g.dart`, `*.freezed.dart`) should NOT be edited manually.
 
 ## Available Commands
