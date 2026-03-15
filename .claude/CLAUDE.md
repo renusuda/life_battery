@@ -11,7 +11,6 @@
 ### 2. Code Style
 
 - No emojis in code, comments, or documentation
-- Follow `very_good_analysis` lint rules strictly
 - Use Dart 3 patterns: switch expressions, records, pattern matching
 
 ### 3. Testing
