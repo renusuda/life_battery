@@ -211,6 +211,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Let\'s make the next 1% your best chapter yet!'**
   String get notificationBody;
+
+  /// No description provided for @notificationBodyZeroPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'Your story lives on within the stories of others.Thank you.'**
+  String get notificationBodyZeroPercent;
 }
 
 class _AppLocalizationsDelegate

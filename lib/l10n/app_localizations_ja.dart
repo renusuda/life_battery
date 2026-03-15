@@ -67,4 +67,8 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get notificationBody => '次の1%を、最高の物語にしましょう！';
+
+  @override
+  String get notificationBodyZeroPercent =>
+      'あなたの物語は、誰かの物語の中で生き続けます。ありがとうございました。';
 }

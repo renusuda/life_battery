@@ -24,5 +24,6 @@
       }
     }
   },
-  "notificationBody": "次の1%を、最高の物語にしましょう！"
+  "notificationBody": "次の1%を、最高の物語にしましょう！",
+  "notificationBodyZeroPercent": "あなたの物語は、誰かの物語の中で生き続けます。ありがとうございました。"
 }

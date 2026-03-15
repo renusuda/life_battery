@@ -144,7 +144,9 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
     );
     await LocalNotificationService.scheduleNotification(
       title: l10n.notificationTitle(percentage),
-      body: l10n.notificationBody,
+      body: percentage == 0
+          ? l10n.notificationBodyZeroPercent
+          : l10n.notificationBody,
       scheduledDate: scheduledDate,
     );
     _isNotificationScheduled = true;
