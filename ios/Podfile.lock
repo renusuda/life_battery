@@ -1,4 +1,6 @@
 PODS:
+  - app_settings (6.1.2):
+    - Flutter
   - Firebase/CoreOnly (12.6.0):
     - FirebaseCore (~> 12.6.0)
   - Firebase/Crashlytics (12.6.0):
@@ -148,6 +150,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - app_settings (from `.symlinks/plugins/app_settings/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
@@ -180,6 +183,8 @@ SPEC REPOS:
     - PromisesSwift
 
 EXTERNAL SOURCES:
+  app_settings:
+    :path: ".symlinks/plugins/app_settings/ios"
   firebase_analytics:
     :path: ".symlinks/plugins/firebase_analytics/ios"
   firebase_core:
@@ -204,6 +209,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  app_settings: 0341ec6daa4f0c50f5a421bf0ad7c36084db6e90
   Firebase: a451a7b61536298fd5cbfe3a746fd40443a50679
   firebase_analytics: 4f9cca09e65f6c2944a862c6dc86f6bed9fb769c
   firebase_core: ba00a168e719694f38960502ceb560285603d073

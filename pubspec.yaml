@@ -8,6 +8,7 @@ environment:
   sdk: ^3.10.4
 
 dependencies:
+  app_settings: ^7.0.0
   collection: ^1.19.1
   cupertino_icons: ^1.0.8
   firebase_analytics: ^12.1.0
