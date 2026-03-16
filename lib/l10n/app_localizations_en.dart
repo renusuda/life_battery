@@ -62,6 +62,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your data has been successfully deleted.\nThank you for using our app.\nWe hope to see you again in the future.😊';
 
   @override
+  String get notificationSettingsLabel => 'Notification settings';
+
+  @override
   String notificationTitle(int percentage) {
     return '$percentage% of your life remaining.';
   }

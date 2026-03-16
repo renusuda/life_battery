@@ -61,6 +61,9 @@ class AppLocalizationsJa extends AppLocalizations {
       'データを削除できました。\nアプリを使用してくださりありがとうございます。\nまたいつかお会いしましょう😊';
 
   @override
+  String get notificationSettingsLabel => '通知設定';
+
+  @override
   String notificationTitle(int percentage) {
     return '人生が残り$percentage%になりました';
   }

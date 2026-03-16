@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// **'Your data has been successfully deleted.\nThank you for using our app.\nWe hope to see you again in the future.😊'**
   String get userDeletionSuccess;
 
+  /// No description provided for @notificationSettingsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification settings'**
+  String get notificationSettingsLabel;
+
   /// No description provided for @notificationTitle.
   ///
   /// In en, this message translates to:

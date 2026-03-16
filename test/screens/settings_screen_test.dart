@@ -49,6 +49,37 @@ void main() {
     });
   });
 
+  group('Notification settings', () {
+    testWidgets('Displays notification settings label', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestSettingsScreen());
+
+      expect(find.text('Notification settings'), findsOneWidget);
+    });
+
+    testWidgets('Invokes onOpenSettings callback when tapped', (tester) async {
+      var called = false;
+
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(
+        ProviderScope(
+          child: CommonMaterialApp(
+            home: Scaffold(
+              body: NotificationSettingsListTile(
+                onOpenSettings: () => called = true,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(NotificationSettingsListTile));
+      await tester.pumpAndSettle();
+
+      expect(called, isTrue);
+    });
+  });
+
   group('Delete data', () {
     testWidgets('Displays delete all label', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];

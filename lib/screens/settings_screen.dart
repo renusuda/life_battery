@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -19,14 +20,19 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
-        children: const <Widget>[
-          ReviewAppListTile(),
-          PrivacyPolicyListTile(
+        children: <Widget>[
+          const ReviewAppListTile(),
+          const PrivacyPolicyListTile(
             canLaunchUrl: canLaunchUrl,
             onLaunchUrl: launchUrl,
           ),
-          AppearanceListTile(),
-          DeleteAllListTile(),
+          const AppearanceListTile(),
+          NotificationSettingsListTile(
+            onOpenSettings: () => AppSettings.openAppSettings(
+              type: AppSettingsType.notification,
+            ),
+          ),
+          const DeleteAllListTile(),
         ],
       ),
     );
@@ -188,6 +194,34 @@ class AppearanceListTile extends ConsumerWidget {
         child: CircularProgressIndicator(),
       ),
     };
+  }
+}
+
+/// Notification settings row
+class NotificationSettingsListTile extends StatelessWidget {
+  const NotificationSettingsListTile({
+    required this.onOpenSettings,
+    super.key,
+  });
+
+  /// Callback for opening notification settings.
+  final VoidCallback onOpenSettings;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return ListTile(
+      leading: const Icon(Icons.notifications_outlined),
+      title: Text(
+        l10n.notificationSettingsLabel,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      trailing: const Icon(Icons.arrow_forward_ios),
+      onTap: onOpenSettings,
+    );
   }
 }
 
