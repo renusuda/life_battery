@@ -16,7 +16,6 @@ Life Battery tells you what percentage of your life remains⚡️
 
 Future features:
 
-- Push notifications when battery life decreases🪫
 - Customizable battery UI design🎨
 - Night sky starry feature⭐️
 - And more...
