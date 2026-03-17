@@ -1,7 +1,6 @@
 ---
 name: bump-version
 description: Bump the app version in pubspec.yaml. Accepts optional argument: major, minor (default), or patch. Build number is always incremented.
-user_invocable: true
 ---
 
 # Bump Version

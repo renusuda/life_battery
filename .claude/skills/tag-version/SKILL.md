@@ -1,7 +1,6 @@
 ---
 name: tag-version
 description: Create a git tag from the current version in pubspec.yaml. Format: v{MAJOR}.{MINOR}.{PATCH}.
-user_invocable: true
 ---
 
 # Tag Version
