@@ -1,0 +1,10 @@
+{
+  "lsp": {
+    "dart": {
+      "binary": {
+        "path": "/opt/homebrew/bin/fvm",
+        "arguments": ["dart", "language-server", "--protocol=lsp"],
+      },
+    },
+  },
+}
