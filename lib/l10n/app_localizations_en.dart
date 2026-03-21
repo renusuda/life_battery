@@ -76,4 +76,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get notificationBodyZeroPercent =>
       'Your story lives on within the stories of others.Thank you.';
+
+  @override
+  String get longPressToEditHint => 'Long press to edit your life';
 }

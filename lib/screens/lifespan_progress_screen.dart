@@ -209,11 +209,24 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
       child: AnimatedScale(
         scale: _isPressed ? 0.90 : 1.0,
         duration: const Duration(milliseconds: 100),
-        child: BatteryIndicator(
-          value: remainingLifePercentage,
-          text: _isPercentageMode
-              ? '$remainingLifePercentage%'
-              : '${remainingLifeDays.withCommaString}${l10n.dayUnit}',
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            BatteryIndicator(
+              value: remainingLifePercentage,
+              text: _isPercentageMode
+                  ? '$remainingLifePercentage%'
+                  : '${remainingLifeDays.withCommaString}${l10n.dayUnit}',
+            ),
+            const SizedBox(height: 32),
+            Text(
+              l10n.longPressToEditHint,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );

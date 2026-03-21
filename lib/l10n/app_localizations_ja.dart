@@ -74,4 +74,7 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get notificationBodyZeroPercent =>
       'あなたの物語は、誰かの物語の中で生き続けます。ありがとうございました。';
+
+  @override
+  String get longPressToEditHint => '長押しで人生を編集';
 }

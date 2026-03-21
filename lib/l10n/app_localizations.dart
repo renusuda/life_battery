@@ -223,6 +223,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your story lives on within the stories of others.Thank you.'**
   String get notificationBodyZeroPercent;
+
+  /// No description provided for @longPressToEditHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Long press to edit your life'**
+  String get longPressToEditHint;
 }
 
 class _AppLocalizationsDelegate
