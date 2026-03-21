@@ -23,7 +23,7 @@ void main() {
       await tester.tap(find.byType(LifeProgressContent));
       await tester.pumpAndSettle();
 
-      expect(find.textContaining('d'), findsOneWidget);
+      expect(find.textContaining(RegExp(r'\d+d')), findsOneWidget);
       expect(find.textContaining('%'), findsNothing);
     });
 
@@ -41,7 +41,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.textContaining('%'), findsOneWidget);
-      expect(find.textContaining('d'), findsNothing);
+      expect(find.textContaining(RegExp(r'\d+d')), findsNothing);
     });
   });
 }
