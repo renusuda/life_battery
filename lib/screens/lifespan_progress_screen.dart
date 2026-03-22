@@ -11,6 +11,7 @@ import 'package:life_battery/services/local_notification_service.dart';
 import 'package:life_battery/utils/extensions.dart';
 import 'package:life_battery/widgets/battery_indicator.dart';
 import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/widgets/long_press_hint.dart';
 
 /// Screen for showing the remaining of lifespan
 class LifespanProgressScreen extends ConsumerWidget {
@@ -220,13 +221,7 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
             ),
           ),
           const SizedBox(height: 32),
-          Text(
-            l10n.longPressToEditHint,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          const LongPressHint(),
         ],
       ),
     );

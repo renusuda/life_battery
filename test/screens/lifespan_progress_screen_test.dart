@@ -10,7 +10,7 @@ void main() {
     testWidgets('Initially displays percentage', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(const TestLifeProgressContent());
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       expect(find.textContaining('%'), findsOneWidget);
     });
@@ -18,10 +18,10 @@ void main() {
     testWidgets('Switches to days display when tapped', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(const TestLifeProgressContent());
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       await tester.tap(find.byType(LifeProgressContent));
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       expect(find.textContaining(RegExp(r'\d+d')), findsOneWidget);
       expect(find.textContaining('%'), findsNothing);
@@ -32,13 +32,13 @@ void main() {
     ) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(const TestLifeProgressContent());
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       await tester.tap(find.byType(LifeProgressContent));
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       await tester.tap(find.byType(LifeProgressContent));
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       expect(find.textContaining('%'), findsOneWidget);
       expect(find.textContaining(RegExp(r'\d+d')), findsNothing);
