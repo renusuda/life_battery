@@ -4,6 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/main.dart';
 import 'package:life_battery/screens/settings_screen.dart';
+import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
+
+import 'extensions.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +23,11 @@ void main() {
           child: App(),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
       // Close the date input bottom sheet
       await tester.tap(find.byType(ModalBarrier).last);
-      await tester.pumpAndSettle();
+      await tester.pumpUntilGone(find.byType(DateInputBottomSheet));
 
       // Go to settings screen
       await tester.tap(find.byIcon(Icons.settings_outlined));
