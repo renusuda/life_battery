@@ -21,7 +21,7 @@ void main() {
           child: App(),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
       // Close the initial DateInputBottomSheet
       await tester.tap(find.byType(ModalBarrier).last);
@@ -32,11 +32,11 @@ void main() {
       await tester.pump();
 
       // Get the initial days value
-      final daysFinder = find.textContaining('d');
+      final daysFinder = find.textContaining(RegExp(r'\d+d'));
       final initialDays = tester.widget<Text>(daysFinder).data ?? '';
 
       await tester.longPress(find.byType(BatteryIndicator));
-      await tester.pumpAndSettle();
+      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
       // Get the initial ideal age value
       final idealAgeFinder = find.byKey(const Key('idealAgeText'));
@@ -44,8 +44,9 @@ void main() {
 
       // Drag the slider to change the ideal lifespan
       final sliderFinder = find.byType(Slider);
+      await tester.pumpUntilFound(sliderFinder.hitTestable());
       await tester.drag(sliderFinder, const Offset(100, 0));
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Verify the ideal age changed
       final newAge = tester.widget<Text>(idealAgeFinder).data ?? '';
