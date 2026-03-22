@@ -21,7 +21,7 @@ void main() {
             child: App(),
           ),
         );
-        await tester.pumpAndSettle();
+        await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
         // Close the date input bottom sheet
         await tester.tap(find.byType(ModalBarrier).last);
@@ -35,7 +35,7 @@ void main() {
             child: App(),
           ),
         );
-        await tester.pumpAndSettle();
+        await tester.pumpUntilFound(find.byType(LifeProgressContent));
 
         // Verify battery screen shows first (not DateInputBottomSheet)
         expect(find.byType(LifeProgressContent), findsOneWidget);
