@@ -21,7 +21,7 @@ void main() {
           child: App(),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
       // Get the initial percentage value
       final percentFinder = find.textContaining('%');
@@ -33,8 +33,9 @@ void main() {
 
       // Drag the slider to change the ideal lifespan
       final sliderFinder = find.byType(Slider);
+      await tester.pumpUntilFound(sliderFinder.hitTestable());
       await tester.drag(sliderFinder, const Offset(100, 0));
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       // Verify the ideal age changed
       final newAge = tester.widget<Text>(idealAgeFinder).data ?? '';
@@ -49,7 +50,9 @@ void main() {
       await tester.pumpUntilGone(find.byType(DateInputBottomSheet));
 
       await tester.longPress(find.byType(BatteryIndicator));
-      await tester.pumpAndSettle();
+      await tester.pumpUntilFound(
+        find.byKey(const Key('idealAgeText')).hitTestable(),
+      );
 
       // Verify the new ideal age is still displayed
       final persistedAge = tester.widget<Text>(idealAgeFinder).data ?? '';
