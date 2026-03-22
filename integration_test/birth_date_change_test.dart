@@ -22,7 +22,7 @@ void main() {
           child: App(),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
       // Get the initial percentage value
       final percentFinder = find.textContaining('%');
@@ -34,7 +34,7 @@ void main() {
 
       // Open the date picker
       await tester.tap(birthDateField);
-      await tester.pumpAndSettle();
+      await tester.pumpUntilFound(find.byType(CupertinoDatePicker));
 
       // Drag the year picker down to decrease year by 5 (2000 -> 1995)
       await tester.drag(
@@ -43,7 +43,7 @@ void main() {
         touchSlopY: 0,
         warnIfMissed: false,
       );
-      await tester.pumpAndSettle();
+      await tester.pumpUntilFound(find.text('1/1/1995'));
 
       // Close the date picker modal
       await tester.tap(find.byType(ModalBarrier).last);
@@ -62,7 +62,7 @@ void main() {
       await tester.pumpUntilGone(find.byType(DateInputBottomSheet));
 
       await tester.longPress(find.byType(BatteryIndicator));
-      await tester.pumpAndSettle();
+      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
       expect(find.text('1/1/1995'), findsOneWidget);
     });
