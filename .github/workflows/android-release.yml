@@ -1,8 +1,6 @@
 name: Android Release
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       track:
@@ -67,5 +65,5 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "Android Release ${{ needs.build-and-deploy.result == 'success' && '✅' || '❌' }}\nVersion: ${{ github.event.release.tag_name || 'manual' }}\nTrack: ${{ github.event.inputs.track || 'internal' }}"
+              "text": "Android Release ${{ needs.build-and-deploy.result == 'success' && '✅' || '❌' }}\nTrack: ${{ github.event.inputs.track }}"
             }
