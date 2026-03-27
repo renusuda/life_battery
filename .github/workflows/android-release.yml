@@ -13,6 +13,16 @@ on:
           - alpha
           - beta
           - production
+      release_notes_en:
+        description: "Release notes - English (max 500 chars)"
+        required: true
+        default: "・Bug fixes and improvements"
+        type: string
+      release_notes_ja:
+        description: "Release notes - Japanese (max 500 chars)"
+        required: true
+        default: "・バグ修正と改善"
+        type: string
 
 jobs:
   build-and-deploy:
@@ -20,6 +30,12 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get latest tag
+        id: tag
+        run: echo "name=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
 
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
@@ -42,6 +58,15 @@ jobs:
           keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}
           EOL
 
+      - name: Create release notes
+        run: |
+          mkdir -p distribution/whatsnew
+          echo "${NOTES_EN:0:500}" > distribution/whatsnew/whatsnew-en-US
+          echo "${NOTES_JA:0:500}" > distribution/whatsnew/whatsnew-ja-JP
+        env:
+          NOTES_EN: ${{ github.event.inputs.release_notes_en }}
+          NOTES_JA: ${{ github.event.inputs.release_notes_ja }}
+
       - name: Build AAB
         run: flutter build appbundle --release
 
@@ -52,6 +77,8 @@ jobs:
           packageName: com.rururu.lifebt
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           track: ${{ github.event.inputs.track || 'internal' }}
+          releaseName: ${{ steps.tag.outputs.name }}
+          whatsNewDirectory: distribution/whatsnew
 
   notify-slack:
     runs-on: ubuntu-latest
