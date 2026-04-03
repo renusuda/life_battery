@@ -1,0 +1,6 @@
+app_identifier "com.rururu.lifebt"
+team_id "982WTPZFCF"
+
+for_platform :ios do
+  app_identifier "com.rururu.lifebt"
+end
