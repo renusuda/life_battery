@@ -1,52 +1,16 @@
 require "yaml"
+require "fastlane_core/build_watcher"
+require "spaceship"
 
 default_platform(:ios)
 
 platform :ios do
   desc "Build and upload an iOS release to TestFlight"
   lane :beta do
-    ensure_required_env_vars!(
-      %w[
-        APP_STORE_CONNECT_API_KEY_ID
-        APP_STORE_CONNECT_API_ISSUER_ID
-        APP_STORE_CONNECT_API_KEY_CONTENT
-        MATCH_GIT_URL
-        MATCH_PASSWORD
-      ],
-    )
+    api_key = app_store_connect_api_key_for_release
+    version = release_version
 
-    api_key = app_store_connect_api_key(
-      key_id: ENV.fetch("APP_STORE_CONNECT_API_KEY_ID"),
-      issuer_id: ENV.fetch("APP_STORE_CONNECT_API_ISSUER_ID"),
-      key_content: normalized_api_key_content,
-      is_key_content_base64: api_key_base64?,
-      duration: 1200,
-      in_house: false,
-    )
-
-    match(
-      type: "appstore",
-      api_key: api_key,
-      git_url: ENV.fetch("MATCH_GIT_URL"),
-      app_identifier: [
-        "com.rururu.lifebt",
-        "com.rururu.lifebt.LifeBatteryWidget",
-      ],
-      readonly: env_flag("MATCH_READONLY", default: false),
-    )
-
-    version = pubspec_version
-
-    sh("fvm flutter pub get")
-    sh(
-      [
-        "fvm flutter build ipa",
-        "--release",
-        "--export-method app-store",
-        "--build-name #{version.fetch(:build_name)}",
-        "--build-number #{version.fetch(:build_number)}",
-      ].join(" "),
-    )
+    prepare_ios_release_build(api_key: api_key, version: version)
 
     upload_to_testflight(
       api_key: api_key,
@@ -58,6 +22,33 @@ platform :ios do
       ),
     )
   end
+
+  desc "Build, wait for processing, and submit the iOS release for App Store review with automatic release after approval"
+  lane :production do
+    api_key = app_store_connect_api_key_for_release
+    version = release_version
+
+    upload_production_build(api_key: api_key, version: version)
+    wait_for_app_store_build(api_key: api_key, version: version)
+    submit_production_build(api_key: api_key, version: version)
+  end
+end
+
+def app_store_connect_api_key_for_release
+  ensure_required_env_vars!(release_env_vars)
+
+  app_store_connect_api_key(
+    key_id: ENV.fetch("APP_STORE_CONNECT_API_KEY_ID"),
+    issuer_id: ENV.fetch("APP_STORE_CONNECT_API_ISSUER_ID"),
+    key_content: normalized_api_key_content,
+    is_key_content_base64: api_key_base64?,
+    duration: 1200,
+    in_house: false,
+  )
+end
+
+def primary_app_identifier
+  "com.rururu.lifebt"
 end
 
 def ensure_required_env_vars!(keys)
@@ -78,18 +69,32 @@ def api_key_base64?
   env_flag("APP_STORE_CONNECT_API_KEY_IS_BASE64", default: false)
 end
 
+def release_env_vars
+  %w[
+    APP_STORE_CONNECT_API_KEY_ID
+    APP_STORE_CONNECT_API_ISSUER_ID
+    APP_STORE_CONNECT_API_KEY_CONTENT
+    MATCH_GIT_URL
+    MATCH_PASSWORD
+  ]
+end
+
 def normalized_api_key_content
-  ENV.fetch("APP_STORE_CONNECT_API_KEY_CONTENT")
+  content = ENV.fetch("APP_STORE_CONNECT_API_KEY_CONTENT")
+  return content if api_key_base64?
+
+  content.gsub('\n', "\n")
 end
 
 def built_ipa_path
-  ipa = Dir[File.expand_path("../build/ios/ipa/*.ipa", __dir__)].first
+  ipa = Dir[File.expand_path("../build/ios/ipa/*.ipa", __dir__)]
+    .max_by { |path| File.mtime(path) }
   UI.user_error!("No IPA found in build/ios/ipa") if ipa.nil?
 
   ipa
 end
 
-def pubspec_version
+def release_version
   pubspec_path = File.expand_path("../pubspec.yaml", __dir__)
   version = YAML.load_file(pubspec_path).fetch("version")
   build_name, build_number = version.split("+", 2)
@@ -97,5 +102,100 @@ def pubspec_version
   {
     build_name: build_name,
     build_number: build_number,
+  }
+end
+
+def prepare_ios_release_build(api_key:, version:)
+  match(
+    type: "appstore",
+    api_key: api_key,
+    git_url: ENV.fetch("MATCH_GIT_URL"),
+    app_identifier: match_app_identifiers,
+    readonly: env_flag("MATCH_READONLY", default: false),
+  )
+
+  sh("fvm flutter pub get")
+  sh(
+    "fvm",
+    "flutter",
+    "build",
+    "ipa",
+    "--release",
+    "--export-method",
+    "app-store",
+    "--build-name",
+    version.fetch(:build_name),
+    "--build-number",
+    version.fetch(:build_number),
+  )
+end
+
+def upload_production_build(api_key:, version:)
+  prepare_ios_release_build(api_key: api_key, version: version)
+
+  upload_to_app_store(
+    api_key: api_key,
+    app_identifier: primary_app_identifier,
+    ipa: built_ipa_path,
+    app_version: version.fetch(:build_name),
+    precheck_include_in_app_purchases: false,
+    skip_metadata: false,
+    skip_screenshots: true,
+    skip_app_version_update: false,
+    submit_for_review: false,
+    automatic_release: false,
+    force: true,
+  )
+end
+
+def submit_production_build(api_key:, version:)
+  upload_to_app_store(
+    api_key: api_key,
+    app_identifier: primary_app_identifier,
+    app_version: version.fetch(:build_name),
+    build_number: version.fetch(:build_number),
+    skip_binary_upload: true,
+    precheck_include_in_app_purchases: false,
+    skip_metadata: true,
+    skip_screenshots: true,
+    submit_for_review: true,
+    automatic_release: true,
+    force: true,
+    submission_information: app_store_submission_information,
+  )
+end
+
+def match_app_identifiers
+  [
+    primary_app_identifier,
+    "com.rururu.lifebt.LifeBatteryWidget",
+  ]
+end
+
+def wait_for_app_store_build(api_key:, version:)
+  app = Spaceship::ConnectAPI::App.find(primary_app_identifier)
+  UI.user_error!("Could not find an app on App Store Connect with app_identifier: #{primary_app_identifier}") unless app
+
+  FastlaneCore::BuildWatcher.wait_for_build_processing_to_be_complete(
+    app_id: app.id,
+    platform: "ios",
+    app_version: version.fetch(:build_name),
+    build_version: version.fetch(:build_number),
+    poll_interval: 30,
+    timeout_duration: 1800,
+    return_when_build_appears: false,
+    return_spaceship_testflight_build: false,
+    select_latest: false,
+  )
+
+  UI.success(
+    "Build #{version.fetch(:build_name)} (#{version.fetch(:build_number)}) finished processing in App Store Connect.",
+  )
+end
+
+def app_store_submission_information
+  {
+    export_compliance_uses_encryption:
+      false,
   }
 end
