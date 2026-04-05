@@ -143,7 +143,6 @@ def upload_production_build(api_key:, version:)
     skip_screenshots: true,
     skip_app_version_update: false,
     submit_for_review: false,
-    automatic_release: false,
     force: true,
   )
 end
