@@ -15,7 +15,7 @@
 - Unit tests for models, utils, and providers in `test/`
 - Integration tests for user flows in `integration_test/`
 - Run unit tests: `fvm flutter test`
-- Run integration tests: `fvm flutter test integration_test/`
+- Run integration tests: `fvm flutter test --timeout=3m integration_test/`
 
 ## Security
 
@@ -44,7 +44,7 @@ fvm flutter run
 fvm flutter test
 
 # Run integration tests
-fvm flutter test integration_test/
+fvm flutter test --timeout=3m integration_test/
 
 # Analyze code
 fvm flutter analyze

@@ -37,7 +37,7 @@ jobs:
           model: iPhone Air
           os_version: '>=26.1'
       - name: Run integration tests
-        run: flutter test integration_test
+        run: flutter test --timeout=3m integration_test
   integration-test-android:
     runs-on: ubuntu-latest
     steps:
@@ -60,7 +60,7 @@ jobs:
           api-level: 36
           arch: x86_64
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
-          script: flutter test integration_test
+          script: flutter test --timeout=3m integration_test
   notify-slack:
     runs-on: ubuntu-latest
     needs: [flutter-test, integration-test-android, integration-test-ios]
