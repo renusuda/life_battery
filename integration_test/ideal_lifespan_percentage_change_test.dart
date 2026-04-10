@@ -1,6 +1,3 @@
-@Retry(5)
-library;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -60,6 +57,6 @@ void main() {
       // Verify the new ideal age is still displayed
       final persistedAge = tester.widget<Text>(idealAgeFinder).data ?? '';
       expect(persistedAge, equals(newAge));
-    });
+    }, retry: 5);
   });
 }

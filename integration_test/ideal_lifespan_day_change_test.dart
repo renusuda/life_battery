@@ -1,6 +1,3 @@
-@Retry(5)
-library;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -62,6 +59,6 @@ void main() {
       // Verify the days value changed
       final newDays = tester.widget<Text>(daysFinder).data ?? '';
       expect(newDays, isNot(equals(initialDays)));
-    });
+    }, retry: 5);
   });
 }

@@ -1,6 +1,3 @@
-@Retry(5)
-library;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -46,6 +43,6 @@ void main() {
       final context = tester.element(find.byType(SettingsScreen));
 
       expect(Theme.of(context).brightness, Brightness.dark);
-    });
+    }, retry: 5);
   });
 }

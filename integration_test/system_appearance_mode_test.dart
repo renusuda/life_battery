@@ -1,6 +1,3 @@
-@Retry(5)
-library;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,7 +26,7 @@ void main() {
       final context = tester.element(find.byType(HomeScreen));
 
       expect(Theme.of(context).brightness, Brightness.light);
-    });
+    }, retry: 5);
 
     testWidgets('Shows dark mode when system is in dark mode', (
       tester,
@@ -46,6 +43,6 @@ void main() {
       final context = tester.element(find.byType(HomeScreen));
 
       expect(Theme.of(context).brightness, Brightness.dark);
-    });
+    }, retry: 5);
   });
 }
