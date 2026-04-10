@@ -119,6 +119,7 @@ def prepare_ios_release_build(api_key:, version:)
     "flutter",
     "build",
     "ipa",
+    "--verbose",
     "--release",
     "--export-method",
     "app-store",
