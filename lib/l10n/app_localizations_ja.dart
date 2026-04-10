@@ -77,4 +77,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get longPressToEditHint => '長押しで人生を編集';
+
+  @override
+  String get todaysMessageHint => 'この瞬間が、一番若い自分';
 }

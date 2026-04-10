@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/l10n/app_localizations.dart';
 import 'package:life_battery/models/lifespan_range.dart';
+import 'package:life_battery/providers/has_long_pressed_battery.dart';
 import 'package:life_battery/providers/is_initial_user.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/screens/settings_screen.dart';
@@ -26,6 +27,7 @@ class LifespanProgressScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
+    final hasLongPressedBattery = ref.watch(hasLongPressedBatteryProvider);
 
     final l10n = AppLocalizations.of(context)!;
 
@@ -48,15 +50,27 @@ class LifespanProgressScreen extends ConsumerWidget {
       ),
       body: Center(
         child: switch (lifespanRangeManager) {
-          AsyncData(:final value) => LifeProgressContent(
-            lifespanRange: value,
-            isInitialUser: isInitialUser,
-            updateUserIsNotInitialUser: () async {
-              await ref
-                  .read(isInitialUserProvider.notifier)
-                  .updateUserIsNotInitialUser();
+          AsyncData(value: final lifespanRange) =>
+            switch (hasLongPressedBattery) {
+              AsyncData(value: final hasLongPressedBatteryValue) =>
+                LifeProgressContent(
+                  lifespanRange: lifespanRange,
+                  isInitialUser: isInitialUser,
+                  hasLongPressedBattery: hasLongPressedBatteryValue,
+                  updateUserIsNotInitialUser: () async {
+                    await ref
+                        .read(isInitialUserProvider.notifier)
+                        .updateUserIsNotInitialUser();
+                  },
+                  updateHasLongPressedBattery: () async {
+                    await ref
+                        .read(hasLongPressedBatteryProvider.notifier)
+                        .updateHasLongPressedBattery();
+                  },
+                ),
+              AsyncError() => Text(l10n.generalError),
+              _ => const CircularProgressIndicator(),
             },
-          ),
           AsyncError() => Text(l10n.generalError),
           _ => const CircularProgressIndicator(),
         },
@@ -70,7 +84,9 @@ class LifeProgressContent extends StatefulWidget {
   const LifeProgressContent({
     required this.lifespanRange,
     required this.isInitialUser,
+    required this.hasLongPressedBattery,
     required this.updateUserIsNotInitialUser,
+    required this.updateHasLongPressedBattery,
     super.key,
   });
 
@@ -80,8 +96,14 @@ class LifeProgressContent extends StatefulWidget {
   /// Whether the user is initial user
   final bool isInitialUser;
 
+  /// Whether the user has long pressed the battery.
+  final bool hasLongPressedBattery;
+
   /// Callback to update the user is not initial user
   final Future<void> Function() updateUserIsNotInitialUser;
+
+  /// Callback to update the user has long pressed the battery.
+  final Future<void> Function() updateHasLongPressedBattery;
 
   @override
   State<LifeProgressContent> createState() => _LifeProgressContentState();
@@ -125,6 +147,14 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
         return const DateInputBottomSheet();
       },
     );
+  }
+
+  Future<void> _handleLongPress() async {
+    if (!widget.hasLongPressedBattery) {
+      await widget.updateHasLongPressedBattery();
+    }
+    if (!mounted) return;
+    await _showDateInputBottomSheet();
   }
 
   Future<void> _scheduleNotification() async {
@@ -202,7 +232,7 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
     final l10n = AppLocalizations.of(context)!;
 
     return GestureDetector(
-      onLongPress: _showDateInputBottomSheet,
+      onLongPress: _handleLongPress,
       onTap: _toggleMode,
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
@@ -221,7 +251,9 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
             ),
           ),
           const SizedBox(height: 32),
-          const LongPressHint(),
+          LongPressHint(
+            hasLongPressedBattery: widget.hasLongPressedBattery,
+          ),
         ],
       ),
     );

@@ -43,11 +43,41 @@ void main() {
       expect(find.textContaining('%'), findsOneWidget);
       expect(find.textContaining(RegExp(r'\d+d')), findsNothing);
     });
+
+    testWidgets('Initially displays long press hint', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestLifeProgressContent());
+      await tester.pump();
+
+      expect(find.text('Long press to edit your life'), findsOneWidget);
+    });
+
+    testWidgets('Changes hint after long press', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestLifeProgressContent());
+      await tester.pump();
+
+      await tester.longPress(find.byType(LifeProgressContent));
+      await tester.pump();
+
+      expect(
+        find.text("This moment is the youngest you'll ever be."),
+        findsOneWidget,
+      );
+    });
   });
 }
 
-class TestLifeProgressContent extends StatelessWidget {
+class TestLifeProgressContent extends StatefulWidget {
   const TestLifeProgressContent({super.key});
+
+  @override
+  State<TestLifeProgressContent> createState() =>
+      _TestLifeProgressContentState();
+}
+
+class _TestLifeProgressContentState extends State<TestLifeProgressContent> {
+  var _hasLongPressedBattery = false;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +90,13 @@ class TestLifeProgressContent extends StatelessWidget {
               idealAge: 90,
             ),
             isInitialUser: false,
+            hasLongPressedBattery: _hasLongPressedBattery,
             updateUserIsNotInitialUser: () async {},
+            updateHasLongPressedBattery: () async {
+              setState(() {
+                _hasLongPressedBattery = true;
+              });
+            },
           ),
         ),
       ),

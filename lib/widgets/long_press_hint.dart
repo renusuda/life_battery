@@ -5,7 +5,12 @@ import 'package:life_battery/l10n/app_localizations.dart';
 
 /// A hint that tells users they can long press to edit.
 class LongPressHint extends StatefulWidget {
-  const LongPressHint({super.key});
+  const LongPressHint({
+    required this.hasLongPressedBattery,
+    super.key,
+  });
+
+  final bool hasLongPressedBattery;
 
   @override
   State<LongPressHint> createState() => _LongPressHintState();
@@ -49,7 +54,9 @@ class _LongPressHintState extends State<LongPressHint>
     return FadeTransition(
       opacity: _animation,
       child: Text(
-        l10n.longPressToEditHint,
+        widget.hasLongPressedBattery
+            ? l10n.todaysMessageHint
+            : l10n.longPressToEditHint,
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,

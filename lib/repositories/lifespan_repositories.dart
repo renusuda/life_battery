@@ -15,6 +15,7 @@ class LifespanRepository {
   static const _columnThemeMode = 'themeMode';
   static const _columnIsInitialUser = 'isInitialUser';
   static const _columnIsDeletedUser = 'isDeletedUser';
+  static const _columnHasLongPressedBattery = 'hasLongPressedBattery';
 
   /// Fetches the lifespan record from the database.
   Future<LifespanRange> getLifespan() async {
@@ -101,6 +102,27 @@ class LifespanRepository {
     }
   }
 
+  /// Fetches whether the user has already used long press edit.
+  Future<bool> getHasLongPressed() async {
+    try {
+      final db = await instance.database;
+      final result = await db.query(
+        _tableName,
+        columns: [_columnHasLongPressedBattery],
+      );
+
+      if (result.isEmpty) {
+        return false;
+      } else {
+        final hasLongPressed =
+            result.first[_columnHasLongPressedBattery]! as int;
+        return hasLongPressed == 1;
+      }
+    } on DatabaseException catch (_) {
+      return false;
+    }
+  }
+
   /// Updates the lifespan record in the database.
   Future<void> updateLifespan({
     required DateTime birthDate,
@@ -157,6 +179,22 @@ class LifespanRepository {
           _tableName,
           {
             _columnIsInitialUser: 0,
+          },
+        );
+      }
+    } on DatabaseException catch (_) {}
+  }
+
+  /// Updates the user as having used long press edit.
+  Future<void> updateHasLongPressed() async {
+    try {
+      final db = await instance.database;
+      final response = await db.query(_tableName);
+      if (response.isNotEmpty) {
+        await db.update(
+          _tableName,
+          {
+            _columnHasLongPressedBattery: 1,
           },
         );
       }

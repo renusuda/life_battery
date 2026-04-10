@@ -229,6 +229,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Long press to edit your life'**
   String get longPressToEditHint;
+
+  /// No description provided for @todaysMessageHint.
+  ///
+  /// In en, this message translates to:
+  /// **'This moment is the youngest you\'ll ever be.'**
+  String get todaysMessageHint;
 }
 
 class _AppLocalizationsDelegate
