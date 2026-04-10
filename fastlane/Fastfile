@@ -114,9 +114,8 @@ def prepare_ios_release_build(api_key:, version:)
     readonly: env_flag("MATCH_READONLY", default: false),
   )
 
-  sh("fvm flutter pub get")
+  sh("flutter pub get")
   sh(
-    "fvm",
     "flutter",
     "build",
     "ipa",
