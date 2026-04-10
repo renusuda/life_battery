@@ -123,7 +123,6 @@ def prepare_ios_release_build(api_key:, version:)
     "flutter",
     "build",
     "ipa",
-    "--verbose",
     "--release",
     "--export-options-plist=#{export_options_plist_path}",
     "--build-name",
