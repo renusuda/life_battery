@@ -126,8 +126,6 @@ def prepare_ios_release_build(api_key:, version:)
     "--verbose",
     "--release",
     "--export-options-plist=#{export_options_plist_path}",
-    "--export-method",
-    "app-store",
     "--build-name",
     version.fetch(:build_name),
     "--build-number",
