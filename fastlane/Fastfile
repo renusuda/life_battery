@@ -105,6 +105,10 @@ def release_version
   }
 end
 
+def export_options_plist_path
+  File.expand_path("../ios/ExportOptions.plist", __dir__)
+end
+
 def prepare_ios_release_build(api_key:, version:)
   match(
     type: "appstore",
@@ -121,6 +125,7 @@ def prepare_ios_release_build(api_key:, version:)
     "ipa",
     "--verbose",
     "--release",
+    "--export-options-plist=#{export_options_plist_path}",
     "--export-method",
     "app-store",
     "--build-name",
