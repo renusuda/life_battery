@@ -3,42 +3,33 @@ name: Android Release
 on:
   workflow_dispatch:
     inputs:
-      track:
-        description: "Play Store track"
+      lane:
+        description: "Fastlane lane"
         required: true
         default: "internal"
         type: choice
         options:
           - internal
-          - alpha
-          - beta
           - production
-      release_notes_en:
-        description: "Release notes - English (max 500 chars)"
-        required: true
-        default: "・Bug fixes and improvements"
-        type: string
-      release_notes_ja:
-        description: "Release notes - Japanese (max 500 chars)"
-        required: true
-        default: "・バグ修正と改善"
-        type: string
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Get latest tag
-        id: tag
-        run: echo "name=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
-
       - name: Setup Flutter
         uses: ./.github/actions/setup-flutter
+
+      - name: Setup Ruby and bundle install
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
       - name: Create firebase_options.dart
         run: echo "${{ secrets.FIREBASE_OPTIONS_DART_BASE64 }}" | base64 --decode > lib/firebase_options.dart
@@ -58,27 +49,8 @@ jobs:
           keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}
           EOL
 
-      - name: Create release notes
-        run: |
-          mkdir -p distribution/whatsnew
-          echo "${NOTES_EN:0:500}" > distribution/whatsnew/whatsnew-en-US
-          echo "${NOTES_JA:0:500}" > distribution/whatsnew/whatsnew-ja-JP
-        env:
-          NOTES_EN: ${{ github.event.inputs.release_notes_en }}
-          NOTES_JA: ${{ github.event.inputs.release_notes_ja }}
-
-      - name: Build AAB
-        run: flutter build appbundle --release
-
-      - name: Upload AAB to Google Play
-        uses: r0adkll/upload-google-play@v1
-        with:
-          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: com.rururu.lifebt
-          releaseFiles: build/app/outputs/bundle/release/app-release.aab
-          track: ${{ github.event.inputs.track || 'internal' }}
-          releaseName: ${{ steps.tag.outputs.name }}
-          whatsNewDirectory: distribution/whatsnew
+      - name: Deploy Android release with Fastlane
+        run: bundle exec fastlane android ${{ github.event.inputs.lane }}
 
   notify-slack:
     runs-on: ubuntu-latest
@@ -92,5 +64,5 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "Android Release ${{ needs.build-and-deploy.result == 'success' && '✅' || '❌' }}\nTrack: ${{ github.event.inputs.track }}"
+              "text": "Android Release ${{ needs.build-and-deploy.result == 'success' && '✅' || '❌' }}\nLane: ${{ github.event.inputs.lane }}"
             }
