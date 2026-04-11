@@ -8,6 +8,7 @@ workflows:
       android_signing:
         - android_upload_keystore
       groups:
+        - firebase
         - google_play
       vars:
         PACKAGE_NAME: "com.rururu.lifebt"
@@ -19,6 +20,10 @@ workflows:
       - name: Get Flutter packages
         script: |
           flutter pub get
+      - name: Restore Firebase config
+        script: |
+          echo "$FIREBASE_OPTIONS_DART_BASE64" | base64 --decode > lib/firebase_options.dart
+          echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 --decode > android/app/google-services.json
       - name: Build AAB with Flutter
         script: |
           BUILD_NAME=$(grep '^version:' pubspec.yaml | cut -d' ' -f2 | cut -d'+' -f1)
