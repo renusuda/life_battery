@@ -1,8 +1,16 @@
 workflows:
-  android-internal:
-    name: Android Internal Release
+  android-release:
+    name: Android Release
     max_build_duration: 120
     instance_type: mac_mini_m2
+    inputs:
+      google_play_track:
+        description: Google Play track
+        type: choice
+        default: internal
+        options:
+          - internal
+          - production
     environment:
       flutter: fvm
       android_signing:
@@ -12,7 +20,7 @@ workflows:
         - google_play
       vars:
         PACKAGE_NAME: "com.rururu.lifebt"
-        GOOGLE_PLAY_TRACK: internal
+        GOOGLE_PLAY_TRACK: ${{ inputs.google_play_track }}
     scripts:
       - name: Set up local.properties
         script: |
