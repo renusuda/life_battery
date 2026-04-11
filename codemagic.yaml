@@ -39,3 +39,9 @@ workflows:
       google_play:
         credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS
         track: $GOOGLE_PLAY_TRACK
+      slack:
+        channel: "$SLACK_CHANNEL"
+        notify_on_build_start: false
+        notify:
+          success: true
+          failure: true

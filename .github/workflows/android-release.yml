@@ -24,3 +24,4 @@ jobs:
           token: ${{ secrets.CODEMAGIC_API_TOKEN }}
         env:
           CM_GOOGLE_PLAY_TRACK: ${{ github.event.inputs.lane }}
+          CM_SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL }}
