@@ -19,7 +19,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: macos-latest
+    runs-on: macos-26
     timeout-minutes: 60
     env:
       APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
