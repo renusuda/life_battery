@@ -15,10 +15,7 @@ platform :ios do
       api_key: api_key,
       ipa: built_ipa_path,
       changelog: ENV["FASTLANE_CHANGELOG"],
-      skip_waiting_for_build_processing: env_flag(
-        "FASTLANE_SKIP_WAITING_FOR_BUILD_PROCESSING",
-        default: true,
-      ),
+      skip_waiting_for_build_processing: true,
     )
   end
 
@@ -66,7 +63,7 @@ def env_flag(key, default: false)
 end
 
 def api_key_base64?
-  env_flag("APP_STORE_CONNECT_API_KEY_IS_BASE64", default: false)
+  true
 end
 
 def release_env_vars
