@@ -109,14 +109,8 @@ def export_options_plist_path
   File.expand_path("../ios/ExportOptions.plist", __dir__)
 end
 
-def setup_ci_if_needed
-  return unless Actions.is_ci?
-
-  setup_ci
-end
-
 def prepare_ios_release_build(api_key:, version:)
-  setup_ci_if_needed
+  setup_ci
 
   match(
     type: "appstore",
