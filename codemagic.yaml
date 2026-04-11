@@ -3,14 +3,6 @@ workflows:
     name: Android Release
     max_build_duration: 120
     instance_type: mac_mini_m2
-    inputs:
-      google_play_track:
-        description: Google Play track
-        type: choice
-        default: internal
-        options:
-          - internal
-          - production
     environment:
       flutter: fvm
       android_signing:
@@ -20,7 +12,6 @@ workflows:
         - google_play
       vars:
         PACKAGE_NAME: "com.rururu.lifebt"
-        GOOGLE_PLAY_TRACK: ${{ inputs.google_play_track }}
     scripts:
       - name: Set up local.properties
         script: |
@@ -34,6 +25,7 @@ workflows:
           echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 --decode > android/app/google-services.json
       - name: Build AAB with Flutter
         script: |
+          GOOGLE_PLAY_TRACK="${GOOGLE_PLAY_TRACK:-internal}"
           BUILD_NAME=$(grep '^version:' pubspec.yaml | cut -d' ' -f2 | cut -d'+' -f1)
           BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks="$GOOGLE_PLAY_TRACK") + 1))
           flutter build appbundle --release \
