@@ -8,7 +8,6 @@ workflows:
       android_signing:
         - android_upload_keystore
       groups:
-        - keystore_credentials
         - google_play
       vars:
         PACKAGE_NAME: "com.rururu.lifebt"
