@@ -1,94 +1,17 @@
-name: iOS Release
+name: iOS Beta Release
 
 on:
   workflow_dispatch:
-    inputs:
-      lane:
-        description: "Fastlane lane"
-        required: true
-        default: "beta"
-        type: choice
-        options:
-          - beta
-          - production
-      changelog:
-        description: "TestFlight changelog (used for beta only)"
-        required: false
-        default: "Bug fixes and improvements"
-        type: string
 
 jobs:
   build-and-deploy:
-    runs-on: macos-26
-    timeout-minutes: 60
-    env:
-      APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-      APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
-      APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
-      APP_STORE_CONNECT_API_KEY_IS_BASE64: "true"
-      FASTLANE_CHANGELOG: ${{ github.event.inputs.lane == 'beta' && github.event.inputs.changelog || '' }}
-      FASTLANE_SKIP_WAITING_FOR_BUILD_PROCESSING: ${{ github.event.inputs.lane == 'beta' && 'true' || 'false' }}
-      MATCH_GIT_URL: git@github.com:renusuda/life_battery_match.git
-      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-      MATCH_READONLY: "true"
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Flutter
-        uses: ./.github/actions/setup-flutter
-
-      - name: Setup Ruby and bundle install
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - name: Set up SSH for match repo
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.MATCH_GIT_DEPLOY_KEY }}
-
-      - name: Add github.com to known_hosts
-        shell: bash
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      - name: Create firebase_options.dart
-        shell: bash
-        run: |
-          printf '%s' "${FIREBASE_OPTIONS_DART_BASE64}" | python3 -c 'import base64, sys; sys.stdout.buffer.write(base64.b64decode(sys.stdin.buffer.read()))' > lib/firebase_options.dart
-        env:
-          FIREBASE_OPTIONS_DART_BASE64: ${{ secrets.FIREBASE_OPTIONS_DART_BASE64 }}
-
-      - name: Create GoogleService-Info.plist
-        shell: bash
-        run: |
-          printf '%s' "${GOOGLE_SERVICE_INFO_PLIST_BASE64}" | python3 -c 'import base64, sys; sys.stdout.buffer.write(base64.b64decode(sys.stdin.buffer.read()))' > ios/Runner/GoogleService-Info.plist
-        env:
-          GOOGLE_SERVICE_INFO_PLIST_BASE64: ${{ secrets.GOOGLE_SERVICE_INFO_PLIST_BASE64 }}
-
-      - name: Install iOS pods
-        working-directory: ios
-        run: bundle exec pod install
-
-      - name: Deploy iOS release with Fastlane
-        run: bundle exec fastlane ios ${{ github.event.inputs.lane }}
-
-  notify-slack:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs: [build-and-deploy]
-    if: always()
     steps:
-      - name: Notify release result to Slack
-        uses: slackapi/slack-github-action@v2.1.1
+      - name: Trigger Codemagic iOS beta release
+        uses: codemagic-ci-cd/trigger-codemagic-workflow-action@v2.0.0
         with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          webhook-type: incoming-webhook
-          payload: |
-            {
-              "text": "iOS Release ${{ needs.build-and-deploy.result == 'success' && '✅' || '❌' }}\nLane: ${{ github.event.inputs.lane }}"
-            }
+          app-id: ${{ vars.CODEMAGIC_APP_ID }}
+          workflow-id: ios-beta-release
+          token: ${{ secrets.CODEMAGIC_API_TOKEN }}
+        env:
+          CM_SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL }}
