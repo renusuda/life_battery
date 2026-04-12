@@ -46,8 +46,8 @@ workflows:
           success: true
           failure: true
 
-  ios-beta-release:
-    name: iOS Beta Release
+  ios-release:
+    name: iOS Release
     max_build_duration: 120
     instance_type: mac_mini_m2
     integrations:
@@ -93,6 +93,8 @@ workflows:
     publishing:
       app_store_connect:
         auth: integration
+        submit_to_app_store: $SUBMIT_TO_APP_STORE
+        release_type: AFTER_APPROVAL
       slack:
         channel: "$SLACK_CHANNEL"
         notify_on_build_start: false

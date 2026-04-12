@@ -1,17 +1,27 @@
-name: iOS Beta Release
+name: iOS Release
 
 on:
   workflow_dispatch:
+    inputs:
+      lane:
+        description: "Release lane"
+        required: true
+        default: "beta"
+        type: choice
+        options:
+          - beta
+          - production
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Codemagic iOS beta release
+      - name: Trigger Codemagic iOS release
         uses: codemagic-ci-cd/trigger-codemagic-workflow-action@v2.0.0
         with:
           app-id: ${{ vars.CODEMAGIC_APP_ID }}
-          workflow-id: ios-beta-release
+          workflow-id: ios-release
           token: ${{ secrets.CODEMAGIC_API_TOKEN }}
         env:
+          CM_SUBMIT_TO_APP_STORE: ${{ github.event.inputs.lane == 'production' }}
           CM_SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL }}
