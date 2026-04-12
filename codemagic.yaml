@@ -68,6 +68,9 @@ workflows:
       - name: Get Flutter packages
         script: |
           flutter pub get
+      - name: Install FlutterFire CLI
+        script: |
+          dart pub global activate flutterfire_cli
       - name: Restore Firebase config
         script: |
           echo "$FIREBASE_OPTIONS_DART_BASE64" | base64 --decode > lib/firebase_options.dart
