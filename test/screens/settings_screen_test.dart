@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:life_battery/providers/app_theme_mode.dart';
 import 'package:life_battery/screens/settings_screen.dart';
 import 'package:life_battery/widgets/common_material_app.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -112,6 +113,34 @@ void main() {
     });
   });
 
+  group('Appearance', () {
+    testWidgets('Shows light mode when light mode is selected', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            appThemeModeProvider.overrideWith(FakeAppThemeMode.new),
+          ],
+          child: const TestSettingsApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Appearance'));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Light').hitTestable());
+      await tester.pumpAndSettle();
+
+      final context = tester.element(find.byType(SettingsScreen));
+      expect(Theme.of(context).brightness, Brightness.light);
+    });
+  });
+
   group('Localization tests', () {
     testWidgets('Device locale is English when set to English', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
@@ -149,5 +178,39 @@ class TestSettingsScreen extends StatelessWidget {
         home: SettingsScreen(),
       ),
     );
+  }
+}
+
+class TestSettingsApp extends ConsumerWidget {
+  const TestSettingsApp({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appThemeMode = ref.watch(appThemeModeProvider);
+
+    return switch (appThemeMode) {
+      AsyncData(:final value) => CommonMaterialApp(
+        themeMode: value,
+        home: const SettingsScreen(),
+      ),
+      AsyncError() => const CommonMaterialApp(
+        home: SizedBox.shrink(),
+      ),
+      _ => const CommonMaterialApp(
+        home: Scaffold(
+          body: CircularProgressIndicator(),
+        ),
+      ),
+    };
+  }
+}
+
+class FakeAppThemeMode extends AppThemeMode {
+  @override
+  Future<ThemeMode> build() async => ThemeMode.system;
+
+  @override
+  Future<void> updateThemeMode(ThemeMode themeMode) async {
+    state = AsyncData(themeMode);
   }
 }
