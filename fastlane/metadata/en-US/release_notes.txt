@@ -1,1 +1,0 @@
-・Added hint text indicating that long-pressing the battery opens the date input screen.

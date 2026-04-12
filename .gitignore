@@ -58,10 +58,5 @@ memo/
 /ios/Runner/GoogleService-Info.plist
 /lib/firebase_options.dart
 
-# Fastlane generated files
-/fastlane/README.md
-/fastlane/report.xml
-/fastlane/build/
-
 # env
 **/.env*

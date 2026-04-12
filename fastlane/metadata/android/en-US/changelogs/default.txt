@@ -1,1 +1,0 @@
-・Added a motivational message that appears after your first long press on the battery.
