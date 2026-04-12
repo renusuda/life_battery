@@ -139,6 +139,32 @@ void main() {
       final context = tester.element(find.byType(SettingsScreen));
       expect(Theme.of(context).brightness, Brightness.light);
     });
+
+    testWidgets('Shows dark mode when dark mode is selected', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            appThemeModeProvider.overrideWith(FakeAppThemeMode.new),
+          ],
+          child: const TestSettingsApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Appearance'));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Dark').hitTestable());
+      await tester.pumpAndSettle();
+
+      final context = tester.element(find.byType(SettingsScreen));
+      expect(Theme.of(context).brightness, Brightness.dark);
+    });
   });
 
   group('Localization tests', () {
