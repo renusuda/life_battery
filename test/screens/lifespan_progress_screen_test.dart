@@ -115,6 +115,53 @@ void main() {
       expect(newPercent, isNot(equals(initialPercent)));
     });
   });
+
+  group('Ideal lifespan change in days display mode', () {
+    testWidgets('Changing ideal lifespan updates displayed days value', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestEditableLifeProgressContent());
+      await tester.pump();
+
+      await tester.tap(find.byType(BatteryIndicator));
+      await tester.pump();
+
+      final daysFinder = find.textContaining(RegExp(r'\d+d'));
+      final initialDays = tester.widget<Text>(daysFinder).data ?? '';
+
+      await tester.longPress(find.byType(BatteryIndicator));
+      await tester.pump();
+      await tester.pumpUntilFound(
+        find.byType(DateInputBottomSheet),
+        timeout: const Duration(seconds: 1),
+      );
+
+      final idealAgeFinder = find.byKey(const Key('idealAgeText'));
+      final initialAge = tester.widget<Text>(idealAgeFinder).data ?? '';
+
+      final sliderFinder = find.byType(Slider);
+      await tester.pumpUntilFound(
+        sliderFinder.hitTestable(),
+        timeout: const Duration(seconds: 1),
+      );
+      await tester.drag(sliderFinder, const Offset(100, 0));
+      await tester.pump();
+
+      final newAge = tester.widget<Text>(idealAgeFinder).data ?? '';
+      expect(newAge, isNot(equals(initialAge)));
+
+      await tester.tap(find.byType(ModalBarrier).last);
+      await tester.pump();
+      await tester.pumpUntilGone(
+        find.byType(DateInputBottomSheet),
+        timeout: const Duration(seconds: 1),
+      );
+
+      final newDays = tester.widget<Text>(daysFinder).data ?? '';
+      expect(newDays, isNot(equals(initialDays)));
+    });
+  });
 }
 
 class TestLifeProgressContent extends StatefulWidget {
