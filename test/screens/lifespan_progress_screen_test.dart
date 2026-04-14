@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:life_battery/models/lifespan_range.dart';
+import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/screens/lifespan_progress_screen.dart';
+import 'package:life_battery/widgets/battery_indicator.dart';
 import 'package:life_battery/widgets/common_material_app.dart';
+import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
+
+import '../../test_helpers/extensions.dart';
 
 void main() {
   group('Battery indicator', () {
@@ -66,6 +71,50 @@ void main() {
       );
     });
   });
+
+  group('Ideal lifespan change in percentage mode', () {
+    testWidgets('Changing ideal lifespan updates displayed percentage', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestEditableLifeProgressContent());
+      await tester.pump();
+
+      final percentFinder = find.textContaining('%');
+      final initialPercent = tester.widget<Text>(percentFinder).data ?? '';
+
+      await tester.longPress(find.byType(BatteryIndicator));
+      await tester.pump();
+      await tester.pumpUntilFound(
+        find.byType(DateInputBottomSheet),
+        timeout: const Duration(seconds: 1),
+      );
+
+      final idealAgeFinder = find.byKey(const Key('idealAgeText'));
+      final initialAge = tester.widget<Text>(idealAgeFinder).data ?? '';
+
+      final sliderFinder = find.byType(Slider);
+      await tester.pumpUntilFound(
+        sliderFinder.hitTestable(),
+        timeout: const Duration(seconds: 1),
+      );
+      await tester.drag(sliderFinder, const Offset(100, 0));
+      await tester.pump();
+
+      final newAge = tester.widget<Text>(idealAgeFinder).data ?? '';
+      expect(newAge, isNot(equals(initialAge)));
+
+      await tester.tap(find.byType(ModalBarrier).last);
+      await tester.pump();
+      await tester.pumpUntilGone(
+        find.byType(DateInputBottomSheet),
+        timeout: const Duration(seconds: 1),
+      );
+
+      final newPercent = tester.widget<Text>(percentFinder).data ?? '';
+      expect(newPercent, isNot(equals(initialPercent)));
+    });
+  });
 }
 
 class TestLifeProgressContent extends StatefulWidget {
@@ -97,6 +146,71 @@ class _TestLifeProgressContentState extends State<TestLifeProgressContent> {
                 _hasLongPressedBattery = true;
               });
             },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FakeLifespanRangeManager extends LifespanRangeManager {
+  static late LifespanRange Function() readValue;
+  static late void Function(LifespanRange value) writeValue;
+
+  @override
+  Future<LifespanRange> build() async => readValue();
+
+  @override
+  Future<void> updateLifespanRange({
+    required DateTime birthDate,
+    required int idealAge,
+  }) async {
+    final newValue = LifespanRange(
+      birthDate: birthDate,
+      idealAge: idealAge,
+    );
+    writeValue(newValue);
+    state = AsyncData(newValue);
+  }
+}
+
+class TestEditableLifeProgressContent extends StatefulWidget {
+  const TestEditableLifeProgressContent({super.key});
+
+  @override
+  State<TestEditableLifeProgressContent> createState() =>
+      _TestEditableLifeProgressContentState();
+}
+
+class _TestEditableLifeProgressContentState
+    extends State<TestEditableLifeProgressContent> {
+  var _lifespanRange = LifespanRange(
+    birthDate: DateTime(2000),
+    idealAge: 100,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    FakeLifespanRangeManager.readValue = () => _lifespanRange;
+    FakeLifespanRangeManager.writeValue = (value) {
+      if (!mounted) return;
+      setState(() {
+        _lifespanRange = value;
+      });
+    };
+
+    return ProviderScope(
+      overrides: [
+        lifespanRangeManagerProvider.overrideWith(FakeLifespanRangeManager.new),
+      ],
+      child: CommonMaterialApp(
+        home: Scaffold(
+          body: LifeProgressContent(
+            lifespanRange: _lifespanRange,
+            isInitialUser: false,
+            hasLongPressedBattery: true,
+            updateUserIsNotInitialUser: () async {},
+            updateHasLongPressedBattery: () async {},
           ),
         ),
       ),
