@@ -17,8 +17,8 @@ Create a GitHub Release from an existing git tag using `gh release create`.
 4. Get the previous tag to determine the commit range:
    - List tags sorted by version: `git tag --list --sort=-v:refname`
    - Find the tag immediately before the target tag.
-5. Gather commits between previous tag and target tag: `git log {prev_tag}..{tag_name} --oneline`.
-6. Summarize the commits into user-friendly bullet points in Japanese, matching the style of existing releases.
+5. Read `release_notes.json` in the project root and extract the `text` from the `en-US` entry.
+6. Convert the text into bullet points using `- ` prefix, matching the style of existing releases.
 7. Show the draft release notes to the user and ask for confirmation before creating.
 8. Push the tag to remote if not already pushed: `git push origin {tag_name}`.
 9. Create the release: `gh release create {tag_name} --title "{tag_name}" --notes "{notes}"`.
