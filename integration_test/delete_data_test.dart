@@ -6,7 +6,7 @@ import 'package:life_battery/main.dart';
 import 'package:life_battery/screens/user_deleted_screen.dart';
 import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
 
-import 'extensions.dart';
+import '../test_helpers/extensions.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

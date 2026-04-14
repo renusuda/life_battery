@@ -6,7 +6,7 @@ import 'package:life_battery/screens/lifespan_progress_screen.dart';
 import 'package:life_battery/widgets/common_material_app.dart';
 import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
 
-import '../extensions.dart';
+import '../../test_helpers/extensions.dart';
 
 void main() {
   group('First launch', () {

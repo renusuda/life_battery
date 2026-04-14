@@ -7,7 +7,7 @@ import 'package:life_battery/widgets/battery_indicator.dart';
 import 'package:life_battery/widgets/date_input_bottom_sheet.dart';
 import 'package:life_battery/widgets/date_range_picker.dart';
 
-import 'extensions.dart';
+import '../test_helpers/extensions.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
