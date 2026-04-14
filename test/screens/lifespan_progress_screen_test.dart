@@ -162,6 +162,66 @@ void main() {
       expect(newDays, isNot(equals(initialDays)));
     });
   });
+
+  group('Birth date change', () {
+    testWidgets('Changing birth date updates displayed value and percentage', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestEditableLifeProgressContent());
+      await tester.pump();
+
+      final percentFinder = find.textContaining('%');
+      final initialPercent = tester.widget<Text>(percentFinder).data ?? '';
+
+      await tester.longPress(find.byType(BatteryIndicator));
+      await tester.pump();
+      await tester.pumpUntilFound(
+        find.byType(DateInputBottomSheet),
+        timeout: const Duration(seconds: 1),
+      );
+
+      expect(find.byType(DateInputBottomSheet), findsOneWidget);
+      expect(find.text('1/1/2000'), findsOneWidget);
+
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(DateInputBottomSheet)),
+      );
+      await container
+          .read(lifespanRangeManagerProvider.notifier)
+          .updateLifespanRange(
+            birthDate: DateTime(1995),
+            idealAge: 100,
+          );
+      await tester.pump();
+
+      expect(find.text('1/1/1995'), findsOneWidget);
+      expect(find.text('1/1/2000'), findsNothing);
+
+      final newPercent = tester.widget<Text>(percentFinder).data ?? '';
+      expect(newPercent, isNot(equals(initialPercent)));
+
+      await tester.tap(find.byType(ModalBarrier).last);
+      await tester.pump();
+      await tester.pumpUntilGone(
+        find.byType(DateInputBottomSheet),
+        timeout: const Duration(seconds: 1),
+      );
+
+      expect(find.byType(DateInputBottomSheet), findsNothing);
+
+      await tester.longPress(find.byType(BatteryIndicator));
+      await tester.pump();
+      await tester.pumpUntilFound(
+        find.byType(DateInputBottomSheet),
+        timeout: const Duration(seconds: 1),
+      );
+
+      expect(find.byType(DateInputBottomSheet), findsOneWidget);
+
+      expect(find.text('1/1/1995'), findsOneWidget);
+    });
+  });
 }
 
 class TestLifeProgressContent extends StatefulWidget {
