@@ -37,7 +37,7 @@ final class LifespanRangeManagerProvider
 }
 
 String _$lifespanRangeManagerHash() =>
-    r'bf3743a51a0b23fa9d9ed650f26f6d4340a8a353';
+    r'dd7ae071fa521e532a38853e61efd4fef066c4b9';
 
 /// lifespan range manager
 

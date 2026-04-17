@@ -16,7 +16,7 @@ class LifespanRangeManager extends _$LifespanRangeManager {
   Future<LifespanRange> build() async {
     final lifespanRange = await fetchLifespanRange();
     unawaited(
-      _lifespanRepository.syncWidgetData(
+      _lifespanRepository.syncLifespanRangeToWidget(
         birthDate: lifespanRange.birthDate,
         idealAge: lifespanRange.idealAge,
       ),
@@ -43,7 +43,7 @@ class LifespanRangeManager extends _$LifespanRangeManager {
     state = AsyncData(newLifespanRange);
 
     unawaited(
-      _lifespanRepository.syncWidgetData(
+      _lifespanRepository.syncLifespanRangeToWidget(
         birthDate: newLifespanRange.birthDate,
         idealAge: newLifespanRange.idealAge,
       ),

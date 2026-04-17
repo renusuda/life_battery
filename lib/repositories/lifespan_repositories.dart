@@ -240,8 +240,8 @@ class LifespanRepository {
     } on DatabaseException catch (_) {}
   }
 
-  /// Syncs birth date and ideal age to the home screen widget.
-  Future<void> syncWidgetData({
+  /// Syncs the lifespan range to the home screen widget.
+  Future<void> syncLifespanRangeToWidget({
     required DateTime birthDate,
     required int idealAge,
   }) async {
