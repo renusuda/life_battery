@@ -10,7 +10,13 @@ class DisplayModeManager extends _$DisplayModeManager {
   static final _lifespanRepository = LifespanRepository();
 
   @override
-  Future<bool> build() => _lifespanRepository.getIsPercentageMode();
+  Future<bool> build() => fetchIsPercentageMode();
+
+  /// Fetches whether the battery is shown in percentage mode.
+  Future<bool> fetchIsPercentageMode() async {
+    final response = await _lifespanRepository.getIsPercentageMode();
+    return response;
+  }
 
   /// Toggles the display mode and persists the new value.
   Future<void> toggle() async {
