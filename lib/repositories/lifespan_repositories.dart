@@ -16,6 +16,7 @@ class LifespanRepository {
   static const _columnIsInitialUser = 'isInitialUser';
   static const _columnIsDeletedUser = 'isDeletedUser';
   static const _columnHasLongPressedBattery = 'hasLongPressedBattery';
+  static const _columnIsPercentageMode = 'isPercentageMode';
 
   /// Fetches the lifespan record from the database.
   Future<LifespanRange> getLifespan() async {
@@ -179,6 +180,44 @@ class LifespanRepository {
           _tableName,
           {
             _columnIsInitialUser: 0,
+          },
+        );
+      }
+    } on DatabaseException catch (_) {}
+  }
+
+  /// Fetches whether the battery is shown in percentage mode from the database.
+  Future<bool> getIsPercentageMode() async {
+    try {
+      final db = await instance.database;
+      final result = await db.query(
+        _tableName,
+        columns: [_columnIsPercentageMode],
+      );
+
+      if (result.isEmpty) {
+        return true;
+      } else {
+        final isPercentageMode = result.first[_columnIsPercentageMode]! as int;
+        return isPercentageMode == 1;
+      }
+    } on DatabaseException catch (_) {
+      return true;
+    }
+  }
+
+  /// Updates whether the battery is shown in percentage mode in the database.
+  Future<void> updateIsPercentageMode({
+    required bool isPercentageMode,
+  }) async {
+    try {
+      final db = await instance.database;
+      final response = await db.query(_tableName);
+      if (response.isNotEmpty) {
+        await db.update(
+          _tableName,
+          {
+            _columnIsPercentageMode: isPercentageMode ? 1 : 0,
           },
         );
       }

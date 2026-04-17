@@ -40,6 +40,7 @@ class TestFirstLaunchScreen extends StatelessWidget {
             ),
             isInitialUser: true,
             hasLongPressedBattery: false,
+            isPercentageMode: true,
             updateUserIsNotInitialUser: () async {},
             updateHasLongPressedBattery: () async {},
           ),

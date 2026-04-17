@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:life_battery/models/lifespan_range.dart';
+import 'package:life_battery/providers/display_mode_manager.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
 import 'package:life_battery/screens/lifespan_progress_screen.dart';
 import 'package:life_battery/widgets/battery_indicator.dart';
@@ -238,25 +239,46 @@ class _TestLifeProgressContentState extends State<TestLifeProgressContent> {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
+      overrides: [
+        displayModeManagerProvider.overrideWith(FakeDisplayModeManager.new),
+      ],
       child: CommonMaterialApp(
         home: Scaffold(
-          body: LifeProgressContent(
-            lifespanRange: LifespanRange(
-              birthDate: DateTime(1990),
-              idealAge: 90,
-            ),
-            isInitialUser: false,
-            hasLongPressedBattery: _hasLongPressedBattery,
-            updateUserIsNotInitialUser: () async {},
-            updateHasLongPressedBattery: () async {
-              setState(() {
-                _hasLongPressedBattery = true;
-              });
+          body: Consumer(
+            builder: (context, ref, _) {
+              final isPercentageMode =
+                  ref.watch(displayModeManagerProvider).value ?? true;
+              return LifeProgressContent(
+                lifespanRange: LifespanRange(
+                  birthDate: DateTime(1990),
+                  idealAge: 90,
+                ),
+                isInitialUser: false,
+                hasLongPressedBattery: _hasLongPressedBattery,
+                isPercentageMode: isPercentageMode,
+                updateUserIsNotInitialUser: () async {},
+                updateHasLongPressedBattery: () async {
+                  setState(() {
+                    _hasLongPressedBattery = true;
+                  });
+                },
+              );
             },
           ),
         ),
       ),
     );
+  }
+}
+
+class FakeDisplayModeManager extends DisplayModeManager {
+  @override
+  Future<bool> build() async => true;
+
+  @override
+  Future<void> toggle() async {
+    final current = state.value ?? true;
+    state = AsyncData(!current);
   }
 }
 
@@ -309,15 +331,23 @@ class _TestEditableLifeProgressContentState
     return ProviderScope(
       overrides: [
         lifespanRangeManagerProvider.overrideWith(FakeLifespanRangeManager.new),
+        displayModeManagerProvider.overrideWith(FakeDisplayModeManager.new),
       ],
       child: CommonMaterialApp(
         home: Scaffold(
-          body: LifeProgressContent(
-            lifespanRange: _lifespanRange,
-            isInitialUser: false,
-            hasLongPressedBattery: true,
-            updateUserIsNotInitialUser: () async {},
-            updateHasLongPressedBattery: () async {},
+          body: Consumer(
+            builder: (context, ref, _) {
+              final isPercentageMode =
+                  ref.watch(displayModeManagerProvider).value ?? true;
+              return LifeProgressContent(
+                lifespanRange: _lifespanRange,
+                isInitialUser: false,
+                hasLongPressedBattery: true,
+                isPercentageMode: isPercentageMode,
+                updateUserIsNotInitialUser: () async {},
+                updateHasLongPressedBattery: () async {},
+              );
+            },
           ),
         ),
       ),

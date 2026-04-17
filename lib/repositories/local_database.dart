@@ -10,7 +10,7 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 6;
+  static const _databaseVersion = 7;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
@@ -20,6 +20,7 @@ class LocalDatabase {
   static const _columnIsInitialUser = 'isInitialUser';
   static const _columnIsDeletedUser = 'isDeletedUser';
   static const _columnHasLongPressedBattery = 'hasLongPressedBattery';
+  static const _columnIsPercentageMode = 'isPercentageMode';
 
   Database? _database;
 
@@ -52,7 +53,8 @@ class LocalDatabase {
             $_columnThemeMode TEXT NOT NULL,
             $_columnIsInitialUser INTEGER NOT NULL,
             $_columnIsDeletedUser INTEGER NOT NULL,
-            $_columnHasLongPressedBattery INTEGER NOT NULL
+            $_columnHasLongPressedBattery INTEGER NOT NULL,
+            $_columnIsPercentageMode INTEGER NOT NULL
           )
         ''');
 
@@ -66,6 +68,7 @@ class LocalDatabase {
               _columnIsInitialUser: 1,
               _columnIsDeletedUser: 0,
               _columnHasLongPressedBattery: 0,
+              _columnIsPercentageMode: 1,
             },
           );
         },
@@ -93,6 +96,13 @@ class LocalDatabase {
               'DEFAULT 0',
             );
           }
+          if (oldVersion < 7) {
+            await db.execute(
+              'ALTER TABLE $_tableName '
+              'ADD COLUMN $_columnIsPercentageMode INTEGER NOT NULL '
+              'DEFAULT 1',
+            );
+          }
         },
       );
     } catch (e) {
@@ -111,6 +121,7 @@ class LocalDatabase {
         _columnIsInitialUser: 0,
         _columnIsDeletedUser: 1,
         _columnHasLongPressedBattery: 0,
+        _columnIsPercentageMode: 1,
       },
     );
   }

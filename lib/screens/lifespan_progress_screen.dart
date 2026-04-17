@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/l10n/app_localizations.dart';
 import 'package:life_battery/models/lifespan_range.dart';
+import 'package:life_battery/providers/display_mode_manager.dart';
 import 'package:life_battery/providers/has_long_pressed_battery.dart';
 import 'package:life_battery/providers/is_initial_user.dart';
 import 'package:life_battery/providers/lifespan_range_manager.dart';
@@ -28,6 +29,7 @@ class LifespanProgressScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
     final hasLongPressedBattery = ref.watch(hasLongPressedBatteryProvider);
+    final displayMode = ref.watch(displayModeManagerProvider);
 
     final l10n = AppLocalizations.of(context)!;
 
@@ -53,21 +55,27 @@ class LifespanProgressScreen extends ConsumerWidget {
           AsyncData(value: final lifespanRange) =>
             switch (hasLongPressedBattery) {
               AsyncData(value: final hasLongPressedBatteryValue) =>
-                LifeProgressContent(
-                  lifespanRange: lifespanRange,
-                  isInitialUser: isInitialUser,
-                  hasLongPressedBattery: hasLongPressedBatteryValue,
-                  updateUserIsNotInitialUser: () async {
-                    await ref
-                        .read(isInitialUserProvider.notifier)
-                        .updateUserIsNotInitialUser();
-                  },
-                  updateHasLongPressedBattery: () async {
-                    await ref
-                        .read(hasLongPressedBatteryProvider.notifier)
-                        .updateHasLongPressedBattery();
-                  },
-                ),
+                switch (displayMode) {
+                  AsyncData(value: final isPercentageMode) =>
+                    LifeProgressContent(
+                      lifespanRange: lifespanRange,
+                      isInitialUser: isInitialUser,
+                      hasLongPressedBattery: hasLongPressedBatteryValue,
+                      isPercentageMode: isPercentageMode,
+                      updateUserIsNotInitialUser: () async {
+                        await ref
+                            .read(isInitialUserProvider.notifier)
+                            .updateUserIsNotInitialUser();
+                      },
+                      updateHasLongPressedBattery: () async {
+                        await ref
+                            .read(hasLongPressedBatteryProvider.notifier)
+                            .updateHasLongPressedBattery();
+                      },
+                    ),
+                  AsyncError() => Text(l10n.generalError),
+                  _ => const CircularProgressIndicator(),
+                },
               AsyncError() => Text(l10n.generalError),
               _ => const CircularProgressIndicator(),
             },
@@ -80,11 +88,12 @@ class LifespanProgressScreen extends ConsumerWidget {
 }
 
 /// Content of the battery indicator
-class LifeProgressContent extends StatefulWidget {
+class LifeProgressContent extends ConsumerStatefulWidget {
   const LifeProgressContent({
     required this.lifespanRange,
     required this.isInitialUser,
     required this.hasLongPressedBattery,
+    required this.isPercentageMode,
     required this.updateUserIsNotInitialUser,
     required this.updateHasLongPressedBattery,
     super.key,
@@ -99,6 +108,9 @@ class LifeProgressContent extends StatefulWidget {
   /// Whether the user has long pressed the battery.
   final bool hasLongPressedBattery;
 
+  /// Whether the battery should be shown in percentage mode.
+  final bool isPercentageMode;
+
   /// Callback to update the user is not initial user
   final Future<void> Function() updateUserIsNotInitialUser;
 
@@ -106,21 +118,15 @@ class LifeProgressContent extends StatefulWidget {
   final Future<void> Function() updateHasLongPressedBattery;
 
   @override
-  State<LifeProgressContent> createState() => _LifeProgressContentState();
+  ConsumerState<LifeProgressContent> createState() =>
+      _LifeProgressContentState();
 }
 
-class _LifeProgressContentState extends State<LifeProgressContent> {
-  var _isPercentageMode = true;
+class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
   var _isPressed = false;
   var _isNotificationScheduled = false;
   Timer? _notificationTimer;
   Timer? _debounceTimer;
-
-  void _toggleMode() {
-    setState(() {
-      _isPercentageMode = !_isPercentageMode;
-    });
-  }
 
   void _onTapDown(TapDownDetails details) {
     setState(() {
@@ -233,7 +239,7 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
 
     return GestureDetector(
       onLongPress: _handleLongPress,
-      onTap: _toggleMode,
+      onTap: () => ref.read(displayModeManagerProvider.notifier).toggle(),
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
       onTapCancel: _onTapCancel,
@@ -245,7 +251,7 @@ class _LifeProgressContentState extends State<LifeProgressContent> {
             duration: const Duration(milliseconds: 100),
             child: BatteryIndicator(
               value: remainingLifePercentage,
-              text: _isPercentageMode
+              text: widget.isPercentageMode
                   ? '$remainingLifePercentage%'
                   : '${remainingLifeDays.withCommaString}${l10n.dayUnit}',
             ),
