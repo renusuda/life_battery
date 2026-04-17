@@ -251,11 +251,7 @@ class LifespanRepository {
         birthDate.toIso8601String(),
       );
       await HomeWidget.saveWidgetData('idealAge', idealAge);
-      await HomeWidget.updateWidget(
-        name: 'LifeBatteryWidget',
-        iOSName: 'LifeBatteryWidget',
-        androidName: 'LifeBatteryWidgetReceiver',
-      );
+      await _updateHomeWidget();
     } on PlatformException catch (_) {
       // Widget sync may fail in test environments.
     }
@@ -271,12 +267,17 @@ class LifespanRepository {
         'isPercentageMode',
         isPercentageMode,
       );
-      await HomeWidget.updateWidget(
-        name: 'LifeBatteryWidget',
-        iOSName: 'LifeBatteryWidget',
-      );
+      await _updateHomeWidget();
     } on PlatformException catch (_) {
       // Widget sync may fail in test environments.
     }
+  }
+
+  Future<void> _updateHomeWidget() async {
+    await HomeWidget.updateWidget(
+      name: 'LifeBatteryWidget',
+      iOSName: 'LifeBatteryWidget',
+      androidName: 'LifeBatteryWidgetReceiver',
+    );
   }
 }

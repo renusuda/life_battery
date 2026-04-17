@@ -54,6 +54,14 @@ class LifeBatteryWidget : GlanceAppWidget() {
         val context = LocalContext.current
         val state = currentState<HomeWidgetGlanceState>()
         val percentage = computePercentage(state)
+        val remainingDays = computeRemainingDays(state)
+        val isPercentageMode = state.preferences.getBoolean("isPercentageMode", true)
+        val displayText =
+            if (isPercentageMode) {
+                "$percentage%"
+            } else {
+                "$remainingDays${context.getString(R.string.widget_day_unit)}"
+            }
         val fillColor = batteryColor(percentage)
         val borderColor = GlanceTheme.colors.onBackground
         val innerBgColor = GlanceTheme.colors.background
@@ -82,7 +90,7 @@ class LifeBatteryWidget : GlanceAppWidget() {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                BatteryBody(percentage, fillColor, borderColor, innerBgColor, textColor)
+                BatteryBody(percentage, displayText, fillColor, borderColor, innerBgColor, textColor)
                 Spacer(modifier = GlanceModifier.width(2.dp))
                 BatteryKnob(borderColor)
             }
@@ -92,6 +100,7 @@ class LifeBatteryWidget : GlanceAppWidget() {
     @Composable
     private fun BatteryBody(
         percentage: Int,
+        displayText: String,
         fillColor: Color,
         borderColor: ColorProvider,
         innerBgColor: ColorProvider,
@@ -140,7 +149,7 @@ class LifeBatteryWidget : GlanceAppWidget() {
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "$percentage%",
+                        text = displayText,
                         style =
                             TextStyle(
                                 fontWeight = FontWeight.Bold,
@@ -196,6 +205,34 @@ class LifeBatteryWidget : GlanceAppWidget() {
         return ceil(remainingDays.toDouble() / totalDays.toDouble() * 100)
             .toInt()
             .coerceIn(0, 100)
+    }
+
+    private fun computeRemainingDays(state: HomeWidgetGlanceState): Int {
+        val birthDateStr =
+            state.preferences.getString("birthDate", null)
+                ?: return 0
+        val idealAge = state.preferences.getInt("idealAge", 0)
+        if (idealAge <= 0) return 0
+
+        val birthDate =
+            try {
+                LocalDate.parse(
+                    birthDateStr.substringBefore("T"),
+                    DateTimeFormatter.ISO_LOCAL_DATE,
+                )
+            } catch (_: Exception) {
+                return 0
+            }
+
+        val deathDate = birthDate.plusYears(idealAge.toLong())
+        val today = LocalDate.now()
+
+        if (today >= deathDate) return 0
+        if (today.isBefore(birthDate)) {
+            return ChronoUnit.DAYS.between(birthDate, deathDate).toInt().coerceAtLeast(0)
+        }
+
+        return ChronoUnit.DAYS.between(today, deathDate).toInt().coerceAtLeast(0)
     }
 
     private fun batteryColor(percentage: Int): Color =
