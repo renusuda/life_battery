@@ -3,7 +3,7 @@ import WidgetKit
 
 struct Provider: TimelineProvider {
   func placeholder(in context: Context) -> LifeBatteryEntry {
-    LifeBatteryEntry(date: Date(), percentage: 100)
+    LifeBatteryEntry(date: Date(), percentage: 100, remainingDays: 0, isPercentageMode: true)
   }
 
   func getSnapshot(in context: Context, completion: @escaping (LifeBatteryEntry) -> Void) {
@@ -29,19 +29,20 @@ struct Provider: TimelineProvider {
     completion(timeline)
   }
 
-  private func loadUserData() -> (birthDate: Date, idealAge: Int)? {
+  private func loadUserData() -> (birthDate: Date, idealAge: Int, isPercentageMode: Bool)? {
     let defaults = UserDefaults(suiteName: "group.com.rururu.lifebt")
     guard let birthDateString = defaults?.string(forKey: "birthDate"),
       let birthDate = parseISO8601Date(birthDateString),
       let idealAge = defaults?.object(forKey: "idealAge") as? Int,
       idealAge > 0
     else { return nil }
-    return (birthDate, idealAge)
+    let isPercentageMode = (defaults?.object(forKey: "isPercentageMode") as? Bool) ?? true
+    return (birthDate, idealAge, isPercentageMode)
   }
 
-  private func createEntry(date: Date, userData: (birthDate: Date, idealAge: Int)?) -> LifeBatteryEntry {
+  private func createEntry(date: Date, userData: (birthDate: Date, idealAge: Int, isPercentageMode: Bool)?) -> LifeBatteryEntry {
     guard let userData else {
-      return LifeBatteryEntry(date: date, percentage: 100)
+      return LifeBatteryEntry(date: date, percentage: 100, remainingDays: 0, isPercentageMode: true)
     }
 
     let percentage = remainingLifePercentage(
@@ -49,13 +50,25 @@ struct Provider: TimelineProvider {
       idealAge: userData.idealAge,
       now: date
     )
-    return LifeBatteryEntry(date: date, percentage: percentage)
+    let remainingDays = remainingLifeDays(
+      birthDate: userData.birthDate,
+      idealAge: userData.idealAge,
+      now: date
+    )
+    return LifeBatteryEntry(
+      date: date,
+      percentage: percentage,
+      remainingDays: remainingDays,
+      isPercentageMode: userData.isPercentageMode
+    )
   }
 }
 
 struct LifeBatteryEntry: TimelineEntry {
   let date: Date
   let percentage: Int
+  let remainingDays: Int
+  let isPercentageMode: Bool
 }
 
 private func parseISO8601Date(_ string: String) -> Date? {
@@ -110,6 +123,28 @@ private func remainingLifePercentage(
   return Int(ceil(Double(remainingDays) / Double(totalDays) * 100))
 }
 
+private func remainingLifeDays(
+  birthDate: Date,
+  idealAge: Int,
+  now: Date
+) -> Int {
+  let calendar = Calendar.current
+
+  let nowOnly = calendar.startOfDay(for: now)
+  let deathDate = computeDeathDate(
+    birthDate: birthDate,
+    idealAge: idealAge,
+    calendar: calendar
+  )
+  let deathOnly = calendar.startOfDay(for: deathDate)
+
+  if nowOnly >= deathOnly {
+    return 0
+  }
+
+  return calendar.dateComponents([.day], from: nowOnly, to: deathOnly).day ?? 0
+}
+
 func batteryColor(for percentage: Int) -> Color {
   if percentage > 50 {
     return Color(red: 16 / 255, green: 185 / 255, blue: 129 / 255)
@@ -148,8 +183,10 @@ struct LifeBatteryWidgetEntryView: View {
               }
             }
 
-          // Percentage text
-          Text(verbatim: "\(entry.percentage)%")
+          // Display text (percentage or remaining days)
+          Text(verbatim: entry.isPercentageMode
+            ? "\(entry.percentage)%"
+            : "\(entry.remainingDays)\(String(localized: "widget.dayUnit"))")
             .font(.system(size: 26, weight: .bold, design: .rounded))
             .foregroundColor(.primary)
         }
@@ -191,9 +228,9 @@ struct LifeBatteryWidget: Widget {
 #Preview(as: .systemSmall) {
   LifeBatteryWidget()
 } timeline: {
-  LifeBatteryEntry(date: .now, percentage: 100)
-  LifeBatteryEntry(date: .now, percentage: 65)
-  LifeBatteryEntry(date: .now, percentage: 35)
-  LifeBatteryEntry(date: .now, percentage: 10)
-  LifeBatteryEntry(date: .now, percentage: 0)
+  LifeBatteryEntry(date: .now, percentage: 100, remainingDays: 30000, isPercentageMode: true)
+  LifeBatteryEntry(date: .now, percentage: 65, remainingDays: 19500, isPercentageMode: true)
+  LifeBatteryEntry(date: .now, percentage: 35, remainingDays: 10500, isPercentageMode: false)
+  LifeBatteryEntry(date: .now, percentage: 10, remainingDays: 3000, isPercentageMode: false)
+  LifeBatteryEntry(date: .now, percentage: 0, remainingDays: 0, isPercentageMode: true)
 }

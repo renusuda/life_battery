@@ -17,6 +17,22 @@
         }
       }
     },
+    "widget.dayUnit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "d"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日"
+          }
+        }
+      }
+    },
     "widget.displayName" : {
       "localizations" : {
         "en" : {

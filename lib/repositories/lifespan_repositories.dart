@@ -260,4 +260,23 @@ class LifespanRepository {
       // Widget sync may fail in test environments.
     }
   }
+
+  /// Syncs the display mode (percentage vs remaining days) to the home screen
+  /// widget.
+  Future<void> syncDisplayModeToWidget({
+    required bool isPercentageMode,
+  }) async {
+    try {
+      await HomeWidget.saveWidgetData(
+        'isPercentageMode',
+        isPercentageMode,
+      );
+      await HomeWidget.updateWidget(
+        name: 'LifeBatteryWidget',
+        iOSName: 'LifeBatteryWidget',
+      );
+    } on PlatformException catch (_) {
+      // Widget sync may fail in test environments.
+    }
+  }
 }

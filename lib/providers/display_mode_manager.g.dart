@@ -40,7 +40,7 @@ final class DisplayModeManagerProvider
 }
 
 String _$displayModeManagerHash() =>
-    r'9b35e9c1852dcdf26ad17991fb61d55f880d6678';
+    r'80375e750fafeec5600a1b88f8892e0c746affc7';
 
 /// Manages whether the battery is displayed as a percentage or as remaining
 /// days.
