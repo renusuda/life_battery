@@ -54,6 +54,12 @@ workflows:
         script: |
           echo "$FIREBASE_OPTIONS_DART_BASE64" | base64 --decode > lib/firebase_options.dart
           echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 --decode > android/app/google-services.json
+      - name: Prepare Android release notes
+        script: |
+          file="release_notes.json"
+          tmp="$(mktemp)"
+          jq 'map(if .language == "ja" then .language = "ja-JP" else . end)' "$file" > "$tmp"
+          mv "$tmp" "$file"
       - name: Shorebird Release Android
         script: |
           GOOGLE_PLAY_TRACK="${GOOGLE_PLAY_TRACK:-internal}"
