@@ -1,4 +1,8 @@
 definitions:
+  shared_workflow: &shared_workflow
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+
   publishing:
     slack_notify: &slack_notify
       channel: "$SLACK_CHANNEL"
@@ -9,9 +13,8 @@ definitions:
 
 workflows:
   android-release:
+    <<: *shared_workflow
     name: Android Release
-    max_build_duration: 120
-    instance_type: mac_mini_m2
     environment:
       flutter: fvm
       android_signing:
@@ -51,9 +54,8 @@ workflows:
       slack: *slack_notify
 
   ios-release:
+    <<: *shared_workflow
     name: iOS Release
-    max_build_duration: 120
-    instance_type: mac_mini_m2
     integrations:
       app_store_connect: codemagic-ci-cd
     environment:
