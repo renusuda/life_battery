@@ -1,3 +1,12 @@
+definitions:
+  publishing:
+    slack_notify: &slack_notify
+      channel: "$SLACK_CHANNEL"
+      notify_on_build_start: false
+      notify:
+        success: true
+        failure: true
+
 workflows:
   android-release:
     name: Android Release
@@ -39,12 +48,7 @@ workflows:
       google_play:
         credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS
         track: $GOOGLE_PLAY_TRACK
-      slack:
-        channel: "$SLACK_CHANNEL"
-        notify_on_build_start: false
-        notify:
-          success: true
-          failure: true
+      slack: *slack_notify
 
   ios-release:
     name: iOS Release
@@ -95,9 +99,4 @@ workflows:
         auth: integration
         submit_to_app_store: $SUBMIT_TO_APP_STORE
         release_type: AFTER_APPROVAL
-      slack:
-        channel: "$SLACK_CHANNEL"
-        notify_on_build_start: false
-        notify:
-          success: true
-          failure: true
+      slack: *slack_notify
