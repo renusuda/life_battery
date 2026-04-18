@@ -132,3 +132,47 @@ workflows:
         submit_to_app_store: $SUBMIT_TO_APP_STORE
         release_type: AFTER_APPROVAL
       slack: *slack_notify
+
+  ios-patch:
+    <<: *shared_workflow
+    name: iOS Patch
+    environment:
+      flutter: fvm
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.rururu.lifebt
+      groups:
+        - firebase
+        - shorebird
+      vars:
+        APP_STORE_APPLE_ID: 6449723058
+    scripts:
+      - *shorebird_install
+      - *get_fvm_flutter_version
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles --custom-export-options={\"manageAppVersionAndBuildNumber\":false}
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+      - name: Install FlutterFire CLI
+        script: |
+          dart pub global activate flutterfire_cli
+      - name: Restore Firebase config
+        script: |
+          echo "$FIREBASE_OPTIONS_DART_BASE64" | base64 --decode > lib/firebase_options.dart
+          echo "$GOOGLE_SERVICE_INFO_PLIST_BASE64" | base64 --decode > ios/Runner/GoogleService-Info.plist
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Shorebird Patch iOS
+        script: |
+          shorebird patch ios \
+            --release-version="$RELEASE_VERSION" \
+            --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    publishing:
+      slack: *slack_notify

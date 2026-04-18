@@ -1,0 +1,23 @@
+name: iOS Patch
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: "Version to apply the patch to"
+        required: true
+        default: "latest"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Codemagic iOS patch
+        uses: codemagic-ci-cd/trigger-codemagic-workflow-action@v2.0.0
+        with:
+          app-id: ${{ vars.CODEMAGIC_APP_ID }}
+          workflow-id: ios-patch
+          token: ${{ secrets.CODEMAGIC_API_TOKEN }}
+        env:
+          CM_RELEASE_VERSION: ${{ github.event.inputs.release_version }}
+          CM_SLACK_CHANNEL: ${{ vars.SLACK_CHANNEL }}
