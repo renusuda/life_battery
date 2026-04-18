@@ -3,6 +3,22 @@ definitions:
     max_build_duration: 120
     instance_type: mac_mini_m2
 
+  scripts:
+    - &shorebird_install
+      name: Install Shorebird
+      script: |
+        curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | bash
+        echo PATH="$HOME/.shorebird/bin:$PATH" >> $CM_ENV
+    - &get_fvm_flutter_version
+      name: Get Flutter version from .fvmrc
+      script: |
+        FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)
+        if [ -z "$FLUTTER_VERSION" ]; then
+          echo "Failed to read Flutter version from .fvmrc"
+          exit 1
+        fi
+        echo "FLUTTER_VERSION=$FLUTTER_VERSION" >> $CM_ENV
+
   publishing:
     slack_notify: &slack_notify
       channel: "$SLACK_CHANNEL"
@@ -22,12 +38,15 @@ workflows:
       groups:
         - firebase
         - google_play
+        - shorebird
       vars:
         PACKAGE_NAME: "com.rururu.lifebt"
     scripts:
       - name: Set up local.properties
         script: |
           echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - *shorebird_install
+      - *get_fvm_flutter_version
       - name: Get Flutter packages
         script: |
           flutter pub get
@@ -35,12 +54,13 @@ workflows:
         script: |
           echo "$FIREBASE_OPTIONS_DART_BASE64" | base64 --decode > lib/firebase_options.dart
           echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 --decode > android/app/google-services.json
-      - name: Build AAB with Flutter
+      - name: Shorebird Release Android
         script: |
           GOOGLE_PLAY_TRACK="${GOOGLE_PLAY_TRACK:-internal}"
           BUILD_NAME=$(grep '^version:' pubspec.yaml | cut -d' ' -f2 | cut -d'+' -f1)
           BUILD_NUMBER=$(($PROJECT_BUILD_NUMBER + 50))
-          flutter build appbundle --release \
+          shorebird release android \
+            --flutter-version="$FLUTTER_VERSION" \
             --build-name="$BUILD_NAME" \
             --build-number=$BUILD_NUMBER
     artifacts:
