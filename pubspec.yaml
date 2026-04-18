@@ -53,3 +53,5 @@ flutter:
   uses-material-design: true
 
   generate: true
+  assets:
+    - shorebird.yaml
