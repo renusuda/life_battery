@@ -91,12 +91,15 @@ workflows:
         bundle_identifier: com.rururu.lifebt
       groups:
         - firebase
+        - shorebird
       vars:
         APP_STORE_APPLE_ID: 6449723058
     scripts:
+      - *shorebird_install
+      - *get_fvm_flutter_version
       - name: Set up code signing settings on Xcode project
         script: |
-          xcode-project use-profiles
+          xcode-project use-profiles --custom-export-options={\"manageAppVersionAndBuildNumber\":false}
       - name: Get Flutter packages
         script: |
           flutter pub get
@@ -110,11 +113,12 @@ workflows:
       - name: Install pods
         script: |
           find . -name "Podfile" -execdir pod install \;
-      - name: Flutter build ipa
+      - name: Shorebird Release iOS
         script: |
           BUILD_NAME=$(grep '^version:' pubspec.yaml | cut -d' ' -f2 | cut -d'+' -f1)
           BUILD_NUMBER=$(($PROJECT_BUILD_NUMBER + 50))
-          flutter build ipa --release \
+          shorebird release ios \
+            --flutter-version="$FLUTTER_VERSION" \
             --build-name="$BUILD_NAME" \
             --build-number=$BUILD_NUMBER \
             --export-options-plist=/Users/builder/export_options.plist
