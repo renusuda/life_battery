@@ -227,7 +227,7 @@ abstract class AppLocalizations {
   /// No description provided for @longPressToEditHint.
   ///
   /// In en, this message translates to:
-  /// **'Long press to edit your life!'**
+  /// **'Long press to edit your life'**
   String get longPressToEditHint;
 
   /// No description provided for @todaysMessageHint.
