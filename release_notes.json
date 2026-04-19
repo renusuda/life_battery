@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・Battery display mode is now saved and restored between app launches.\n・Widgets now sync with your selected display mode."
+    "text": "・Fixed an issue where the Android notification icon was not displayed correctly."
   },
   {
     "language": "ja",
-    "text": "・バッテリーの表示モードがアプリの再起動後も保持されるようになりました。\n・ウィジェットが選択した表示モードと同期するようになりました。"
+    "text": "・Android通知アイコンが正しく表示されない問題を修正しました。"
   }
 ]
