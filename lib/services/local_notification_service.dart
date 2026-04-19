@@ -12,7 +12,7 @@ class LocalNotificationService {
     await _plugin.initialize(
       settings: const InitializationSettings(
         android: AndroidInitializationSettings(
-          '@drawable/ic_stat_life_battery',
+          'ic_stat_life_battery',
         ),
         iOS: DarwinInitializationSettings(
           requestAlertPermission: false,
