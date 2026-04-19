@@ -79,6 +79,42 @@ workflows:
         track: $GOOGLE_PLAY_TRACK
       slack: *slack_notify
 
+  android-patch:
+    <<: *shared_workflow
+    name: Android Patch
+    environment:
+      flutter: fvm
+      android_signing:
+        - android_upload_keystore
+      groups:
+        - firebase
+        - shorebird
+      vars:
+        PACKAGE_NAME: "com.rururu.lifebt"
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - *shorebird_install
+      - *get_fvm_flutter_version
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+      - name: Restore Firebase config
+        script: |
+          echo "$FIREBASE_OPTIONS_DART_BASE64" | base64 --decode > lib/firebase_options.dart
+          echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 --decode > android/app/google-services.json
+      - name: Shorebird Patch Android
+        script: |
+          shorebird patch android \
+            --release-version="$RELEASE_VERSION"
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - flutter_drive.log
+    publishing:
+      slack: *slack_notify
+
   ios-release:
     <<: *shared_workflow
     name: iOS Release
