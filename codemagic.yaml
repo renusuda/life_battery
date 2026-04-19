@@ -169,6 +169,7 @@ workflows:
         script: |
           shorebird patch ios \
             --release-version="$RELEASE_VERSION" \
+            --allow-asset-diffs \
             --export-options-plist=/Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
