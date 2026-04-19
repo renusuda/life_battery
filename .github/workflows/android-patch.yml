@@ -6,6 +6,7 @@ on:
       release_version:
         description: "Version to apply the patch to"
         required: true
+        default: "latest"
 
 jobs:
   build-and-deploy:
