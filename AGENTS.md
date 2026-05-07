@@ -23,7 +23,7 @@
 ## Localization
 
 - All user-facing strings must be localized
-- Always add to both `lib/l10n/app_en.arb` and `lib/l10n/app_ja.arb`
+- Always add to both `lib/src/l10n/app_en.arb` and `lib/src/l10n/app_ja.arb`
 - Access via `AppLocalizations.of(context)`
 
 # Code Generation
