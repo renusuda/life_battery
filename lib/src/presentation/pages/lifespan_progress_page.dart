@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
-import 'package:life_battery/src/models/lifespan_range.dart';
+import 'package:life_battery/src/domain/lifespan_range.dart';
 import 'package:life_battery/src/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/presentation/providers/display_mode_manager.dart';
 import 'package:life_battery/src/presentation/providers/has_long_pressed_battery.dart';

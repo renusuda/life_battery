@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:home_widget/home_widget.dart';
-import 'package:life_battery/src/models/lifespan_range.dart';
+import 'package:life_battery/src/domain/lifespan_range.dart';
 import 'package:life_battery/src/repositories/local_database.dart';
 import 'package:sqflite/sqflite.dart';
 
