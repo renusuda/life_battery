@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/models/lifespan_range.dart';
-import 'package:life_battery/src/providers/display_mode_manager.dart';
-import 'package:life_battery/src/providers/has_long_pressed_battery.dart';
-import 'package:life_battery/src/providers/is_initial_user.dart';
-import 'package:life_battery/src/providers/lifespan_range_manager.dart';
-import 'package:life_battery/src/screens/settings_screen.dart';
+import 'package:life_battery/src/presentation/providers/display_mode_manager.dart';
+import 'package:life_battery/src/presentation/providers/has_long_pressed_battery.dart';
+import 'package:life_battery/src/presentation/providers/is_initial_user.dart';
+import 'package:life_battery/src/presentation/providers/lifespan_range_manager.dart';
+import 'package:life_battery/src/presentation/screens/settings_screen.dart';
+import 'package:life_battery/src/presentation/widgets/battery_indicator.dart';
+import 'package:life_battery/src/presentation/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/src/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/services/local_notification_service.dart';
 import 'package:life_battery/src/utils/extensions.dart';
-import 'package:life_battery/src/widgets/battery_indicator.dart';
-import 'package:life_battery/src/widgets/date_input_bottom_sheet.dart';
-import 'package:life_battery/src/widgets/long_press_hint.dart';
 
 /// Screen for showing the remaining of lifespan
 class LifespanProgressScreen extends ConsumerWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:life_battery/src/providers/app_theme_mode.dart';
-import 'package:life_battery/src/screens/home_screen.dart';
-import 'package:life_battery/src/widgets/common_material_app.dart';
+import 'package:life_battery/src/presentation/providers/app_theme_mode.dart';
+import 'package:life_battery/src/presentation/screens/home_screen.dart';
+import 'package:life_battery/src/presentation/widgets/common_material_app.dart';
 
 /// Application
 class App extends ConsumerWidget {

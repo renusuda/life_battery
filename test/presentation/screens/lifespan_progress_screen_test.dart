@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:life_battery/src/models/lifespan_range.dart';
-import 'package:life_battery/src/providers/display_mode_manager.dart';
-import 'package:life_battery/src/providers/lifespan_range_manager.dart';
-import 'package:life_battery/src/screens/lifespan_progress_screen.dart';
-import 'package:life_battery/src/widgets/battery_indicator.dart';
-import 'package:life_battery/src/widgets/common_material_app.dart';
-import 'package:life_battery/src/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/src/presentation/providers/display_mode_manager.dart';
+import 'package:life_battery/src/presentation/providers/lifespan_range_manager.dart';
+import 'package:life_battery/src/presentation/screens/lifespan_progress_screen.dart';
+import 'package:life_battery/src/presentation/widgets/battery_indicator.dart';
+import 'package:life_battery/src/presentation/widgets/common_material_app.dart';
+import 'package:life_battery/src/presentation/widgets/date_input_bottom_sheet.dart';
 
-import '../../test_helpers/extensions.dart';
+import '../../../test_helpers/extensions.dart';
 
 void main() {
   group('Battery indicator', () {

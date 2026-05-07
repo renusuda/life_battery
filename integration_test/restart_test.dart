@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/src/app.dart';
-import 'package:life_battery/src/screens/lifespan_progress_screen.dart';
-import 'package:life_battery/src/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/src/presentation/screens/lifespan_progress_screen.dart';
+import 'package:life_battery/src/presentation/widgets/date_input_bottom_sheet.dart';
 
 import '../test_helpers/extensions.dart';
 
