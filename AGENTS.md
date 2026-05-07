@@ -3,7 +3,6 @@
 ## Code Organization
 
 - Many small files over few large files
-- Organize by layer: screens, models, providers, repositories
 - Keep files under 200 lines (400 max)
 
 ## Code Style
