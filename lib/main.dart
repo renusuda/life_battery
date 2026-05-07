@@ -3,16 +3,14 @@ import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:home_widget/home_widget.dart';
+import 'package:life_battery/app.dart';
 import 'package:life_battery/firebase_options.dart';
-import 'package:life_battery/providers/app_theme_mode.dart';
 import 'package:life_battery/repositories/local_database.dart';
-import 'package:life_battery/screens/home_screen.dart';
 import 'package:life_battery/services/local_notification_service.dart';
-import 'package:life_battery/widgets/common_material_app.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -52,37 +50,4 @@ void main() async {
       child: App(),
     ),
   );
-}
-
-/// Application
-class App extends ConsumerWidget {
-  const App({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final appThemeMode = ref.watch(appThemeModeProvider);
-
-    return switch (appThemeMode) {
-      AsyncData(:final value) => CommonMaterialApp(
-        themeMode: value,
-        home: const HomeScreen(),
-      ),
-      AsyncError() => CommonMaterialApp(
-        home: Scaffold(
-          appBar: AppBar(),
-          body: const Center(
-            child: Text(''),
-          ),
-        ),
-      ),
-      _ => CommonMaterialApp(
-        home: Scaffold(
-          appBar: AppBar(),
-          body: const Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      ),
-    };
-  }
 }
