@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_battery/src/repositories/lifespan_repositories.dart';
+import 'package:life_battery/src/features/lifespan/data/lifespan_repositories.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_theme_mode.g.dart';

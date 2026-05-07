@@ -4,10 +4,10 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:life_battery/src/features/lifespan/presentation/pages/user_deleted_page.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/app_theme_mode.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/local_database.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
-import 'package:life_battery/src/presentation/pages/user_deleted_page.dart';
-import 'package:life_battery/src/presentation/providers/app_theme_mode.dart';
-import 'package:life_battery/src/presentation/providers/local_database.dart';
 import 'package:life_battery/src/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 

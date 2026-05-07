@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:life_battery/src/presentation/providers/lifespan_range_manager.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager.dart';
 import 'package:life_battery/src/utils/extensions.dart';
 
 /// Formats the given date into a string.

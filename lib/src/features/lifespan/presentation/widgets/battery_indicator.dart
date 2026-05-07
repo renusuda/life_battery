@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_battery/src/domain/life_battery_status.dart';
+import 'package:life_battery/src/features/lifespan/domain/life_battery_status.dart';
 
 /// A widget that shows the remaining of battery.
 class BatteryIndicator extends StatelessWidget {

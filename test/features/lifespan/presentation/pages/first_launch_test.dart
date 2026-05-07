@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:life_battery/src/domain/lifespan_range.dart';
-import 'package:life_battery/src/presentation/pages/lifespan_progress_page.dart';
-import 'package:life_battery/src/presentation/widgets/common_material_app.dart';
-import 'package:life_battery/src/presentation/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
+import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
+import 'package:life_battery/src/features/lifespan/presentation/widgets/common_material_app.dart';
+import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 
-import '../../../test_helpers/extensions.dart';
+import '../../../../../test_helpers/extensions.dart';
 
 void main() {
   group('First launch', () {

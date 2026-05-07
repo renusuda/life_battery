@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:life_battery/src/domain/lifespan_range.dart';
-import 'package:life_battery/src/repositories/lifespan_repositories.dart';
+import 'package:life_battery/src/features/lifespan/data/lifespan_repositories.dart';
+import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'lifespan_range_manager.g.dart';

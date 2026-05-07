@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:life_battery/src/domain/lifespan_range.dart';
+import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 
 void main() {
   group('Test remainingLifePercentage', () {
