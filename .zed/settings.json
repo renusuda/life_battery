@@ -19,5 +19,8 @@
     "**/.settings",
     "**/*.g.dart",
     "**/*.freezed.dart",
+    "**/*_localizations.dart",
+    "**/*_localizations_en.dart",
+    "**/*_localizations_ja.dart",
   ],
 }
