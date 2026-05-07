@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:life_battery/src/presentation/pages/settings_screen.dart';
 import 'package:life_battery/src/presentation/providers/app_theme_mode.dart';
-import 'package:life_battery/src/presentation/screens/settings_screen.dart';
 import 'package:life_battery/src/presentation/widgets/common_material_app.dart';
 import 'package:url_launcher/url_launcher.dart';
 
