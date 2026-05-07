@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:life_battery/l10n/app_localizations.dart';
-import 'package:life_battery/providers/is_deleted_user.dart';
-import 'package:life_battery/providers/is_initial_user.dart';
-import 'package:life_battery/screens/lifespan_progress_screen.dart';
-import 'package:life_battery/screens/user_deleted_screen.dart';
+import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/providers/is_deleted_user.dart';
+import 'package:life_battery/src/providers/is_initial_user.dart';
+import 'package:life_battery/src/screens/lifespan_progress_screen.dart';
+import 'package:life_battery/src/screens/user_deleted_screen.dart';
 
 /// Home screen
 class HomeScreen extends ConsumerWidget {

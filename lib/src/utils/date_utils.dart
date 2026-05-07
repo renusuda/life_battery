@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:life_battery/providers/lifespan_range_manager.dart';
-import 'package:life_battery/utils/extensions.dart';
+import 'package:life_battery/src/providers/lifespan_range_manager.dart';
+import 'package:life_battery/src/utils/extensions.dart';
 
 /// Formats the given date into a string.
 String formatDate(

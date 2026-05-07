@@ -4,11 +4,11 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'package:life_battery/l10n/app_localizations.dart';
-import 'package:life_battery/providers/app_theme_mode.dart';
-import 'package:life_battery/providers/local_database.dart';
-import 'package:life_battery/screens/user_deleted_screen.dart';
-import 'package:life_battery/utils/extensions.dart';
+import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/providers/app_theme_mode.dart';
+import 'package:life_battery/src/providers/local_database.dart';
+import 'package:life_battery/src/screens/user_deleted_screen.dart';
+import 'package:life_battery/src/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// A screen that shows the settings.

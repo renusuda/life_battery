@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:home_widget/home_widget.dart';
-import 'package:life_battery/models/lifespan_range.dart';
-import 'package:life_battery/repositories/local_database.dart';
+import 'package:life_battery/src/models/lifespan_range.dart';
+import 'package:life_battery/src/repositories/local_database.dart';
 import 'package:sqflite/sqflite.dart';
 
 /// A class that manages the lifespan records in the database.

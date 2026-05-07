@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:life_battery/widgets/common_material_app.dart';
-import 'package:life_battery/widgets/date_range_picker.dart';
+import 'package:life_battery/src/widgets/common_material_app.dart';
+import 'package:life_battery/src/widgets/date_range_picker.dart';
 
 void main() {
   group('Date range picker interactions', () {

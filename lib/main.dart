@@ -7,10 +7,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:home_widget/home_widget.dart';
-import 'package:life_battery/app.dart';
 import 'package:life_battery/firebase_options.dart';
-import 'package:life_battery/repositories/local_database.dart';
-import 'package:life_battery/services/local_notification_service.dart';
+import 'package:life_battery/src/app.dart';
+import 'package:life_battery/src/repositories/local_database.dart';
+import 'package:life_battery/src/services/local_notification_service.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
