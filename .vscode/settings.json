@@ -1,16 +1,16 @@
 {
-  "dart.flutterSdkPath": ".fvm/versions/3.38.5",
+  "dart.flutterSdkPath": ".fvm/versions/3.41.9",
   "dart.flutterRunAdditionalArgs": ["--no-enable-impeller"],
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": "always",
-    "source.organizeImports": "always"
+    "source.organizeImports": "always",
   },
   "files.exclude": {
     "**/*.freezed.dart": true,
     "**/*.g.dart": true,
     "**/*_localizations.dart": true,
     "**/*_localizations_en.dart": true,
-    "**/*_localizations_ja.dart": true
-  }
+    "**/*_localizations_ja.dart": true,
+  },
 }
