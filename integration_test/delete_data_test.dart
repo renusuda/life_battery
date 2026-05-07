@@ -25,7 +25,7 @@ void main() {
       await tester.tap(find.byType(ModalBarrier).last);
       await tester.pumpUntilGone(find.byType(DateInputBottomSheet));
 
-      // Go to settings screen
+      // Go to settings page
       await tester.tap(find.byIcon(Icons.settings_outlined));
       await tester.pumpAndSettle();
 

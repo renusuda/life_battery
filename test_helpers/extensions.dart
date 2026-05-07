@@ -7,7 +7,7 @@ extension WidgetTesterExtension on WidgetTester {
   ///
   /// Example:
   /// ```dart
-  /// await tester.pumpUntilFound(find.byType(HomeScreen));
+  /// await tester.pumpUntilFound(find.byType(HomePage));
   /// ```
   Future<void> pumpUntilFound(
     Finder finder, {

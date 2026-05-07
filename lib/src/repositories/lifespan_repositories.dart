@@ -240,7 +240,7 @@ class LifespanRepository {
     } on DatabaseException catch (_) {}
   }
 
-  /// Syncs the lifespan range to the home screen widget.
+  /// Syncs the lifespan range to the home page widget.
   Future<void> syncLifespanRangeToWidget({
     required DateTime birthDate,
     required int idealAge,
@@ -257,7 +257,7 @@ class LifespanRepository {
     }
   }
 
-  /// Syncs the display mode (percentage vs remaining days) to the home screen
+  /// Syncs the display mode (percentage vs remaining days) to the home page
   /// widget.
   Future<void> syncDisplayModeToWidget({
     required bool isPercentageMode,

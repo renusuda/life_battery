@@ -15,7 +15,7 @@ import 'package:life_battery/src/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/services/local_notification_service.dart';
 import 'package:life_battery/src/utils/extensions.dart';
 
-/// Screen for showing the remaining of lifespan
+/// Page for showing the remaining of lifespan
 class LifespanProgressPage extends ConsumerWidget {
   const LifespanProgressPage({
     required this.isInitialUser,

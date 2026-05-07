@@ -12,7 +12,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Restart', () {
-    testWidgets('Shows battery screen instead of date input after restart', (
+    testWidgets('Shows battery page instead of date input after restart', (
       tester,
     ) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
@@ -37,7 +37,7 @@ void main() {
       );
       await tester.pumpUntilFound(find.byType(LifeProgressContent));
 
-      // Verify battery screen shows first (not DateInputBottomSheet)
+      // Verify battery page shows first (not DateInputBottomSheet)
       expect(find.byType(LifeProgressContent), findsOneWidget);
       expect(find.byType(DateInputBottomSheet), findsNothing);
     });

@@ -16,7 +16,7 @@ void main() {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
 
       await tester.pumpWidget(
-        const TestFirstLaunchScreen(),
+        const TestFirstLaunchPage(),
       );
       await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
 
@@ -25,8 +25,8 @@ void main() {
   });
 }
 
-class TestFirstLaunchScreen extends StatelessWidget {
-  const TestFirstLaunchScreen({super.key});
+class TestFirstLaunchPage extends StatelessWidget {
+  const TestFirstLaunchPage({super.key});
 
   @override
   Widget build(BuildContext context) {

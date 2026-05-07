@@ -11,7 +11,7 @@ import 'package:life_battery/src/presentation/providers/local_database.dart';
 import 'package:life_battery/src/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// A screen that shows the settings.
+/// A page that shows the settings.
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -274,7 +274,7 @@ class DeleteAllListTile extends ConsumerWidget {
                   Navigator.pop(context);
                   // Delete all data from database
                   ref.read(deleteAllDataProvider);
-                  // Navigate to user deleted screen
+                  // Navigate to user deleted page
                   Navigator.pop(context);
                   await Navigator.pushReplacement(
                     context,

@@ -6,7 +6,7 @@ import 'package:life_battery/src/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/presentation/providers/is_deleted_user.dart';
 import 'package:life_battery/src/presentation/providers/is_initial_user.dart';
 
-/// Home screen
+/// Home page
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
@@ -16,8 +16,8 @@ class HomePage extends ConsumerWidget {
     final isInitialUser = ref.watch(isInitialUserProvider);
 
     return switch (isDeletedUser) {
-      // If the user is initial user, show the tutorial screen
-      // Otherwise, show the lifespan progress screen
+      // If the user is initial user, show the tutorial page
+      // Otherwise, show the lifespan progress page
       AsyncData(:final value) =>
         value
             ? const UserDeletedPage()
@@ -33,7 +33,7 @@ class HomePage extends ConsumerWidget {
   }
 }
 
-/// Error screen
+/// Error page
 class ErrorPage extends StatelessWidget {
   const ErrorPage({
     super.key,
@@ -52,7 +52,7 @@ class ErrorPage extends StatelessWidget {
   }
 }
 
-/// Loading screen
+/// Loading page
 class LoadingPage extends StatelessWidget {
   const LoadingPage({
     super.key,
