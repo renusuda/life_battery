@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager.dart';
@@ -13,7 +14,6 @@ import 'package:life_battery/src/features/lifespan/presentation/widgets/date_inp
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/features/lifespan/services/local_notification_service.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
-import 'package:life_battery/src/utils/extensions.dart';
 
 /// Page for showing the remaining of lifespan
 class LifespanProgressPage extends ConsumerWidget {

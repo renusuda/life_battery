@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_battery/src/utils/extensions.dart';
+import 'package:life_battery/src/extensions/extensions.dart';
 
 part 'lifespan_range.freezed.dart';
 part 'lifespan_range.g.dart';
