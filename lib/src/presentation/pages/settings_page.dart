@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
-import 'package:life_battery/src/presentation/pages/user_deleted_screen.dart';
+import 'package:life_battery/src/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/presentation/providers/app_theme_mode.dart';
 import 'package:life_battery/src/presentation/providers/local_database.dart';
 import 'package:life_battery/src/utils/extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// A screen that shows the settings.
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -279,7 +279,7 @@ class DeleteAllListTile extends ConsumerWidget {
                   await Navigator.pushReplacement(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (context) => const UserDeletedScreen(),
+                      builder: (context) => const UserDeletedPage(),
                     ),
                   );
                 },

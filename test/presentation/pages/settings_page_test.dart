@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:life_battery/src/presentation/pages/settings_screen.dart';
+import 'package:life_battery/src/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/presentation/providers/app_theme_mode.dart';
 import 'package:life_battery/src/presentation/widgets/common_material_app.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,7 +10,7 @@ void main() {
   group('Privacy policy', () {
     testWidgets('Displays privacy policy label', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
-      await tester.pumpWidget(const TestSettingsScreen());
+      await tester.pumpWidget(const TestSettingsPage());
 
       expect(find.text('Privacy policy'), findsOneWidget);
     });
@@ -53,7 +53,7 @@ void main() {
   group('Notification settings', () {
     testWidgets('Displays notification settings label', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
-      await tester.pumpWidget(const TestSettingsScreen());
+      await tester.pumpWidget(const TestSettingsPage());
 
       expect(find.text('Notification settings'), findsOneWidget);
     });
@@ -84,14 +84,14 @@ void main() {
   group('Delete data', () {
     testWidgets('Displays delete all label', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
-      await tester.pumpWidget(const TestSettingsScreen());
+      await tester.pumpWidget(const TestSettingsPage());
 
       expect(find.text('Delete Data'), findsOneWidget);
     });
 
     testWidgets('Shows confirmation dialog when tapped', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
-      await tester.pumpWidget(const TestSettingsScreen());
+      await tester.pumpWidget(const TestSettingsPage());
 
       await tester.tap(find.text('Delete Data'));
       await tester.pumpAndSettle();
@@ -101,7 +101,7 @@ void main() {
 
     testWidgets('Dismisses dialog when cancel is tapped', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
-      await tester.pumpWidget(const TestSettingsScreen());
+      await tester.pumpWidget(const TestSettingsPage());
 
       await tester.tap(find.text('Delete Data'));
       await tester.pumpAndSettle();
@@ -136,7 +136,7 @@ void main() {
       await tester.tap(find.text('Light').hitTestable());
       await tester.pumpAndSettle();
 
-      final context = tester.element(find.byType(SettingsScreen));
+      final context = tester.element(find.byType(SettingsPage));
       expect(Theme.of(context).brightness, Brightness.light);
     });
 
@@ -162,7 +162,7 @@ void main() {
       await tester.tap(find.text('Dark').hitTestable());
       await tester.pumpAndSettle();
 
-      final context = tester.element(find.byType(SettingsScreen));
+      final context = tester.element(find.byType(SettingsPage));
       expect(Theme.of(context).brightness, Brightness.dark);
     });
   });
@@ -171,14 +171,14 @@ void main() {
     testWidgets('Device locale is English when set to English', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(
-        const TestSettingsScreen(),
+        const TestSettingsPage(),
       );
       expect(find.text('Rate this app'), findsOneWidget);
     });
     testWidgets('Device locale is Chinese when set to English', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('zh')];
       await tester.pumpWidget(
-        const TestSettingsScreen(),
+        const TestSettingsPage(),
       );
       expect(find.text('Rate this app'), findsOneWidget);
     });
@@ -187,21 +187,21 @@ void main() {
     ) async {
       tester.platformDispatcher.localesTestValue = [const Locale('ja')];
       await tester.pumpWidget(
-        const TestSettingsScreen(),
+        const TestSettingsPage(),
       );
       expect(find.text('アプリをレビューする'), findsOneWidget);
     });
   });
 }
 
-class TestSettingsScreen extends StatelessWidget {
-  const TestSettingsScreen({super.key});
+class TestSettingsPage extends StatelessWidget {
+  const TestSettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const ProviderScope(
       child: CommonMaterialApp(
-        home: SettingsScreen(),
+        home: SettingsPage(),
       ),
     );
   }
@@ -217,7 +217,7 @@ class TestSettingsApp extends ConsumerWidget {
     return switch (appThemeMode) {
       AsyncData(:final value) => CommonMaterialApp(
         themeMode: value,
-        home: const SettingsScreen(),
+        home: const SettingsPage(),
       ),
       AsyncError() => const CommonMaterialApp(
         home: SizedBox.shrink(),

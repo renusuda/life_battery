@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:life_battery/src/models/lifespan_range.dart';
-import 'package:life_battery/src/presentation/pages/lifespan_progress_screen.dart';
+import 'package:life_battery/src/presentation/pages/lifespan_progress_page.dart';
 import 'package:life_battery/src/presentation/providers/display_mode_manager.dart';
 import 'package:life_battery/src/presentation/providers/lifespan_range_manager.dart';
 import 'package:life_battery/src/presentation/widgets/battery_indicator.dart';

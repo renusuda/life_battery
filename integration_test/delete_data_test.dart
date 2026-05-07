@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/src/app.dart';
-import 'package:life_battery/src/presentation/pages/user_deleted_screen.dart';
+import 'package:life_battery/src/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/presentation/widgets/date_input_bottom_sheet.dart';
 
 import '../test_helpers/extensions.dart';
@@ -36,7 +36,7 @@ void main() {
       await tester.tap(find.text('Delete'));
       await tester.pumpAndSettle();
 
-      expect(find.byType(UserDeletedScreen), findsOneWidget);
+      expect(find.byType(UserDeletedPage), findsOneWidget);
 
       // Restart app
       await tester.pumpWidget(
@@ -46,8 +46,8 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Verify UserDeletedScreen is still shown after restart
-      expect(find.byType(UserDeletedScreen), findsOneWidget);
+      // Verify UserDeletedPage is still shown after restart
+      expect(find.byType(UserDeletedPage), findsOneWidget);
     });
   });
 }

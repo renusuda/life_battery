@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/models/lifespan_range.dart';
-import 'package:life_battery/src/presentation/pages/settings_screen.dart';
+import 'package:life_battery/src/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/presentation/providers/display_mode_manager.dart';
 import 'package:life_battery/src/presentation/providers/has_long_pressed_battery.dart';
 import 'package:life_battery/src/presentation/providers/is_initial_user.dart';
@@ -16,8 +16,8 @@ import 'package:life_battery/src/services/local_notification_service.dart';
 import 'package:life_battery/src/utils/extensions.dart';
 
 /// Screen for showing the remaining of lifespan
-class LifespanProgressScreen extends ConsumerWidget {
-  const LifespanProgressScreen({
+class LifespanProgressPage extends ConsumerWidget {
+  const LifespanProgressPage({
     required this.isInitialUser,
     super.key,
   });
@@ -43,7 +43,7 @@ class LifespanProgressScreen extends ConsumerWidget {
               await Navigator.push(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (context) => const SettingsScreen(),
+                  builder: (context) => const SettingsPage(),
                 ),
               );
             },

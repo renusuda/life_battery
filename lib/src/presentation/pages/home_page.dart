@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
-import 'package:life_battery/src/presentation/pages/lifespan_progress_screen.dart';
-import 'package:life_battery/src/presentation/pages/user_deleted_screen.dart';
+import 'package:life_battery/src/presentation/pages/lifespan_progress_page.dart';
+import 'package:life_battery/src/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/presentation/providers/is_deleted_user.dart';
 import 'package:life_battery/src/presentation/providers/is_initial_user.dart';
 
 /// Home screen
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+class HomePage extends ConsumerWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,22 +20,22 @@ class HomeScreen extends ConsumerWidget {
       // Otherwise, show the lifespan progress screen
       AsyncData(:final value) =>
         value
-            ? const UserDeletedScreen()
+            ? const UserDeletedPage()
             : isInitialUser.when(
                 data: (isInitial) =>
-                    LifespanProgressScreen(isInitialUser: isInitial),
-                error: (error, _) => const ErrorScreen(),
-                loading: () => const LoadingScreen(),
+                    LifespanProgressPage(isInitialUser: isInitial),
+                error: (error, _) => const ErrorPage(),
+                loading: () => const LoadingPage(),
               ),
-      AsyncError() => const ErrorScreen(),
-      _ => const LoadingScreen(),
+      AsyncError() => const ErrorPage(),
+      _ => const LoadingPage(),
     };
   }
 }
 
 /// Error screen
-class ErrorScreen extends StatelessWidget {
-  const ErrorScreen({
+class ErrorPage extends StatelessWidget {
+  const ErrorPage({
     super.key,
   });
 
@@ -53,8 +53,8 @@ class ErrorScreen extends StatelessWidget {
 }
 
 /// Loading screen
-class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({
+class LoadingPage extends StatelessWidget {
+  const LoadingPage({
     super.key,
   });
 
