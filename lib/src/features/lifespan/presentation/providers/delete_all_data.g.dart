@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'local_database.dart';
+part of 'delete_all_data.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -44,4 +44,4 @@ final class DeleteAllDataProvider
   }
 }
 
-String _$deleteAllDataHash() => r'14b5c561dfe60776912811e88c7a99cc435a37e5';
+String _$deleteAllDataHash() => r'028cf1a02449f3cc69733a16b158b4126c20dd1a';

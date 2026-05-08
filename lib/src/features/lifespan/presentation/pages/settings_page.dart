@@ -7,7 +7,7 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/app_theme_mode.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/local_database.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/delete_all_data.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
