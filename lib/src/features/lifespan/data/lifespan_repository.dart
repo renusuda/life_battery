@@ -46,8 +46,8 @@ class LifespanRepository {
     );
   }
 
-  Future<void> updateThemeMode({required String themeMode}) {
-    return _localDataSource.updateThemeMode(themeMode: themeMode);
+  Future<void> updateThemeMode({required ThemeMode themeMode}) {
+    return _localDataSource.updateThemeMode(themeMode: themeMode.name);
   }
 
   Future<void> updateUserIsNotInitialUser() {

@@ -18,7 +18,7 @@ class AppThemeMode extends _$AppThemeMode {
       ref
           .read(lifespanRepositoryProvider)
           .updateThemeMode(
-            themeMode: themeMode.name,
+            themeMode: themeMode,
           ),
     );
   }
