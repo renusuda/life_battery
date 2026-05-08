@@ -219,4 +219,20 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
       }
     } on DatabaseException catch (_) {}
   }
+
+  /// Deletes all data.
+  @override
+  Future<void> deleteAllData() async {
+    try {
+      final db = await _localDatabase.database;
+      await db.update(_tableName, {
+        _columnBirthDate: '2000-01-01T00:00:00.000',
+        _columnIdealAge: 100,
+        _columnIsInitialUser: 0,
+        _columnIsDeletedUser: 1,
+        _columnHasLongPressedBattery: 0,
+        _columnIsPercentageMode: 1,
+      });
+    } on DatabaseException catch (_) {}
+  }
 }

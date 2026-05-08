@@ -110,22 +110,6 @@ class LocalDatabase {
     }
   }
 
-  /// Deletes all data.
-  Future<void> deleteAllData() async {
-    final db = await database;
-    await db.update(
-      _tableName,
-      {
-        _columnBirthDate: '2000-01-01T00:00:00.000',
-        _columnIdealAge: 100,
-        _columnIsInitialUser: 0,
-        _columnIsDeletedUser: 1,
-        _columnHasLongPressedBattery: 0,
-        _columnIsPercentageMode: 1,
-      },
-    );
-  }
-
   /// Closes the database.
   Future<void> closeDatabase() async {
     if (_database != null) {

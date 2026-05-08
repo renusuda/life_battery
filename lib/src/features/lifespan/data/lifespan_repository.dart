@@ -43,6 +43,8 @@ class LifespanRepository {
   Future<void> updateHasLongPressed() =>
       _localDataSource.updateHasLongPressed();
 
+  Future<void> deleteAllData() => _localDataSource.deleteAllData();
+
   Future<void> syncLifespanRangeToWidget({
     required DateTime birthDate,
     required int idealAge,

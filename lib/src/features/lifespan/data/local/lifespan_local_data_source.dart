@@ -25,4 +25,6 @@ abstract interface class LifespanLocalDataSource {
   Future<void> updateIsPercentageMode({required bool isPercentageMode});
 
   Future<void> updateHasLongPressed();
+
+  Future<void> deleteAllData();
 }
