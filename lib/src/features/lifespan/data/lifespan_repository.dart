@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:life_battery/src/features/lifespan/data/local/lifespan_local_data_source.dart';
@@ -11,7 +12,14 @@ class LifespanRepository {
 
   Future<LifespanRange> getLifespan() => _localDataSource.getLifespan();
 
-  Future<String> getThemeMode() => _localDataSource.getThemeMode();
+  Future<ThemeMode> getThemeMode() async {
+    final response = await _localDataSource.getThemeMode();
+    return switch (response) {
+      'light' => ThemeMode.light,
+      'dark' => ThemeMode.dark,
+      _ => ThemeMode.system,
+    };
+  }
 
   Future<bool> getIsInitialUser() => _localDataSource.getIsInitialUser();
 

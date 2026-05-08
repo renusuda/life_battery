@@ -10,14 +10,7 @@ class AppThemeMode extends _$AppThemeMode {
   Future<ThemeMode> build() => _fetch();
 
   Future<ThemeMode> _fetch() async {
-    final response = await ref.read(lifespanRepositoryProvider).getThemeMode();
-    if (response == 'light') {
-      return ThemeMode.light;
-    } else if (response == 'dark') {
-      return ThemeMode.dark;
-    } else {
-      return ThemeMode.system;
-    }
+    return ref.read(lifespanRepositoryProvider).getThemeMode();
   }
 
   Future<void> updateThemeMode(ThemeMode themeMode) async {
