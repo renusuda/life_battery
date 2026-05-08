@@ -10,7 +10,9 @@ class LifespanRepository {
 
   final LifespanLocalDataSource _localDataSource;
 
-  Future<LifespanRange> getLifespan() => _localDataSource.getLifespan();
+  Future<LifespanRange> getLifespan() {
+    return _localDataSource.getLifespan();
+  }
 
   Future<ThemeMode> getThemeMode() async {
     final response = await _localDataSource.getThemeMode();
@@ -21,37 +23,53 @@ class LifespanRepository {
     };
   }
 
-  Future<bool> getIsInitialUser() => _localDataSource.getIsInitialUser();
+  Future<bool> getIsInitialUser() {
+    return _localDataSource.getIsInitialUser();
+  }
 
-  Future<bool> getIsDeletedUser() => _localDataSource.getIsDeletedUser();
+  Future<bool> getIsDeletedUser() {
+    return _localDataSource.getIsDeletedUser();
+  }
 
-  Future<bool> getHasLongPressed() => _localDataSource.getHasLongPressed();
+  Future<bool> getHasLongPressed() {
+    return _localDataSource.getHasLongPressed();
+  }
 
-  Future<bool> getIsPercentageMode() => _localDataSource.getIsPercentageMode();
+  Future<bool> getIsPercentageMode() {
+    return _localDataSource.getIsPercentageMode();
+  }
 
   Future<void> updateLifespan({
     required DateTime birthDate,
     required int idealAge,
-  }) => _localDataSource.updateLifespan(
-    birthDate: birthDate,
-    idealAge: idealAge,
-  );
+  }) {
+    return _localDataSource.updateLifespan(
+      birthDate: birthDate,
+      idealAge: idealAge,
+    );
+  }
 
-  Future<void> updateThemeMode({required String themeMode}) =>
-      _localDataSource.updateThemeMode(themeMode: themeMode);
+  Future<void> updateThemeMode({required String themeMode}) {
+    return _localDataSource.updateThemeMode(themeMode: themeMode);
+  }
 
-  Future<void> updateUserIsNotInitialUser() =>
-      _localDataSource.updateUserIsNotInitialUser();
+  Future<void> updateUserIsNotInitialUser() {
+    return _localDataSource.updateUserIsNotInitialUser();
+  }
 
-  Future<void> updateIsPercentageMode({required bool isPercentageMode}) =>
-      _localDataSource.updateIsPercentageMode(
-        isPercentageMode: isPercentageMode,
-      );
+  Future<void> updateIsPercentageMode({required bool isPercentageMode}) {
+    return _localDataSource.updateIsPercentageMode(
+      isPercentageMode: isPercentageMode,
+    );
+  }
 
-  Future<void> updateHasLongPressed() =>
-      _localDataSource.updateHasLongPressed();
+  Future<void> updateHasLongPressed() {
+    return _localDataSource.updateHasLongPressed();
+  }
 
-  Future<void> deleteAllData() => _localDataSource.deleteAllData();
+  Future<void> deleteAllData() {
+    return _localDataSource.deleteAllData();
+  }
 
   Future<void> syncLifespanRangeToWidget({
     required DateTime birthDate,
