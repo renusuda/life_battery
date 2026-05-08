@@ -33,7 +33,7 @@ final class AppThemeModeProvider
   AppThemeMode create() => AppThemeMode();
 }
 
-String _$appThemeModeHash() => r'2643f43a92184bf4bd462fff83cb380cde5cfaef';
+String _$appThemeModeHash() => r'9f1611f4488369d79d556a8a74a4c3074c638c90';
 
 abstract class _$AppThemeMode extends $AsyncNotifier<ThemeMode> {
   FutureOr<ThemeMode> build();

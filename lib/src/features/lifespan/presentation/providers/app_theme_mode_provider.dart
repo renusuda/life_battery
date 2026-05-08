@@ -9,11 +9,8 @@ part 'app_theme_mode_provider.g.dart';
 @riverpod
 class AppThemeMode extends _$AppThemeMode {
   @override
-  Future<ThemeMode> build() => _fetch();
-
-  Future<ThemeMode> _fetch() async {
-    return ref.read(lifespanRepositoryProvider).getThemeMode();
-  }
+  Future<ThemeMode> build() =>
+      ref.read(lifespanRepositoryProvider).getThemeMode();
 
   Future<void> updateThemeMode(ThemeMode themeMode) async {
     state = AsyncData(themeMode);
