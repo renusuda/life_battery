@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:life_battery/src/database/local_database.dart';
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository.dart';
 import 'package:life_battery/src/features/lifespan/data/local/cache_lifespan_local_data_source.dart';
@@ -11,7 +9,6 @@ part 'lifespan_repository_provider.g.dart';
 @Riverpod(keepAlive: true)
 LocalDatabase localDatabase(Ref ref) {
   final database = LocalDatabase();
-  ref.onDispose(() => unawaited(database.closeDatabase()));
   return database;
 }
 

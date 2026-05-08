@@ -48,7 +48,7 @@ final class LocalDatabaseProvider
   }
 }
 
-String _$localDatabaseHash() => r'7afc1eeaffbf0c36d399ad451dbe276ba8b09187';
+String _$localDatabaseHash() => r'afc96f0851e573f7b590118a7a72bfd60a86cc50';
 
 @ProviderFor(lifespanLocalDataSource)
 const lifespanLocalDataSourceProvider = LifespanLocalDataSourceProvider._();

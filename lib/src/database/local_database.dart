@@ -109,11 +109,4 @@ class LocalDatabase {
       throw Exception('Failed to initialize the database $e');
     }
   }
-
-  /// Closes the database.
-  Future<void> closeDatabase() async {
-    if (_database != null) {
-      await _database!.close();
-    }
-  }
 }
