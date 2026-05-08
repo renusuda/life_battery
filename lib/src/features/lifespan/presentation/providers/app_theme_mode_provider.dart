@@ -8,10 +8,9 @@ part 'app_theme_mode_provider.g.dart';
 @riverpod
 class AppThemeMode extends _$AppThemeMode {
   @override
-  Future<ThemeMode> build() => fetchThemeMode();
+  Future<ThemeMode> build() => _fetchThemeMode();
 
-  /// Fetches the theme mode from Local Storage.
-  Future<ThemeMode> fetchThemeMode() async {
+  Future<ThemeMode> _fetchThemeMode() async {
     final response = await ref.read(lifespanRepositoryProvider).getThemeMode();
     if (response == 'light') {
       return ThemeMode.light;
@@ -29,7 +28,7 @@ class AppThemeMode extends _$AppThemeMode {
         .updateThemeMode(
           themeMode: themeMode.name,
         );
-    final newThemeMode = await fetchThemeMode();
+    final newThemeMode = await _fetchThemeMode();
     state = AsyncData(newThemeMode);
   }
 }
