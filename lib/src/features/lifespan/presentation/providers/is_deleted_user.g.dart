@@ -36,7 +36,7 @@ final class IsDeletedUserProvider
   IsDeletedUser create() => IsDeletedUser();
 }
 
-String _$isDeletedUserHash() => r'e01b403f6138e85f7741976f6cdc1b2e796d8388';
+String _$isDeletedUserHash() => r'1ef4c59b86b64dec2d9c57cca0169b6943ad40e0';
 
 /// Whether the user is deleted.
 
