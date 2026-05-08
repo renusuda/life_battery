@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -14,11 +16,13 @@ class AppThemeMode extends _$AppThemeMode {
   }
 
   Future<void> updateThemeMode(ThemeMode themeMode) async {
-    await ref
-        .read(lifespanRepositoryProvider)
-        .updateThemeMode(
-          themeMode: themeMode.name,
-        );
-    ref.invalidateSelf();
+    state = AsyncData(themeMode);
+    unawaited(
+      ref
+          .read(lifespanRepositoryProvider)
+          .updateThemeMode(
+            themeMode: themeMode.name,
+          ),
+    );
   }
 }
