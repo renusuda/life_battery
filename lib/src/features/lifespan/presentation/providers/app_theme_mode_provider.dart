@@ -4,7 +4,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_theme_mode_provider.g.dart';
 
-/// app theme mode.
 @riverpod
 class AppThemeMode extends _$AppThemeMode {
   @override
@@ -21,7 +20,6 @@ class AppThemeMode extends _$AppThemeMode {
     }
   }
 
-  /// Updates the theme mode in Local Storage.
   Future<void> updateThemeMode(ThemeMode themeMode) async {
     await ref
         .read(lifespanRepositoryProvider)

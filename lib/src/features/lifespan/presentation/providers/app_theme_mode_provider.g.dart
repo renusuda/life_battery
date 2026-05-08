@@ -8,15 +8,12 @@ part of 'app_theme_mode_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// app theme mode.
 
 @ProviderFor(AppThemeMode)
 const appThemeModeProvider = AppThemeModeProvider._();
 
-/// app theme mode.
 final class AppThemeModeProvider
     extends $AsyncNotifierProvider<AppThemeMode, ThemeMode> {
-  /// app theme mode.
   const AppThemeModeProvider._()
     : super(
         from: null,
@@ -37,8 +34,6 @@ final class AppThemeModeProvider
 }
 
 String _$appThemeModeHash() => r'1a75779f700a5333ec226a4e127f63da5ad8f388';
-
-/// app theme mode.
 
 abstract class _$AppThemeMode extends $AsyncNotifier<ThemeMode> {
   FutureOr<ThemeMode> build();
