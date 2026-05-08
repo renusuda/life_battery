@@ -10,7 +10,7 @@ part 'app_theme_mode_provider.g.dart';
 class AppThemeMode extends _$AppThemeMode {
   @override
   Future<ThemeMode> build() =>
-      ref.read(lifespanRepositoryProvider).getThemeMode();
+      ref.watch(lifespanRepositoryProvider).getThemeMode();
 
   Future<void> updateThemeMode(ThemeMode themeMode) async {
     state = AsyncData(themeMode);
