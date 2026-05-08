@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:life_battery/src/features/lifespan/data/lifespan_repositories.dart';
+import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'display_mode_manager.g.dart';
@@ -9,13 +9,11 @@ part 'display_mode_manager.g.dart';
 /// days.
 @riverpod
 class DisplayModeManager extends _$DisplayModeManager {
-  static final _lifespanRepository = LifespanRepository();
-
   @override
   Future<bool> build() async {
     final isPercentageMode = await fetchIsPercentageMode();
     unawaited(
-      _lifespanRepository.syncDisplayModeToWidget(
+      ref.read(lifespanRepositoryProvider).syncDisplayModeToWidget(
         isPercentageMode: isPercentageMode,
       ),
     );
@@ -24,7 +22,8 @@ class DisplayModeManager extends _$DisplayModeManager {
 
   /// Fetches whether the battery is shown in percentage mode.
   Future<bool> fetchIsPercentageMode() async {
-    final response = await _lifespanRepository.getIsPercentageMode();
+    final response =
+        await ref.read(lifespanRepositoryProvider).getIsPercentageMode();
     return response;
   }
 
@@ -33,11 +32,13 @@ class DisplayModeManager extends _$DisplayModeManager {
     final current = state.value ?? true;
     final next = !current;
     state = AsyncData(next);
-    await _lifespanRepository.updateIsPercentageMode(
-      isPercentageMode: next,
-    );
+    await ref
+        .read(lifespanRepositoryProvider)
+        .updateIsPercentageMode(isPercentageMode: next);
     unawaited(
-      _lifespanRepository.syncDisplayModeToWidget(isPercentageMode: next),
+      ref
+          .read(lifespanRepositoryProvider)
+          .syncDisplayModeToWidget(isPercentageMode: next),
     );
   }
 }

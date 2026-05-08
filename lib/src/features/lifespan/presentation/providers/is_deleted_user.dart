@@ -1,4 +1,4 @@
-import 'package:life_battery/src/features/lifespan/data/lifespan_repositories.dart';
+import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'is_deleted_user.g.dart';
@@ -6,15 +6,13 @@ part 'is_deleted_user.g.dart';
 /// Whether the user is deleted.
 @riverpod
 class IsDeletedUser extends _$IsDeletedUser {
-  /// lifespan repository
-  static final _lifespanRepository = LifespanRepository();
-
   @override
   Future<bool> build() => fetchIsDeletedUser();
 
   /// Fetches whether user is deleted from Local Storage.
   Future<bool> fetchIsDeletedUser() async {
-    final response = await _lifespanRepository.getIsDeletedUser();
+    final response =
+        await ref.read(lifespanRepositoryProvider).getIsDeletedUser();
     return response;
   }
 }

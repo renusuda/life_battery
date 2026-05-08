@@ -1,22 +1,21 @@
-import 'package:life_battery/src/features/lifespan/data/lifespan_repositories.dart';
+import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'has_long_pressed_battery.g.dart';
 
 @riverpod
 class HasLongPressedBattery extends _$HasLongPressedBattery {
-  static final _lifespanRepository = LifespanRepository();
-
   @override
   Future<bool> build() => fetchHasLongPressedBattery();
 
   Future<bool> fetchHasLongPressedBattery() async {
-    final response = await _lifespanRepository.getHasLongPressed();
+    final response =
+        await ref.read(lifespanRepositoryProvider).getHasLongPressed();
     return response;
   }
 
   Future<void> updateHasLongPressedBattery() async {
-    await _lifespanRepository.updateHasLongPressed();
+    await ref.read(lifespanRepositoryProvider).updateHasLongPressed();
     state = const AsyncData(true);
   }
 }

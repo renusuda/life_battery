@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_battery/src/features/lifespan/data/lifespan_repositories.dart';
+import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_theme_mode.g.dart';
@@ -7,15 +7,12 @@ part 'app_theme_mode.g.dart';
 /// app theme mode.
 @riverpod
 class AppThemeMode extends _$AppThemeMode {
-  /// lifespan repository
-  static final _lifespanRepository = LifespanRepository();
-
   @override
   Future<ThemeMode> build() => fetchThemeMode();
 
   /// Fetches the theme mode from Local Storage.
   Future<ThemeMode> fetchThemeMode() async {
-    final response = await _lifespanRepository.getThemeMode();
+    final response = await ref.read(lifespanRepositoryProvider).getThemeMode();
     if (response == 'light') {
       return ThemeMode.light;
     } else if (response == 'dark') {
@@ -27,7 +24,7 @@ class AppThemeMode extends _$AppThemeMode {
 
   /// Updates the theme mode in Local Storage.
   Future<void> updateThemeMode(ThemeMode themeMode) async {
-    await _lifespanRepository.updateThemeMode(
+    await ref.read(lifespanRepositoryProvider).updateThemeMode(
       themeMode: themeMode.name,
     );
     final newThemeMode = await fetchThemeMode();

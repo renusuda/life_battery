@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:life_battery/src/features/lifespan/data/lifespan_repositories.dart';
+import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -9,14 +9,11 @@ part 'lifespan_range_manager.g.dart';
 /// lifespan range manager
 @riverpod
 class LifespanRangeManager extends _$LifespanRangeManager {
-  /// lifespan repository
-  static final _lifespanRepository = LifespanRepository();
-
   @override
   Future<LifespanRange> build() async {
     final lifespanRange = await fetchLifespanRange();
     unawaited(
-      _lifespanRepository.syncLifespanRangeToWidget(
+      ref.read(lifespanRepositoryProvider).syncLifespanRangeToWidget(
         birthDate: lifespanRange.birthDate,
         idealAge: lifespanRange.idealAge,
       ),
@@ -26,8 +23,7 @@ class LifespanRangeManager extends _$LifespanRangeManager {
 
   /// Fetches the lifespan range from Local Storage.
   Future<LifespanRange> fetchLifespanRange() async {
-    final response = await _lifespanRepository.getLifespan();
-    return response;
+    return ref.read(lifespanRepositoryProvider).getLifespan();
   }
 
   /// Updates the lifespan range in Local Storage.
@@ -35,7 +31,7 @@ class LifespanRangeManager extends _$LifespanRangeManager {
     required DateTime birthDate,
     required int idealAge,
   }) async {
-    await _lifespanRepository.updateLifespan(
+    await ref.read(lifespanRepositoryProvider).updateLifespan(
       birthDate: birthDate,
       idealAge: idealAge,
     );
@@ -43,7 +39,7 @@ class LifespanRangeManager extends _$LifespanRangeManager {
     state = AsyncData(newLifespanRange);
 
     unawaited(
-      _lifespanRepository.syncLifespanRangeToWidget(
+      ref.read(lifespanRepositoryProvider).syncLifespanRangeToWidget(
         birthDate: newLifespanRange.birthDate,
         idealAge: newLifespanRange.idealAge,
       ),
