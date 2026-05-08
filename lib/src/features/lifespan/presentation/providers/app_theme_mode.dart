@@ -24,9 +24,11 @@ class AppThemeMode extends _$AppThemeMode {
 
   /// Updates the theme mode in Local Storage.
   Future<void> updateThemeMode(ThemeMode themeMode) async {
-    await ref.read(lifespanRepositoryProvider).updateThemeMode(
-      themeMode: themeMode.name,
-    );
+    await ref
+        .read(lifespanRepositoryProvider)
+        .updateThemeMode(
+          themeMode: themeMode.name,
+        );
     final newThemeMode = await fetchThemeMode();
     state = AsyncData(newThemeMode);
   }

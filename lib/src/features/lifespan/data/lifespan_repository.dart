@@ -5,7 +5,7 @@ import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 
 class LifespanRepository {
   const LifespanRepository({required LifespanLocalDataSource localDataSource})
-      : _localDataSource = localDataSource;
+    : _localDataSource = localDataSource;
 
   final LifespanLocalDataSource _localDataSource;
 
@@ -25,9 +25,9 @@ class LifespanRepository {
     required DateTime birthDate,
     required int idealAge,
   }) => _localDataSource.updateLifespan(
-        birthDate: birthDate,
-        idealAge: idealAge,
-      );
+    birthDate: birthDate,
+    idealAge: idealAge,
+  );
 
   Future<void> updateThemeMode({required String themeMode}) =>
       _localDataSource.updateThemeMode(themeMode: themeMode);

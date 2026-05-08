@@ -13,17 +13,20 @@ class DisplayModeManager extends _$DisplayModeManager {
   Future<bool> build() async {
     final isPercentageMode = await fetchIsPercentageMode();
     unawaited(
-      ref.read(lifespanRepositoryProvider).syncDisplayModeToWidget(
-        isPercentageMode: isPercentageMode,
-      ),
+      ref
+          .read(lifespanRepositoryProvider)
+          .syncDisplayModeToWidget(
+            isPercentageMode: isPercentageMode,
+          ),
     );
     return isPercentageMode;
   }
 
   /// Fetches whether the battery is shown in percentage mode.
   Future<bool> fetchIsPercentageMode() async {
-    final response =
-        await ref.read(lifespanRepositoryProvider).getIsPercentageMode();
+    final response = await ref
+        .read(lifespanRepositoryProvider)
+        .getIsPercentageMode();
     return response;
   }
 

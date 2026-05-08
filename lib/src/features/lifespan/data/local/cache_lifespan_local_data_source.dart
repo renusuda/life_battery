@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 /// A class that manages the lifespan records in the database.
 class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
   const CacheLifespanLocalDataSource({required LocalDatabase localDatabase})
-      : _localDatabase = localDatabase;
+    : _localDatabase = localDatabase;
 
   final LocalDatabase _localDatabase;
 
@@ -136,8 +136,7 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
       if (result.isEmpty) {
         return true;
       } else {
-        final isPercentageMode =
-            result.first[_columnIsPercentageMode]! as int;
+        final isPercentageMode = result.first[_columnIsPercentageMode]! as int;
         return isPercentageMode == 1;
       }
     } on DatabaseException catch (_) {

@@ -13,10 +13,12 @@ class LifespanRangeManager extends _$LifespanRangeManager {
   Future<LifespanRange> build() async {
     final lifespanRange = await fetchLifespanRange();
     unawaited(
-      ref.read(lifespanRepositoryProvider).syncLifespanRangeToWidget(
-        birthDate: lifespanRange.birthDate,
-        idealAge: lifespanRange.idealAge,
-      ),
+      ref
+          .read(lifespanRepositoryProvider)
+          .syncLifespanRangeToWidget(
+            birthDate: lifespanRange.birthDate,
+            idealAge: lifespanRange.idealAge,
+          ),
     );
     return lifespanRange;
   }
@@ -31,18 +33,22 @@ class LifespanRangeManager extends _$LifespanRangeManager {
     required DateTime birthDate,
     required int idealAge,
   }) async {
-    await ref.read(lifespanRepositoryProvider).updateLifespan(
-      birthDate: birthDate,
-      idealAge: idealAge,
-    );
+    await ref
+        .read(lifespanRepositoryProvider)
+        .updateLifespan(
+          birthDate: birthDate,
+          idealAge: idealAge,
+        );
     final newLifespanRange = await fetchLifespanRange();
     state = AsyncData(newLifespanRange);
 
     unawaited(
-      ref.read(lifespanRepositoryProvider).syncLifespanRangeToWidget(
-        birthDate: newLifespanRange.birthDate,
-        idealAge: newLifespanRange.idealAge,
-      ),
+      ref
+          .read(lifespanRepositoryProvider)
+          .syncLifespanRangeToWidget(
+            birthDate: newLifespanRange.birthDate,
+            idealAge: newLifespanRange.idealAge,
+          ),
     );
   }
 }

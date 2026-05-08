@@ -11,8 +11,9 @@ class IsInitialUser extends _$IsInitialUser {
 
   /// Fetches the theme mode from Local Storage.
   Future<bool> fetchIsInitialUser() async {
-    final response =
-        await ref.read(lifespanRepositoryProvider).getIsInitialUser();
+    final response = await ref
+        .read(lifespanRepositoryProvider)
+        .getIsInitialUser();
     return response;
   }
 

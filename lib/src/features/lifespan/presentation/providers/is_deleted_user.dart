@@ -11,8 +11,9 @@ class IsDeletedUser extends _$IsDeletedUser {
 
   /// Fetches whether user is deleted from Local Storage.
   Future<bool> fetchIsDeletedUser() async {
-    final response =
-        await ref.read(lifespanRepositoryProvider).getIsDeletedUser();
+    final response = await ref
+        .read(lifespanRepositoryProvider)
+        .getIsDeletedUser();
     return response;
   }
 }
