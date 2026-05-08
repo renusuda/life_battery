@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 
 /// Formats the given date into a string.
 String formatDate(

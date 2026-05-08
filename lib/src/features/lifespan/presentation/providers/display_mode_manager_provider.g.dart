@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'is_deleted_user.dart';
+part of 'display_mode_manager_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -8,39 +8,44 @@ part of 'is_deleted_user.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Whether the user is deleted.
+/// Manages whether the battery is displayed as a percentage or as remaining
+/// days.
 
-@ProviderFor(IsDeletedUser)
-const isDeletedUserProvider = IsDeletedUserProvider._();
+@ProviderFor(DisplayModeManager)
+const displayModeManagerProvider = DisplayModeManagerProvider._();
 
-/// Whether the user is deleted.
-final class IsDeletedUserProvider
-    extends $AsyncNotifierProvider<IsDeletedUser, bool> {
-  /// Whether the user is deleted.
-  const IsDeletedUserProvider._()
+/// Manages whether the battery is displayed as a percentage or as remaining
+/// days.
+final class DisplayModeManagerProvider
+    extends $AsyncNotifierProvider<DisplayModeManager, bool> {
+  /// Manages whether the battery is displayed as a percentage or as remaining
+  /// days.
+  const DisplayModeManagerProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'isDeletedUserProvider',
+        name: r'displayModeManagerProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$isDeletedUserHash();
+  String debugGetCreateSourceHash() => _$displayModeManagerHash();
 
   @$internal
   @override
-  IsDeletedUser create() => IsDeletedUser();
+  DisplayModeManager create() => DisplayModeManager();
 }
 
-String _$isDeletedUserHash() => r'1ef4c59b86b64dec2d9c57cca0169b6943ad40e0';
+String _$displayModeManagerHash() =>
+    r'314e588fed47190318643cb7102ee745ea26ea66';
 
-/// Whether the user is deleted.
+/// Manages whether the battery is displayed as a percentage or as remaining
+/// days.
 
-abstract class _$IsDeletedUser extends $AsyncNotifier<bool> {
+abstract class _$DisplayModeManager extends $AsyncNotifier<bool> {
   FutureOr<bool> build();
   @$mustCallSuper
   @override

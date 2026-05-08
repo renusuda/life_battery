@@ -1,7 +1,7 @@
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'is_initial_user.g.dart';
+part 'is_initial_user_provider.g.dart';
 
 /// app theme mode.
 @riverpod

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'has_long_pressed_battery.dart';
+part of 'has_long_pressed_battery_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator

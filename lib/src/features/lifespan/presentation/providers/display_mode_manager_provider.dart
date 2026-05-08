@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'display_mode_manager.g.dart';
+part 'display_mode_manager_provider.g.dart';
 
 /// Manages whether the battery is displayed as a percentage or as remaining
 /// days.

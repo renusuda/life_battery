@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'delete_all_data.dart';
+part of 'delete_all_data_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator

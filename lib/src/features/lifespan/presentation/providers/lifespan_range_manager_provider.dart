@@ -4,7 +4,7 @@ import 'package:life_battery/src/features/lifespan/data/lifespan_repository_prov
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'lifespan_range_manager.g.dart';
+part 'lifespan_range_manager_provider.g.dart';
 
 /// lifespan range manager
 @riverpod

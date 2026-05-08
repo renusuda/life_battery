@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'app_theme_mode.g.dart';
+part 'app_theme_mode_provider.g.dart';
 
 /// app theme mode.
 @riverpod

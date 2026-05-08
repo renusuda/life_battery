@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'lifespan_range_manager.dart';
+part of 'lifespan_range_manager_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator

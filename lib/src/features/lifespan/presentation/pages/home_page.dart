@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/user_deleted_page.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/is_deleted_user.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/is_deleted_user_provider.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
 /// Home page
