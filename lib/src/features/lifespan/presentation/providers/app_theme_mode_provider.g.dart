@@ -36,7 +36,7 @@ final class AppThemeModeProvider
   AppThemeMode create() => AppThemeMode();
 }
 
-String _$appThemeModeHash() => r'9c7f05bbc60d4ad79a974f88ad580f8e89a1552c';
+String _$appThemeModeHash() => r'1a75779f700a5333ec226a4e127f63da5ad8f388';
 
 /// app theme mode.
 

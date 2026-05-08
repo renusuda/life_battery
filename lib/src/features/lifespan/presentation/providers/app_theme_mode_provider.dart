@@ -28,7 +28,6 @@ class AppThemeMode extends _$AppThemeMode {
         .updateThemeMode(
           themeMode: themeMode.name,
         );
-    final newThemeMode = await _fetch();
-    state = AsyncData(newThemeMode);
+    ref.invalidateSelf();
   }
 }
