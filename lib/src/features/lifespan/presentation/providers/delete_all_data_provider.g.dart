@@ -8,17 +8,13 @@ part of 'delete_all_data_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Deletes all data from the database.
 
 @ProviderFor(deleteAllData)
 const deleteAllDataProvider = DeleteAllDataProvider._();
 
-/// Deletes all data from the database.
-
 final class DeleteAllDataProvider
     extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
     with $FutureModifier<void>, $FutureProvider<void> {
-  /// Deletes all data from the database.
   const DeleteAllDataProvider._()
     : super(
         from: null,
