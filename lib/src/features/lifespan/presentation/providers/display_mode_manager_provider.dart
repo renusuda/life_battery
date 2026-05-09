@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
+import 'package:life_battery/src/features/lifespan/use_case/toggle_display_mode_use_case_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'display_mode_manager_provider.g.dart';
@@ -26,19 +27,10 @@ class DisplayModeManager extends _$DisplayModeManager {
     return ref.watch(lifespanRepositoryProvider).getIsPercentageMode();
   }
 
-  Future<void> toggle() async {
+  void toggle() {
     final current = state.value ?? true;
     final next = !current;
     state = AsyncData(next);
-    unawaited(
-      ref
-          .read(lifespanRepositoryProvider)
-          .updateIsPercentageMode(isPercentageMode: next),
-    );
-    unawaited(
-      ref
-          .read(lifespanRepositoryProvider)
-          .syncDisplayModeToWidget(isPercentageMode: next),
-    );
+    ref.read(toggleDisplayModeUseCaseProvider).execute(isPercentageMode: next);
   }
 }
