@@ -11,6 +11,6 @@ class HasLongPressedBattery extends _$HasLongPressedBattery {
 
   Future<void> updateHasLongPressedBattery() async {
     await ref.read(lifespanRepositoryProvider).updateHasLongPressed();
-    state = const AsyncData(true);
+    ref.invalidateSelf();
   }
 }
