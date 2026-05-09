@@ -9,12 +9,11 @@ part of 'delete_all_data_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(deleteAllData)
+@ProviderFor(DeleteAllData)
 const deleteAllDataProvider = DeleteAllDataProvider._();
 
 final class DeleteAllDataProvider
-    extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
-    with $FutureModifier<void>, $FutureProvider<void> {
+    extends $NotifierProvider<DeleteAllData, void> {
   const DeleteAllDataProvider._()
     : super(
         from: null,
@@ -31,13 +30,34 @@ final class DeleteAllDataProvider
 
   @$internal
   @override
-  $FutureProviderElement<void> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
+  DeleteAllData create() => DeleteAllData();
 
-  @override
-  FutureOr<void> create(Ref ref) {
-    return deleteAllData(ref);
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(void value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<void>(value),
+    );
   }
 }
 
-String _$deleteAllDataHash() => r'028cf1a02449f3cc69733a16b158b4126c20dd1a';
+String _$deleteAllDataHash() => r'e798ccbc04fb6c9c58e0985960d2e2d48a6e4812';
+
+abstract class _$DeleteAllData extends $Notifier<void> {
+  void build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    build();
+    final ref = this.ref as $Ref<void, void>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<void, void>,
+              void,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, null);
+  }
+}

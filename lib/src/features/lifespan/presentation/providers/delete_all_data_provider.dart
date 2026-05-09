@@ -4,6 +4,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'delete_all_data_provider.g.dart';
 
 @riverpod
-Future<void> deleteAllData(Ref ref) async {
-  await ref.read(lifespanRepositoryProvider).deleteAllData();
+class DeleteAllData extends _$DeleteAllData {
+  @override
+  void build() {}
+
+  Future<void> execute() async {
+    await ref.read(lifespanRepositoryProvider).deleteAllData();
+  }
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
@@ -273,7 +274,7 @@ class DeleteAllListTile extends ConsumerWidget {
                 onPressed: () async {
                   Navigator.pop(context);
                   // Delete all data from database
-                  ref.read(deleteAllDataProvider);
+                  unawaited(ref.read(deleteAllDataProvider.notifier).execute());
                   // Navigate to user deleted page
                   Navigator.pop(context);
                   await Navigator.pushReplacement(

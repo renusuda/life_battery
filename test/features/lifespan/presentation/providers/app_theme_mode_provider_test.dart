@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -65,11 +67,11 @@ void main() {
           );
           await container.read(appThemeModeProvider.future);
 
-          container
-              .read(appThemeModeProvider.notifier)
-              .updateThemeMode(
-                ThemeMode.light,
-              );
+          unawaited(
+            container
+                .read(appThemeModeProvider.notifier)
+                .updateThemeMode(ThemeMode.light),
+          );
 
           expect(container.read(appThemeModeProvider).value, ThemeMode.light);
         },
