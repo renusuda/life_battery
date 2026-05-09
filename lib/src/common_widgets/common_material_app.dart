@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/theme/app_theme.dart';
 
-/// Common Material App
 class CommonMaterialApp extends StatelessWidget {
   const CommonMaterialApp({
     required this.home,
@@ -12,10 +11,8 @@ class CommonMaterialApp extends StatelessWidget {
     super.key,
   });
 
-  /// Home
   final Widget home;
 
-  /// Theme mode
   final ThemeMode themeMode;
 
   @override

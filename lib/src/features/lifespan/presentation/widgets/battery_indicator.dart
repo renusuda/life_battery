@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_battery/src/features/lifespan/domain/life_battery_status.dart';
 
-/// A widget that shows the remaining of battery.
 class BatteryIndicator extends StatelessWidget {
   const BatteryIndicator({
     required this.value,
@@ -9,10 +8,8 @@ class BatteryIndicator extends StatelessWidget {
     super.key,
   });
 
-  /// battery value
   final int value;
 
-  /// battery text
   final String text;
 
   @override
@@ -30,7 +27,6 @@ class BatteryIndicator extends StatelessWidget {
   }
 }
 
-/// A widget that shows the body of battery.
 class BatteryBody extends StatelessWidget {
   const BatteryBody({
     required this.value,
@@ -38,10 +34,8 @@ class BatteryBody extends StatelessWidget {
     super.key,
   });
 
-  /// battery value
   final int value;
 
-  /// battery text
   final String text;
 
   @override
@@ -66,7 +60,6 @@ class BatteryBody extends StatelessWidget {
   }
 }
 
-/// A widget that shows the frame of battery.
 class BatteryFrame extends StatelessWidget {
   const BatteryFrame({
     super.key,
@@ -86,7 +79,6 @@ class BatteryFrame extends StatelessWidget {
   }
 }
 
-/// A widget that shows the bar of battery.
 class BatteryBar extends StatefulWidget {
   const BatteryBar({
     required this.value,
@@ -94,10 +86,8 @@ class BatteryBar extends StatefulWidget {
     super.key,
   });
 
-  /// battery value
   final int value;
 
-  /// body width
   final double bodyWidth;
 
   @override
@@ -139,14 +129,12 @@ class _BatteryBarState extends State<BatteryBar> {
   }
 }
 
-/// A widget that shows the text of battery.
 class BatteryText extends StatelessWidget {
   const BatteryText({
     required this.text,
     super.key,
   });
 
-  /// battery text
   final String text;
 
   @override
@@ -164,7 +152,6 @@ class BatteryText extends StatelessWidget {
   }
 }
 
-/// A widget that shows the knob of battery.
 class BatteryKnob extends StatelessWidget {
   const BatteryKnob({
     super.key,

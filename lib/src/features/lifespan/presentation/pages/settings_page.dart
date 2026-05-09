@@ -12,7 +12,6 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/delete
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// A page that shows the settings.
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -40,7 +39,6 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
-/// Review app row
 class ReviewAppListTile extends StatelessWidget {
   const ReviewAppListTile({
     super.key,
@@ -70,7 +68,6 @@ class ReviewAppListTile extends StatelessWidget {
   }
 }
 
-/// Privacy policy row
 class PrivacyPolicyListTile extends StatelessWidget {
   const PrivacyPolicyListTile({
     required this.canLaunchUrl,
@@ -78,10 +75,8 @@ class PrivacyPolicyListTile extends StatelessWidget {
     super.key,
   });
 
-  /// Callback for checking if URL can be launched.
   final Future<bool> Function(Uri url) canLaunchUrl;
 
-  /// Callback for launching URL.
   final Future<bool> Function(Uri url, {LaunchMode mode}) onLaunchUrl;
 
   @override
@@ -117,7 +112,6 @@ class PrivacyPolicyListTile extends StatelessWidget {
   }
 }
 
-/// Appearance row
 class AppearanceListTile extends ConsumerWidget {
   const AppearanceListTile({
     super.key,
@@ -198,14 +192,12 @@ class AppearanceListTile extends ConsumerWidget {
   }
 }
 
-/// Notification settings row
 class NotificationSettingsListTile extends StatelessWidget {
   const NotificationSettingsListTile({
     required this.onOpenSettings,
     super.key,
   });
 
-  /// Callback for opening notification settings.
   final VoidCallback onOpenSettings;
 
   @override
@@ -226,7 +218,6 @@ class NotificationSettingsListTile extends StatelessWidget {
   }
 }
 
-/// Data deletion row
 class DeleteAllListTile extends ConsumerWidget {
   const DeleteAllListTile({
     super.key,
@@ -258,7 +249,6 @@ class DeleteAllListTile extends ConsumerWidget {
             ),
             content: Text(l10n.deleteContent),
             actions: <Widget>[
-              /// Cancel button
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(
@@ -269,13 +259,10 @@ class DeleteAllListTile extends ConsumerWidget {
                 ),
               ),
 
-              /// Delete button
               TextButton(
                 onPressed: () async {
                   Navigator.pop(context);
-                  // Delete all data from database
                   unawaited(ref.read(deleteAllDataProvider.notifier).execute());
-                  // Navigate to user deleted page
                   Navigator.pop(context);
                   await Navigator.pushReplacement(
                     context,

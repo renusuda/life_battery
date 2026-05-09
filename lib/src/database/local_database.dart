@@ -2,9 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-/// A class that initializes the local database.
 class LocalDatabase {
-  /// Returns the instance of the local database.
   factory LocalDatabase() => _instance;
   LocalDatabase._internal();
   static final _instance = LocalDatabase._internal();
@@ -24,7 +22,6 @@ class LocalDatabase {
 
   Database? _database;
 
-  /// Returns the database.
   Future<Database> get database async {
     if (_database != null) return _database!;
 
@@ -32,7 +29,6 @@ class LocalDatabase {
     return _database!;
   }
 
-  /// Initializes the database.
   Future<Database> _initDatabase() async {
     try {
       final dbPath = await getDatabasesPath();
@@ -58,7 +54,6 @@ class LocalDatabase {
           )
         ''');
 
-          // Insert a lifespan record
           await db.insert(
             _tableName,
             {

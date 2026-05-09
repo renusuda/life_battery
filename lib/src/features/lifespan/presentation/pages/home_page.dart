@@ -6,7 +6,6 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/is_del
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
-/// Home page
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
@@ -33,7 +32,6 @@ class HomePage extends ConsumerWidget {
   }
 }
 
-/// Error page
 class ErrorPage extends StatelessWidget {
   const ErrorPage({
     super.key,
@@ -52,7 +50,6 @@ class ErrorPage extends StatelessWidget {
   }
 }
 
-/// Loading page
 class LoadingPage extends StatelessWidget {
   const LoadingPage({
     super.key,

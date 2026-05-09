@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 
-/// Formats the given date into a string.
 String formatDate(
   BuildContext context,
   DateTime date,
@@ -15,7 +14,6 @@ String formatDate(
   ).format(date);
 }
 
-/// Shows a date picker for updating the birth date.
 Future<void> showPickerForBirthDate({
   required BuildContext context,
   required WidgetRef ref,

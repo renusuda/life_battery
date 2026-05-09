@@ -6,7 +6,6 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/lifesp
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/date_utils.dart';
 
-/// A widget that allows users to select a date range.
 class DateRangePicker extends ConsumerWidget {
   const DateRangePicker({super.key});
 
@@ -27,7 +26,6 @@ class DateRangePicker extends ConsumerWidget {
   }
 }
 
-/// A content of the date range picker.
 class DateRangePickerContent extends StatelessWidget {
   const DateRangePickerContent({
     required this.birthDate,
@@ -35,10 +33,8 @@ class DateRangePickerContent extends StatelessWidget {
     super.key,
   });
 
-  /// Birth date
   final DateTime birthDate;
 
-  /// Ideal age
   final int idealAge;
 
   @override
@@ -54,7 +50,6 @@ class DateRangePickerContent extends StatelessWidget {
   }
 }
 
-/// A widget that displays the labels of the date range picker.
 class DateRangePickerLabels extends StatelessWidget {
   const DateRangePickerLabels({
     required this.birthDate,
@@ -62,10 +57,8 @@ class DateRangePickerLabels extends StatelessWidget {
     super.key,
   });
 
-  /// Birth date
   final DateTime birthDate;
 
-  /// Ideal age
   final int idealAge;
 
   @override
@@ -89,7 +82,6 @@ class DateRangePickerLabels extends StatelessWidget {
   }
 }
 
-/// A birth date field with label.
 class BirthDateField extends ConsumerWidget {
   const BirthDateField({
     required this.birthDate,
@@ -97,10 +89,8 @@ class BirthDateField extends ConsumerWidget {
     super.key,
   });
 
-  /// Birth date
   final DateTime birthDate;
 
-  /// Ideal age
   final int idealAge;
 
   @override
@@ -162,7 +152,6 @@ class BirthDateField extends ConsumerWidget {
   }
 }
 
-/// An ideal lifespan field with label and slider.
 class IdealLifespanField extends ConsumerWidget {
   const IdealLifespanField({
     required this.birthDate,
@@ -170,10 +159,8 @@ class IdealLifespanField extends ConsumerWidget {
     super.key,
   });
 
-  /// Birth date
   final DateTime birthDate;
 
-  /// Ideal age
   final int idealAge;
 
   @override
@@ -243,14 +230,12 @@ class IdealLifespanField extends ConsumerWidget {
   }
 }
 
-/// A widget that displays the ideal age with unit.
 class IdealAgeLabel extends StatelessWidget {
   const IdealAgeLabel({
     required this.idealAge,
     super.key,
   });
 
-  /// The ideal age to display
   final int idealAge;
 
   @override

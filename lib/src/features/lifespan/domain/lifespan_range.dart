@@ -4,7 +4,6 @@ import 'package:life_battery/src/extensions/extensions.dart';
 part 'lifespan_range.freezed.dart';
 part 'lifespan_range.g.dart';
 
-/// A class that represents the range of a person's lifespan.
 @freezed
 abstract class LifespanRange with _$LifespanRange {
   factory LifespanRange({
@@ -14,18 +13,15 @@ abstract class LifespanRange with _$LifespanRange {
 
   const LifespanRange._();
 
-  /// Converts a JSON object to a [LifespanRange] instance.
   factory LifespanRange.fromJson(Map<String, dynamic> json) =>
       _$LifespanRangeFromJson(json);
 
-  /// Returns the calculated death date based on birthDate and idealAge.
   DateTime get deathDate => DateTime(
     birthDate.year + idealAge,
     birthDate.month,
     birthDate.day,
   );
 
-  /// Returns the remaining life percentage.
   int remainingLifePercentage({
     required DateTime now,
   }) {
@@ -50,7 +46,6 @@ abstract class LifespanRange with _$LifespanRange {
     return (remainingLife / totalLife * 100).ceil();
   }
 
-  /// Returns the remaining life days.
   int remainingLifeDays({
     required DateTime now,
   }) {

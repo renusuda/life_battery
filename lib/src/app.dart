@@ -4,7 +4,6 @@ import 'package:life_battery/src/common_widgets/common_material_app.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/home_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/app_theme_mode_provider.dart';
 
-/// Application
 class App extends ConsumerWidget {
   const App({super.key});
 

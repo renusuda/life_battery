@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Light mode theme
 final lightModeTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: Colors.white,
@@ -26,7 +25,6 @@ final lightModeTheme = ThemeData(
   ),
 );
 
-/// Dark mode theme
 final darkModeTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: const Color(0xFF0F172A),

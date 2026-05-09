@@ -19,7 +19,6 @@ void main() async {
   // Set App Group ID for iOS widget data sharing
   await HomeWidget.setAppGroupId('group.com.rururu.lifebt');
 
-  // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

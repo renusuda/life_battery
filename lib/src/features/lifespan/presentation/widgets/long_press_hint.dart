@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
-/// A hint that tells users they can long press to edit.
 class LongPressHint extends StatefulWidget {
   const LongPressHint({
     required this.hasLongPressedBattery,

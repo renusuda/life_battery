@@ -15,14 +15,12 @@ import 'package:life_battery/src/features/lifespan/presentation/widgets/date_inp
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
-/// Page for showing the remaining of lifespan
 class LifespanProgressPage extends ConsumerWidget {
   const LifespanProgressPage({
     required this.isInitialUser,
     super.key,
   });
 
-  /// Whether the user is initial user
   final bool isInitialUser;
 
   @override
@@ -87,7 +85,6 @@ class LifespanProgressPage extends ConsumerWidget {
   }
 }
 
-/// Content of the battery indicator
 class LifeProgressContent extends ConsumerStatefulWidget {
   const LifeProgressContent({
     required this.lifespanRange,
@@ -99,22 +96,16 @@ class LifeProgressContent extends ConsumerStatefulWidget {
     super.key,
   });
 
-  /// the range of a person's lifespan.
   final LifespanRange lifespanRange;
 
-  /// Whether the user is initial user
   final bool isInitialUser;
 
-  /// Whether the user has long pressed the battery.
   final bool hasLongPressedBattery;
 
-  /// Whether the battery should be shown in percentage mode.
   final bool isPercentageMode;
 
-  /// Callback to update the user is not initial user
   final Future<void> Function() updateUserIsNotInitialUser;
 
-  /// Callback to update the user has long pressed the battery.
   final Future<void> Function() updateHasLongPressedBattery;
 
   @override

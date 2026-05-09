@@ -3,7 +3,6 @@ import 'package:life_battery/src/features/lifespan/data/local/lifespan_local_dat
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:sqflite/sqflite.dart';
 
-/// A class that manages the lifespan records in the database.
 class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
   const CacheLifespanLocalDataSource({required LocalDatabase localDatabase})
     : _localDatabase = localDatabase;
@@ -19,7 +18,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
   static const _columnHasLongPressedBattery = 'hasLongPressedBattery';
   static const _columnIsPercentageMode = 'isPercentageMode';
 
-  /// Fetches the lifespan record from the database.
   @override
   Future<LifespanRange> getLifespan() async {
     try {
@@ -39,7 +37,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     }
   }
 
-  /// Fetches the theme mode record from the database.
   @override
   Future<String> getThemeMode() async {
     try {
@@ -59,7 +56,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     }
   }
 
-  /// Fetches whether the user is an initial user from the database.
   @override
   Future<bool> getIsInitialUser() async {
     try {
@@ -80,7 +76,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     }
   }
 
-  /// Fetches whether user is deleted from the database.
   @override
   Future<bool> getIsDeletedUser() async {
     try {
@@ -101,7 +96,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     }
   }
 
-  /// Fetches whether the user has already used long press edit.
   @override
   Future<bool> getHasLongPressed() async {
     try {
@@ -123,7 +117,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     }
   }
 
-  /// Fetches whether the battery is shown in percentage mode from the database.
   @override
   Future<bool> getIsPercentageMode() async {
     try {
@@ -144,7 +137,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     }
   }
 
-  /// Updates the lifespan record in the database.
   @override
   Future<void> updateLifespan({
     required DateTime birthDate,
@@ -167,7 +159,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     } on DatabaseException catch (_) {}
   }
 
-  /// Updates the theme mode record in the database.
   @override
   Future<void> updateThemeMode({required String themeMode}) async {
     try {
@@ -179,7 +170,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     } on DatabaseException catch (_) {}
   }
 
-  /// Updates the user is not an initial user in the database.
   @override
   Future<void> updateUserIsNotInitialUser() async {
     try {
@@ -191,7 +181,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     } on DatabaseException catch (_) {}
   }
 
-  /// Updates whether the battery is shown in percentage mode in the database.
   @override
   Future<void> updateIsPercentageMode({
     required bool isPercentageMode,
@@ -207,7 +196,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     } on DatabaseException catch (_) {}
   }
 
-  /// Updates the user as having used long press edit.
   @override
   Future<void> updateHasLongPressed() async {
     try {
@@ -219,7 +207,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
     } on DatabaseException catch (_) {}
   }
 
-  /// Deletes all data.
   @override
   Future<void> deleteAllData() async {
     try {
