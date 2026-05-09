@@ -6,7 +6,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'lifespan_range_manager_provider.g.dart';
 
-/// lifespan range manager
 @riverpod
 class LifespanRangeManager extends _$LifespanRangeManager {
   @override
@@ -23,12 +22,10 @@ class LifespanRangeManager extends _$LifespanRangeManager {
     return lifespanRange;
   }
 
-  /// Fetches the lifespan range from Local Storage.
   Future<LifespanRange> fetchLifespanRange() async {
     return ref.read(lifespanRepositoryProvider).getLifespan();
   }
 
-  /// Updates the lifespan range in Local Storage.
   Future<void> updateLifespanRange({
     required DateTime birthDate,
     required int idealAge,
