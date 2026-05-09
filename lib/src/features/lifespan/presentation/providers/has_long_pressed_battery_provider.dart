@@ -7,7 +7,7 @@ part 'has_long_pressed_battery_provider.g.dart';
 class HasLongPressedBattery extends _$HasLongPressedBattery {
   @override
   Future<bool> build() =>
-      ref.read(lifespanRepositoryProvider).getHasLongPressed();
+      ref.watch(lifespanRepositoryProvider).getHasLongPressed();
 
   Future<void> updateHasLongPressedBattery() async {
     await ref.read(lifespanRepositoryProvider).updateHasLongPressed();
