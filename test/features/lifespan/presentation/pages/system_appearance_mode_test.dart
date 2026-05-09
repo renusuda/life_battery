@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:life_battery/src/features/lifespan/presentation/widgets/common_material_app.dart';
+import 'package:life_battery/src/common_widgets/common_material_app.dart';
 
 void main() {
   group('System appearance mode', () {
