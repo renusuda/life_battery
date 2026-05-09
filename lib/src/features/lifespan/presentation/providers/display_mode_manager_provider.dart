@@ -11,7 +11,7 @@ part 'display_mode_manager_provider.g.dart';
 class DisplayModeManager extends _$DisplayModeManager {
   @override
   Future<bool> build() async {
-    final isPercentageMode = await _fetchIsPercentageMode();
+    final isPercentageMode = await _fetch();
     unawaited(
       ref
           .read(lifespanRepositoryProvider)
@@ -22,11 +22,8 @@ class DisplayModeManager extends _$DisplayModeManager {
     return isPercentageMode;
   }
 
-  Future<bool> _fetchIsPercentageMode() async {
-    final response = await ref
-        .read(lifespanRepositoryProvider)
-        .getIsPercentageMode();
-    return response;
+  Future<bool> _fetch() async {
+    return ref.read(lifespanRepositoryProvider).getIsPercentageMode();
   }
 
   /// Toggles the display mode and persists the new value.
