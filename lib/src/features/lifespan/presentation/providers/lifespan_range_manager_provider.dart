@@ -36,16 +36,6 @@ class LifespanRangeManager extends _$LifespanRangeManager {
           birthDate: birthDate,
           idealAge: idealAge,
         );
-    final newLifespanRange = await fetchLifespanRange();
-    state = AsyncData(newLifespanRange);
-
-    unawaited(
-      ref
-          .read(lifespanRepositoryProvider)
-          .syncLifespanRangeToWidget(
-            birthDate: newLifespanRange.birthDate,
-            idealAge: newLifespanRange.idealAge,
-          ),
-    );
+    ref.invalidateSelf();
   }
 }
