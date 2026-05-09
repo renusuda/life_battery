@@ -30,9 +30,11 @@ class DisplayModeManager extends _$DisplayModeManager {
     final current = state.value ?? true;
     final next = !current;
     state = AsyncData(next);
-    await ref
-        .read(lifespanRepositoryProvider)
-        .updateIsPercentageMode(isPercentageMode: next);
+    unawaited(
+      ref
+          .read(lifespanRepositoryProvider)
+          .updateIsPercentageMode(isPercentageMode: next),
+    );
     unawaited(
       ref
           .read(lifespanRepositoryProvider)
