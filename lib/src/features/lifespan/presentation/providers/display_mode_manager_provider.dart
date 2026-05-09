@@ -23,7 +23,7 @@ class DisplayModeManager extends _$DisplayModeManager {
   }
 
   Future<bool> _fetch() async {
-    return ref.read(lifespanRepositoryProvider).getIsPercentageMode();
+    return ref.watch(lifespanRepositoryProvider).getIsPercentageMode();
   }
 
   /// Toggles the display mode and persists the new value.
