@@ -9,10 +9,7 @@ class HasLongPressedBattery extends _$HasLongPressedBattery {
   Future<bool> build() => _fetch();
 
   Future<bool> _fetch() async {
-    final response = await ref
-        .read(lifespanRepositoryProvider)
-        .getHasLongPressed();
-    return response;
+    return ref.read(lifespanRepositoryProvider).getHasLongPressed();
   }
 
   Future<void> updateHasLongPressedBattery() async {
