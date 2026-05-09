@@ -34,7 +34,7 @@ final class HasLongPressedBatteryProvider
 }
 
 String _$hasLongPressedBatteryHash() =>
-    r'b12277d378b27ae5a0c09e9eaab2999fb015fce0';
+    r'7d0875e2e11342fb352a3081059f798f57e11a6a';
 
 abstract class _$HasLongPressedBattery extends $AsyncNotifier<bool> {
   FutureOr<bool> build();
