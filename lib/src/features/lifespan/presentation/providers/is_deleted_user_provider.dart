@@ -7,5 +7,5 @@ part 'is_deleted_user_provider.g.dart';
 class IsDeletedUser extends _$IsDeletedUser {
   @override
   Future<bool> build() =>
-      ref.read(lifespanRepositoryProvider).getIsDeletedUser();
+      ref.watch(lifespanRepositoryProvider).getIsDeletedUser();
 }
