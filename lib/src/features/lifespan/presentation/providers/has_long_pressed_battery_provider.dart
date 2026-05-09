@@ -6,11 +6,8 @@ part 'has_long_pressed_battery_provider.g.dart';
 @riverpod
 class HasLongPressedBattery extends _$HasLongPressedBattery {
   @override
-  Future<bool> build() => _fetch();
-
-  Future<bool> _fetch() async {
-    return ref.read(lifespanRepositoryProvider).getHasLongPressed();
-  }
+  Future<bool> build() =>
+      ref.read(lifespanRepositoryProvider).getHasLongPressed();
 
   Future<void> updateHasLongPressedBattery() async {
     await ref.read(lifespanRepositoryProvider).updateHasLongPressed();
