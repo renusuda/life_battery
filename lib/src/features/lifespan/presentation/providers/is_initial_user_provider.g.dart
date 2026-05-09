@@ -8,15 +8,12 @@ part of 'is_initial_user_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// app theme mode.
 
 @ProviderFor(IsInitialUser)
 const isInitialUserProvider = IsInitialUserProvider._();
 
-/// app theme mode.
 final class IsInitialUserProvider
     extends $AsyncNotifierProvider<IsInitialUser, bool> {
-  /// app theme mode.
   const IsInitialUserProvider._()
     : super(
         from: null,
@@ -37,8 +34,6 @@ final class IsInitialUserProvider
 }
 
 String _$isInitialUserHash() => r'b0cf514e90d313c4a1b3557a688183f62d3dfba3';
-
-/// app theme mode.
 
 abstract class _$IsInitialUser extends $AsyncNotifier<bool> {
   FutureOr<bool> build();
