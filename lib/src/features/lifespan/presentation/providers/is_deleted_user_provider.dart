@@ -6,12 +6,6 @@ part 'is_deleted_user_provider.g.dart';
 @riverpod
 class IsDeletedUser extends _$IsDeletedUser {
   @override
-  Future<bool> build() => fetchIsDeletedUser();
-
-  Future<bool> fetchIsDeletedUser() async {
-    final response = await ref
-        .read(lifespanRepositoryProvider)
-        .getIsDeletedUser();
-    return response;
-  }
+  Future<bool> build() =>
+      ref.read(lifespanRepositoryProvider).getIsDeletedUser();
 }
