@@ -22,7 +22,6 @@ class DisplayModeManager extends _$DisplayModeManager {
     return isPercentageMode;
   }
 
-  /// Fetches whether the battery is shown in percentage mode.
   Future<bool> _fetchIsPercentageMode() async {
     final response = await ref
         .read(lifespanRepositoryProvider)
