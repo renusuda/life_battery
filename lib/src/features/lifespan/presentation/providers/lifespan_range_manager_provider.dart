@@ -10,7 +10,9 @@ part 'lifespan_range_manager_provider.g.dart';
 class LifespanRangeManager extends _$LifespanRangeManager {
   @override
   Future<LifespanRange> build() async {
-    final lifespanRange = await fetchLifespanRange();
+    final lifespanRange = await ref
+        .read(lifespanRepositoryProvider)
+        .getLifespan();
     unawaited(
       ref
           .read(lifespanRepositoryProvider)
@@ -20,10 +22,6 @@ class LifespanRangeManager extends _$LifespanRangeManager {
           ),
     );
     return lifespanRange;
-  }
-
-  Future<LifespanRange> fetchLifespanRange() async {
-    return ref.read(lifespanRepositoryProvider).getLifespan();
   }
 
   Future<void> updateLifespanRange({
