@@ -7,15 +7,8 @@ part 'is_initial_user_provider.g.dart';
 @riverpod
 class IsInitialUser extends _$IsInitialUser {
   @override
-  Future<bool> build() => fetchIsInitialUser();
-
-  /// Fetches the theme mode from Local Storage.
-  Future<bool> fetchIsInitialUser() async {
-    final response = await ref
-        .read(lifespanRepositoryProvider)
-        .getIsInitialUser();
-    return response;
-  }
+  Future<bool> build() =>
+      ref.read(lifespanRepositoryProvider).getIsInitialUser();
 
   /// Updates the theme mode in Local Storage.
   Future<void> updateUserIsNotInitialUser() async {

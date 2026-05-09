@@ -36,7 +36,7 @@ final class IsInitialUserProvider
   IsInitialUser create() => IsInitialUser();
 }
 
-String _$isInitialUserHash() => r'485af8c6171f0650317b9ecee7e7fb74b52213ee';
+String _$isInitialUserHash() => r'b0cf514e90d313c4a1b3557a688183f62d3dfba3';
 
 /// app theme mode.
 
