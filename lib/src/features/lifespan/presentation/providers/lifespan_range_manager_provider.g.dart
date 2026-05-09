@@ -34,7 +34,7 @@ final class LifespanRangeManagerProvider
 }
 
 String _$lifespanRangeManagerHash() =>
-    r'20ae12a1ed7318ddb533b5d5f047c0f8abe51baa';
+    r'e5bbb9dd2ae8c9db8a3fbe6b37d3de9115cf8a11';
 
 abstract class _$LifespanRangeManager extends $AsyncNotifier<LifespanRange> {
   FutureOr<LifespanRange> build();

@@ -11,7 +11,7 @@ class LifespanRangeManager extends _$LifespanRangeManager {
   @override
   Future<LifespanRange> build() async {
     final lifespanRange = await ref
-        .read(lifespanRepositoryProvider)
+        .watch(lifespanRepositoryProvider)
         .getLifespan();
     unawaited(
       ref
