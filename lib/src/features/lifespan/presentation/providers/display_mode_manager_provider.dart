@@ -26,7 +26,6 @@ class DisplayModeManager extends _$DisplayModeManager {
     return ref.watch(lifespanRepositoryProvider).getIsPercentageMode();
   }
 
-  /// Toggles the display mode and persists the new value.
   Future<void> toggle() async {
     final current = state.value ?? true;
     final next = !current;
