@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:life_battery/src/common_widgets/common_material_app.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/app_theme_mode_provider.dart';
-import 'package:life_battery/src/common_widgets/common_material_app.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
