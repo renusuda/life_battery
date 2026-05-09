@@ -11,7 +11,7 @@ part 'display_mode_manager_provider.g.dart';
 class DisplayModeManager extends _$DisplayModeManager {
   @override
   Future<bool> build() async {
-    final isPercentageMode = await fetchIsPercentageMode();
+    final isPercentageMode = await _fetchIsPercentageMode();
     unawaited(
       ref
           .read(lifespanRepositoryProvider)
@@ -23,7 +23,7 @@ class DisplayModeManager extends _$DisplayModeManager {
   }
 
   /// Fetches whether the battery is shown in percentage mode.
-  Future<bool> fetchIsPercentageMode() async {
+  Future<bool> _fetchIsPercentageMode() async {
     final response = await ref
         .read(lifespanRepositoryProvider)
         .getIsPercentageMode();
