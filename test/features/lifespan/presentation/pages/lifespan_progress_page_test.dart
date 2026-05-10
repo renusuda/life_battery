@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_battery/src/common_widgets/common_material_app.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
@@ -11,6 +10,7 @@ import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 
 import '../../../../../test_helpers/extensions.dart';
+import '../../../../../test_helpers/test_app.dart';
 
 void main() {
   group('Battery indicator', () {
@@ -237,7 +237,7 @@ class TestLifeProgressContent extends HookWidget {
       overrides: [
         displayModeManagerProvider.overrideWith(FakeDisplayModeManager.new),
       ],
-      child: CommonMaterialApp(
+      child: TestApp(
         home: Scaffold(
           body: Consumer(
             builder: (context, ref, _) {
@@ -318,7 +318,7 @@ class TestEditableLifeProgressContent extends HookWidget {
         lifespanRangeManagerProvider.overrideWith(FakeLifespanRangeManager.new),
         displayModeManagerProvider.overrideWith(FakeDisplayModeManager.new),
       ],
-      child: CommonMaterialApp(
+      child: TestApp(
         home: Scaffold(
           body: Consumer(
             builder: (context, ref, _) {

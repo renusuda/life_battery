@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/lifespan/data/local_notification_service.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
-import 'package:life_battery/src/features/lifespan/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/has_long_pressed_battery_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
@@ -15,6 +15,7 @@ import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/routing/app_route.dart';
 
 class LifespanProgressPage extends ConsumerWidget {
   const LifespanProgressPage({
@@ -38,14 +39,7 @@ class LifespanProgressPage extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings_outlined),
-            onPressed: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (context) => const SettingsPage(),
-                ),
-              );
-            },
+            onPressed: () => context.goNamed(AppRoute.settings.name),
           ),
         ],
       ),

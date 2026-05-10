@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_battery/src/common_widgets/common_material_app.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/app_theme_mode_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../../test_helpers/test_app.dart';
 
 void main() {
   group('Privacy policy', () {
@@ -24,7 +25,7 @@ void main() {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(
         ProviderScope(
-          child: CommonMaterialApp(
+          child: TestApp(
             home: Scaffold(
               body: PrivacyPolicyListTile(
                 canLaunchUrl: (_) async => true,
@@ -64,7 +65,7 @@ void main() {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(
         ProviderScope(
-          child: CommonMaterialApp(
+          child: TestApp(
             home: Scaffold(
               body: NotificationSettingsListTile(
                 onOpenSettings: () => called = true,
@@ -200,7 +201,7 @@ class TestSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ProviderScope(
-      child: CommonMaterialApp(
+      child: TestApp(
         home: SettingsPage(),
       ),
     );
@@ -215,14 +216,14 @@ class TestSettingsApp extends ConsumerWidget {
     final appThemeMode = ref.watch(appThemeModeProvider);
 
     return switch (appThemeMode) {
-      AsyncData(:final value) => CommonMaterialApp(
+      AsyncData(:final value) => TestApp(
         themeMode: value,
         home: const SettingsPage(),
       ),
-      AsyncError() => const CommonMaterialApp(
+      AsyncError() => const TestApp(
         home: SizedBox.shrink(),
       ),
-      _ => const CommonMaterialApp(
+      _ => const TestApp(
         home: Scaffold(
           body: CircularProgressIndicator(),
         ),

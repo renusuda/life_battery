@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:life_battery/src/common_widgets/common_material_app.dart';
+import '../../../../../test_helpers/test_app.dart';
 
 void main() {
   group('System appearance mode', () {
@@ -10,7 +10,7 @@ void main() {
       tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
 
       await tester.pumpWidget(
-        const CommonMaterialApp(
+        const TestApp(
           home: Scaffold(body: Placeholder()),
         ),
       );
@@ -26,7 +26,7 @@ void main() {
       tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
 
       await tester.pumpWidget(
-        const CommonMaterialApp(
+        const TestApp(
           home: Scaffold(body: Placeholder()),
         ),
       );

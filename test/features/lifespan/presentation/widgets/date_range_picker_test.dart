@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_battery/src/common_widgets/common_material_app.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_range_picker.dart';
+
+import '../../../../../test_helpers/test_app.dart';
 
 void main() {
   group('Date range picker interactions', () {
@@ -25,7 +26,7 @@ class TestDateRangePickerContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      child: CommonMaterialApp(
+      child: TestApp(
         home: Scaffold(
           body: DateRangePickerContent(
             birthDate: DateTime(1990),

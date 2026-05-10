@@ -1,37 +1,45 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_battery/src/common_widgets/common_material_app.dart';
-import 'package:life_battery/src/features/lifespan/presentation/pages/home_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/app_theme_mode_provider.dart';
+import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/routing/app_router.dart';
+import 'package:life_battery/src/theme/app_theme.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appThemeMode = ref.watch(appThemeModeProvider);
+    final goRouter = ref.watch(goRouterProvider);
+    final themeMode = ref.watch(appThemeModeProvider).value ?? ThemeMode.system;
 
-    return switch (appThemeMode) {
-      AsyncData(:final value) => CommonMaterialApp(
-        themeMode: value,
-        home: const HomePage(),
-      ),
-      AsyncError() => CommonMaterialApp(
-        home: Scaffold(
-          appBar: AppBar(),
-          body: const Center(
-            child: Text(''),
-          ),
-        ),
-      ),
-      _ => CommonMaterialApp(
-        home: Scaffold(
-          appBar: AppBar(),
-          body: const Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      ),
-    };
+    return MaterialApp.router(
+      routerConfig: goRouter,
+      debugShowCheckedModeBanner: false,
+      title: 'Life Battery',
+      theme: lightModeTheme,
+      darkTheme: darkModeTheme,
+      themeMode: themeMode,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ja'),
+        Locale('en'),
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        const defaultLocale = Locale('en');
+        return supportedLocales.firstWhereOrNull(
+              (supportedLocale) =>
+                  supportedLocale.languageCode == locale?.languageCode,
+            ) ??
+            defaultLocale;
+      },
+    );
   }
 }

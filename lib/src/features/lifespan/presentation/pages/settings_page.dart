@@ -3,13 +3,14 @@ import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
-import 'package:life_battery/src/features/lifespan/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/app_theme_mode_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/delete_all_data_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/routing/app_route.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -264,12 +265,7 @@ class DeleteAllListTile extends ConsumerWidget {
                   Navigator.pop(context);
                   unawaited(ref.read(deleteAllDataProvider.notifier).execute());
                   Navigator.pop(context);
-                  await Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (context) => const UserDeletedPage(),
-                    ),
-                  );
+                  context.goNamed(AppRoute.userDeleted.name);
                 },
                 child: Text(
                   l10n.deleteLabel,
