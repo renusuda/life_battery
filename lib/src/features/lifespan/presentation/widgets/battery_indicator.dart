@@ -79,7 +79,7 @@ class BatteryFrame extends StatelessWidget {
   }
 }
 
-class BatteryBar extends StatefulWidget {
+class BatteryBar extends StatelessWidget {
   const BatteryBar({
     required this.value,
     required this.bodyWidth,
@@ -91,18 +91,13 @@ class BatteryBar extends StatefulWidget {
   final double bodyWidth;
 
   @override
-  State<BatteryBar> createState() => _BatteryBarState();
-}
-
-class _BatteryBarState extends State<BatteryBar> {
-  @override
   Widget build(BuildContext context) {
     // An animation that transitions the battery indicator from
     // a fully charged state to the specified value.
     return TweenAnimationBuilder(
       tween: IntTween(
         begin: 100,
-        end: widget.value,
+        end: value,
       ),
       duration: const Duration(seconds: 1),
       builder: (_, value, _) {
@@ -114,7 +109,7 @@ class _BatteryBarState extends State<BatteryBar> {
               children: [
                 const SizedBox.expand(),
                 Container(
-                  width: widget.bodyWidth * (value / 100),
+                  width: bodyWidth * (value / 100),
                   decoration: BoxDecoration(
                     color: LifeBatteryStatus(value).color,
                     boxShadow: LifeBatteryStatus(value).boxShadow(context),
