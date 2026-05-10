@@ -115,8 +115,6 @@ class LifeProgressContent extends StatefulHookConsumerWidget {
 }
 
 class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
-  var _isNotificationScheduled = false;
-
   Future<void> _showDateInputBottomSheet() {
     return showModalBottomSheet<void>(
       context: context,
@@ -134,7 +132,9 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
     await _showDateInputBottomSheet();
   }
 
-  Future<void> _scheduleNotification() async {
+  Future<void> _scheduleNotification(
+    ObjectRef<bool> isNotificationScheduled,
+  ) async {
     if (!mounted) return;
     final now = DateTime.now();
     final dropDate = widget.lifespanRange.nextDropDate(now: now);
@@ -157,12 +157,13 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
           : l10n.notificationBody,
       scheduledDate: scheduledDate,
     );
-    _isNotificationScheduled = true;
+    isNotificationScheduled.value = true;
   }
 
   @override
   Widget build(BuildContext context) {
     final isPressed = useState(false);
+    final isNotificationScheduled = useRef(false);
 
     useEffect(() {
       Timer? timer;
@@ -173,7 +174,7 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
         }
         timer = Timer(
           const Duration(seconds: 3),
-          () => unawaited(_scheduleNotification()),
+          () => unawaited(_scheduleNotification(isNotificationScheduled)),
         );
       });
       unawaited(widget.updateUserIsNotInitialUser());
@@ -181,10 +182,10 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
     }, const []);
 
     useEffect(() {
-      if (!_isNotificationScheduled) return null;
+      if (!isNotificationScheduled.value) return null;
       final timer = Timer(
         const Duration(seconds: 1),
-        () => unawaited(_scheduleNotification()),
+        () => unawaited(_scheduleNotification(isNotificationScheduled)),
       );
       return timer.cancel;
     }, [widget.lifespanRange]);
