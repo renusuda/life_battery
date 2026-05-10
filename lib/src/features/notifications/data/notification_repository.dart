@@ -3,12 +3,10 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-class LocalNotificationService {
-  LocalNotificationService._();
-
+class NotificationRepository {
   static final _plugin = FlutterLocalNotificationsPlugin();
 
-  static Future<void> initialize() async {
+  Future<void> initialize() async {
     await _plugin.initialize(
       settings: const InitializationSettings(
         android: AndroidInitializationSettings(
@@ -25,7 +23,7 @@ class LocalNotificationService {
 
   /// Requests permission, cancels existing notifications, and schedules a new
   /// notification at the given [scheduledDate].
-  static Future<void> scheduleNotification({
+  Future<void> scheduleNotification({
     required String title,
     required String body,
     required DateTime scheduledDate,
@@ -61,7 +59,7 @@ class LocalNotificationService {
     }
   }
 
-  static Future<bool> _requestPermission() async {
+  Future<bool> _requestPermission() async {
     final androidPlugin = _plugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
@@ -87,7 +85,7 @@ class LocalNotificationService {
     return false;
   }
 
-  static Future<void> _cancelAll() async {
+  Future<void> _cancelAll() async {
     await _plugin.cancelAll();
   }
 }

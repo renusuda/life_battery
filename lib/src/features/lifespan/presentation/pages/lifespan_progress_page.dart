@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/common_widgets/async_value_widget.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
-import 'package:life_battery/src/features/lifespan/data/local_notification_service.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/has_long_pressed_battery_provider.dart';
@@ -15,6 +14,7 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/lifesp
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
+import 'package:life_battery/src/features/notifications/presentation/providers/notification_schedule_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/routing/app_route.dart';
 
@@ -100,25 +100,17 @@ class LifeProgressContent extends HookConsumerWidget {
     Future<void> scheduleNotification() async {
       if (!context.mounted) return;
       final now = DateTime.now();
-      final dropDate = lifespanRange.nextDropDate(now: now);
-      if (dropDate == null) return;
-
       final l10n = AppLocalizations.of(context)!;
       final percentage = lifespanRange.remainingLifePercentage(now: now) - 1;
-      // Schedule at 9:00 AM on the drop date.
-      final scheduledDate = DateTime(
-        dropDate.year,
-        dropDate.month,
-        dropDate.day,
-        9,
-      );
-      await LocalNotificationService.scheduleNotification(
-        title: l10n.notificationTitle(percentage),
-        body: percentage == 0
-            ? l10n.notificationBodyZeroPercent
-            : l10n.notificationBody,
-        scheduledDate: scheduledDate,
-      );
+      await ref
+          .read(notificationScheduleProvider.notifier)
+          .schedule(
+            title: l10n.notificationTitle(percentage),
+            body: percentage == 0
+                ? l10n.notificationBodyZeroPercent
+                : l10n.notificationBody,
+            lifespanRange: lifespanRange,
+          );
       isNotificationScheduled.value = true;
     }
 
