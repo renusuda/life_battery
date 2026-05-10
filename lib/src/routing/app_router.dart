@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
-import 'package:life_battery/src/features/lifespan/presentation/pages/home_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/user_deleted_page.dart';
@@ -28,14 +27,7 @@ GoRouter goRouter(Ref ref) {
       GoRoute(
         path: '/',
         name: AppRoute.home.name,
-        builder: (context, state) => const HomePage(),
-      ),
-      GoRoute(
-        path: '/lifespan',
-        name: AppRoute.lifespan.name,
-        builder: (context, state) => LifespanProgressPage(
-          isInitialUser: state.uri.queryParameters['isInitialUser'] == 'true',
-        ),
+        builder: (context, state) => const LifespanProgressPage(),
         routes: [
           GoRoute(
             path: 'settings',

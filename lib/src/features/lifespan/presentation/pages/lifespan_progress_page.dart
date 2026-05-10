@@ -18,63 +18,93 @@ import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/routing/app_route.dart';
 
 class LifespanProgressPage extends ConsumerWidget {
-  const LifespanProgressPage({
-    required this.isInitialUser,
-    super.key,
-  });
-
-  final bool isInitialUser;
+  const LifespanProgressPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isInitialUser = ref.watch(isInitialUserProvider);
     final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
     final hasLongPressedBattery = ref.watch(hasLongPressedBatteryProvider);
     final displayMode = ref.watch(displayModeManagerProvider);
 
     final l10n = AppLocalizations.of(context)!;
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () => context.goNamed(AppRoute.settings.name),
-          ),
-        ],
+    return isInitialUser.when(
+      loading: () => const LoadingPage(),
+      error: (_, _) => const ErrorPage(),
+      data: (isInitialUserValue) => Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings_outlined),
+              onPressed: () => context.goNamed(AppRoute.settings.name),
+            ),
+          ],
+        ),
+        body: Center(
+          child: switch (lifespanRangeManager) {
+            AsyncData(value: final lifespanRange) =>
+              switch (hasLongPressedBattery) {
+                AsyncData(value: final hasLongPressedBatteryValue) =>
+                  switch (displayMode) {
+                    AsyncData(value: final isPercentageMode) =>
+                      LifeProgressContent(
+                        lifespanRange: lifespanRange,
+                        isInitialUser: isInitialUserValue,
+                        hasLongPressedBattery: hasLongPressedBatteryValue,
+                        isPercentageMode: isPercentageMode,
+                        updateUserIsNotInitialUser: () async {
+                          await ref
+                              .read(isInitialUserProvider.notifier)
+                              .updateUserIsNotInitialUser();
+                        },
+                        updateHasLongPressedBattery: () async {
+                          await ref
+                              .read(hasLongPressedBatteryProvider.notifier)
+                              .updateHasLongPressedBattery();
+                        },
+                      ),
+                    AsyncError() => Text(l10n.generalError),
+                    _ => const CircularProgressIndicator(),
+                  },
+                AsyncError() => Text(l10n.generalError),
+                _ => const CircularProgressIndicator(),
+              },
+            AsyncError() => Text(l10n.generalError),
+            _ => const CircularProgressIndicator(),
+          },
+        ),
       ),
+    );
+  }
+}
+
+class ErrorPage extends StatelessWidget {
+  const ErrorPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Scaffold(
+      appBar: AppBar(),
       body: Center(
-        child: switch (lifespanRangeManager) {
-          AsyncData(value: final lifespanRange) =>
-            switch (hasLongPressedBattery) {
-              AsyncData(value: final hasLongPressedBatteryValue) =>
-                switch (displayMode) {
-                  AsyncData(value: final isPercentageMode) =>
-                    LifeProgressContent(
-                      lifespanRange: lifespanRange,
-                      isInitialUser: isInitialUser,
-                      hasLongPressedBattery: hasLongPressedBatteryValue,
-                      isPercentageMode: isPercentageMode,
-                      updateUserIsNotInitialUser: () async {
-                        await ref
-                            .read(isInitialUserProvider.notifier)
-                            .updateUserIsNotInitialUser();
-                      },
-                      updateHasLongPressedBattery: () async {
-                        await ref
-                            .read(hasLongPressedBatteryProvider.notifier)
-                            .updateHasLongPressedBattery();
-                      },
-                    ),
-                  AsyncError() => Text(l10n.generalError),
-                  _ => const CircularProgressIndicator(),
-                },
-              AsyncError() => Text(l10n.generalError),
-              _ => const CircularProgressIndicator(),
-            },
-          AsyncError() => Text(l10n.generalError),
-          _ => const CircularProgressIndicator(),
-        },
+        child: Text(l10n.generalError),
+      ),
+    );
+  }
+}
+
+class LoadingPage extends StatelessWidget {
+  const LoadingPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: const Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }
