@@ -117,7 +117,6 @@ class LifeProgressContent extends StatefulHookConsumerWidget {
 class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
   var _isNotificationScheduled = false;
   Timer? _notificationTimer;
-  Timer? _debounceTimer;
 
   Future<void> _showDateInputBottomSheet() {
     return showModalBottomSheet<void>(
@@ -179,28 +178,23 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
   }
 
   @override
-  void didUpdateWidget(covariant LifeProgressContent oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (!_isNotificationScheduled) return;
-    if (widget.lifespanRange != oldWidget.lifespanRange) {
-      _debounceTimer?.cancel();
-      _debounceTimer = Timer(
-        const Duration(seconds: 1),
-        () => unawaited(_scheduleNotification()),
-      );
-    }
-  }
-
-  @override
   void dispose() {
     _notificationTimer?.cancel();
-    _debounceTimer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final isPressed = useState(false);
+
+    useEffect(() {
+      if (!_isNotificationScheduled) return null;
+      final timer = Timer(
+        const Duration(seconds: 1),
+        () => unawaited(_scheduleNotification()),
+      );
+      return timer.cancel;
+    }, [widget.lifespanRange]);
 
     final remainingLifePercentage = widget.lifespanRange
         .remainingLifePercentage(
