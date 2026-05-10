@@ -144,4 +144,10 @@ class FakeLifespanLocalDataSource implements LifespanLocalDataSource {
 
   @override
   Future<void> deleteAllData() => throw UnimplementedError();
+
+  @override
+  bool get isUserDeleted => throw UnimplementedError();
+
+  @override
+  Stream<bool> isUserDeletedStateChanges() => throw UnimplementedError();
 }

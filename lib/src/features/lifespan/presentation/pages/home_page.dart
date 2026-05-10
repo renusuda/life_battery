@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
-import 'package:life_battery/src/features/lifespan/presentation/pages/user_deleted_page.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/is_deleted_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
@@ -11,24 +9,13 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDeletedUser = ref.watch(isDeletedUserProvider);
     final isInitialUser = ref.watch(isInitialUserProvider);
 
-    return switch (isDeletedUser) {
-      // If the user is initial user, show the tutorial page
-      // Otherwise, show the lifespan progress page
-      AsyncData(:final value) =>
-        value
-            ? const UserDeletedPage()
-            : isInitialUser.when(
-                data: (isInitial) =>
-                    LifespanProgressPage(isInitialUser: isInitial),
-                error: (error, _) => const ErrorPage(),
-                loading: () => const LoadingPage(),
-              ),
-      AsyncError() => const ErrorPage(),
-      _ => const LoadingPage(),
-    };
+    return isInitialUser.when(
+      data: (isInitial) => LifespanProgressPage(isInitialUser: isInitial),
+      error: (error, _) => const ErrorPage(),
+      loading: () => const LoadingPage(),
+    );
   }
 }
 

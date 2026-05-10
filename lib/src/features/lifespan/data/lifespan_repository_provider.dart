@@ -15,7 +15,9 @@ LocalDatabase localDatabase(Ref ref) {
 @Riverpod(keepAlive: true)
 LifespanLocalDataSource lifespanLocalDataSource(Ref ref) {
   final database = ref.watch(localDatabaseProvider);
-  return CacheLifespanLocalDataSource(localDatabase: database);
+  final localDataSource = CacheLifespanLocalDataSource(localDatabase: database);
+  ref.onDispose(localDataSource.dispose);
+  return localDataSource;
 }
 
 @Riverpod(keepAlive: true)

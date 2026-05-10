@@ -99,4 +99,10 @@ class LifespanRepository {
       androidName: 'LifeBatteryWidgetReceiver',
     );
   }
+
+  bool get isUserDeleted => _localDataSource.isUserDeleted;
+
+  Stream<bool> isUserDeletedStateChanges() {
+    return _localDataSource.isUserDeletedStateChanges();
+  }
 }

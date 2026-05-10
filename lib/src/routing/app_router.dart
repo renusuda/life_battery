@@ -1,16 +1,29 @@
 import 'package:go_router/go_router.dart';
+import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/home_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/routing/app_route.dart';
+import 'package:life_battery/src/routing/go_router_refresh_stream.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';
 
 @Riverpod(keepAlive: true)
 GoRouter goRouter(Ref ref) {
+  final lifespanRepository = ref.watch(lifespanRepositoryProvider);
   return GoRouter(
+    redirect: (context, state) {
+      final isDeleted = lifespanRepository.isUserDeleted;
+      if (isDeleted) {
+        return '/user-deleted';
+      }
+      return null;
+    },
+    refreshListenable: GoRouterRefreshStream(
+      lifespanRepository.isUserDeletedStateChanges(),
+    ),
     routes: [
       GoRoute(
         path: '/',

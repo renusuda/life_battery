@@ -96,7 +96,7 @@ final class LifespanLocalDataSourceProvider
 }
 
 String _$lifespanLocalDataSourceHash() =>
-    r'051d52ada7ed951b3e693ab887a6b9a75f35feb7';
+    r'f1923af0311af2f8d4ab546a109a0f80e13a16cd';
 
 @ProviderFor(lifespanRepository)
 const lifespanRepositoryProvider = LifespanRepositoryProvider._();

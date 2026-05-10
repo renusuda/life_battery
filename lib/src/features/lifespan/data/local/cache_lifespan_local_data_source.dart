@@ -1,13 +1,28 @@
+import 'dart:async';
+
 import 'package:life_battery/src/database/local_database.dart';
 import 'package:life_battery/src/features/lifespan/data/local/lifespan_local_data_source.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:sqflite/sqflite.dart';
 
 class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
-  const CacheLifespanLocalDataSource({required LocalDatabase localDatabase})
-    : _localDatabase = localDatabase;
+  CacheLifespanLocalDataSource({required LocalDatabase localDatabase})
+    : _localDatabase = localDatabase {
+    // Kick off the async load at construction time so that _isUserDeleted
+    // is populated before the router first reads isUserDeleted.
+    unawaited(getIsDeletedUser());
+  }
 
   final LocalDatabase _localDatabase;
+
+  bool _isUserDeleted = false;
+
+  final _isUserDeletedState = StreamController<bool>.broadcast();
+
+  void _setUserDeleted(bool value) {
+    _isUserDeleted = value;
+    _isUserDeletedState.add(value);
+  }
 
   static const _tableName = 'lifespan';
   static const _columnBirthDate = 'birthDate';
@@ -86,12 +101,15 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
       );
 
       if (result.isEmpty) {
+        _setUserDeleted(false);
         return false;
       } else {
         final isDeletedUser = result.first[_columnIsDeletedUser]! as int;
+        _setUserDeleted(isDeletedUser == 1);
         return isDeletedUser == 1;
       }
-    } on DatabaseException catch (_) {
+    } on Exception catch (_) {
+      _setUserDeleted(false);
       return false;
     }
   }
@@ -219,6 +237,17 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
         _columnHasLongPressedBattery: 0,
         _columnIsPercentageMode: 1,
       });
+      _setUserDeleted(true);
     } on DatabaseException catch (_) {}
+  }
+
+  @override
+  bool get isUserDeleted => _isUserDeleted;
+
+  @override
+  Stream<bool> isUserDeletedStateChanges() => _isUserDeletedState.stream;
+
+  void dispose() {
+    unawaited(_isUserDeletedState.close());
   }
 }

@@ -27,4 +27,8 @@ abstract interface class LifespanLocalDataSource {
   Future<void> updateHasLongPressed();
 
   Future<void> deleteAllData();
+
+  bool get isUserDeleted;
+
+  Stream<bool> isUserDeletedStateChanges();
 }
