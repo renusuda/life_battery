@@ -25,7 +25,7 @@ GoRouter goRouter(Ref ref) {
         ),
         routes: [
           GoRoute(
-            path: '/settings',
+            path: 'settings',
             name: AppRoute.settings.name,
             builder: (context, state) => const SettingsPage(),
           ),
