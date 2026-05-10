@@ -86,7 +86,7 @@ class LifespanProgressPage extends ConsumerWidget {
   }
 }
 
-class LifeProgressContent extends StatefulHookConsumerWidget {
+class LifeProgressContent extends HookConsumerWidget {
   const LifeProgressContent({
     required this.lifespanRange,
     required this.isInitialUser,
@@ -110,74 +110,65 @@ class LifeProgressContent extends StatefulHookConsumerWidget {
   final Future<void> Function() updateHasLongPressedBattery;
 
   @override
-  ConsumerState<LifeProgressContent> createState() =>
-      _LifeProgressContentState();
-}
-
-class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
-  Future<void> _showDateInputBottomSheet() {
-    return showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return const DateInputBottomSheet();
-      },
-    );
-  }
-
-  Future<void> _handleLongPress() async {
-    if (!widget.hasLongPressedBattery) {
-      await widget.updateHasLongPressedBattery();
-    }
-    if (!mounted) return;
-    await _showDateInputBottomSheet();
-  }
-
-  Future<void> _scheduleNotification(
-    ObjectRef<bool> isNotificationScheduled,
-  ) async {
-    if (!mounted) return;
-    final now = DateTime.now();
-    final dropDate = widget.lifespanRange.nextDropDate(now: now);
-    if (dropDate == null) return;
-
-    final l10n = AppLocalizations.of(context)!;
-    final percentage =
-        widget.lifespanRange.remainingLifePercentage(now: now) - 1;
-    // Schedule at 9:00 AM on the drop date.
-    final scheduledDate = DateTime(
-      dropDate.year,
-      dropDate.month,
-      dropDate.day,
-      9,
-    );
-    await LocalNotificationService.scheduleNotification(
-      title: l10n.notificationTitle(percentage),
-      body: percentage == 0
-          ? l10n.notificationBodyZeroPercent
-          : l10n.notificationBody,
-      scheduledDate: scheduledDate,
-    );
-    isNotificationScheduled.value = true;
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isPressed = useState(false);
     final isNotificationScheduled = useRef(false);
+
+    Future<void> showDateInputBottomSheet() {
+      return showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return const DateInputBottomSheet();
+        },
+      );
+    }
+
+    Future<void> scheduleNotification() async {
+      if (!context.mounted) return;
+      final now = DateTime.now();
+      final dropDate = lifespanRange.nextDropDate(now: now);
+      if (dropDate == null) return;
+
+      final l10n = AppLocalizations.of(context)!;
+      final percentage = lifespanRange.remainingLifePercentage(now: now) - 1;
+      // Schedule at 9:00 AM on the drop date.
+      final scheduledDate = DateTime(
+        dropDate.year,
+        dropDate.month,
+        dropDate.day,
+        9,
+      );
+      await LocalNotificationService.scheduleNotification(
+        title: l10n.notificationTitle(percentage),
+        body: percentage == 0
+            ? l10n.notificationBodyZeroPercent
+            : l10n.notificationBody,
+        scheduledDate: scheduledDate,
+      );
+      isNotificationScheduled.value = true;
+    }
+
+    Future<void> handleLongPress() async {
+      if (!hasLongPressedBattery) {
+        await updateHasLongPressedBattery();
+      }
+      if (!context.mounted) return;
+      await showDateInputBottomSheet();
+    }
 
     useEffect(() {
       Timer? timer;
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        if (widget.isInitialUser) {
-          await _showDateInputBottomSheet();
-          if (!mounted) return;
+        if (isInitialUser) {
+          await showDateInputBottomSheet();
+          if (!context.mounted) return;
         }
         timer = Timer(
           const Duration(seconds: 3),
-          () => unawaited(_scheduleNotification(isNotificationScheduled)),
+          () => unawaited(scheduleNotification()),
         );
       });
-      unawaited(widget.updateUserIsNotInitialUser());
+      unawaited(updateUserIsNotInitialUser());
       return () => timer?.cancel();
     }, const []);
 
@@ -185,23 +176,22 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
       if (!isNotificationScheduled.value) return null;
       final timer = Timer(
         const Duration(seconds: 1),
-        () => unawaited(_scheduleNotification(isNotificationScheduled)),
+        () => unawaited(scheduleNotification()),
       );
       return timer.cancel;
-    }, [widget.lifespanRange]);
+    }, [lifespanRange]);
 
-    final remainingLifePercentage = widget.lifespanRange
-        .remainingLifePercentage(
-          now: DateTime.now(),
-        );
-    final remainingLifeDays = widget.lifespanRange.remainingLifeDays(
+    final remainingLifePercentage = lifespanRange.remainingLifePercentage(
+      now: DateTime.now(),
+    );
+    final remainingLifeDays = lifespanRange.remainingLifeDays(
       now: DateTime.now(),
     );
 
     final l10n = AppLocalizations.of(context)!;
 
     return GestureDetector(
-      onLongPress: _handleLongPress,
+      onLongPress: handleLongPress,
       onTap: () => ref.read(displayModeManagerProvider.notifier).toggle(),
       onTapDown: (_) => isPressed.value = true,
       onTapUp: (_) => isPressed.value = false,
@@ -214,14 +204,14 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
             duration: const Duration(milliseconds: 100),
             child: BatteryIndicator(
               value: remainingLifePercentage,
-              text: widget.isPercentageMode
+              text: isPercentageMode
                   ? '$remainingLifePercentage%'
                   : '${remainingLifeDays.withCommaString}${l10n.dayUnit}',
             ),
           ),
           const SizedBox(height: 32),
           LongPressHint(
-            hasLongPressedBattery: widget.hasLongPressedBattery,
+            hasLongPressedBattery: hasLongPressedBattery,
           ),
         ],
       ),
