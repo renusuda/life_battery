@@ -1,7 +1,0 @@
-interface:
-  display_name: "Commit"
-  short_description: "Write concise conventional git commits"
-  default_prompt: "Use $commit to prepare a concise conventional git commit message for the current changes."
-
-policy:
-  allow_implicit_invocation: true
