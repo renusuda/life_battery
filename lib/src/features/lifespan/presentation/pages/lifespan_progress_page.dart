@@ -35,10 +35,10 @@ class LifespanProgressPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: Center(
-        child: AsyncValueWidget(
-          asyncValue: lifespanProgressState,
-          data: (state) => LifeProgressContent(
+      body: AsyncValueWidget(
+        asyncValue: lifespanProgressState,
+        data: (state) => Center(
+          child: LifeProgressContent(
             lifespanRange: state.lifespanRange,
             isInitialUser: state.isInitialUser,
             hasLongPressedBattery: state.hasLongPressedBattery,
