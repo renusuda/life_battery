@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/lifespan/data/local_notification_service.dart';
@@ -85,7 +86,7 @@ class LifespanProgressPage extends ConsumerWidget {
   }
 }
 
-class LifeProgressContent extends ConsumerStatefulWidget {
+class LifeProgressContent extends StatefulHookConsumerWidget {
   const LifeProgressContent({
     required this.lifespanRange,
     required this.isInitialUser,
@@ -114,28 +115,9 @@ class LifeProgressContent extends ConsumerStatefulWidget {
 }
 
 class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
-  var _isPressed = false;
   var _isNotificationScheduled = false;
   Timer? _notificationTimer;
   Timer? _debounceTimer;
-
-  void _onTapDown(TapDownDetails details) {
-    setState(() {
-      _isPressed = true;
-    });
-  }
-
-  void _onTapUp(TapUpDetails details) {
-    setState(() {
-      _isPressed = false;
-    });
-  }
-
-  void _onTapCancel() {
-    setState(() {
-      _isPressed = false;
-    });
-  }
 
   Future<void> _showDateInputBottomSheet() {
     return showModalBottomSheet<void>(
@@ -218,6 +200,8 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
 
   @override
   Widget build(BuildContext context) {
+    final isPressed = useState(false);
+
     final remainingLifePercentage = widget.lifespanRange
         .remainingLifePercentage(
           now: DateTime.now(),
@@ -231,14 +215,14 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
     return GestureDetector(
       onLongPress: _handleLongPress,
       onTap: () => ref.read(displayModeManagerProvider.notifier).toggle(),
-      onTapDown: _onTapDown,
-      onTapUp: _onTapUp,
-      onTapCancel: _onTapCancel,
+      onTapDown: (_) => isPressed.value = true,
+      onTapUp: (_) => isPressed.value = false,
+      onTapCancel: () => isPressed.value = false,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           AnimatedScale(
-            scale: _isPressed ? 0.90 : 1.0,
+            scale: isPressed.value ? 0.90 : 1.0,
             duration: const Duration(milliseconds: 100),
             child: BatteryIndicator(
               value: remainingLifePercentage,
