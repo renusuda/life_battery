@@ -54,7 +54,7 @@ class CacheDataDeletionLocalDataSource implements DataDeletionLocalDataSource {
     try {
       final db = await _localDatabase.database;
       await db.update(_tableName, {
-        _columnBirthDate: '2000-01-01T00:00:00.000',
+        _columnBirthDate: '1980-01-01T00:00:00.000',
         _columnIdealAge: 100,
         _columnIsInitialUser: 0,
         _columnIsDeletedUser: 1,

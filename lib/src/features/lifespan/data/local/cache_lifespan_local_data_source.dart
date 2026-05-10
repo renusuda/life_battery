@@ -26,12 +26,12 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
       );
 
       if (result.isEmpty) {
-        return LifespanRange(birthDate: DateTime(2000), idealAge: 100);
+        return LifespanRange(birthDate: DateTime(1980), idealAge: 100);
       } else {
         return LifespanRange.fromJson(result.first);
       }
     } on DatabaseException catch (_) {
-      return LifespanRange(birthDate: DateTime(2000), idealAge: 100);
+      return LifespanRange(birthDate: DateTime(1980), idealAge: 100);
     }
   }
 

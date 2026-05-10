@@ -57,7 +57,7 @@ class LocalDatabase {
           await db.insert(
             _tableName,
             {
-              _columnBirthDate: '2000-01-01T00:00:00.000',
+              _columnBirthDate: '1980-01-01T00:00:00.000',
               _columnIdealAge: 100,
               _columnThemeMode: 'system',
               _columnIsInitialUser: 1,
