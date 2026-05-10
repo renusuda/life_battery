@@ -1,0 +1,7 @@
+interface:
+  display_name: "Commit"
+  short_description: "日本語でのConventional Commit"
+  default_prompt: "Conventional Commitsに従って日本語でgitのコミットメッセージを生成してください。"
+
+dependencies:
+  tools: []
