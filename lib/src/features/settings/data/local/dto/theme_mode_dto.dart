@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ThemeModeDto {
   const ThemeModeDto(this.value);
+
   final String value;
 
   ThemeMode toDomain() => switch (value) {

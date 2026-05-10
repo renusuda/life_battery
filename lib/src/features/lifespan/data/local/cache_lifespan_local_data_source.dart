@@ -12,7 +12,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
   static const _tableName = 'lifespan';
   static const _columnBirthDate = 'birthDate';
   static const _columnIdealAge = 'idealAge';
-  static const _columnThemeMode = 'themeMode';
   static const _columnIsInitialUser = 'isInitialUser';
   static const _columnHasLongPressedBattery = 'hasLongPressedBattery';
   static const _columnIsPercentageMode = 'isPercentageMode';
@@ -33,25 +32,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
       }
     } on DatabaseException catch (_) {
       return LifespanRange(birthDate: DateTime(2000), idealAge: 100);
-    }
-  }
-
-  @override
-  Future<String> getThemeMode() async {
-    try {
-      final db = await _localDatabase.database;
-      final result = await db.query(
-        _tableName,
-        columns: [_columnThemeMode],
-      );
-
-      if (result.isEmpty) {
-        return 'system';
-      } else {
-        return result.first[_columnThemeMode]! as String;
-      }
-    } on DatabaseException catch (_) {
-      return 'system';
     }
   }
 
@@ -134,17 +114,6 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
           _columnBirthDate: birthDate.toIso8601String(),
           _columnIdealAge: idealAge,
         });
-      }
-    } on DatabaseException catch (_) {}
-  }
-
-  @override
-  Future<void> updateThemeMode({required String themeMode}) async {
-    try {
-      final db = await _localDatabase.database;
-      final response = await db.query(_tableName);
-      if (response.isNotEmpty) {
-        await db.update(_tableName, {_columnThemeMode: themeMode});
       }
     } on DatabaseException catch (_) {}
   }

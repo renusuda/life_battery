@@ -3,8 +3,6 @@ import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 abstract interface class LifespanLocalDataSource {
   Future<LifespanRange> getLifespan();
 
-  Future<String> getThemeMode();
-
   Future<bool> getIsInitialUser();
 
   Future<bool> getHasLongPressed();
@@ -15,8 +13,6 @@ abstract interface class LifespanLocalDataSource {
     required DateTime birthDate,
     required int idealAge,
   });
-
-  Future<void> updateThemeMode({required String themeMode});
 
   Future<void> updateUserIsNotInitialUser();
 

@@ -3,18 +3,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_battery/src/features/lifespan/data/lifespan_repository.dart';
-import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
-import 'package:life_battery/src/features/lifespan/data/local/lifespan_local_data_source.dart';
-import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
+import 'package:life_battery/src/features/settings/data/local/settings_local_data_source.dart';
+import 'package:life_battery/src/features/settings/data/settings_repository.dart';
+import 'package:life_battery/src/features/settings/data/settings_repository_provider.dart';
 import 'package:life_battery/src/features/settings/presentation/providers/app_theme_mode_provider.dart';
 
 void main() {
-  ProviderContainer makeContainer(FakeLifespanLocalDataSource dataSource) {
+  ProviderContainer makeContainer(FakeSettingsLocalDataSource dataSource) {
     final container = ProviderContainer(
       overrides: [
-        lifespanRepositoryProvider.overrideWithValue(
-          LifespanRepository(localDataSource: dataSource),
+        settingsRepositoryProvider.overrideWithValue(
+          SettingsRepository(localDataSource: dataSource),
         ),
       ],
     );
@@ -26,7 +25,7 @@ void main() {
     group('build', () {
       test('returns ThemeMode.system from repository', () async {
         final container = makeContainer(
-          FakeLifespanLocalDataSource(themeMode: ThemeMode.system),
+          FakeSettingsLocalDataSource(themeMode: ThemeMode.system),
         );
 
         expect(
@@ -37,7 +36,7 @@ void main() {
 
       test('returns ThemeMode.light from repository', () async {
         final container = makeContainer(
-          FakeLifespanLocalDataSource(themeMode: ThemeMode.light),
+          FakeSettingsLocalDataSource(themeMode: ThemeMode.light),
         );
 
         expect(
@@ -48,7 +47,7 @@ void main() {
 
       test('returns ThemeMode.dark from repository', () async {
         final container = makeContainer(
-          FakeLifespanLocalDataSource(themeMode: ThemeMode.dark),
+          FakeSettingsLocalDataSource(themeMode: ThemeMode.dark),
         );
 
         expect(
@@ -63,7 +62,7 @@ void main() {
         'immediately sets state without awaiting repository write',
         () async {
           final container = makeContainer(
-            FakeLifespanLocalDataSource(themeMode: ThemeMode.system),
+            FakeSettingsLocalDataSource(themeMode: ThemeMode.system),
           );
           await container.read(appThemeModeProvider.future);
 
@@ -78,7 +77,7 @@ void main() {
       );
 
       test('calls repository with the given theme mode', () async {
-        final dataSource = FakeLifespanLocalDataSource(
+        final dataSource = FakeSettingsLocalDataSource(
           themeMode: ThemeMode.system,
         );
         final container = makeContainer(dataSource);
@@ -96,8 +95,8 @@ void main() {
   });
 }
 
-class FakeLifespanLocalDataSource implements LifespanLocalDataSource {
-  FakeLifespanLocalDataSource({required ThemeMode themeMode})
+class FakeSettingsLocalDataSource implements SettingsLocalDataSource {
+  FakeSettingsLocalDataSource({required ThemeMode themeMode})
     : _themeMode = themeMode.name;
 
   final String _themeMode;
@@ -110,32 +109,4 @@ class FakeLifespanLocalDataSource implements LifespanLocalDataSource {
   Future<void> updateThemeMode({required String themeMode}) async {
     lastUpdatedThemeMode = themeMode;
   }
-
-  @override
-  Future<LifespanRange> getLifespan() => throw UnimplementedError();
-
-  @override
-  Future<bool> getIsInitialUser() => throw UnimplementedError();
-
-  @override
-  Future<bool> getHasLongPressed() => throw UnimplementedError();
-
-  @override
-  Future<bool> getIsPercentageMode() => throw UnimplementedError();
-
-  @override
-  Future<void> updateLifespan({
-    required DateTime birthDate,
-    required int idealAge,
-  }) => throw UnimplementedError();
-
-  @override
-  Future<void> updateUserIsNotInitialUser() => throw UnimplementedError();
-
-  @override
-  Future<void> updateIsPercentageMode({required bool isPercentageMode}) =>
-      throw UnimplementedError();
-
-  @override
-  Future<void> updateHasLongPressed() => throw UnimplementedError();
 }

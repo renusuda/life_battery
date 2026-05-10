@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
+import 'package:life_battery/src/features/settings/data/settings_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_theme_mode_provider.g.dart';
@@ -10,13 +10,13 @@ part 'app_theme_mode_provider.g.dart';
 class AppThemeMode extends _$AppThemeMode {
   @override
   Future<ThemeMode> build() =>
-      ref.watch(lifespanRepositoryProvider).getThemeMode();
+      ref.watch(settingsRepositoryProvider).getThemeMode();
 
   Future<void> updateThemeMode(ThemeMode themeMode) async {
     state = AsyncData(themeMode);
     unawaited(
       ref
-          .read(lifespanRepositoryProvider)
+          .read(settingsRepositoryProvider)
           .updateThemeMode(
             themeMode: themeMode,
           ),
