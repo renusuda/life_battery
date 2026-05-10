@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・Fixed an issue where the Android notification icon was not displayed correctly."
+    "text": "・Set the default birth date to 1980."
   },
   {
     "language": "ja",
-    "text": "・Android通知アイコンが正しく表示されない問題を修正しました。"
+    "text": "・デフォルトの生年月日を1980年に設定しました。"
   }
 ]
