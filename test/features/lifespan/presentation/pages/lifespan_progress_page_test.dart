@@ -296,29 +296,21 @@ class FakeLifespanRangeManager extends LifespanRangeManager {
   }
 }
 
-class TestEditableLifeProgressContent extends StatefulWidget {
+class TestEditableLifeProgressContent extends HookWidget {
   const TestEditableLifeProgressContent({super.key});
 
   @override
-  State<TestEditableLifeProgressContent> createState() =>
-      _TestEditableLifeProgressContentState();
-}
-
-class _TestEditableLifeProgressContentState
-    extends State<TestEditableLifeProgressContent> {
-  var _lifespanRange = LifespanRange(
-    birthDate: DateTime(2000),
-    idealAge: 100,
-  );
-
-  @override
   Widget build(BuildContext context) {
-    FakeLifespanRangeManager.readValue = () => _lifespanRange;
+    final lifespanRange = useState(
+      LifespanRange(
+        birthDate: DateTime(2000),
+        idealAge: 100,
+      ),
+    );
+
+    FakeLifespanRangeManager.readValue = () => lifespanRange.value;
     FakeLifespanRangeManager.writeValue = (value) {
-      if (!mounted) return;
-      setState(() {
-        _lifespanRange = value;
-      });
+      lifespanRange.value = value;
     };
 
     return ProviderScope(
@@ -333,7 +325,7 @@ class _TestEditableLifeProgressContentState
               final isPercentageMode =
                   ref.watch(displayModeManagerProvider).value ?? true;
               return LifeProgressContent(
-                lifespanRange: _lifespanRange,
+                lifespanRange: lifespanRange.value,
                 isInitialUser: false,
                 hasLongPressedBattery: true,
                 isPercentageMode: isPercentageMode,
