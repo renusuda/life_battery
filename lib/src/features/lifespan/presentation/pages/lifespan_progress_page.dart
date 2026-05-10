@@ -116,7 +116,6 @@ class LifeProgressContent extends StatefulHookConsumerWidget {
 
 class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
   var _isNotificationScheduled = false;
-  Timer? _notificationTimer;
 
   Future<void> _showDateInputBottomSheet() {
     return showModalBottomSheet<void>(
@@ -162,30 +161,24 @@ class _LifeProgressContentState extends ConsumerState<LifeProgressContent> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (widget.isInitialUser) {
-        await _showDateInputBottomSheet();
-        if (!mounted) return;
-      }
-      _notificationTimer = Timer(
-        const Duration(seconds: 3),
-        () => unawaited(_scheduleNotification()),
-      );
-    });
-    unawaited(widget.updateUserIsNotInitialUser());
-  }
-
-  @override
-  void dispose() {
-    _notificationTimer?.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final isPressed = useState(false);
+
+    useEffect(() {
+      Timer? timer;
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (widget.isInitialUser) {
+          await _showDateInputBottomSheet();
+          if (!mounted) return;
+        }
+        timer = Timer(
+          const Duration(seconds: 3),
+          () => unawaited(_scheduleNotification()),
+        );
+      });
+      unawaited(widget.updateUserIsNotInitialUser());
+      return () => timer?.cancel();
+    }, const []);
 
     useEffect(() {
       if (!_isNotificationScheduled) return null;
