@@ -41,7 +41,7 @@ final class DeleteAllDataProvider
   }
 }
 
-String _$deleteAllDataHash() => r'e798ccbc04fb6c9c58e0985960d2e2d48a6e4812';
+String _$deleteAllDataHash() => r'b30c6f0ff8db59b8b5ff55090114395df9ed9a4b';
 
 abstract class _$DeleteAllData extends $Notifier<void> {
   void build();

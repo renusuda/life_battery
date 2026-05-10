@@ -9,47 +9,6 @@ part of 'lifespan_repository_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(localDatabase)
-const localDatabaseProvider = LocalDatabaseProvider._();
-
-final class LocalDatabaseProvider
-    extends $FunctionalProvider<LocalDatabase, LocalDatabase, LocalDatabase>
-    with $Provider<LocalDatabase> {
-  const LocalDatabaseProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'localDatabaseProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$localDatabaseHash();
-
-  @$internal
-  @override
-  $ProviderElement<LocalDatabase> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  LocalDatabase create(Ref ref) {
-    return localDatabase(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(LocalDatabase value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<LocalDatabase>(value),
-    );
-  }
-}
-
-String _$localDatabaseHash() => r'afc96f0851e573f7b590118a7a72bfd60a86cc50';
-
 @ProviderFor(lifespanLocalDataSource)
 const lifespanLocalDataSourceProvider = LifespanLocalDataSourceProvider._();
 
@@ -96,7 +55,7 @@ final class LifespanLocalDataSourceProvider
 }
 
 String _$lifespanLocalDataSourceHash() =>
-    r'f1923af0311af2f8d4ab546a109a0f80e13a16cd';
+    r'ea4943f18c1bbb2df724ea6b91f3c2c28f4f8d2b';
 
 @ProviderFor(lifespanRepository)
 const lifespanRepositoryProvider = LifespanRepositoryProvider._();

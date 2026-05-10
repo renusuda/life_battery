@@ -7,8 +7,6 @@ abstract interface class LifespanLocalDataSource {
 
   Future<bool> getIsInitialUser();
 
-  Future<bool> getIsDeletedUser();
-
   Future<bool> getHasLongPressed();
 
   Future<bool> getIsPercentageMode();
@@ -25,10 +23,4 @@ abstract interface class LifespanLocalDataSource {
   Future<void> updateIsPercentageMode({required bool isPercentageMode});
 
   Future<void> updateHasLongPressed();
-
-  Future<void> deleteAllData();
-
-  bool get isUserDeleted;
-
-  Stream<bool> isUserDeletedStateChanges();
 }

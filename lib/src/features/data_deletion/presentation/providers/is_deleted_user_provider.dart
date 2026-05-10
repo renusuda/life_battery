@@ -1,4 +1,4 @@
-import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
+import 'package:life_battery/src/features/data_deletion/data/data_deletion_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'is_deleted_user_provider.g.dart';
@@ -7,5 +7,5 @@ part 'is_deleted_user_provider.g.dart';
 class IsDeletedUser extends _$IsDeletedUser {
   @override
   Future<bool> build() =>
-      ref.watch(lifespanRepositoryProvider).getIsDeletedUser();
+      ref.watch(dataDeletionRepositoryProvider).getIsDeletedUser();
 }

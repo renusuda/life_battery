@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_battery/src/features/settings/presentation/providers/delete_all_data_provider.dart';
+import 'package:life_battery/src/features/data_deletion/presentation/providers/delete_all_data_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
 class DeleteAllListTile extends ConsumerWidget {

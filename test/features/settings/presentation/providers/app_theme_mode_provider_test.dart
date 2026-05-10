@@ -118,9 +118,6 @@ class FakeLifespanLocalDataSource implements LifespanLocalDataSource {
   Future<bool> getIsInitialUser() => throw UnimplementedError();
 
   @override
-  Future<bool> getIsDeletedUser() => throw UnimplementedError();
-
-  @override
   Future<bool> getHasLongPressed() => throw UnimplementedError();
 
   @override
@@ -141,13 +138,4 @@ class FakeLifespanLocalDataSource implements LifespanLocalDataSource {
 
   @override
   Future<void> updateHasLongPressed() => throw UnimplementedError();
-
-  @override
-  Future<void> deleteAllData() => throw UnimplementedError();
-
-  @override
-  bool get isUserDeleted => throw UnimplementedError();
-
-  @override
-  Stream<bool> isUserDeletedStateChanges() => throw UnimplementedError();
 }

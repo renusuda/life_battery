@@ -24,10 +24,6 @@ class LifespanRepository {
     return _localDataSource.getIsInitialUser();
   }
 
-  Future<bool> getIsDeletedUser() {
-    return _localDataSource.getIsDeletedUser();
-  }
-
   Future<bool> getHasLongPressed() {
     return _localDataSource.getHasLongPressed();
   }
@@ -64,10 +60,6 @@ class LifespanRepository {
     return _localDataSource.updateHasLongPressed();
   }
 
-  Future<void> deleteAllData() {
-    return _localDataSource.deleteAllData();
-  }
-
   Future<void> syncLifespanRangeToWidget({
     required DateTime birthDate,
     required int idealAge,
@@ -98,11 +90,5 @@ class LifespanRepository {
       iOSName: 'LifeBatteryWidget',
       androidName: 'LifeBatteryWidgetReceiver',
     );
-  }
-
-  bool get isUserDeleted => _localDataSource.isUserDeleted;
-
-  Stream<bool> isUserDeletedStateChanges() {
-    return _localDataSource.isUserDeletedStateChanges();
   }
 }

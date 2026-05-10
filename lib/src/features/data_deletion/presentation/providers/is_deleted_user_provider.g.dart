@@ -33,7 +33,7 @@ final class IsDeletedUserProvider
   IsDeletedUser create() => IsDeletedUser();
 }
 
-String _$isDeletedUserHash() => r'0a196e969892088f75b2ec644fa23cecf1eafacd';
+String _$isDeletedUserHash() => r'871d975e487b171d08b10401c82bc7ed09f001b2';
 
 abstract class _$IsDeletedUser extends $AsyncNotifier<bool> {
   FutureOr<bool> build();
