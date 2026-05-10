@@ -7,7 +7,7 @@ import 'package:life_battery/src/features/lifespan/data/lifespan_repository.dart
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/data/local/lifespan_local_data_source.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/app_theme_mode_provider.dart';
+import 'package:life_battery/src/features/settings/presentation/providers/app_theme_mode_provider.dart';
 
 void main() {
   ProviderContainer makeContainer(FakeLifespanLocalDataSource dataSource) {

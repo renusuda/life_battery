@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
-import 'package:life_battery/src/features/lifespan/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/user_deleted_page.dart';
+import 'package:life_battery/src/features/settings/presentation/pages/settings_page.dart';
 import 'package:life_battery/src/routing/app_route.dart';
 import 'package:life_battery/src/routing/go_router_refresh_stream.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_battery/src/features/lifespan/presentation/pages/settings_page.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/app_theme_mode_provider.dart';
+import 'package:life_battery/src/features/settings/presentation/pages/settings_page.dart';
+import 'package:life_battery/src/features/settings/presentation/providers/app_theme_mode_provider.dart';
+import 'package:life_battery/src/features/settings/presentation/widgets/notification_settings_list_tile.dart';
+import 'package:life_battery/src/features/settings/presentation/widgets/privacy_policy_list_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../test_helpers/test_app.dart';
