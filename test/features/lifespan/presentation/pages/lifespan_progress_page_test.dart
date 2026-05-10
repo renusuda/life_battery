@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/common_widgets/common_material_app.dart';
@@ -225,19 +226,13 @@ void main() {
   });
 }
 
-class TestLifeProgressContent extends StatefulWidget {
+class TestLifeProgressContent extends HookWidget {
   const TestLifeProgressContent({super.key});
 
   @override
-  State<TestLifeProgressContent> createState() =>
-      _TestLifeProgressContentState();
-}
-
-class _TestLifeProgressContentState extends State<TestLifeProgressContent> {
-  var _hasLongPressedBattery = false;
-
-  @override
   Widget build(BuildContext context) {
+    final hasLongPressedBattery = useState(false);
+
     return ProviderScope(
       overrides: [
         displayModeManagerProvider.overrideWith(FakeDisplayModeManager.new),
@@ -254,13 +249,11 @@ class _TestLifeProgressContentState extends State<TestLifeProgressContent> {
                   idealAge: 90,
                 ),
                 isInitialUser: false,
-                hasLongPressedBattery: _hasLongPressedBattery,
+                hasLongPressedBattery: hasLongPressedBattery.value,
                 isPercentageMode: isPercentageMode,
                 updateUserIsNotInitialUser: () async {},
                 updateHasLongPressedBattery: () async {
-                  setState(() {
-                    _hasLongPressedBattery = true;
-                  });
+                  hasLongPressedBattery.value = true;
                 },
               );
             },
