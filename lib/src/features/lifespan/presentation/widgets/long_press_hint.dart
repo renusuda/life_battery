@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
-class LongPressHint extends StatefulWidget {
+class LongPressHint extends HookWidget {
   const LongPressHint({
     required this.hasLongPressedBattery,
     super.key,
@@ -12,48 +13,26 @@ class LongPressHint extends StatefulWidget {
   final bool hasLongPressedBattery;
 
   @override
-  State<LongPressHint> createState() => _LongPressHintState();
-}
-
-class _LongPressHintState extends State<LongPressHint>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 3),
-    );
-    unawaited(_controller.repeat(reverse: true));
-    _animation =
-        Tween<double>(
-          begin: 0.45,
-          end: 0.85,
-        ).animate(
-          CurvedAnimation(
-            parent: _controller,
-            curve: Curves.easeInOut,
-          ),
-        );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
+    final controller = useAnimationController(
+      duration: const Duration(seconds: 3),
+    );
+
+    useEffect(() {
+      unawaited(controller.repeat(reverse: true));
+      return null;
+    }, const []);
+
+    final animation = Tween<double>(begin: 0.45, end: 0.85).animate(
+      CurvedAnimation(parent: controller, curve: Curves.easeInOut),
+    );
+
     return FadeTransition(
-      opacity: _animation,
+      opacity: animation,
       child: Text(
-        widget.hasLongPressedBattery
+        hasLongPressedBattery
             ? l10n.todaysMessageHint
             : l10n.longPressToEditHint,
         style: TextStyle(
