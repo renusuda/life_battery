@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository.dart';
 import 'package:life_battery/src/features/lifespan/data/lifespan_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/data/local/lifespan_local_data_source.dart';
