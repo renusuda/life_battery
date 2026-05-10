@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_battery/src/common_widgets/async_value_widget.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/date_utils.dart';
@@ -13,16 +14,13 @@ class DateRangePicker extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
 
-    final l10n = AppLocalizations.of(context)!;
-
-    return switch (lifespanRangeManager) {
-      AsyncData(:final value) => DateRangePickerContent(
+    return AsyncValueWidget(
+      asyncValue: lifespanRangeManager,
+      data: (value) => DateRangePickerContent(
         birthDate: value.birthDate,
         idealAge: value.idealAge,
       ),
-      AsyncError() => Text(l10n.generalError),
-      _ => const CircularProgressIndicator(),
-    };
+    );
   }
 }
 
