@@ -11,7 +11,7 @@ import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/has_long_pressed_battery_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_progress_state_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
@@ -23,10 +23,7 @@ class LifespanProgressPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isInitialUser = ref.watch(isInitialUserProvider);
-    final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
-    final hasLongPressedBattery = ref.watch(hasLongPressedBatteryProvider);
-    final displayMode = ref.watch(displayModeManagerProvider);
+    final lifespanProgressState = ref.watch(lifespanProgressStateProvider);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -40,31 +37,22 @@ class LifespanProgressPage extends ConsumerWidget {
       ),
       body: Center(
         child: AsyncValueWidget(
-          asyncValue: isInitialUser,
-          data: (isInitialUserValue) => AsyncValueWidget(
-            asyncValue: lifespanRangeManager,
-            data: (lifespanRange) => AsyncValueWidget(
-              asyncValue: hasLongPressedBattery,
-              data: (hasLongPressedBatteryValue) => AsyncValueWidget(
-                asyncValue: displayMode,
-                data: (isPercentageMode) => LifeProgressContent(
-                  lifespanRange: lifespanRange,
-                  isInitialUser: isInitialUserValue,
-                  hasLongPressedBattery: hasLongPressedBatteryValue,
-                  isPercentageMode: isPercentageMode,
-                  updateUserIsNotInitialUser: () async {
-                    await ref
-                        .read(isInitialUserProvider.notifier)
-                        .updateUserIsNotInitialUser();
-                  },
-                  updateHasLongPressedBattery: () async {
-                    await ref
-                        .read(hasLongPressedBatteryProvider.notifier)
-                        .updateHasLongPressedBattery();
-                  },
-                ),
-              ),
-            ),
+          asyncValue: lifespanProgressState,
+          data: (state) => LifeProgressContent(
+            lifespanRange: state.lifespanRange,
+            isInitialUser: state.isInitialUser,
+            hasLongPressedBattery: state.hasLongPressedBattery,
+            isPercentageMode: state.isPercentageMode,
+            updateUserIsNotInitialUser: () async {
+              await ref
+                  .read(isInitialUserProvider.notifier)
+                  .updateUserIsNotInitialUser();
+            },
+            updateHasLongPressedBattery: () async {
+              await ref
+                  .read(hasLongPressedBatteryProvider.notifier)
+                  .updateHasLongPressedBattery();
+            },
           ),
         ),
       ),
