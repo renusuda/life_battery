@@ -120,6 +120,22 @@ void main() {
     expect(fakeApi.boughtProducts, isEmpty);
   });
 
+  testWidgets('Shows the legal links on the bottom sheet', (tester) async {
+    await openSheet(tester);
+
+    expect(find.text('Terms of Use'), findsOneWidget);
+    expect(find.text('Privacy policy'), findsOneWidget);
+  });
+
+  testWidgets('Shows the legal links on the Japanese bottom sheet', (
+    tester,
+  ) async {
+    await openSheet(tester, locale: 'ja');
+
+    expect(find.text('利用規約'), findsOneWidget);
+    expect(find.text('プライバシーポリシー'), findsOneWidget);
+  });
+
   testWidgets('Shows the dollar price on the bottom sheet', (tester) async {
     fakeApi.product = ProductDetails(
       id: FakePurchasesApiDataSource.defaultPremiumProduct.id,

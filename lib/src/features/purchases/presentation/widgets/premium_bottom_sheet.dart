@@ -15,9 +15,11 @@ import 'package:life_battery/src/features/purchases/presentation/providers/premi
 import 'package:life_battery/src/features/purchases/presentation/providers/purchase_updates_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/five_star_rating.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_feature_list.dart';
+import 'package:life_battery/src/features/purchases/presentation/widgets/premium_legal_links.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_price_card.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/restore_purchases_button.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// A modal sheet that starts the purchase of the premium product.
 class PremiumBottomSheet extends HookConsumerWidget {
@@ -207,8 +209,15 @@ class PremiumBottomSheet extends HookConsumerWidget {
             ),
             const SizedBox(height: 4),
             const Padding(
-              padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
+              padding: EdgeInsets.symmetric(horizontal: 24),
               child: RestorePurchasesButton(),
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
+              child: PremiumLegalLinks(
+                canLaunchUrl: canLaunchUrl,
+                onLaunchUrl: launchUrl,
+              ),
             ),
           ],
         ),

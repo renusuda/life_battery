@@ -410,6 +410,12 @@ abstract class AppLocalizations {
   /// **'Restore purchases'**
   String get restorePurchasesLabel;
 
+  /// No description provided for @termsOfUseLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use'**
+  String get termsOfUseLabel;
+
   /// No description provided for @todaysMessageHint.
   ///
   /// In en, this message translates to:
