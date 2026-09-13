@@ -144,5 +144,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get restorePurchasesLabel => '以前の購入を復元';
 
   @override
+  String get termsOfUseLabel => '利用規約';
+
+  @override
   String get todaysMessageHint => 'この瞬間が、一番若い自分';
 }

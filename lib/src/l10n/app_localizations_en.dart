@@ -149,6 +149,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get restorePurchasesLabel => 'Restore purchases';
 
   @override
+  String get termsOfUseLabel => 'Terms of Use';
+
+  @override
   String get todaysMessageHint =>
       'This moment is the youngest you\'ll ever be.';
 }
