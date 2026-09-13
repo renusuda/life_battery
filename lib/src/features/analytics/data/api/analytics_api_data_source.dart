@@ -20,5 +20,7 @@ abstract interface class AnalyticsApiDataSource {
 
   Future<void> logReviewTap();
 
+  Future<void> logWidgetGuideView();
+
   Future<void> logNotificationPermissionResult({required bool granted});
 }

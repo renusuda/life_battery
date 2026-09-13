@@ -48,6 +48,10 @@ class AnalyticsRepository {
     return _apiDataSource.logReviewTap();
   }
 
+  Future<void> logWidgetGuideView() {
+    return _apiDataSource.logWidgetGuideView();
+  }
+
   Future<void> logNotificationPermissionResult({required bool granted}) {
     return _apiDataSource.logNotificationPermissionResult(granted: granted);
   }

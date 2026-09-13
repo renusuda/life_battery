@@ -111,6 +111,13 @@ void main() {
     expect(analytics.events.single.parameters, isNull);
   });
 
+  test('Sends the widget guide view as a widget_guide_view event', () async {
+    await dataSource.logWidgetGuideView();
+
+    expect(analytics.events.single.name, 'widget_guide_view');
+    expect(analytics.events.single.parameters, isNull);
+  });
+
   test('Prints events to the console in debug builds', () async {
     final printed = <String>[];
     final originalDebugPrint = debugPrint;
