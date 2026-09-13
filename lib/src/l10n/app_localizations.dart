@@ -134,6 +134,42 @@ abstract class AppLocalizations {
   /// **'Rate this app'**
   String get reviewAppLabel;
 
+  /// No description provided for @widgetGuideLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Add the widget'**
+  String get widgetGuideLabel;
+
+  /// No description provided for @widgetGuideSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add the widget to your Home Screen'**
+  String get widgetGuideSheetTitle;
+
+  /// No description provided for @widgetGuideDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'See how much life you have left at a glance, right on your Home Screen.'**
+  String get widgetGuideDescription;
+
+  /// No description provided for @widgetGuideIosStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Touch and hold an empty area on the Home Screen.'**
+  String get widgetGuideIosStep1;
+
+  /// No description provided for @widgetGuideIosStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap Edit in the top-left corner, then tap Add Widget.'**
+  String get widgetGuideIosStep2;
+
+  /// No description provided for @widgetGuideIosStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for Life Battery and add the widget.'**
+  String get widgetGuideIosStep3;
+
   /// No description provided for @privacyPolicyLabel.
   ///
   /// In en, this message translates to:

@@ -216,6 +216,32 @@ void main() {
     );
   });
 
+  group('Widget guide', () {
+    testWidgets(
+      'Displays widget guide label on iOS',
+      (tester) async {
+        tester.platformDispatcher.localesTestValue = [const Locale('en')];
+        await tester.pumpWidget(const TestSettingsPage());
+        await tester.pumpAndSettle();
+
+        expect(find.text('Add the widget'), findsOneWidget);
+      },
+      variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+    );
+
+    testWidgets(
+      'Hides widget guide tile on Android',
+      (tester) async {
+        tester.platformDispatcher.localesTestValue = [const Locale('en')];
+        await tester.pumpWidget(const TestSettingsPage());
+        await tester.pumpAndSettle();
+
+        expect(find.text('Add the widget'), findsNothing);
+      },
+      variant: TargetPlatformVariant.only(TargetPlatform.android),
+    );
+  });
+
   group('Purchases on Android', () {
     testWidgets(
       'Hides premium tile',

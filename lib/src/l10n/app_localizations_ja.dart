@@ -27,6 +27,24 @@ class AppLocalizationsJa extends AppLocalizations {
   String get reviewAppLabel => 'アプリをレビューする';
 
   @override
+  String get widgetGuideLabel => 'ウィジェットを追加';
+
+  @override
+  String get widgetGuideSheetTitle => 'ホーム画面にウィジェットを追加';
+
+  @override
+  String get widgetGuideDescription => 'ホーム画面で残りの人生をひと目でチェックできます。';
+
+  @override
+  String get widgetGuideIosStep1 => 'ホーム画面の何もない場所を長押しします。';
+
+  @override
+  String get widgetGuideIosStep2 => '左上の「編集」から「ウィジェットを追加」をタップします。';
+
+  @override
+  String get widgetGuideIosStep3 => '「ライフバッテリー」を検索してウィジェットを追加します。';
+
+  @override
   String get privacyPolicyLabel => 'プライバシーポリシー';
 
   @override

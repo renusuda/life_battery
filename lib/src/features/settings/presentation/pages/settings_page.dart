@@ -7,6 +7,7 @@ import 'package:life_battery/src/features/settings/presentation/widgets/delete_a
 import 'package:life_battery/src/features/settings/presentation/widgets/notification_settings_list_tile.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/privacy_policy_list_tile.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/review_app_list_tile.dart';
+import 'package:life_battery/src/features/settings/presentation/widgets/widget_guide_list_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -21,6 +22,9 @@ class SettingsPage extends StatelessWidget {
           // Purchases are sold on the App Store only.
           if (defaultTargetPlatform == TargetPlatform.iOS)
             const PremiumListTile(),
+          // The home screen widget ships on iOS only for now.
+          if (defaultTargetPlatform == TargetPlatform.iOS)
+            const WidgetGuideListTile(),
           const ReviewAppListTile(),
           const PrivacyPolicyListTile(
             canLaunchUrl: canLaunchUrl,

@@ -27,6 +27,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reviewAppLabel => 'Rate this app';
 
   @override
+  String get widgetGuideLabel => 'Add the widget';
+
+  @override
+  String get widgetGuideSheetTitle => 'Add the widget to your Home Screen';
+
+  @override
+  String get widgetGuideDescription =>
+      'See how much life you have left at a glance, right on your Home Screen.';
+
+  @override
+  String get widgetGuideIosStep1 =>
+      'Touch and hold an empty area on the Home Screen.';
+
+  @override
+  String get widgetGuideIosStep2 =>
+      'Tap Edit in the top-left corner, then tap Add Widget.';
+
+  @override
+  String get widgetGuideIosStep3 =>
+      'Search for Life Battery and add the widget.';
+
+  @override
   String get privacyPolicyLabel => 'Privacy policy';
 
   @override
