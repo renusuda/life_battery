@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-/// Links to the Terms of Use (EULA).
+/// Links to the Terms of Use (EULA) and the privacy policy.
 ///
-/// App Review Guideline 3.1.2 requires the link to be reachable from
+/// App Review Guideline 3.1.2 requires both links to be reachable from
 /// the paywall because the app sells an auto-renewable subscription.
 class PremiumLegalLinks extends StatelessWidget {
   const PremiumLegalLinks({
@@ -49,6 +49,20 @@ class PremiumLegalLinks extends StatelessWidget {
           style: compactButtonStyle,
           onPressed: () async => _open(_termsOfUseUrl),
           child: Text(l10n.termsOfUseLabel, style: linkStyle),
+        ),
+        TextButton(
+          style: compactButtonStyle,
+          onPressed: () async {
+            final locale = Localizations.localeOf(context);
+            final langPath = locale.languageCode == 'ja' ? 'ja' : 'en';
+            await _open(
+              Uri.parse(
+                'https://renusuda.github.io/life_battery_privacy_policy/'
+                '$langPath',
+              ),
+            );
+          },
+          child: Text(l10n.privacyPolicyLabel, style: linkStyle),
         ),
       ],
     );

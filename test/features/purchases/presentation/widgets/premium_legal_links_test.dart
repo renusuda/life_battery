@@ -49,4 +49,32 @@ void main() {
 
     expect(find.text('利用規約'), findsOneWidget);
   });
+
+  testWidgets('Opens the English privacy policy from the privacy link', (
+    tester,
+  ) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildLinks());
+
+    await tester.tap(find.text('Privacy policy'));
+    await tester.pumpAndSettle();
+
+    expect(launchedUrls, [
+      Uri.parse('https://renusuda.github.io/life_battery_privacy_policy/en'),
+    ]);
+  });
+
+  testWidgets('Opens the Japanese privacy policy on the Japanese locale', (
+    tester,
+  ) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('ja')];
+    await tester.pumpWidget(buildLinks());
+
+    await tester.tap(find.text('プライバシーポリシー'));
+    await tester.pumpAndSettle();
+
+    expect(launchedUrls, [
+      Uri.parse('https://renusuda.github.io/life_battery_privacy_policy/ja'),
+    ]);
+  });
 }

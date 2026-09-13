@@ -117,6 +117,7 @@ void main() {
     await openSheet(tester);
 
     expect(find.text('Terms of Use'), findsOneWidget);
+    expect(find.text('Privacy policy'), findsOneWidget);
   });
 
   testWidgets('Shows the legal links on the Japanese bottom sheet', (
@@ -125,6 +126,7 @@ void main() {
     await openSheet(tester, locale: 'ja');
 
     expect(find.text('利用規約'), findsOneWidget);
+    expect(find.text('プライバシーポリシー'), findsOneWidget);
   });
 
   testWidgets('Shows the dollar price on the bottom sheet', (tester) async {
