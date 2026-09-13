@@ -170,6 +170,24 @@ abstract class AppLocalizations {
   /// **'Search for Life Battery and add the widget.'**
   String get widgetGuideIosStep3;
 
+  /// No description provided for @widgetGuideAndroidStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Touch and hold an empty area on the Home Screen.'**
+  String get widgetGuideAndroidStep1;
+
+  /// No description provided for @widgetGuideAndroidStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap Widgets.'**
+  String get widgetGuideAndroidStep2;
+
+  /// No description provided for @widgetGuideAndroidStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for Life Battery and add the widget.'**
+  String get widgetGuideAndroidStep3;
+
   /// No description provided for @privacyPolicyLabel.
   ///
   /// In en, this message translates to:

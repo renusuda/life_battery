@@ -22,9 +22,7 @@ class SettingsPage extends StatelessWidget {
           // Purchases are sold on the App Store only.
           if (defaultTargetPlatform == TargetPlatform.iOS)
             const PremiumListTile(),
-          // The home screen widget ships on iOS only for now.
-          if (defaultTargetPlatform == TargetPlatform.iOS)
-            const WidgetGuideListTile(),
+          const WidgetGuideListTile(),
           const ReviewAppListTile(),
           const PrivacyPolicyListTile(
             canLaunchUrl: canLaunchUrl,

@@ -49,6 +49,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Search for Life Battery and add the widget.';
 
   @override
+  String get widgetGuideAndroidStep1 =>
+      'Touch and hold an empty area on the Home Screen.';
+
+  @override
+  String get widgetGuideAndroidStep2 => 'Tap Widgets.';
+
+  @override
+  String get widgetGuideAndroidStep3 =>
+      'Search for Life Battery and add the widget.';
+
+  @override
   String get privacyPolicyLabel => 'Privacy policy';
 
   @override

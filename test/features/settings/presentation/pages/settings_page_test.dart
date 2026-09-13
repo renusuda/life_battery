@@ -230,13 +230,13 @@ void main() {
     );
 
     testWidgets(
-      'Hides widget guide tile on Android',
+      'Displays widget guide label on Android',
       (tester) async {
         tester.platformDispatcher.localesTestValue = [const Locale('en')];
         await tester.pumpWidget(const TestSettingsPage());
         await tester.pumpAndSettle();
 
-        expect(find.text('Add the widget'), findsNothing);
+        expect(find.text('Add the widget'), findsOneWidget);
       },
       variant: TargetPlatformVariant.only(TargetPlatform.android),
     );

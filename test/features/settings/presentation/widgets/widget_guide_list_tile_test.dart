@@ -30,6 +30,22 @@ void main() {
     variant: TargetPlatformVariant.only(TargetPlatform.iOS),
   );
 
+  testWidgets(
+    'Shows the Android guide steps in the sheet',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildTile());
+      await tester.pump();
+
+      await tester.tap(find.byType(WidgetGuideListTile));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Add the widget to your Home Screen'), findsOneWidget);
+      expect(find.text('Tap Widgets.'), findsOneWidget);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
+  );
+
   testWidgets('Closes the sheet by tapping outside', (tester) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildTile());

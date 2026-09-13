@@ -45,6 +45,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get widgetGuideIosStep3 => '「ライフバッテリー」を検索してウィジェットを追加します。';
 
   @override
+  String get widgetGuideAndroidStep1 => 'ホーム画面の何もない場所を長押しします。';
+
+  @override
+  String get widgetGuideAndroidStep2 => '「ウィジェット」をタップします。';
+
+  @override
+  String get widgetGuideAndroidStep3 => '「Life Battery」を検索してウィジェットを追加します。';
+
+  @override
   String get privacyPolicyLabel => 'プライバシーポリシー';
 
   @override

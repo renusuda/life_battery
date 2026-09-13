@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
@@ -17,11 +18,17 @@ class WidgetGuideBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final steps = [
-      l10n.widgetGuideIosStep1,
-      l10n.widgetGuideIosStep2,
-      l10n.widgetGuideIosStep3,
-    ];
+    final steps = defaultTargetPlatform == TargetPlatform.android
+        ? [
+            l10n.widgetGuideAndroidStep1,
+            l10n.widgetGuideAndroidStep2,
+            l10n.widgetGuideAndroidStep3,
+          ]
+        : [
+            l10n.widgetGuideIosStep1,
+            l10n.widgetGuideIosStep2,
+            l10n.widgetGuideIosStep3,
+          ];
 
     return SafeArea(
       child: SingleChildScrollView(
