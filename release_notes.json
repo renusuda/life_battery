@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・Premium can now be subscribed to monthly, alongside the one-time purchase.\n・Redesigned the Premium purchase screen with plan tabs, pricing, and feature highlights.\n・Purchases can now be restored right from the Premium purchase screen."
+    "text": "・Added a step-by-step guide in Settings for adding the home screen widget.\n・Added a button above the banner ad that opens the Premium screen."
   },
   {
     "language": "ja",
-    "text": "・プレミアムに月額プランが追加され、買い切りと選べるようになりました。\n・プレミアム購入画面を刷新し、プランの切り替え・価格・機能一覧を見やすくしました。\n・「以前の購入を復元」をプレミアム購入画面から行えるようになりました。"
+    "text": "・設定画面にホーム画面ウィジェットの追加ガイドを追加しました。\n・バナー広告の上からプレミアム画面を開けるボタンを追加しました。"
   }
 ]
