@@ -3,10 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/src/app.dart';
+import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/data_deletion/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 
 import '../test_helpers/extensions.dart';
+import '../test_helpers/fake_analytics.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -15,8 +17,13 @@ void main() {
     testWidgets('Deletes data and persists after restart', (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(
-        const ProviderScope(
-          child: App(),
+        ProviderScope(
+          overrides: [
+            analyticsApiDataSourceProvider.overrideWithValue(
+              FakeAnalyticsApiDataSource(),
+            ),
+          ],
+          child: const App(),
         ),
       );
       await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
@@ -40,8 +47,13 @@ void main() {
 
       // Restart app
       await tester.pumpWidget(
-        const ProviderScope(
-          child: App(),
+        ProviderScope(
+          overrides: [
+            analyticsApiDataSourceProvider.overrideWithValue(
+              FakeAnalyticsApiDataSource(),
+            ),
+          ],
+          child: const App(),
         ),
       );
       await tester.pumpAndSettle();
