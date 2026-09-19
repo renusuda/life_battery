@@ -2,7 +2,7 @@
 
 アプリのダウンロードを増やすために、App Store Connectの数値をここに蓄積して分析するためのドキュメント。メインユーザーはiOSユーザーのため、Google Playは対象外とし、App Storeのみに絞って記録する。
 
-# 計測ログ
+## 計測ログ
 
 | 期間 | Impressions | Product Page Views | First-Time Downloads | Conversion Rate (First-Time Downloads ÷ Impressions) |
 | --- | --- | --- | --- | --- |
