@@ -6,4 +6,4 @@
 
 | 期間 | Impressions | Product Page Views | First-Time Downloads | Conversion Rate |
 | --- | --- | --- | --- | --- |
-| 2026-06-20 〜 2026-09-17 (90日) | 10,036 | 485 |  |  |
+| 2026-06-20 〜 2026-09-17 (90日) | 10,036 | 485 | 82 |  |
