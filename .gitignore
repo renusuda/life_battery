@@ -60,3 +60,17 @@ memo/
 
 # env
 **/.env*
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/metadata/*/release_notes.txt
+fastlane/metadata/review_information/
+fastlane/metadata/trade_representative_contact_information/
+fastlane/README.md
+
+# Bundler
+.bundle/
+vendor/bundle/

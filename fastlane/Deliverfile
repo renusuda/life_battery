@@ -1,0 +1,7 @@
+# Metadata-only sync with App Store Connect.
+# The binary and screenshots are uploaded by Codemagic, not by fastlane.
+skip_binary_upload(true)
+skip_screenshots(true)
+skip_app_version_update(true)
+run_precheck_before_submit(false)
+force(true)

@@ -1,0 +1,50 @@
+default_platform(:ios)
+
+RELEASE_NOTES_JSON = File.expand_path("../release_notes.json", __dir__)
+METADATA_DIR = File.expand_path("metadata", __dir__)
+
+platform :ios do
+  desc "Download the live App Store listing into fastlane/metadata"
+  lane :download_metadata do
+    command = "bundle exec fastlane deliver download_metadata --force"
+    key_json = api_key_json_path
+    command += " --api_key_path #{key_json.shellescape}" if key_json
+    sh(command)
+  end
+
+  desc "Upload fastlane/metadata to App Store Connect"
+  lane :upload_metadata do
+    sync_release_notes
+    deliver(api_key_path: api_key_json_path)
+  end
+
+  desc "Write metadata/<locale>/release_notes.txt from release_notes.json"
+  lane :sync_release_notes do
+    notes = JSON.parse(File.read(RELEASE_NOTES_JSON))
+    notes.each do |entry|
+      dir = File.join(METADATA_DIR, entry["language"])
+      FileUtils.mkdir_p(dir)
+      File.write(File.join(dir, "release_notes.txt"), entry["text"])
+    end
+  end
+end
+
+# deliver expects an App Store Connect API key as a JSON file, while Apple
+# hands out a .p8. Build the JSON in a temp file from ASC_* so the .p8 can stay
+# where Apple tooling looks for it. Returns nil when no key is configured, in
+# which case deliver falls back to Apple ID login.
+def api_key_json_path
+  p8_path = ENV["ASC_KEY_PATH"]
+  return nil if p8_path.nil? || p8_path.empty?
+
+  json = {
+    key_id: ENV.fetch("ASC_KEY_ID"),
+    issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+    key: File.read(File.expand_path(p8_path)),
+    in_house: false,
+  }
+  file = Tempfile.new(["asc_api_key", ".json"])
+  file.write(JSON.generate(json))
+  file.close
+  file.path
+end
