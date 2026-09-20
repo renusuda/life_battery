@@ -4,9 +4,9 @@
 
 ## 計測ログ
 
-| 期間 | Impressions | Product Page Views | First-Time Downloads | Conversion Rate (First-Time Downloads ÷ Impressions) |
-| --- | --- | --- | --- | --- |
-| 2026-06-20 〜 2026-09-17 (90日) | 10,036 | 485 | 82 | 0.82% |
+| 期間 | Impressions | Product Page Views | First-Time Downloads | Page View Rate (Product Page Views ÷ Impressions) | Product Page Conversion Rate (First-Time Downloads ÷ Product Page Views) | Conversion Rate (First-Time Downloads ÷ Impressions) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2026-06-20 〜 2026-09-17 (90日) | 10,036 | 485 | 82 | 4.83% | 16.91% | 0.82% |
 
 ## Impressionsの内訳
 
