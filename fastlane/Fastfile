@@ -6,7 +6,15 @@ METADATA_DIR = File.expand_path("metadata", __dir__)
 platform :ios do
   desc "Download the live App Store listing into fastlane/metadata"
   lane :download_metadata do
-    command = "bundle exec fastlane deliver download_metadata --force"
+    command = "bundle exec fastlane deliver download_metadata --force --use_live_version true"
+    key_json = api_key_json_path
+    command += " --api_key_path #{key_json.shellescape}" if key_json
+    sh(command)
+  end
+
+  desc "Download the live App Store screenshots into fastlane/screenshots"
+  lane :download_screenshots do
+    command = "bundle exec fastlane deliver download_screenshots --force --use_live_version true"
     key_json = api_key_json_path
     command += " --api_key_path #{key_json.shellescape}" if key_json
     sh(command)
