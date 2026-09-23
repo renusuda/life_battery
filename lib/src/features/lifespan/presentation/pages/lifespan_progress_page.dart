@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,6 +20,7 @@ import 'package:life_battery/src/features/lifespan/presentation/widgets/long_pre
 import 'package:life_battery/src/features/notifications/presentation/providers/notification_schedule_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/routing/app_route.dart';
+import 'package:life_battery/src/utils/app_haptics.dart';
 
 class LifespanProgressPage extends ConsumerWidget {
   const LifespanProgressPage({super.key});
@@ -183,7 +183,7 @@ class LifeProgressContent extends HookConsumerWidget {
     return GestureDetector(
       onLongPress: handleLongPress,
       onTap: () {
-        unawaited(HapticFeedback.selectionClick());
+        unawaited(AppHaptics.selectionClick());
         ref.read(displayModeManagerProvider.notifier).toggle();
       },
       onTapDown: (_) => isPressed.value = true,
