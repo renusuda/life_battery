@@ -7,6 +7,11 @@ import 'package:flutter/services.dart';
 class AppHaptics {
   const AppHaptics._();
 
+  static Future<void> mediumImpact() {
+    if (kDebugMode) debugPrint('[haptics] mediumImpact');
+    return HapticFeedback.mediumImpact();
+  }
+
   static Future<void> selectionClick() {
     if (kDebugMode) debugPrint('[haptics] selectionClick');
     return HapticFeedback.selectionClick();

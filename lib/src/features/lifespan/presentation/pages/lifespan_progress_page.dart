@@ -123,6 +123,7 @@ class LifeProgressContent extends HookConsumerWidget {
     }
 
     Future<void> handleLongPress() async {
+      unawaited(AppHaptics.mediumImpact());
       if (!hasLongPressedBattery) {
         await updateHasLongPressedBattery();
       }
