@@ -202,12 +202,14 @@ class IdealLifespanField extends ConsumerWidget {
             min: minAge.toDouble(),
             max: 150,
             onChanged: (value) {
+              final newIdealAge = value.toInt();
+              if (newIdealAge == safeIdealAge) return;
               unawaited(
                 ref
                     .read(lifespanRangeManagerProvider.notifier)
                     .updateLifespanRange(
                       birthDate: birthDate,
-                      idealAge: value.toInt(),
+                      idealAge: newIdealAge,
                     ),
               );
             },
