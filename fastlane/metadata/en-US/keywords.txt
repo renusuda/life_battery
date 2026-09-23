@@ -1,1 +1,1 @@
-countdown,death,remaining,time,timer,memento,mori,left,longevity,motivation,focus,reminder,purpose
+widget,expectancy,lifespan,calendar,weeks,progress,remaining,mortality,age,calculator,stoic,lifetime
