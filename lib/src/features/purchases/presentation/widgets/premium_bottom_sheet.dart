@@ -19,6 +19,7 @@ import 'package:life_battery/src/features/purchases/presentation/widgets/premium
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_price_card.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/restore_purchases_button.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/utils/app_haptics.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// A modal sheet that starts the purchase of the premium product.
@@ -59,7 +60,10 @@ class PremiumBottomSheet extends HookConsumerWidget {
     // inline above the purchase button.
     ref.listen(purchaseUpdatesProvider, (_, status) {
       switch (status) {
-        case PremiumPurchaseStatus.purchased || PremiumPurchaseStatus.restored:
+        case PremiumPurchaseStatus.purchased:
+          Navigator.of(context).pop();
+        case PremiumPurchaseStatus.restored:
+          unawaited(AppHaptics.mediumImpact());
           Navigator.of(context).pop();
         case PremiumPurchaseStatus.error:
           purchaseError.value = l10n.purchaseErrorContent;
