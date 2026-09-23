@@ -7,6 +7,7 @@ class AsyncValueWidget<T> extends StatelessWidget {
   const AsyncValueWidget({
     required this.asyncValue,
     required this.data,
+    this.loading = const LoadingView(),
     super.key,
   });
 
@@ -14,12 +15,14 @@ class AsyncValueWidget<T> extends StatelessWidget {
 
   final Widget Function(T) data;
 
+  final Widget loading;
+
   @override
   Widget build(BuildContext context) {
     return switch (asyncValue) {
       AsyncValue(:final value?) => data(value),
       AsyncValue(error: != null) => const ErrorView(),
-      AsyncValue() => const LoadingView(),
+      AsyncValue() => loading,
     };
   }
 }
