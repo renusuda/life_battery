@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/common_widgets/async_value_widget.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/utils/app_haptics.dart';
 import 'package:life_battery/src/utils/date_utils.dart';
 
 class DateRangePicker extends ConsumerWidget {
@@ -204,6 +205,7 @@ class IdealLifespanField extends ConsumerWidget {
             onChanged: (value) {
               final newIdealAge = value.toInt();
               if (newIdealAge == safeIdealAge) return;
+              unawaited(AppHaptics.selectionClick());
               unawaited(
                 ref
                     .read(lifespanRangeManagerProvider.notifier)
