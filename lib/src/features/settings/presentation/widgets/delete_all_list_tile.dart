@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/data_deletion/presentation/providers/delete_all_data_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/utils/app_haptics.dart';
 
 class DeleteAllListTile extends ConsumerWidget {
   const DeleteAllListTile({super.key});
@@ -45,6 +46,7 @@ class DeleteAllListTile extends ConsumerWidget {
               ),
               TextButton(
                 onPressed: () {
+                  unawaited(AppHaptics.heavyImpact());
                   unawaited(ref.read(deleteAllDataProvider.notifier).execute());
                 },
                 child: Text(
