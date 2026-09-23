@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/common_widgets/async_value_widget.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/settings/presentation/providers/app_theme_mode_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/utils/app_haptics.dart';
 
 class AppearanceListTile extends ConsumerWidget {
   const AppearanceListTile({super.key});
@@ -21,6 +24,7 @@ class AppearanceListTile extends ConsumerWidget {
         offset: const Offset(100, 0),
         onSelected: (ThemeMode mode) async {
           if (mode == value) return;
+          unawaited(AppHaptics.selectionClick());
           await ref.read(appThemeModeProvider.notifier).updateThemeMode(mode);
         },
         itemBuilder: (BuildContext context) => <PopupMenuEntry<ThemeMode>>[
