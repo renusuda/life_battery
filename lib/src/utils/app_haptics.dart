@@ -12,6 +12,11 @@ class AppHaptics {
     return HapticFeedback.heavyImpact();
   }
 
+  static Future<void> lightImpact() {
+    if (kDebugMode) debugPrint('[haptics] lightImpact');
+    return HapticFeedback.lightImpact();
+  }
+
   static Future<void> mediumImpact() {
     if (kDebugMode) debugPrint('[haptics] mediumImpact');
     return HapticFeedback.mediumImpact();

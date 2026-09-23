@@ -112,6 +112,7 @@ class BirthDateField extends ConsumerWidget {
         const SizedBox(height: 8),
         GestureDetector(
           onTap: () async {
+            unawaited(AppHaptics.lightImpact());
             await showPickerForBirthDate(
               context: context,
               ref: ref,
