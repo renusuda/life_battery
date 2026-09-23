@@ -24,8 +24,9 @@ void main() async {
   );
 
   const isAnalyticsDebug = bool.fromEnvironment('ANALYTICS_DEBUG');
-  await FirebaseAnalytics.instance
-      .setAnalyticsCollectionEnabled(!kDebugMode || isAnalyticsDebug);
+  await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(
+    !kDebugMode || isAnalyticsDebug,
+  );
 
   // Send Flutter framework errors to Firebase Crashlytics
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;

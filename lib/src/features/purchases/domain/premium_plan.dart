@@ -7,8 +7,7 @@ enum PremiumPlan {
   monthly('premium_monthly'),
 
   /// One-time lifetime purchase.
-  lifetime('premium_lifetime')
-  ;
+  lifetime('premium_lifetime');
 
   const PremiumPlan(this.productId);
 

@@ -48,6 +48,8 @@ class LocalDatabase {
       }
       final path = join(dbPath, _databaseName);
 
+      // TODO(lint): Fix after the Flutter 3.47.5 update.
+      // ignore: unawaited_return_in_try_block
       return openDatabase(
         path,
         version: _databaseVersion,

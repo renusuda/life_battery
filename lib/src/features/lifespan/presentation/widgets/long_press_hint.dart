@@ -21,6 +21,8 @@ class LongPressHint extends HookWidget {
     );
 
     useEffect(() {
+      // TODO(lint): Fix after the Flutter 3.47.5 update.
+      // ignore: unnecessary_unawaited
       unawaited(controller.repeat(reverse: true));
       return null;
     }, const []);
