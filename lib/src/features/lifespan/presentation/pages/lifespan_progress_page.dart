@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -181,7 +182,10 @@ class LifeProgressContent extends HookConsumerWidget {
 
     return GestureDetector(
       onLongPress: handleLongPress,
-      onTap: () => ref.read(displayModeManagerProvider.notifier).toggle(),
+      onTap: () {
+        unawaited(HapticFeedback.selectionClick());
+        ref.read(displayModeManagerProvider.notifier).toggle();
+      },
       onTapDown: (_) => isPressed.value = true,
       onTapUp: (_) => isPressed.value = false,
       onTapCancel: () => isPressed.value = false,
