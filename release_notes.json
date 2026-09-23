@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・Minor improvements and stability updates."
+    "text": "・Added haptic feedback when tapping, sliding, and switching options across the app.\n・The battery now shimmers while your lifespan loads instead of showing a spinner."
   },
   {
     "language": "ja",
-    "text": "・軽微な改善と安定性の向上を行いました。"
+    "text": "・タップやスライダー操作、設定の切り替え時に触覚フィードバックを追加しました。\n・読み込み中はスピナーの代わりにバッテリーがシマー表示されるようになりました。"
   }
 ]
