@@ -1,4 +1,8 @@
-Life Battery is a mirror for your remaining time. It’s not an app you use every day, but one you feel when it matters most. It’s a quiet reminder that life is finite—and a nudge to make every moment count.
+See what percentage of your life remains, shown as a battery.
+Check it at a glance with the Home Screen widget.
+Just set your birth date and ideal lifespan to see the days you have left.
+
+Life Battery reminds you that life is finite, and that today matters.
 
 Terms of Use (EULA):
 https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
