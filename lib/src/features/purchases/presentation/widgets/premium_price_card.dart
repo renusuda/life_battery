@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_products.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/utils/app_haptics.dart';
 
 /// The outlined rounded frame shared by the price card states.
 class PriceCardFrame extends StatelessWidget {
@@ -72,6 +75,7 @@ class PremiumPriceCard extends StatelessWidget {
                   isSelected: plan == offer.plan,
                   onTap: () {
                     if (plan == offer.plan) return;
+                    unawaited(AppHaptics.selectionClick());
                     onPlanChanged(plan);
                   },
                 ),
