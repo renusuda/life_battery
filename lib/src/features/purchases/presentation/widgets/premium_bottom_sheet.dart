@@ -66,6 +66,7 @@ class PremiumBottomSheet extends HookConsumerWidget {
           unawaited(AppHaptics.mediumImpact());
           Navigator.of(context).pop();
         case PremiumPurchaseStatus.error:
+          unawaited(AppHaptics.heavyImpact());
           purchaseError.value = l10n.purchaseErrorContent;
         case PremiumPurchaseStatus.pending ||
             PremiumPurchaseStatus.canceled ||
