@@ -70,7 +70,10 @@ class PremiumPriceCard extends StatelessWidget {
                     PremiumPlan.lifetime => l10n.oneTimePurchaseLabel,
                   },
                   isSelected: plan == offer.plan,
-                  onTap: () => onPlanChanged(plan),
+                  onTap: () {
+                    if (plan == offer.plan) return;
+                    onPlanChanged(plan);
+                  },
                 ),
                 const SizedBox(width: 8),
               ],
