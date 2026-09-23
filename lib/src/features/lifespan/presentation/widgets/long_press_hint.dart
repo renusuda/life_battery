@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
@@ -21,9 +19,7 @@ class LongPressHint extends HookWidget {
     );
 
     useEffect(() {
-      // TODO(lint): Fix after the Flutter 3.47.5 update.
-      // ignore: unnecessary_unawaited
-      unawaited(controller.repeat(reverse: true));
+      controller.repeat(reverse: true);
       return null;
     }, const []);
 
