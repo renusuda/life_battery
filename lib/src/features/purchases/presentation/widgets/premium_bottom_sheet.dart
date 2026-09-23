@@ -35,9 +35,7 @@ class PremiumBottomSheet extends HookConsumerWidget {
   }) {
     return showCupertinoSheet<void>(
       context: context,
-      // TODO(lint): Fix after the Flutter 3.47.5 update.
-      // ignore: deprecated_member_use
-      builder: (_) => PremiumBottomSheet(source: source),
+      scrollableBuilder: (_, _) => PremiumBottomSheet(source: source),
     );
   }
 
