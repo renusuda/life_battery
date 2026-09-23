@@ -16,6 +16,7 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/lifesp
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/src/features/lifespan/presentation/widgets/life_progress_shimmer.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/features/notifications/presentation/providers/notification_schedule_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
@@ -45,6 +46,7 @@ class LifespanProgressPage extends ConsumerWidget {
       bottomNavigationBar: const BannerAdWidget(),
       body: AsyncValueWidget(
         asyncValue: lifespanProgressState,
+        loading: const Center(child: LifeProgressShimmer()),
         data: (state) => Center(
           child: LifeProgressContent(
             lifespanRange: state.lifespanRange,
