@@ -20,7 +20,7 @@ final class ReviewRequestProvider
         argument: null,
         retry: null,
         name: r'reviewRequestProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +41,7 @@ final class ReviewRequestProvider
   }
 }
 
-String _$reviewRequestHash() => r'3f6c6ef31308b66b12622741eb4769994e113266';
+String _$reviewRequestHash() => r'380804d274f0e85cec1533811b2abb8adee5304e';
 
 abstract class _$ReviewRequest extends $Notifier<void> {
   void build();

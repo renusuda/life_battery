@@ -10,7 +10,9 @@ part 'review_request_provider.g.dart';
 /// The launch count from which a user is asked for a store review.
 const reviewRequestLaunchCount = 10;
 
-@riverpod
+// keepAlive so the ref stays valid across the awaits in requestIfHeavyUser;
+// nothing listens to this provider, so autoDispose would drop it mid-call.
+@Riverpod(keepAlive: true)
 class ReviewRequest extends _$ReviewRequest {
   @override
   void build() {}
