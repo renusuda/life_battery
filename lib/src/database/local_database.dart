@@ -8,7 +8,7 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 10;
+  static const _databaseVersion = 11;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
@@ -30,6 +30,8 @@ class LocalDatabase {
   // since epoch; NULL when the user never subscribed.
   static const _columnPremiumSubscriptionExpiresAt =
       'premiumSubscriptionExpiresAt';
+  // Cold starts recorded so far.
+  static const _columnLaunchCount = 'launchCount';
 
   Database? _database;
 
@@ -64,7 +66,8 @@ class LocalDatabase {
             $_columnIsPercentageMode INTEGER NOT NULL,
             $_columnHasRemovedAds INTEGER NOT NULL,
             $_columnHasPremiumLifetime INTEGER NOT NULL,
-            $_columnPremiumSubscriptionExpiresAt INTEGER
+            $_columnPremiumSubscriptionExpiresAt INTEGER,
+            $_columnLaunchCount INTEGER NOT NULL
           )
         ''');
 
@@ -80,6 +83,7 @@ class LocalDatabase {
               _columnIsPercentageMode: 1,
               _columnHasRemovedAds: 0,
               _columnHasPremiumLifetime: 0,
+              _columnLaunchCount: 0,
             },
           );
         },
@@ -139,6 +143,12 @@ class LocalDatabase {
             await db.execute(
               'ALTER TABLE $_tableName '
               'ADD COLUMN $_columnPremiumSubscriptionExpiresAt INTEGER',
+            );
+          }
+          if (oldVersion < 11) {
+            await db.execute(
+              'ALTER TABLE $_tableName '
+              'ADD COLUMN $_columnLaunchCount INTEGER NOT NULL DEFAULT 0',
             );
           }
         },

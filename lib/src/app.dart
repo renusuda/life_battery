@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_battery/src/features/launch_count/data/launch_count_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/premium_widget_sync_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/purchase_updates_provider.dart';
 import 'package:life_battery/src/features/settings/presentation/providers/app_theme_mode_provider.dart';
@@ -10,11 +14,18 @@ import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/routing/app_router.dart';
 import 'package:life_battery/src/theme/app_theme.dart';
 
-class App extends ConsumerWidget {
+class App extends HookConsumerWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    useEffect(() {
+      unawaited(
+        ref.read(launchCountRepositoryProvider).incrementLaunchCount(),
+      );
+      return null;
+    }, const []);
+
     // Activates the app-wide purchase stream listener at startup.
     // Purchases are sold on the App Store only.
     if (defaultTargetPlatform == TargetPlatform.iOS) {
