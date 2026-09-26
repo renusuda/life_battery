@@ -8,6 +8,7 @@ import 'package:life_battery/src/common_widgets/async_value_widget.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/ads/presentation/widgets/banner_ad_widget.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
+import 'package:life_battery/src/features/launch_count/presentation/providers/review_request_provider.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/has_long_pressed_battery_provider.dart';
@@ -97,6 +98,7 @@ class LifeProgressContent extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isPressed = useState(false);
     final isNotificationScheduled = useRef(false);
+    final hasRequestedReview = useRef(false);
 
     Future<void> showDateInputBottomSheet() {
       return showModalBottomSheet<void>(
@@ -188,6 +190,12 @@ class LifeProgressContent extends HookConsumerWidget {
       onTap: () {
         unawaited(AppHaptics.selectionClick());
         ref.read(displayModeManagerProvider.notifier).toggle();
+        if (!hasRequestedReview.value) {
+          hasRequestedReview.value = true;
+          unawaited(
+            ref.read(reviewRequestProvider.notifier).requestIfHeavyUser(),
+          );
+        }
       },
       onTapDown: (_) => isPressed.value = true,
       onTapUp: (_) => isPressed.value = false,

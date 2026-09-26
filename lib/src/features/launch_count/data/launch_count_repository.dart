@@ -7,6 +7,10 @@ class LaunchCountRepository {
 
   final LaunchCountLocalDataSource _localDataSource;
 
+  Future<int> getLaunchCount() {
+    return _localDataSource.getLaunchCount();
+  }
+
   Future<void> incrementLaunchCount() {
     return _localDataSource.incrementLaunchCount();
   }

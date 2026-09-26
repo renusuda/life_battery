@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_battery/src/features/launch_count/data/launch_count_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
@@ -10,6 +11,7 @@ import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 
 import '../../../../../test_helpers/extensions.dart';
+import '../../../../../test_helpers/fake_launch_count.dart';
 import '../../../../../test_helpers/test_app.dart';
 
 void main() {
@@ -49,6 +51,24 @@ void main() {
 
       expect(find.textContaining('%'), findsOneWidget);
       expect(find.textContaining(RegExp(r'\d+d')), findsNothing);
+    });
+
+    testWidgets('Checks the review request only on the first tap', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      final fakeLaunchCount = FakeLaunchCountLocalDataSource();
+      await tester.pumpWidget(
+        TestLifeProgressContent(fakeLaunchCount: fakeLaunchCount),
+      );
+      await tester.pump();
+
+      await tester.tap(find.byType(LifeProgressContent));
+      await tester.pump();
+      await tester.tap(find.byType(LifeProgressContent));
+      await tester.pump();
+
+      expect(fakeLaunchCount.getCallCount, 1);
     });
 
     testWidgets('Initially displays long press hint', (tester) async {
@@ -227,7 +247,9 @@ void main() {
 }
 
 class TestLifeProgressContent extends HookWidget {
-  const TestLifeProgressContent({super.key});
+  const TestLifeProgressContent({this.fakeLaunchCount, super.key});
+
+  final FakeLaunchCountLocalDataSource? fakeLaunchCount;
 
   @override
   Widget build(BuildContext context) {
@@ -236,6 +258,9 @@ class TestLifeProgressContent extends HookWidget {
     return ProviderScope(
       overrides: [
         displayModeManagerProvider.overrideWith(FakeDisplayModeManager.new),
+        launchCountLocalDataSourceProvider.overrideWithValue(
+          fakeLaunchCount ?? FakeLaunchCountLocalDataSource(),
+        ),
       ],
       child: TestApp(
         home: Scaffold(
@@ -317,6 +342,9 @@ class TestEditableLifeProgressContent extends HookWidget {
       overrides: [
         lifespanRangeManagerProvider.overrideWith(FakeLifespanRangeManager.new),
         displayModeManagerProvider.overrideWith(FakeDisplayModeManager.new),
+        launchCountLocalDataSourceProvider.overrideWithValue(
+          FakeLaunchCountLocalDataSource(),
+        ),
       ],
       child: TestApp(
         home: Scaffold(

@@ -13,6 +13,25 @@ class CacheLaunchCountLocalDataSource implements LaunchCountLocalDataSource {
   static const _columnLaunchCount = 'launchCount';
 
   @override
+  Future<int> getLaunchCount() async {
+    try {
+      final db = await _localDatabase.database;
+      final result = await db.query(
+        _tableName,
+        columns: [_columnLaunchCount],
+      );
+
+      if (result.isEmpty) {
+        return 0;
+      } else {
+        return result.first[_columnLaunchCount]! as int;
+      }
+    } on DatabaseException catch (_) {
+      return 0;
+    }
+  }
+
+  @override
   Future<void> incrementLaunchCount() async {
     try {
       final db = await _localDatabase.database;

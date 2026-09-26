@@ -1,4 +1,5 @@
-// ignore: one_member_abstracts
 abstract interface class LaunchCountLocalDataSource {
+  Future<int> getLaunchCount();
+
   Future<void> incrementLaunchCount();
 }
