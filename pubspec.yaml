@@ -61,3 +61,12 @@ flutter:
   assets:
     - shorebird.yaml
     - assets/images/laurel_leading.svg
+
+# Local patch until the upstream plugin passes a presentation context to
+# StoreKit 2 purchases; without it the payment sheet never appears on iPad.
+dependency_overrides:
+  in_app_purchase_storekit:
+    git:
+      url: https://github.com/renusuda/packages.git
+      ref: 506603dcffe353466b9a879cb49b4d5cc060382b
+      path: packages/in_app_purchase/in_app_purchase_storekit
