@@ -29,6 +29,7 @@ class CacheDataDeletionLocalDataSource implements DataDeletionLocalDataSource {
   static const _columnPremiumSubscriptionExpiresAt =
       'premiumSubscriptionExpiresAt';
   static const _columnLaunchCount = 'launchCount';
+  static const _columnHasRequestedReview = 'hasRequestedReview';
 
   @override
   Future<bool> getIsDeletedUser() async {
@@ -67,6 +68,7 @@ class CacheDataDeletionLocalDataSource implements DataDeletionLocalDataSource {
         _columnHasPremiumLifetime: 0,
         _columnPremiumSubscriptionExpiresAt: null,
         _columnLaunchCount: 0,
+        _columnHasRequestedReview: 0,
       });
       _setUserDeleted(true);
     } on DatabaseException catch (_) {}

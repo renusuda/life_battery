@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'review_request_provider.g.dart';
 
-/// The launch on which a heavy user is asked for a store review.
+/// The launch count from which a user is asked for a store review.
 const reviewRequestLaunchCount = 10;
 
 @riverpod
@@ -19,11 +19,16 @@ class ReviewRequest extends _$ReviewRequest {
     final launchCount = await ref
         .read(launchCountRepositoryProvider)
         .getLaunchCount();
-    if (launchCount != reviewRequestLaunchCount) return;
+    if (launchCount < reviewRequestLaunchCount) return;
+    final hasRequestedReview = await ref
+        .read(launchCountRepositoryProvider)
+        .getHasRequestedReview();
+    if (hasRequestedReview) return;
 
     final inAppReview = InAppReview.instance;
     if (await inAppReview.isAvailable()) {
       unawaited(ref.read(analyticsRepositoryProvider).logReviewRequest());
+      await ref.read(launchCountRepositoryProvider).markReviewRequested();
       await inAppReview.requestReview();
     }
   }

@@ -14,4 +14,12 @@ class LaunchCountRepository {
   Future<void> incrementLaunchCount() {
     return _localDataSource.incrementLaunchCount();
   }
+
+  Future<bool> getHasRequestedReview() {
+    return _localDataSource.getHasRequestedReview();
+  }
+
+  Future<void> markReviewRequested() {
+    return _localDataSource.markReviewRequested();
+  }
 }

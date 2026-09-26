@@ -8,7 +8,7 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 11;
+  static const _databaseVersion = 12;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
@@ -32,6 +32,8 @@ class LocalDatabase {
       'premiumSubscriptionExpiresAt';
   // Cold starts recorded so far.
   static const _columnLaunchCount = 'launchCount';
+  // Whether the store review prompt has been requested for this user.
+  static const _columnHasRequestedReview = 'hasRequestedReview';
 
   Database? _database;
 
@@ -67,7 +69,8 @@ class LocalDatabase {
             $_columnHasRemovedAds INTEGER NOT NULL,
             $_columnHasPremiumLifetime INTEGER NOT NULL,
             $_columnPremiumSubscriptionExpiresAt INTEGER,
-            $_columnLaunchCount INTEGER NOT NULL
+            $_columnLaunchCount INTEGER NOT NULL,
+            $_columnHasRequestedReview INTEGER NOT NULL
           )
         ''');
 
@@ -84,6 +87,7 @@ class LocalDatabase {
               _columnHasRemovedAds: 0,
               _columnHasPremiumLifetime: 0,
               _columnLaunchCount: 0,
+              _columnHasRequestedReview: 0,
             },
           );
         },
@@ -149,6 +153,13 @@ class LocalDatabase {
             await db.execute(
               'ALTER TABLE $_tableName '
               'ADD COLUMN $_columnLaunchCount INTEGER NOT NULL DEFAULT 0',
+            );
+          }
+          if (oldVersion < 12) {
+            await db.execute(
+              'ALTER TABLE $_tableName '
+              'ADD COLUMN $_columnHasRequestedReview INTEGER NOT NULL '
+              'DEFAULT 0',
             );
           }
         },

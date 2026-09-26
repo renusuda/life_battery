@@ -11,6 +11,7 @@ class CacheLaunchCountLocalDataSource implements LaunchCountLocalDataSource {
 
   static const _tableName = 'lifespan';
   static const _columnLaunchCount = 'launchCount';
+  static const _columnHasRequestedReview = 'hasRequestedReview';
 
   @override
   Future<int> getLaunchCount() async {
@@ -39,6 +40,36 @@ class CacheLaunchCountLocalDataSource implements LaunchCountLocalDataSource {
         'UPDATE $_tableName '
         'SET $_columnLaunchCount = $_columnLaunchCount + 1',
       );
+    } on DatabaseException catch (_) {}
+  }
+
+  @override
+  Future<bool> getHasRequestedReview() async {
+    try {
+      final db = await _localDatabase.database;
+      final result = await db.query(
+        _tableName,
+        columns: [_columnHasRequestedReview],
+      );
+
+      if (result.isEmpty) {
+        return false;
+      } else {
+        return result.first[_columnHasRequestedReview] == 1;
+      }
+    } on DatabaseException catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<void> markReviewRequested() async {
+    try {
+      final db = await _localDatabase.database;
+      final response = await db.query(_tableName);
+      if (response.isNotEmpty) {
+        await db.update(_tableName, {_columnHasRequestedReview: 1});
+      }
     } on DatabaseException catch (_) {}
   }
 }
