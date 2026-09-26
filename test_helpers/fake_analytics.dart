@@ -12,6 +12,7 @@ class FakeAnalyticsApiDataSource implements AnalyticsApiDataSource {
   final List<PremiumPlan> purchaseErrors = [];
   int subscriptionRenewCount = 0;
   int reviewTapCount = 0;
+  int reviewRequestCount = 0;
   int widgetGuideViewCount = 0;
   final List<bool> notificationPermissionResults = [];
 
@@ -58,6 +59,11 @@ class FakeAnalyticsApiDataSource implements AnalyticsApiDataSource {
   @override
   Future<void> logReviewTap() async {
     reviewTapCount++;
+  }
+
+  @override
+  Future<void> logReviewRequest() async {
+    reviewRequestCount++;
   }
 
   @override

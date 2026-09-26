@@ -84,6 +84,11 @@ class FirebaseAnalyticsApiDataSource implements AnalyticsApiDataSource {
   }
 
   @override
+  Future<void> logReviewRequest() {
+    return _logEvent('review_request');
+  }
+
+  @override
   Future<void> logWidgetGuideView() {
     return _logEvent('widget_guide_view');
   }

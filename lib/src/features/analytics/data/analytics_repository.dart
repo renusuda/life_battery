@@ -48,6 +48,10 @@ class AnalyticsRepository {
     return _apiDataSource.logReviewTap();
   }
 
+  Future<void> logReviewRequest() {
+    return _apiDataSource.logReviewRequest();
+  }
+
   Future<void> logWidgetGuideView() {
     return _apiDataSource.logWidgetGuideView();
   }

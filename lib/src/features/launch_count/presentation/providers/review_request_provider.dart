@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:in_app_review/in_app_review.dart';
+import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/launch_count/data/launch_count_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -20,6 +23,7 @@ class ReviewRequest extends _$ReviewRequest {
 
     final inAppReview = InAppReview.instance;
     if (await inAppReview.isAvailable()) {
+      unawaited(ref.read(analyticsRepositoryProvider).logReviewRequest());
       await inAppReview.requestReview();
     }
   }

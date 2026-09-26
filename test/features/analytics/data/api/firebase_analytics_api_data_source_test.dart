@@ -111,6 +111,13 @@ void main() {
     expect(analytics.events.single.parameters, isNull);
   });
 
+  test('Sends the review prompt as a review_request event', () async {
+    await dataSource.logReviewRequest();
+
+    expect(analytics.events.single.name, 'review_request');
+    expect(analytics.events.single.parameters, isNull);
+  });
+
   test('Sends the widget guide view as a widget_guide_view event', () async {
     await dataSource.logWidgetGuideView();
 
