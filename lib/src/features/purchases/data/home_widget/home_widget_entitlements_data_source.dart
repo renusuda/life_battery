@@ -7,11 +7,19 @@ class HomeWidgetEntitlementsDataSource
   const HomeWidgetEntitlementsDataSource();
 
   @override
-  Future<void> syncIsWidgetUnlocked({required bool isUnlocked}) async {
+  Future<void> syncWidgetUnlock({
+    required bool isUnlocked,
+    required DateTime? expiresAt,
+  }) async {
     try {
       // Read by the widget extension to decide between the battery view
       // and the locked view.
       await HomeWidget.saveWidgetData('isWidgetUnlocked', isUnlocked);
+      // null removes the key, so a lifetime purchase clears any old expiry.
+      await HomeWidget.saveWidgetData(
+        'widgetUnlockExpiresAt',
+        expiresAt?.millisecondsSinceEpoch,
+      );
       await HomeWidget.updateWidget(
         name: 'LifeBatteryWidget',
         iOSName: 'LifeBatteryWidget',

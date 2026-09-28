@@ -37,9 +37,14 @@ class FakeEntitlementsLocalDataSource implements EntitlementsLocalDataSource {
 class FakeEntitlementsHomeWidgetDataSource
     implements EntitlementsHomeWidgetDataSource {
   final syncedValues = <bool>[];
+  final syncedExpiries = <DateTime?>[];
 
   @override
-  Future<void> syncIsWidgetUnlocked({required bool isUnlocked}) async {
+  Future<void> syncWidgetUnlock({
+    required bool isUnlocked,
+    required DateTime? expiresAt,
+  }) async {
     syncedValues.add(isUnlocked);
+    syncedExpiries.add(expiresAt);
   }
 }

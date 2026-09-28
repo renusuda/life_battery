@@ -36,9 +36,18 @@ class EntitlementsRepository {
     return _localDataSource.markSubscribedUntil(expiresAt);
   }
 
-  /// Pushes the premium entitlement to the home screen widget so it can
-  /// switch between the battery view and the locked view.
-  Future<void> syncPremiumToWidget({required bool isPremium}) {
-    return _homeWidgetDataSource.syncIsWidgetUnlocked(isUnlocked: isPremium);
+  /// Pushes the premium entitlement to the home screen widget.
+  ///
+  /// The expiry is sent along so the widget locks itself even when the
+  /// app is never opened again after a cancellation.
+  Future<void> syncEntitlementToWidget() async {
+    final entitlement = await _localDataSource.getEntitlement();
+    final isUnlocked = entitlement.isActive(DateTime.now());
+    return _homeWidgetDataSource.syncWidgetUnlock(
+      isUnlocked: isUnlocked,
+      expiresAt: isUnlocked && !entitlement.hasLifetime
+          ? entitlement.subscriptionExpiresAt
+          : null,
+    );
   }
 }

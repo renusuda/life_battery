@@ -7,12 +7,10 @@ part 'premium_widget_sync_provider.g.dart';
 /// Mirrors the premium entitlement to the home screen widget.
 ///
 /// keepAlive and watched at startup so the widget reflects the entitlement
-/// after a purchase, a restore, or a reinstall. Re-runs whenever
-/// [isPremiumProvider] is invalidated by a purchase event.
+/// after a purchase, a restore, or a reinstall. [isPremiumProvider] is
+/// watched only as the re-run trigger for purchase events.
 @Riverpod(keepAlive: true)
 Future<void> premiumWidgetSync(Ref ref) async {
-  final isPremium = await ref.watch(isPremiumProvider.future);
-  await ref
-      .read(entitlementsRepositoryProvider)
-      .syncPremiumToWidget(isPremium: isPremium);
+  await ref.watch(isPremiumProvider.future);
+  await ref.read(entitlementsRepositoryProvider).syncEntitlementToWidget();
 }

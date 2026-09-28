@@ -8,7 +8,7 @@ struct Provider: TimelineProvider {
   }
 
   func getSnapshot(in context: Context, completion: @escaping (LifeBatteryEntry) -> Void) {
-    let entry = createEntry(date: Date(), userData: loadUserData())
+    let entry = createEntry(date: Date(), userData: loadUserData(), unlock: loadUnlock())
     completion(entry)
   }
 
@@ -17,13 +17,14 @@ struct Provider: TimelineProvider {
     let now = Date()
     let startOfToday = calendar.startOfDay(for: now)
     let userData = loadUserData()
+    let unlock = loadUnlock()
 
     var entries: [LifeBatteryEntry] = []
     for dayOffset in 0..<7 {
       guard let entryDate = calendar.date(byAdding: .day, value: dayOffset, to: startOfToday) else {
         continue
       }
-      entries.append(createEntry(date: entryDate, userData: userData))
+      entries.append(createEntry(date: entryDate, userData: userData, unlock: unlock))
     }
 
     let timeline = Timeline(entries: entries, policy: .atEnd)
@@ -43,13 +44,22 @@ struct Provider: TimelineProvider {
 
   // Written by the app when the premium entitlement changes. Defaults to
   // locked so a database error or missing sync can never unlock the widget.
-  private func loadIsUnlocked() -> Bool {
+  private func loadUnlock() -> WidgetUnlock {
     let defaults = UserDefaults(suiteName: "group.com.rururu.lifebt")
-    return (defaults?.object(forKey: "isWidgetUnlocked") as? Bool) ?? false
+    let isUnlocked = (defaults?.object(forKey: "isWidgetUnlocked") as? Bool) ?? false
+    var expiresAt: Date?
+    if let expiresAtMillis = defaults?.object(forKey: "widgetUnlockExpiresAt") as? Double {
+      expiresAt = Date(timeIntervalSince1970: expiresAtMillis / 1000)
+    }
+    return WidgetUnlock(isUnlocked: isUnlocked, expiresAt: expiresAt)
   }
 
-  private func createEntry(date: Date, userData: (birthDate: Date, idealAge: Int, isPercentageMode: Bool)?) -> LifeBatteryEntry {
-    let isUnlocked = loadIsUnlocked()
+  private func createEntry(
+    date: Date,
+    userData: (birthDate: Date, idealAge: Int, isPercentageMode: Bool)?,
+    unlock: WidgetUnlock
+  ) -> LifeBatteryEntry {
+    let isUnlocked = unlock.isUnlocked(at: date)
     guard let userData else {
       return LifeBatteryEntry(
         date: date, percentage: 100, remainingDays: 0, isPercentageMode: true,
@@ -73,6 +83,17 @@ struct Provider: TimelineProvider {
       isPercentageMode: userData.isPercentageMode,
       isUnlocked: isUnlocked
     )
+  }
+}
+
+struct WidgetUnlock {
+  let isUnlocked: Bool
+  let expiresAt: Date?
+
+  func isUnlocked(at date: Date) -> Bool {
+    guard isUnlocked else { return false }
+    guard let expiresAt else { return true }
+    return date < expiresAt
   }
 }
 
