@@ -19,6 +19,7 @@ import 'package:life_battery/src/features/lifespan/presentation/widgets/date_inp
 import 'package:life_battery/src/features/lifespan/presentation/widgets/life_progress_shimmer.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/features/notifications/presentation/providers/notification_schedule_provider.dart';
+import 'package:life_battery/src/features/share/presentation/widgets/share_icon_button.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/routing/app_route.dart';
 import 'package:life_battery/src/utils/app_haptics.dart';
@@ -37,6 +38,7 @@ class LifespanProgressPage extends ConsumerWidget {
       extendBody: true,
       appBar: AppBar(
         actions: [
+          const ShareIconButton(),
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             onPressed: () => context.goNamed(AppRoute.settings.name),

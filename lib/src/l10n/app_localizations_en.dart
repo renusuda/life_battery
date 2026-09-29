@@ -187,4 +187,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get todaysMessageHint =>
       'This moment is the youngest you\'ll ever be.';
+
+  @override
+  String shareMessage(int percentage) {
+    return '$percentage% of my life left. What\'s yours?';
+  }
+
+  @override
+  String get shareHashtag => '#LifeBattery';
+
+  @override
+  String get shareErrorContent => 'Sharing is unavailable right now.';
 }

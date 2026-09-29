@@ -421,6 +421,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This moment is the youngest you\'ll ever be.'**
   String get todaysMessageHint;
+
+  /// No description provided for @shareMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'{percentage}% of my life left. What\'s yours?'**
+  String shareMessage(int percentage);
+
+  /// No description provided for @shareHashtag.
+  ///
+  /// In en, this message translates to:
+  /// **'#LifeBattery'**
+  String get shareHashtag;
+
+  /// No description provided for @shareErrorContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing is unavailable right now.'**
+  String get shareErrorContent;
 }
 
 class _AppLocalizationsDelegate

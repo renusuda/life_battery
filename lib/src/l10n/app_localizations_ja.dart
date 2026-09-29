@@ -175,4 +175,15 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get todaysMessageHint => 'この瞬間が、一番若い自分';
+
+  @override
+  String shareMessage(int percentage) {
+    return '人生あと$percentage%だった。みんなは？';
+  }
+
+  @override
+  String get shareHashtag => '#ライフバッテリー';
+
+  @override
+  String get shareErrorContent => '現在共有できません。';
 }
