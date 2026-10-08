@@ -185,5 +185,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get shareHashtag => '#ライフバッテリー';
 
   @override
+  String get shareCardAppName => 'ライフバッテリー';
+
+  @override
+  String get shareCardCaption => '残りの人生';
+
+  @override
   String get shareErrorContent => '現在共有できません。';
 }

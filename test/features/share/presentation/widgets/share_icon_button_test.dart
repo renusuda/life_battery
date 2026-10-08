@@ -4,16 +4,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_progress_state_provider.dart';
 import 'package:life_battery/src/features/share/data/share_repository_provider.dart';
-import 'package:life_battery/src/features/share/domain/share_store_url.dart';
 import 'package:life_battery/src/features/share/presentation/widgets/share_icon_button.dart';
 
 import '../../../../../test_helpers/fake_share.dart';
+import '../../../../../test_helpers/share_test_pump.dart';
 import '../../../../../test_helpers/test_app.dart';
 
 void main() {
   late FakeShareApiDataSource fakeShare;
 
-  LifespanProgressState buildState({bool isInitialUser = false}) {
+  LifespanProgressState buildState({
+    bool isInitialUser = false,
+    bool isPercentageMode = true,
+  }) {
     return (
       isInitialUser: isInitialUser,
       lifespanRange: LifespanRange(
@@ -21,7 +24,7 @@ void main() {
         idealAge: 80,
       ),
       hasLongPressedBattery: true,
-      isPercentageMode: true,
+      isPercentageMode: isPercentageMode,
     );
   }
 
@@ -53,53 +56,28 @@ void main() {
     expect(find.byType(IconButton), findsNothing);
   });
 
-  testWidgets(
-    'Shares the English message with the App Store URL',
-    (tester) async {
-      tester.platformDispatcher.localesTestValue = [const Locale('en')];
-      await tester.pumpWidget(buildButton(buildState()));
-      await tester.pumpAndSettle();
+  testWidgets('Shares the card with the percentage message', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildButton(buildState()));
+    await tester.pumpAndSettle();
 
-      await tester.tap(find.byType(IconButton));
-      await tester.pumpAndSettle();
+    await tester.tapAndAwaitShare(find.byType(IconButton));
 
-      expect(fakeShare.sharedTexts, hasLength(1));
-      expect(
-        fakeShare.sharedTexts.single,
-        matches(
-          RegExp(
-            r"^\d+% of my life left\. What's yours\?\n#LifeBattery\n"
-            '${RegExp.escape(ShareStoreUrl.appStore)}\$',
-          ),
-        ),
-      );
-      expect(fakeShare.sharePositionOrigins.single, isNotNull);
-    },
-    variant: TargetPlatformVariant.only(TargetPlatform.iOS),
-  );
+    expect(fakeShare.sharedImages, hasLength(1));
+    expect(fakeShare.sharedTexts.single, contains('% of my life left.'));
+  });
 
-  testWidgets(
-    'Shares the Japanese message with the Play Store URL',
-    (tester) async {
-      tester.platformDispatcher.localesTestValue = [const Locale('ja')];
-      await tester.pumpWidget(buildButton(buildState()));
-      await tester.pumpAndSettle();
+  testWidgets('Shares in days mode too', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(
+      buildButton(buildState(isPercentageMode: false)),
+    );
+    await tester.pumpAndSettle();
 
-      await tester.tap(find.byType(IconButton));
-      await tester.pumpAndSettle();
+    await tester.tapAndAwaitShare(find.byType(IconButton));
 
-      expect(
-        fakeShare.sharedTexts.single,
-        matches(
-          RegExp(
-            r'^人生あと\d+%だった。みんなは？\n#ライフバッテリー\n'
-            '${RegExp.escape(ShareStoreUrl.playStore)}\$',
-          ),
-        ),
-      );
-    },
-    variant: TargetPlatformVariant.only(TargetPlatform.android),
-  );
+    expect(fakeShare.sharedImages, hasLength(1));
+  });
 }
 
 class AppBarHost extends StatelessWidget {

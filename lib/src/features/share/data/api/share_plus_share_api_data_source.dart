@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:life_battery/src/features/share/data/api/share_api_data_source.dart';
@@ -13,11 +14,19 @@ class SharePlusShareApiDataSource implements ShareApiDataSource {
   @override
   Future<ShareOutcome> share({
     required String text,
+    required Uint8List imageBytes,
     Rect? sharePositionOrigin,
   }) async {
     final result = await _sharePlus.share(
       ShareParams(
         text: text,
+        files: [
+          XFile.fromData(
+            imageBytes,
+            mimeType: 'image/png',
+            name: 'life_battery.png',
+          ),
+        ],
         sharePositionOrigin: sharePositionOrigin,
       ),
     );

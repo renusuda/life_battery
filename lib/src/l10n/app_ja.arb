@@ -76,5 +76,7 @@
     }
   },
   "shareHashtag": "#ライフバッテリー",
+  "shareCardAppName": "ライフバッテリー",
+  "shareCardCaption": "残りの人生",
   "shareErrorContent": "現在共有できません。"
 }

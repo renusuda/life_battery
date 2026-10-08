@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_progress_state_provider.dart';
-import 'package:life_battery/src/features/share/data/share_repository_provider.dart';
-import 'package:life_battery/src/features/share/domain/share_message.dart';
+import 'package:life_battery/src/features/share/presentation/widgets/share_card_dialog.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/app_haptics.dart';
 
@@ -24,8 +24,15 @@ class ShareIconButton extends ConsumerWidget {
     }
 
     final l10n = AppLocalizations.of(context)!;
+    final now = DateTime.now();
     final percentage = lifespanProgressState.lifespanRange
-        .remainingLifePercentage(now: DateTime.now());
+        .remainingLifePercentage(now: now);
+    final days = lifespanProgressState.lifespanRange.remainingLifeDays(
+      now: now,
+    );
+    final text = lifespanProgressState.isPercentageMode
+        ? '$percentage%'
+        : '${days.withCommaString}${l10n.dayUnit}';
 
     return IconButton(
       icon: Icon(
@@ -36,24 +43,11 @@ class ShareIconButton extends ConsumerWidget {
       onPressed: () async {
         unawaited(AppHaptics.lightImpact());
 
-        final box = context.findRenderObject()! as RenderBox;
-        try {
-          await ref
-              .read(shareRepositoryProvider)
-              .share(
-                text: ShareMessage.build(
-                  message: l10n.shareMessage(percentage),
-                  hashtag: l10n.shareHashtag,
-                  platform: defaultTargetPlatform,
-                ),
-                sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
-              );
-        } on Exception {
-          if (!context.mounted) return;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.shareErrorContent)),
-          );
-        }
+        await ShareCardDialog.show(
+          context,
+          percentage: percentage,
+          text: text,
+        );
       },
     );
   }

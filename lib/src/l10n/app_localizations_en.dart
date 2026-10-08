@@ -197,5 +197,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareHashtag => '#LifeBattery';
 
   @override
+  String get shareCardAppName => 'Life Battery';
+
+  @override
+  String get shareCardCaption => 'Life remaining';
+
+  @override
   String get shareErrorContent => 'Sharing is unavailable right now.';
 }

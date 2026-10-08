@@ -5,12 +5,22 @@ class BatteryIndicator extends StatelessWidget {
   const BatteryIndicator({
     required this.value,
     required this.text,
+    this.bodyWidth,
+    this.bodyHeight = 150,
+    this.animate = true,
     super.key,
   });
 
   final int value;
 
   final String text;
+
+  final double? bodyWidth;
+
+  final double bodyHeight;
+
+  /// Off when captured as an image, so the capture is never mid-animation.
+  final bool animate;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +30,9 @@ class BatteryIndicator extends StatelessWidget {
         BatteryBody(
           value: value,
           text: text,
+          bodyWidth: bodyWidth,
+          bodyHeight: bodyHeight,
+          animate: animate,
         ),
         const BatteryKnob(),
       ],
@@ -31,6 +44,9 @@ class BatteryBody extends StatelessWidget {
   const BatteryBody({
     required this.value,
     required this.text,
+    this.bodyWidth,
+    this.bodyHeight = 150,
+    this.animate = true,
     super.key,
   });
 
@@ -38,20 +54,26 @@ class BatteryBody extends StatelessWidget {
 
   final String text;
 
+  final double? bodyWidth;
+
+  final double bodyHeight;
+
+  final bool animate;
+
   @override
   Widget build(BuildContext context) {
-    const bodyHeight = 150.0;
-    final bodyWidth = MediaQuery.of(context).size.width * 0.75;
+    final width = bodyWidth ?? MediaQuery.of(context).size.width * 0.75;
 
     return SizedBox(
       height: bodyHeight,
-      width: bodyWidth,
+      width: width,
       child: Stack(
         children: [
           const BatteryFrame(),
           BatteryBar(
             value: value,
-            bodyWidth: bodyWidth,
+            bodyWidth: width,
+            animate: animate,
           ),
           BatteryText(text: text),
         ],
@@ -83,6 +105,7 @@ class BatteryBar extends StatelessWidget {
   const BatteryBar({
     required this.value,
     required this.bodyWidth,
+    this.animate = true,
     super.key,
   });
 
@@ -90,16 +113,18 @@ class BatteryBar extends StatelessWidget {
 
   final double bodyWidth;
 
+  final bool animate;
+
   @override
   Widget build(BuildContext context) {
     // An animation that transitions the battery indicator from
     // a fully charged state to the specified value.
     return TweenAnimationBuilder(
       tween: IntTween(
-        begin: 100,
+        begin: animate ? 100 : value,
         end: value,
       ),
-      duration: const Duration(seconds: 1),
+      duration: animate ? const Duration(seconds: 1) : Duration.zero,
       builder: (_, value, _) {
         return Padding(
           padding: const EdgeInsets.all(10),

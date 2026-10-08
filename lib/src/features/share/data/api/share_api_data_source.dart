@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:life_battery/src/features/share/domain/share_outcome.dart';
@@ -9,6 +10,7 @@ abstract interface class ShareApiDataSource {
   /// present the share sheet without it.
   Future<ShareOutcome> share({
     required String text,
+    required Uint8List imageBytes,
     Rect? sharePositionOrigin,
   });
 }

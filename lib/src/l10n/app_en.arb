@@ -76,5 +76,7 @@
     }
   },
   "shareHashtag": "#LifeBattery",
+  "shareCardAppName": "Life Battery",
+  "shareCardCaption": "Life remaining",
   "shareErrorContent": "Sharing is unavailable right now."
 }

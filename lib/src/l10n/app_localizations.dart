@@ -434,6 +434,18 @@ abstract class AppLocalizations {
   /// **'#LifeBattery'**
   String get shareHashtag;
 
+  /// No description provided for @shareCardAppName.
+  ///
+  /// In en, this message translates to:
+  /// **'Life Battery'**
+  String get shareCardAppName;
+
+  /// No description provided for @shareCardCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'Life remaining'**
+  String get shareCardCaption;
+
   /// No description provided for @shareErrorContent.
   ///
   /// In en, this message translates to:
