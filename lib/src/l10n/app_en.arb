@@ -66,5 +66,17 @@
   "purchaseErrorContent": "The purchase could not be completed. Please try again.",
   "restorePurchasesLabel": "Restore purchases",
   "termsOfUseLabel": "Terms of Use",
-  "todaysMessageHint": "This moment is the youngest you'll ever be."
+  "todaysMessageHint": "This moment is the youngest you'll ever be.",
+  "shareMessage": "{percentage}% of my life left. What's yours?",
+  "@shareMessage": {
+    "placeholders": {
+      "percentage": {
+        "type": "int"
+      }
+    }
+  },
+  "shareHashtag": "#LifeBattery",
+  "shareCardAppName": "Life Battery",
+  "shareCardCaption": "Life remaining",
+  "shareErrorContent": "Sharing is unavailable right now."
 }
