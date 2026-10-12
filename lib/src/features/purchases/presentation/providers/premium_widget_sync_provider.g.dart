@@ -11,8 +11,8 @@ part of 'premium_widget_sync_provider.dart';
 /// Mirrors the premium entitlement to the home screen widget.
 ///
 /// keepAlive and watched at startup so the widget reflects the entitlement
-/// after a purchase, a restore, or a reinstall. Re-runs whenever
-/// [isPremiumProvider] is invalidated by a purchase event.
+/// after a purchase, a restore, or a reinstall. [isPremiumProvider] is
+/// watched only as the re-run trigger for purchase events.
 
 @ProviderFor(premiumWidgetSync)
 const premiumWidgetSyncProvider = PremiumWidgetSyncProvider._();
@@ -20,8 +20,8 @@ const premiumWidgetSyncProvider = PremiumWidgetSyncProvider._();
 /// Mirrors the premium entitlement to the home screen widget.
 ///
 /// keepAlive and watched at startup so the widget reflects the entitlement
-/// after a purchase, a restore, or a reinstall. Re-runs whenever
-/// [isPremiumProvider] is invalidated by a purchase event.
+/// after a purchase, a restore, or a reinstall. [isPremiumProvider] is
+/// watched only as the re-run trigger for purchase events.
 
 final class PremiumWidgetSyncProvider
     extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
@@ -29,8 +29,8 @@ final class PremiumWidgetSyncProvider
   /// Mirrors the premium entitlement to the home screen widget.
   ///
   /// keepAlive and watched at startup so the widget reflects the entitlement
-  /// after a purchase, a restore, or a reinstall. Re-runs whenever
-  /// [isPremiumProvider] is invalidated by a purchase event.
+  /// after a purchase, a restore, or a reinstall. [isPremiumProvider] is
+  /// watched only as the re-run trigger for purchase events.
   const PremiumWidgetSyncProvider._()
     : super(
         from: null,
@@ -56,4 +56,4 @@ final class PremiumWidgetSyncProvider
   }
 }
 
-String _$premiumWidgetSyncHash() => r'da9f4807daa3148552966feea17caa846acfed6a';
+String _$premiumWidgetSyncHash() => r'46154a4006ba860ac042e795ee6d39cd5ab157e4';
