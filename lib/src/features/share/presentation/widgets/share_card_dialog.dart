@@ -62,9 +62,21 @@ class ShareCardDialog extends HookConsumerWidget {
       await Navigator.of(context).maybePop();
     }
 
+    // The card is not painted while the dialog is still fully transparent,
+    // and release builds cannot detect that before capturing it, so sharing
+    // waits for the fade-in to finish.
+    final routeAnimation = ModalRoute.of(context)?.animation;
     useEffect(() {
-      unawaited(share());
-      return null;
+      if (routeAnimation == null || routeAnimation.isCompleted) {
+        unawaited(share());
+        return null;
+      }
+      void onStatusChanged(AnimationStatus status) {
+        if (status.isCompleted) unawaited(share());
+      }
+
+      routeAnimation.addStatusListener(onStatusChanged);
+      return () => routeAnimation.removeStatusListener(onStatusChanged);
     }, const []);
 
     // Top-aligned so the share sheet does not cover the card.
