@@ -11,5 +11,6 @@ class IsInitialUser extends _$IsInitialUser {
 
   Future<void> updateUserIsNotInitialUser() async {
     await ref.read(lifespanRepositoryProvider).updateUserIsNotInitialUser();
+    ref.invalidateSelf();
   }
 }
