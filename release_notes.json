@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・Added the ability to share your remaining life.\n・The widget now locks itself when your subscription expires."
+    "text": "・Fixed an issue where the share sheet did not open.\n・Fixed an issue where the share button did not appear until the app was restarted after the first setup."
   },
   {
     "language": "ja",
-    "text": "・残りの人生を共有できる機能を追加しました。\n・サブスクリプションの期限が切れるとウィジェットがロックされるようになりました。"
+    "text": "・共有シートが開かない不具合を修正しました。\n・初回設定の後、アプリを再起動するまで共有ボタンが表示されない不具合を修正しました。"
   }
 ]
