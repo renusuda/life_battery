@@ -51,11 +51,11 @@ class PremiumPriceCard extends StatelessWidget {
 
     final (price, description) = switch (offer.plan) {
       PremiumPlan.monthly => (
-        l10n.monthlyPriceLabel(product.price),
+        l10n.monthlyPriceLabel(product.priceString),
         l10n.monthlySubscriptionDescription,
       ),
       PremiumPlan.lifetime => (
-        product.price,
+        product.priceString,
         l10n.oneTimePurchaseDescription,
       ),
     };

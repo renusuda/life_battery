@@ -8,27 +8,21 @@ part of 'purchase_updates_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Listens to the store purchase stream for the whole app session.
-///
-/// keepAlive because purchases can complete outside the settings screen:
-/// deferred purchases (Ask to Buy) may be approved days later and are
-/// delivered right after app start.
+/// keepAlive because entitlements can change outside the settings screen:
+/// deferred purchases (Ask to Buy) may be approved days later and renewals
+/// are delivered right after app start.
 
 @ProviderFor(PurchaseUpdates)
 const purchaseUpdatesProvider = PurchaseUpdatesProvider._();
 
-/// Listens to the store purchase stream for the whole app session.
-///
-/// keepAlive because purchases can complete outside the settings screen:
-/// deferred purchases (Ask to Buy) may be approved days later and are
-/// delivered right after app start.
+/// keepAlive because entitlements can change outside the settings screen:
+/// deferred purchases (Ask to Buy) may be approved days later and renewals
+/// are delivered right after app start.
 final class PurchaseUpdatesProvider
     extends $NotifierProvider<PurchaseUpdates, PremiumPurchaseStatus> {
-  /// Listens to the store purchase stream for the whole app session.
-  ///
-  /// keepAlive because purchases can complete outside the settings screen:
-  /// deferred purchases (Ask to Buy) may be approved days later and are
-  /// delivered right after app start.
+  /// keepAlive because entitlements can change outside the settings screen:
+  /// deferred purchases (Ask to Buy) may be approved days later and renewals
+  /// are delivered right after app start.
   const PurchaseUpdatesProvider._()
     : super(
         from: null,
@@ -56,13 +50,11 @@ final class PurchaseUpdatesProvider
   }
 }
 
-String _$purchaseUpdatesHash() => r'516b84504831cc1d91d3f6e7f3275acde5821446';
+String _$purchaseUpdatesHash() => r'e1351ad1177df83a3955f65c1adbb7221fdcd11f';
 
-/// Listens to the store purchase stream for the whole app session.
-///
-/// keepAlive because purchases can complete outside the settings screen:
-/// deferred purchases (Ask to Buy) may be approved days later and are
-/// delivered right after app start.
+/// keepAlive because entitlements can change outside the settings screen:
+/// deferred purchases (Ask to Buy) may be approved days later and renewals
+/// are delivered right after app start.
 
 abstract class _$PurchaseUpdates extends $Notifier<PremiumPurchaseStatus> {
   PremiumPurchaseStatus build();

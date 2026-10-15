@@ -647,39 +647,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.4"
-  in_app_purchase:
-    dependency: "direct main"
-    description:
-      name: in_app_purchase
-      sha256: "0e9510b80b0074e89ab0a8e0fc901439b779dc9ae575ab8d419253c6e1627716"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.0"
-  in_app_purchase_android:
-    dependency: transitive
-    description:
-      name: in_app_purchase_android
-      sha256: b8af1b6f0e57076b5da5ede71e3af2d727017c0416ad2a41017c6ed2b102381d
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.0"
-  in_app_purchase_platform_interface:
-    dependency: "direct dev"
-    description:
-      name: in_app_purchase_platform_interface
-      sha256: "0b0076cac8ce4fa7048f01e76af8b123aeb6a7c4e0dea2a5206d6664454f3e36"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.1"
-  in_app_purchase_storekit:
-    dependency: "direct overridden"
-    description:
-      path: "packages/in_app_purchase/in_app_purchase_storekit"
-      ref: "506603dcffe353466b9a879cb49b4d5cc060382b"
-      resolved-ref: "506603dcffe353466b9a879cb49b4d5cc060382b"
-      url: "https://github.com/renusuda/packages.git"
-    source: git
-    version: "0.4.14"
   in_app_review:
     dependency: "direct main"
     description:
@@ -973,6 +940,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+  purchases_flutter:
+    dependency: "direct main"
+    description:
+      name: purchases_flutter
+      sha256: e258a5a6b284961c688eb49d8661f2441f28469c3e73a1b9732a47cb8ce537a8
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.15.2"
   riverpod:
     dependency: transitive
     description:

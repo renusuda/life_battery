@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
+import 'package:life_battery/src/features/purchases/presentation/providers/purchase_updates_provider.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
 /// Asks the store to redeliver past purchases, showing an inline
@@ -24,7 +24,9 @@ class RestorePurchasesButton extends HookConsumerWidget {
           : () async {
               isRestoring.value = true;
               try {
-                await ref.read(purchasesRepositoryProvider).restorePurchases();
+                await ref
+                    .read(purchaseUpdatesProvider.notifier)
+                    .restorePurchases();
               } finally {
                 if (context.mounted) {
                   isRestoring.value = false;

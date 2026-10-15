@@ -55,7 +55,7 @@ final class PurchasesApiDataSourceProvider
 }
 
 String _$purchasesApiDataSourceHash() =>
-    r'26808affdbbf66de77f8a9893c91e7cc68e3d659';
+    r'e6d153cc341a6f2ec7d60ef2814c70b52fa7d34e';
 
 @ProviderFor(purchasesRepository)
 const purchasesRepositoryProvider = PurchasesRepositoryProvider._();

@@ -1,8 +1,12 @@
 import 'package:collection/collection.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:life_battery/src/features/purchases/data/api/purchases_api_data_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_products.dart';
+import 'package:life_battery/src/features/purchases/domain/purchase_outcome.dart';
+import 'package:life_battery/src/features/purchases/domain/store_entitlement.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PurchasesRepository {
   const PurchasesRepository({required PurchasesApiDataSource apiDataSource})
@@ -10,9 +14,8 @@ class PurchasesRepository {
 
   final PurchasesApiDataSource _apiDataSource;
 
-  /// Purchase updates from the store, including deferred ones.
-  Stream<List<PurchaseDetails>> get purchaseStream =>
-      _apiDataSource.purchaseStream;
+  Stream<StoreEntitlement?> get entitlementStream =>
+      _apiDataSource.entitlementStream;
 
   /// Whether the store is available on this device.
   Future<bool> isAvailable() {
@@ -23,26 +26,35 @@ class PurchasesRepository {
     final products = await _apiDataSource.fetchPremiumProducts();
     return PremiumProducts(
       monthly: products.firstWhereOrNull(
-        (product) => product.id == PremiumPlan.monthly.productId,
+        (product) => product.identifier == PremiumPlan.monthly.productId,
       ),
       lifetime: products.firstWhereOrNull(
-        (product) => product.id == PremiumPlan.lifetime.productId,
+        (product) => product.identifier == PremiumPlan.lifetime.productId,
       ),
     );
   }
 
-  /// Requests the premium purchase; true when the request was accepted.
-  Future<bool> buyPremium({required ProductDetails product}) {
-    return _apiDataSource.buyNonConsumable(product: product);
+  Future<({PurchaseOutcome outcome, StoreEntitlement? entitlement})>
+  buyPremium({required StoreProduct product}) async {
+    try {
+      return await _apiDataSource.purchase(product: product);
+    } on Object catch (error, stack) {
+      if (Firebase.apps.isNotEmpty) {
+        await FirebaseCrashlytics.instance.recordError(error, stack);
+      }
+      return (outcome: PurchaseOutcome.error, entitlement: null);
+    }
   }
 
-  /// Asks the store to redeliver past purchases as restored events.
-  Future<void> restorePurchases() {
-    return _apiDataSource.restorePurchases();
-  }
-
-  /// Finishes a store transaction; required for every finished purchase.
-  Future<void> completePurchase(PurchaseDetails purchase) {
-    return _apiDataSource.completePurchase(purchase);
+  Future<({PurchaseOutcome outcome, StoreEntitlement? entitlement})>
+  restorePurchases() async {
+    try {
+      return await _apiDataSource.restorePurchases();
+    } on Object catch (error, stack) {
+      if (Firebase.apps.isNotEmpty) {
+        await FirebaseCrashlytics.instance.recordError(error, stack);
+      }
+      return (outcome: PurchaseOutcome.error, entitlement: null);
+    }
   }
 }

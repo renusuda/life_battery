@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/entitlements_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
+import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
+import 'package:life_battery/src/features/purchases/domain/purchase_outcome.dart';
+import 'package:life_battery/src/features/purchases/domain/store_entitlement.dart';
+import 'package:life_battery/src/features/purchases/presentation/providers/purchase_updates_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_list_tile.dart';
 
 import '../../../../../test_helpers/fake_analytics.dart';
@@ -86,19 +89,16 @@ void main() {
     expect(find.text('購入済み'), findsOneWidget);
   });
 
-  testWidgets('Shows success and flips to purchased on a purchase event', (
+  testWidgets('Shows success and flips to purchased on an entitlement update', (
     tester,
   ) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildTile());
     await tester.pumpAndSettle();
 
-    fakeApi.controller.add([
-      buildPurchaseDetails(
-        status: PurchaseStatus.purchased,
-        pendingCompletePurchase: true,
-      ),
-    ]);
+    fakeApi.controller.add(
+      StoreEntitlement(productId: PremiumPlan.lifetime.productId),
+    );
     await tester.pumpAndSettle();
 
     expect(
@@ -106,17 +106,21 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Purchased'), findsOneWidget);
-    expect(fakeApi.completedPurchases, hasLength(1));
   });
 
-  testWidgets('Shows a pending message on a pending event', (tester) async {
+  testWidgets('Shows a pending message on a pending purchase', (tester) async {
+    fakeApi.purchaseOutcome = PurchaseOutcome.pending;
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildTile());
     await tester.pumpAndSettle();
 
-    fakeApi.controller.add([
-      buildPurchaseDetails(status: PurchaseStatus.pending),
-    ]);
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(PremiumListTile)),
+    );
+    await container.read(purchaseUpdatesProvider.notifier).buyPremium((
+      plan: PremiumPlan.lifetime,
+      product: fakeApi.lifetimeProduct!,
+    ));
     await tester.pumpAndSettle();
 
     expect(find.text('Your purchase is pending approval.'), findsOneWidget);

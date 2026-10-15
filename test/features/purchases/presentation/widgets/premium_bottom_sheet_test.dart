@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/entitlements_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
+import 'package:life_battery/src/features/purchases/domain/purchase_outcome.dart';
+import 'package:life_battery/src/features/purchases/domain/store_entitlement.dart';
+import 'package:life_battery/src/features/purchases/presentation/widgets/premium_bottom_sheet.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_list_tile.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../../../../test_helpers/fake_analytics.dart';
 import '../../../../../test_helpers/fake_entitlements.dart';
@@ -68,7 +71,7 @@ void main() {
     'Disables the purchase on the sheet when no product can be fetched',
     (tester) async {
       fakeApi
-        ..product = null
+        ..lifetimeProduct = null
         ..monthlyProduct = null;
 
       await openSheet(tester);
@@ -137,13 +140,13 @@ void main() {
   });
 
   testWidgets('Shows the dollar price on the bottom sheet', (tester) async {
-    fakeApi.product = ProductDetails(
-      id: FakePurchasesApiDataSource.defaultPremiumProduct.id,
-      title: 'Premium',
-      description: 'Removes ads and unlocks the widget',
-      price: r'$6.99',
-      rawPrice: 6.99,
-      currencyCode: 'USD',
+    fakeApi.lifetimeProduct = const StoreProduct(
+      'premium_lifetime',
+      'Removes ads and unlocks the widget',
+      'Premium',
+      6.99,
+      r'$6.99',
+      'USD',
     );
 
     await openSheet(tester);
@@ -154,13 +157,13 @@ void main() {
   testWidgets('Shows the yen price on the Japanese bottom sheet', (
     tester,
   ) async {
-    fakeApi.product = ProductDetails(
-      id: FakePurchasesApiDataSource.defaultPremiumProduct.id,
-      title: 'Premium',
-      description: 'Removes ads and unlocks the widget',
-      price: '¥1,000',
-      rawPrice: 1000,
-      currencyCode: 'JPY',
+    fakeApi.lifetimeProduct = const StoreProduct(
+      'premium_lifetime',
+      'Removes ads and unlocks the widget',
+      'Premium',
+      1000,
+      '¥1,000',
+      'JPY',
     );
 
     await openSheet(tester, locale: 'ja');
@@ -221,22 +224,28 @@ void main() {
     await tester.tap(find.text('Purchase'));
     await tester.pumpAndSettle();
 
-    expect(fakeApi.boughtProducts, [fakeApi.product]);
+    expect(fakeApi.boughtProducts, [fakeApi.lifetimeProduct]);
   });
 
   testWidgets('Shows an error when the purchase request fails', (
     tester,
   ) async {
-    fakeApi.buyResult = false;
+    fakeApi.purchaseOutcome = PurchaseOutcome.error;
 
     await openSheet(tester);
 
     await tester.tap(find.text('Purchase'));
-    await tester.pump();
-    await tester.pump();
+    await tester.pumpAndSettle();
 
+    // The settings tile behind the sheet shows the same message as a
+    // snack bar, so the lookup is scoped to the sheet.
     expect(
-      find.text('The purchase could not be completed. Please try again.'),
+      find.descendant(
+        of: find.byType(PremiumBottomSheet),
+        matching: find.text(
+          'The purchase could not be completed. Please try again.',
+        ),
+      ),
       findsOneWidget,
     );
   });
@@ -248,42 +257,55 @@ void main() {
 
     await tester.tap(find.text('Purchase'));
     await tester.pumpAndSettle();
-    fakeApi.controller.add([
-      buildPurchaseDetails(
-        status: PurchaseStatus.purchased,
-        pendingCompletePurchase: true,
-      ),
-    ]);
-    await tester.pumpAndSettle();
 
     expect(fakeAnalytics.purchaseCompletes, [PremiumPlan.lifetime]);
   });
 
-  testWidgets('Does not log purchase_complete without a started purchase', (
+  testWidgets('Does not log purchase_complete on an entitlement update', (
     tester,
   ) async {
     await openSheet(tester);
 
-    fakeApi.controller.add([
-      buildPurchaseDetails(
-        status: PurchaseStatus.purchased,
-        pendingCompletePurchase: true,
-      ),
-    ]);
+    fakeApi.controller.add(
+      StoreEntitlement(productId: PremiumPlan.lifetime.productId),
+    );
     await tester.pumpAndSettle();
 
     expect(fakeAnalytics.purchaseCompletes, isEmpty);
   });
 
-  testWidgets('Closes the bottom sheet on a purchase event', (tester) async {
+  testWidgets('Closes the bottom sheet after a purchase', (tester) async {
     await openSheet(tester);
 
-    fakeApi.controller.add([
-      buildPurchaseDetails(
-        status: PurchaseStatus.purchased,
-        pendingCompletePurchase: true,
-      ),
-    ]);
+    await tester.tap(find.text('Purchase'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Purchase'), findsNothing);
+    expect(find.text('Purchased'), findsOneWidget);
+  });
+
+  testWidgets('Closes the bottom sheet on an entitlement update', (
+    tester,
+  ) async {
+    await openSheet(tester);
+
+    fakeApi.controller.add(
+      StoreEntitlement(productId: PremiumPlan.lifetime.productId),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Purchase'), findsNothing);
+    expect(find.text('Purchased'), findsOneWidget);
+  });
+
+  testWidgets('Closes the bottom sheet after a restore', (tester) async {
+    fakeApi.restoredEntitlement = StoreEntitlement(
+      productId: PremiumPlan.lifetime.productId,
+    );
+
+    await openSheet(tester);
+
+    await tester.tap(find.text('Restore purchases'));
     await tester.pumpAndSettle();
 
     expect(find.text('Purchase'), findsNothing);
@@ -305,6 +327,9 @@ void main() {
   testWidgets('Logs the purchase start with the selected plan', (
     tester,
   ) async {
+    // A canceled purchase keeps the sheet open for the second attempt.
+    fakeApi.purchaseOutcome = PurchaseOutcome.canceled;
+
     await openSheet(tester);
 
     await tester.tap(find.text('Purchase'));

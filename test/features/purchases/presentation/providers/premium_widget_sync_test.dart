@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/entitlements_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_entitlement.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
+import 'package:life_battery/src/features/purchases/domain/store_entitlement.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/premium_widget_sync_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/purchase_updates_provider.dart';
 
@@ -96,34 +96,36 @@ void main() {
     },
   );
 
-  test('Unlocks the widget after a purchase event', () async {
+  test('Unlocks the widget after an entitlement update', () async {
     container
       ..read(purchaseUpdatesProvider)
       ..listen(premiumWidgetSyncProvider, (_, _) {});
     await container.read(premiumWidgetSyncProvider.future);
     expect(fakeWidget.syncedValues, [false]);
 
-    fakeApi.controller.add([
-      buildPurchaseDetails(status: PurchaseStatus.purchased),
-    ]);
+    fakeApi.controller.add(
+      StoreEntitlement(productId: PremiumPlan.lifetime.productId),
+    );
+    await Future<void>.delayed(Duration.zero);
     await Future<void>.delayed(Duration.zero);
     await Future<void>.delayed(Duration.zero);
 
     expect(fakeWidget.syncedValues, [false, true]);
   });
 
-  test('Syncs the expiry after a subscription purchase event', () async {
+  test('Syncs the expiry after a subscription entitlement update', () async {
     container
       ..read(purchaseUpdatesProvider)
       ..listen(premiumWidgetSyncProvider, (_, _) {});
     await container.read(premiumWidgetSyncProvider.future);
 
-    fakeApi.controller.add([
-      buildPurchaseDetails(
-        status: PurchaseStatus.purchased,
-        productID: PremiumPlan.monthly.productId,
+    fakeApi.controller.add(
+      StoreEntitlement(
+        productId: PremiumPlan.monthly.productId,
+        expiresAt: DateTime.now().add(const Duration(days: 30)),
       ),
-    ]);
+    );
+    await Future<void>.delayed(Duration.zero);
     await Future<void>.delayed(Duration.zero);
     await Future<void>.delayed(Duration.zero);
 

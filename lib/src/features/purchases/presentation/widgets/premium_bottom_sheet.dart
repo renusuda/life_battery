@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
-import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_products.dart';
@@ -173,23 +172,12 @@ class PremiumBottomSheet extends HookConsumerWidget {
                 onPressed: offer == null || isPremium || isPurchasing.value
                     ? null
                     : () async {
-                        unawaited(
-                          ref
-                              .read(analyticsRepositoryProvider)
-                              .logPurchaseStart(plan: selectedPlan.value),
-                        );
-                        ref
-                            .read(purchaseUpdatesProvider.notifier)
-                            .markPurchaseStarted();
                         purchaseError.value = null;
                         isPurchasing.value = true;
                         try {
-                          final isRequested = await ref
-                              .read(purchasesRepositoryProvider)
-                              .buyPremium(product: offer.product);
-                          if (!isRequested && context.mounted) {
-                            purchaseError.value = l10n.purchaseErrorContent;
-                          }
+                          await ref
+                              .read(purchaseUpdatesProvider.notifier)
+                              .buyPremium(offer);
                         } finally {
                           if (context.mounted) {
                             isPurchasing.value = false;

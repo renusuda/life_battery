@@ -1,11 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/entitlements_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
+import 'package:life_battery/src/features/purchases/domain/premium_products.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_purchase_status.dart';
+import 'package:life_battery/src/features/purchases/domain/purchase_outcome.dart';
+import 'package:life_battery/src/features/purchases/domain/store_entitlement.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/is_premium_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/purchase_updates_provider.dart';
 
@@ -18,6 +20,26 @@ void main() {
   late FakeEntitlementsLocalDataSource fakeEntitlements;
   late FakeAnalyticsApiDataSource fakeAnalytics;
   late ProviderContainer container;
+
+  PremiumOffer lifetimeOffer() =>
+      (plan: PremiumPlan.lifetime, product: fakeApi.lifetimeProduct!);
+
+  PremiumOffer monthlyOffer() =>
+      (plan: PremiumPlan.monthly, product: fakeApi.monthlyProduct!);
+
+  /// A store entitlement for the lifetime plan, or for [productId] when
+  /// given. A monthly entitlement expires 30 days from now by default.
+  StoreEntitlement buildEntitlement({String? productId, DateTime? expiresAt}) {
+    final id = productId ?? PremiumPlan.lifetime.productId;
+    return StoreEntitlement(
+      productId: id,
+      expiresAt:
+          expiresAt ??
+          (id == PremiumPlan.monthly.productId
+              ? DateTime.now().add(const Duration(days: 30))
+              : null),
+    );
+  }
 
   setUp(() {
     fakeApi = FakePurchasesApiDataSource();
@@ -36,287 +58,264 @@ void main() {
     container.read(purchaseUpdatesProvider);
   });
 
-  Future<void> emit(
-    PurchaseStatus status, {
-    String? productID,
-    bool pendingCompletePurchase = false,
-    String? transactionDate,
+  PremiumPurchaseStatus status() => container.read(purchaseUpdatesProvider);
+
+  PurchaseUpdates notifier() =>
+      container.read(purchaseUpdatesProvider.notifier);
+
+  Future<void> emit({
+    String? productId,
+    DateTime? expiresAt,
+    bool entitled = true,
   }) async {
-    fakeApi.controller.add([
-      buildPurchaseDetails(
-        status: status,
-        productID: productID,
-        pendingCompletePurchase: pendingCompletePurchase,
-        transactionDate: transactionDate,
-      ),
-    ]);
+    fakeApi.controller.add(
+      entitled
+          ? buildEntitlement(productId: productId, expiresAt: expiresAt)
+          : null,
+    );
+    await Future<void>.delayed(Duration.zero);
     await Future<void>.delayed(Duration.zero);
   }
 
-  test('Reports purchased on a premium purchase event', () async {
-    await emit(PurchaseStatus.purchased);
+  group('Entitlement updates', () {
+    test('Reports purchased and grants premium on a new entitlement', () async {
+      await emit();
 
-    expect(
-      container.read(purchaseUpdatesProvider),
-      PremiumPurchaseStatus.purchased,
-    );
-  });
+      expect(status(), PremiumPurchaseStatus.purchased);
+      expect(fakeEntitlements.isPremium, isTrue);
+    });
 
-  test('Reports restored on a premium restore event', () async {
-    await emit(PurchaseStatus.restored);
+    test('Ignores entitlements of unrelated products', () async {
+      await emit(productId: 'other_product');
 
-    expect(
-      container.read(purchaseUpdatesProvider),
-      PremiumPurchaseStatus.restored,
-    );
-  });
+      expect(status(), PremiumPurchaseStatus.none);
+      expect(fakeEntitlements.isPremium, isFalse);
+    });
 
-  test('Ignores purchases of unrelated products', () async {
-    await emit(PurchaseStatus.purchased, productID: 'other_product');
+    test('Does nothing when the store reports no entitlement', () async {
+      await emit(entitled: false);
 
-    expect(
-      container.read(purchaseUpdatesProvider),
-      PremiumPurchaseStatus.none,
-    );
-  });
+      expect(status(), PremiumPurchaseStatus.none);
+      expect(fakeEntitlements.isPremium, isFalse);
+    });
 
-  test('Reports pending while the purchase awaits approval', () async {
-    await emit(PurchaseStatus.pending);
-
-    expect(
-      container.read(purchaseUpdatesProvider),
-      PremiumPurchaseStatus.pending,
-    );
-  });
-
-  test('Reports error when the purchase fails', () async {
-    await emit(PurchaseStatus.error);
-
-    expect(
-      container.read(purchaseUpdatesProvider),
-      PremiumPurchaseStatus.error,
-    );
-  });
-
-  test('Reports canceled when the purchase is canceled', () async {
-    await emit(PurchaseStatus.canceled);
-
-    expect(
-      container.read(purchaseUpdatesProvider),
-      PremiumPurchaseStatus.canceled,
-    );
-  });
-
-  test('Logs purchase_complete with the plan on a started purchase', () async {
-    container.read(purchaseUpdatesProvider.notifier).markPurchaseStarted();
-
-    await emit(
-      PurchaseStatus.purchased,
-      productID: PremiumPlan.monthly.productId,
-    );
-
-    expect(fakeAnalytics.purchaseCompletes, [PremiumPlan.monthly]);
-  });
-
-  test('Does not log purchase_complete without a started purchase', () async {
-    await emit(
-      PurchaseStatus.purchased,
-      productID: PremiumPlan.monthly.productId,
-    );
-
-    expect(fakeAnalytics.purchaseCompletes, isEmpty);
-  });
-
-  test('Logs purchase_complete only once for one started purchase', () async {
-    container.read(purchaseUpdatesProvider.notifier).markPurchaseStarted();
-
-    await emit(PurchaseStatus.purchased);
-    await emit(PurchaseStatus.purchased);
-
-    expect(fakeAnalytics.purchaseCompletes, hasLength(1));
-  });
-
-  test('Does not log purchase_complete after a canceled purchase', () async {
-    container.read(purchaseUpdatesProvider.notifier).markPurchaseStarted();
-
-    await emit(PurchaseStatus.canceled);
-    await emit(PurchaseStatus.purchased);
-
-    expect(fakeAnalytics.purchaseCompletes, isEmpty);
-  });
-
-  test('Does not log purchase_complete on a restore event', () async {
-    container.read(purchaseUpdatesProvider.notifier).markPurchaseStarted();
-
-    await emit(PurchaseStatus.restored);
-
-    expect(fakeAnalytics.purchaseCompletes, isEmpty);
-  });
-
-  test('Does not log purchase_complete for unrelated products', () async {
-    container.read(purchaseUpdatesProvider.notifier).markPurchaseStarted();
-
-    await emit(PurchaseStatus.purchased, productID: 'other_product');
-
-    expect(fakeAnalytics.purchaseCompletes, isEmpty);
-  });
-
-  test('Logs subscription_renew for a monthly purchase without a start',
+    test(
+      'Does not revoke premium when the store reports no entitlement',
       () async {
-    await emit(
-      PurchaseStatus.purchased,
-      productID: PremiumPlan.monthly.productId,
+        fakeEntitlements.isPremium = true;
+
+        await emit(entitled: false);
+
+        expect(fakeEntitlements.isPremium, isTrue);
+      },
     );
 
-    expect(fakeAnalytics.subscriptionRenewCount, 1);
-    expect(fakeAnalytics.purchaseCompletes, isEmpty);
-  });
+    test(
+      'Does not report a purchase for an already stored entitlement',
+      () async {
+        fakeEntitlements.isPremium = true;
 
-  test('Does not log subscription_renew on a started purchase', () async {
-    container.read(purchaseUpdatesProvider.notifier).markPurchaseStarted();
+        await emit();
 
-    await emit(
-      PurchaseStatus.purchased,
-      productID: PremiumPlan.monthly.productId,
+        expect(status(), PremiumPurchaseStatus.none);
+      },
     );
 
-    expect(fakeAnalytics.subscriptionRenewCount, 0);
-  });
+    test('Grants a time-limited entitlement on a monthly update', () async {
+      final expiresAt = DateTime.now().add(const Duration(days: 30));
 
-  test('Does not log subscription_renew for a lifetime purchase', () async {
-    await emit(
-      PurchaseStatus.purchased,
-      productID: PremiumPlan.lifetime.productId,
+      await emit(
+        productId: PremiumPlan.monthly.productId,
+        expiresAt: expiresAt,
+      );
+
+      final entitlement = fakeEntitlements.entitlement;
+      expect(entitlement.hasLifetime, isFalse);
+      expect(entitlement.subscriptionExpiresAt, expiresAt);
+      expect(status(), PremiumPurchaseStatus.purchased);
+    });
+
+    test('An older monthly update does not rewind the expiry', () async {
+      await emit(productId: PremiumPlan.monthly.productId);
+      final expiryAfterPurchase =
+          fakeEntitlements.entitlement.subscriptionExpiresAt;
+
+      await emit(
+        productId: PremiumPlan.monthly.productId,
+        expiresAt: DateTime.now().subtract(const Duration(days: 60)),
+      );
+
+      expect(
+        fakeEntitlements.entitlement.subscriptionExpiresAt,
+        expiryAfterPurchase,
+      );
+      expect(await container.read(isPremiumProvider.future), isTrue);
+    });
+
+    test(
+      'Logs subscription_renew when an active subscription is extended',
+      () async {
+        await emit(productId: PremiumPlan.monthly.productId);
+        await emit(
+          productId: PremiumPlan.monthly.productId,
+          expiresAt: DateTime.now().add(const Duration(days: 60)),
+        );
+
+        expect(fakeAnalytics.subscriptionRenewCount, 1);
+        expect(fakeAnalytics.purchaseCompletes, isEmpty);
+      },
     );
 
-    expect(fakeAnalytics.subscriptionRenewCount, 0);
-  });
+    test(
+      'Does not log subscription_renew on the first subscription update',
+      () async {
+        await emit(productId: PremiumPlan.monthly.productId);
 
-  test('Logs purchase_cancel with the plan on a cancel event', () async {
-    await emit(
-      PurchaseStatus.canceled,
-      productID: PremiumPlan.lifetime.productId,
+        expect(fakeAnalytics.subscriptionRenewCount, 0);
+      },
     );
 
-    expect(fakeAnalytics.purchaseCancels, [PremiumPlan.lifetime]);
+    test('Does not log subscription_renew for a lifetime update', () async {
+      await emit();
+
+      expect(fakeAnalytics.subscriptionRenewCount, 0);
+    });
+
+    test('Refreshes isPremium after an entitlement update', () async {
+      expect(await container.read(isPremiumProvider.future), isFalse);
+
+      await emit();
+
+      expect(await container.read(isPremiumProvider.future), isTrue);
+    });
   });
 
-  test('Does not log purchase_cancel for unrelated products', () async {
-    await emit(PurchaseStatus.canceled, productID: 'other_product');
+  group('Purchase', () {
+    test('Reports purchased and grants premium', () async {
+      await notifier().buyPremium(lifetimeOffer());
 
-    expect(fakeAnalytics.purchaseCancels, isEmpty);
-  });
+      expect(status(), PremiumPurchaseStatus.purchased);
+      expect(fakeEntitlements.isPremium, isTrue);
+      expect(fakeApi.boughtProducts, [fakeApi.lifetimeProduct]);
+      expect(await container.read(isPremiumProvider.future), isTrue);
+    });
 
-  test('Logs purchase_error with the plan on an error event', () async {
-    await emit(
-      PurchaseStatus.error,
-      productID: PremiumPlan.monthly.productId,
+    test('Logs purchase_start and purchase_complete with the plan', () async {
+      await notifier().buyPremium(monthlyOffer());
+
+      expect(fakeAnalytics.purchaseStarts, [PremiumPlan.monthly]);
+      expect(fakeAnalytics.purchaseCompletes, [PremiumPlan.monthly]);
+    });
+
+    test('Grants a time-limited entitlement on a monthly purchase', () async {
+      await notifier().buyPremium(monthlyOffer());
+
+      final entitlement = fakeEntitlements.entitlement;
+      expect(entitlement.hasLifetime, isFalse);
+      expect(entitlement.isActive(DateTime.now()), isTrue);
+    });
+
+    test(
+      'Does not log subscription_renew for a purchase while subscribed',
+      () async {
+        await fakeEntitlements.markSubscribedUntil(
+          DateTime.now().add(const Duration(days: 10)),
+        );
+
+        await notifier().buyPremium(monthlyOffer());
+
+        expect(fakeAnalytics.subscriptionRenewCount, 0);
+        expect(fakeAnalytics.purchaseCompletes, [PremiumPlan.monthly]);
+      },
     );
 
-    expect(fakeAnalytics.purchaseErrors, [PremiumPlan.monthly]);
+    test('Reports pending while the purchase awaits approval', () async {
+      fakeApi.purchaseOutcome = PurchaseOutcome.pending;
+
+      await notifier().buyPremium(lifetimeOffer());
+
+      expect(status(), PremiumPurchaseStatus.pending);
+      expect(fakeEntitlements.isPremium, isFalse);
+      expect(fakeAnalytics.purchaseCompletes, isEmpty);
+    });
+
+    test('Reports canceled and logs purchase_cancel', () async {
+      fakeApi.purchaseOutcome = PurchaseOutcome.canceled;
+
+      await notifier().buyPremium(lifetimeOffer());
+
+      expect(status(), PremiumPurchaseStatus.canceled);
+      expect(fakeAnalytics.purchaseCancels, [PremiumPlan.lifetime]);
+      expect(fakeAnalytics.purchaseCompletes, isEmpty);
+    });
+
+    test('Reports error and logs purchase_error', () async {
+      fakeApi.purchaseOutcome = PurchaseOutcome.error;
+
+      await notifier().buyPremium(monthlyOffer());
+
+      expect(status(), PremiumPurchaseStatus.error);
+      expect(fakeAnalytics.purchaseErrors, [PremiumPlan.monthly]);
+      expect(fakeEntitlements.isPremium, isFalse);
+    });
   });
 
-  test('Does not log purchase_error for unrelated products', () async {
-    await emit(PurchaseStatus.error, productID: 'other_product');
+  group('Restore', () {
+    test('Reports restored and grants premium', () async {
+      fakeApi.restoredEntitlement = buildEntitlement();
 
-    expect(fakeAnalytics.purchaseErrors, isEmpty);
-  });
+      await notifier().restorePurchases();
 
-  test('Grants the entitlement and completes a purchase', () async {
-    await emit(PurchaseStatus.purchased, pendingCompletePurchase: true);
+      expect(status(), PremiumPurchaseStatus.restored);
+      expect(fakeEntitlements.isPremium, isTrue);
+      expect(fakeApi.restoreCallCount, 1);
+      expect(fakeAnalytics.purchaseCompletes, isEmpty);
+    });
 
-    expect(fakeEntitlements.isPremium, isTrue);
-    expect(fakeApi.completedPurchases, hasLength(1));
-  });
+    test('Reports restored for an already stored entitlement', () async {
+      fakeEntitlements.isPremium = true;
+      fakeApi.restoredEntitlement = buildEntitlement();
 
-  test('Grants the entitlement on a restore event', () async {
-    await emit(PurchaseStatus.restored, pendingCompletePurchase: true);
+      await notifier().restorePurchases();
 
-    expect(fakeEntitlements.isPremium, isTrue);
-    expect(fakeApi.completedPurchases, hasLength(1));
-  });
+      expect(status(), PremiumPurchaseStatus.restored);
+    });
 
-  test('Does not grant the entitlement for unrelated products', () async {
-    await emit(
-      PurchaseStatus.purchased,
-      productID: 'other_product',
-      pendingCompletePurchase: true,
-    );
+    test('Reports nothing when there is nothing to restore', () async {
+      await notifier().restorePurchases();
 
-    expect(fakeEntitlements.isPremium, isFalse);
-    expect(fakeApi.completedPurchases, hasLength(1));
-  });
+      expect(status(), PremiumPurchaseStatus.none);
+      expect(fakeEntitlements.isPremium, isFalse);
+    });
 
-  test('Does not grant the entitlement while pending', () async {
-    await emit(PurchaseStatus.pending);
+    test('Ignores restored entitlements of unrelated products', () async {
+      fakeApi.restoredEntitlement = buildEntitlement(
+        productId: 'other_product',
+      );
 
-    expect(fakeEntitlements.isPremium, isFalse);
-    expect(fakeApi.completedPurchases, isEmpty);
-  });
+      await notifier().restorePurchases();
 
-  test('Completes a finished transaction even on error', () async {
-    await emit(PurchaseStatus.error, pendingCompletePurchase: true);
+      expect(status(), PremiumPurchaseStatus.none);
+    });
 
-    expect(fakeEntitlements.isPremium, isFalse);
-    expect(fakeApi.completedPurchases, hasLength(1));
-  });
+    test('Reports error when the restore fails', () async {
+      fakeApi.restoreOutcome = PurchaseOutcome.error;
 
-  test('Grants a time-limited entitlement on a monthly purchase', () async {
-    await emit(
-      PurchaseStatus.purchased,
-      productID: PremiumPlan.monthly.productId,
-    );
+      await notifier().restorePurchases();
 
-    final entitlement = fakeEntitlements.entitlement;
-    expect(entitlement.hasLifetime, isFalse);
-    expect(entitlement.subscriptionExpiresAt, isNotNull);
-    expect(entitlement.isActive(DateTime.now()), isTrue);
-    expect(
-      container.read(purchaseUpdatesProvider),
-      PremiumPurchaseStatus.purchased,
-    );
-  });
+      expect(status(), PremiumPurchaseStatus.error);
+    });
 
-  test('An expired monthly restore does not grant premium', () async {
-    final oldTransaction = DateTime.now().subtract(const Duration(days: 90));
+    test('An expired monthly restore does not grant premium', () async {
+      fakeApi.restoredEntitlement = buildEntitlement(
+        productId: PremiumPlan.monthly.productId,
+        expiresAt: DateTime.now().subtract(const Duration(days: 60)),
+      );
 
-    await emit(
-      PurchaseStatus.restored,
-      productID: PremiumPlan.monthly.productId,
-      transactionDate: oldTransaction.millisecondsSinceEpoch.toString(),
-    );
+      await notifier().restorePurchases();
 
-    expect(fakeEntitlements.entitlement.subscriptionExpiresAt, isNotNull);
-    expect(await container.read(isPremiumProvider.future), isFalse);
-  });
-
-  test('An older monthly restore does not rewind the expiry', () async {
-    await emit(
-      PurchaseStatus.purchased,
-      productID: PremiumPlan.monthly.productId,
-    );
-    final expiryAfterPurchase =
-        fakeEntitlements.entitlement.subscriptionExpiresAt;
-
-    final oldTransaction = DateTime.now().subtract(const Duration(days: 90));
-    await emit(
-      PurchaseStatus.restored,
-      productID: PremiumPlan.monthly.productId,
-      transactionDate: oldTransaction.millisecondsSinceEpoch.toString(),
-    );
-
-    expect(
-      fakeEntitlements.entitlement.subscriptionExpiresAt,
-      expiryAfterPurchase,
-    );
-    expect(await container.read(isPremiumProvider.future), isTrue);
-  });
-
-  test('Refreshes isPremium after a purchase', () async {
-    expect(await container.read(isPremiumProvider.future), isFalse);
-
-    await emit(PurchaseStatus.purchased);
-
-    expect(await container.read(isPremiumProvider.future), isTrue);
+      expect(fakeEntitlements.entitlement.subscriptionExpiresAt, isNotNull);
+      expect(await container.read(isPremiumProvider.future), isFalse);
+    });
   });
 }

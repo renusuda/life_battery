@@ -18,22 +18,25 @@ class EntitlementsRepository {
     return entitlement.isActive(DateTime.now());
   }
 
-  Future<void> markPremiumPurchased() {
-    return _localDataSource.markLifetimePurchased();
+  Future<bool> markPremiumPurchased() async {
+    final entitlement = await _localDataSource.getEntitlement();
+    if (entitlement.hasLifetime) return false;
+
+    await _localDataSource.markLifetimePurchased();
+    return true;
   }
 
-  /// Stores a subscription entitlement valid until [expiresAt].
-  Future<void> markPremiumSubscribed({required DateTime expiresAt}) async {
-    // Never shorten a known expiry: a restore redelivers the whole
-    // transaction history, and an old renewal must not rewind the expiry
-    // written by a newer one.
+  Future<bool> markPremiumSubscribed({required DateTime expiresAt}) async {
+    // Never shorten a known expiry: the store may redeliver an older
+    // transaction, and it must not rewind the expiry written by a newer one.
     final entitlement = await _localDataSource.getEntitlement();
     final currentExpiresAt = entitlement.subscriptionExpiresAt;
     if (currentExpiresAt != null && !expiresAt.isAfter(currentExpiresAt)) {
-      return;
+      return false;
     }
 
-    return _localDataSource.markSubscribedUntil(expiresAt);
+    await _localDataSource.markSubscribedUntil(expiresAt);
+    return true;
   }
 
   /// Pushes the premium entitlement to the home screen widget.

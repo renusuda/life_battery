@@ -1,130 +1,141 @@
 import 'dart:async';
 
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/entitlements_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
+import 'package:life_battery/src/features/purchases/domain/premium_products.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_purchase_status.dart';
+import 'package:life_battery/src/features/purchases/domain/purchase_outcome.dart';
+import 'package:life_battery/src/features/purchases/domain/store_entitlement.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/is_premium_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'purchase_updates_provider.g.dart';
 
-/// Listens to the store purchase stream for the whole app session.
-///
-/// keepAlive because purchases can complete outside the settings screen:
-/// deferred purchases (Ask to Buy) may be approved days later and are
-/// delivered right after app start.
+/// keepAlive because entitlements can change outside the settings screen:
+/// deferred purchases (Ask to Buy) may be approved days later and renewals
+/// are delivered right after app start.
 @Riverpod(keepAlive: true)
 class PurchaseUpdates extends _$PurchaseUpdates {
+  /// Set while a purchase or restore is in flight: the request reports its
+  /// own outcome, so the entitlement update it triggers must neither change
+  /// the status nor count as a renewal.
+  bool _isRequestInFlight = false;
+
+  /// Used when the store reports no expiry for the subscription: the longest
+  /// monthly billing cycle plus a buffer for a renewal delivered late.
+  static const _fallbackSubscriptionValidity = Duration(days: 34);
+
   @override
   PremiumPurchaseStatus build() {
     final repository = ref.watch(purchasesRepositoryProvider);
-    final subscription = repository.purchaseStream.listen(_onPurchaseUpdates);
+    final subscription = repository.entitlementStream.listen(
+      _onEntitlementUpdate,
+    );
     ref.onDispose(subscription.cancel);
     return PremiumPurchaseStatus.none;
   }
 
-  Future<void> _onPurchaseUpdates(List<PurchaseDetails> purchases) async {
-    for (final purchase in purchases) {
-      await _handlePurchase(purchase);
+  Future<void> buyPremium(PremiumOffer offer) async {
+    unawaited(
+      ref.read(analyticsRepositoryProvider).logPurchaseStart(plan: offer.plan),
+    );
+    _isRequestInFlight = true;
+    try {
+      final result = await ref
+          .read(purchasesRepositoryProvider)
+          .buyPremium(product: offer.product);
+      switch (result.outcome) {
+        case PurchaseOutcome.completed:
+          await _storeEntitlement(result.entitlement);
+          state = PremiumPurchaseStatus.purchased;
+          unawaited(
+            ref
+                .read(analyticsRepositoryProvider)
+                .logPurchaseComplete(plan: offer.plan),
+          );
+        case PurchaseOutcome.canceled:
+          state = PremiumPurchaseStatus.canceled;
+          unawaited(
+            ref
+                .read(analyticsRepositoryProvider)
+                .logPurchaseCancel(plan: offer.plan),
+          );
+        case PurchaseOutcome.pending:
+          state = PremiumPurchaseStatus.pending;
+        case PurchaseOutcome.error:
+          state = PremiumPurchaseStatus.error;
+          unawaited(
+            ref
+                .read(analyticsRepositoryProvider)
+                .logPurchaseError(plan: offer.plan),
+          );
+      }
+    } finally {
+      _isRequestInFlight = false;
     }
   }
 
-  /// Subscription renewals arrive as purchased events at startup without
-  /// a user action, so purchase_complete is only logged for purchased
-  /// events preceded by [markPurchaseStarted]. Cleared once the started
-  /// purchase reaches any final status.
-  bool _hasPurchaseStarted = false;
-
-  void markPurchaseStarted() => _hasPurchaseStarted = true;
-
-  /// The longest monthly billing cycle.
-  static const _billingCycleDays = 31;
-
-  /// A renewal transaction only reaches the app on its next launch, so
-  /// the expiry is stretched past the billing date to bridge the gap.
-  static const _bufferDays = 3;
-
-  static const _subscriptionValidity = Duration(
-    days: _billingCycleDays + _bufferDays,
-  );
-
-  Future<void> _handlePurchase(PurchaseDetails purchase) async {
-    switch (purchase.status) {
-      case PurchaseStatus.purchased || PurchaseStatus.restored:
-        if (await _grantEntitlement(purchase)) {
-          ref.invalidate(isPremiumProvider);
-          state = purchase.status == PurchaseStatus.purchased
-              ? PremiumPurchaseStatus.purchased
-              : PremiumPurchaseStatus.restored;
-          if (purchase.status == PurchaseStatus.restored) {
-            _hasPurchaseStarted = false;
-          }
-          final plan = PremiumPlan.fromProductId(purchase.productID);
-          if (purchase.status == PurchaseStatus.purchased && plan != null) {
-            if (_hasPurchaseStarted) {
-              _hasPurchaseStarted = false;
-              unawaited(
-                ref
-                    .read(analyticsRepositoryProvider)
-                    .logPurchaseComplete(plan: plan),
-              );
-            } else if (plan == PremiumPlan.monthly) {
-              unawaited(
-                ref.read(analyticsRepositoryProvider).logSubscriptionRenew(),
-              );
-            }
-          }
-        }
-      case PurchaseStatus.pending:
-        state = PremiumPurchaseStatus.pending;
-      case PurchaseStatus.error:
+  Future<void> restorePurchases() async {
+    _isRequestInFlight = true;
+    try {
+      final result = await ref
+          .read(purchasesRepositoryProvider)
+          .restorePurchases();
+      if (result.outcome != PurchaseOutcome.completed) {
         state = PremiumPurchaseStatus.error;
-        final plan = PremiumPlan.fromProductId(purchase.productID);
-        if (plan != null) {
-          _hasPurchaseStarted = false;
-          unawaited(
-            ref.read(analyticsRepositoryProvider).logPurchaseError(plan: plan),
-          );
-        }
-      case PurchaseStatus.canceled:
-        state = PremiumPurchaseStatus.canceled;
-        final plan = PremiumPlan.fromProductId(purchase.productID);
-        if (plan != null) {
-          _hasPurchaseStarted = false;
-          unawaited(
-            ref.read(analyticsRepositoryProvider).logPurchaseCancel(plan: plan),
-          );
-        }
-    }
+        return;
+      }
 
-    // Required for every finished transaction regardless of status to
-    // avoid transactions getting stuck in the store queue.
-    if (purchase.pendingCompletePurchase) {
-      await ref.read(purchasesRepositoryProvider).completePurchase(purchase);
+      final entitlement = result.entitlement;
+      if (entitlement == null) return;
+      if (PremiumPlan.fromProductId(entitlement.productId) == null) return;
+
+      await _storeEntitlement(entitlement);
+      state = PremiumPurchaseStatus.restored;
+    } finally {
+      _isRequestInFlight = false;
     }
   }
 
-  /// Returns true when [purchase] granted the premium entitlement.
-  Future<bool> _grantEntitlement(PurchaseDetails purchase) async {
-    final repository = ref.read(entitlementsRepositoryProvider);
-    switch (PremiumPlan.fromProductId(purchase.productID)) {
-      case PremiumPlan.lifetime:
-        await repository.markPremiumPurchased();
-        return true;
-      case PremiumPlan.monthly:
-        final transactionMillis = int.tryParse(purchase.transactionDate ?? '');
-        final purchasedAt = transactionMillis == null
-            ? DateTime.now()
-            : DateTime.fromMillisecondsSinceEpoch(transactionMillis);
-        await repository.markPremiumSubscribed(
-          expiresAt: purchasedAt.add(_subscriptionValidity),
-        );
-        return true;
-      case null:
-        return false;
+  Future<void> _onEntitlementUpdate(StoreEntitlement? entitlement) async {
+    // A lapsed subscription is handled by the stored expiry; the store
+    // never revokes a stored entitlement.
+    if (entitlement == null) return;
+
+    final plan = PremiumPlan.fromProductId(entitlement.productId);
+    final wasPremium = await ref
+        .read(entitlementsRepositoryProvider)
+        .isPremium();
+    final hasChanged = await _storeEntitlement(entitlement);
+    if (!hasChanged || _isRequestInFlight) return;
+
+    if (wasPremium && plan == PremiumPlan.monthly) {
+      unawaited(ref.read(analyticsRepositoryProvider).logSubscriptionRenew());
+    } else {
+      state = PremiumPurchaseStatus.purchased;
     }
+  }
+
+  Future<bool> _storeEntitlement(StoreEntitlement? entitlement) async {
+    if (entitlement == null) return false;
+
+    final repository = ref.read(entitlementsRepositoryProvider);
+    final hasChanged = switch (PremiumPlan.fromProductId(
+      entitlement.productId,
+    )) {
+      PremiumPlan.lifetime => await repository.markPremiumPurchased(),
+      PremiumPlan.monthly => await repository.markPremiumSubscribed(
+        expiresAt:
+            entitlement.expiresAt ??
+            DateTime.now().add(_fallbackSubscriptionValidity),
+      ),
+      null => false,
+    };
+    if (hasChanged) {
+      ref.invalidate(isPremiumProvider);
+    }
+    return hasChanged;
   }
 }

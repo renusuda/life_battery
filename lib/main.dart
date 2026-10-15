@@ -10,6 +10,7 @@ import 'package:home_widget/home_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/firebase_options.dart';
 import 'package:life_battery/src/app.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -38,6 +39,18 @@ void main() async {
     );
     return true;
   };
+
+  // Purchases are sold on the App Store only. The public SDK key is passed
+  // with --dart-define so that no key lives in the repository; without it
+  // the store is reported as unavailable.
+  const revenueCatApiKey = String.fromEnvironment('REVENUECAT_IOS_API_KEY');
+  if (defaultTargetPlatform == TargetPlatform.iOS &&
+      revenueCatApiKey.isNotEmpty) {
+    if (kDebugMode) {
+      await Purchases.setLogLevel(LogLevel.debug);
+    }
+    await Purchases.configure(PurchasesConfiguration(revenueCatApiKey));
+  }
 
   tz.initializeTimeZones();
   final currentTimeZone = await FlutterTimezone.getLocalTimezone();

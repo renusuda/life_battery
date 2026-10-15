@@ -1,88 +1,87 @@
 import 'dart:async';
 
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:life_battery/src/features/purchases/data/api/purchases_api_data_source.dart';
-import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
+import 'package:life_battery/src/features/purchases/domain/purchase_outcome.dart';
+import 'package:life_battery/src/features/purchases/domain/store_entitlement.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 class FakePurchasesApiDataSource implements PurchasesApiDataSource {
   FakePurchasesApiDataSource({
     this.available = true,
-    ProductDetails? product,
-    this.buyResult = true,
-  }) : product = product ?? defaultPremiumProduct;
+    this.lifetimeProduct = const StoreProduct(
+      'premium_lifetime',
+      'Removes ads and unlocks the widget',
+      'Premium',
+      1,
+      r'$1.00',
+      'USD',
+    ),
+    this.monthlyProduct = const StoreProduct(
+      'premium_monthly',
+      'Removes ads and unlocks the widget',
+      'Premium Monthly',
+      0.99,
+      r'$0.99',
+      'USD',
+    ),
+    this.purchaseOutcome = PurchaseOutcome.completed,
+    this.restoreOutcome = PurchaseOutcome.completed,
+    this.restoredEntitlement,
+  });
 
-  static final defaultPremiumProduct = ProductDetails(
-    id: PremiumPlan.lifetime.productId,
-    title: 'Premium',
-    description: 'Removes ads and unlocks the widget',
-    price: r'$1.00',
-    rawPrice: 1,
-    currencyCode: 'USD',
-  );
-
-  static final defaultMonthlyProduct = ProductDetails(
-    id: PremiumPlan.monthly.productId,
-    title: 'Premium Monthly',
-    description: 'Removes ads and unlocks the widget',
-    price: r'$0.99',
-    rawPrice: 0.99,
-    currencyCode: 'USD',
-  );
-
-  final controller = StreamController<List<PurchaseDetails>>.broadcast();
+  final controller = StreamController<StoreEntitlement?>.broadcast();
 
   bool available;
-  ProductDetails? product;
-  ProductDetails? monthlyProduct = defaultMonthlyProduct;
-  bool buyResult;
+  StoreProduct? lifetimeProduct;
+  StoreProduct? monthlyProduct;
+  PurchaseOutcome purchaseOutcome;
+  PurchaseOutcome restoreOutcome;
+  StoreEntitlement? restoredEntitlement;
 
-  final boughtProducts = <ProductDetails>[];
+  final boughtProducts = <StoreProduct>[];
   int restoreCallCount = 0;
-  final completedPurchases = <PurchaseDetails>[];
 
   @override
-  Stream<List<PurchaseDetails>> get purchaseStream => controller.stream;
+  Stream<StoreEntitlement?> get entitlementStream => controller.stream;
 
   @override
   Future<bool> isAvailable() async => available;
 
   @override
-  Future<List<ProductDetails>> fetchPremiumProducts() async => [
-    ?product,
+  Future<List<StoreProduct>> fetchPremiumProducts() async => [
+    ?lifetimeProduct,
     ?monthlyProduct,
   ];
 
   @override
-  Future<bool> buyNonConsumable({required ProductDetails product}) async {
+  Future<({PurchaseOutcome outcome, StoreEntitlement? entitlement})> purchase({
+    required StoreProduct product,
+  }) async {
     boughtProducts.add(product);
-    return buyResult;
+    if (purchaseOutcome != PurchaseOutcome.completed) {
+      return (outcome: purchaseOutcome, entitlement: null);
+    }
+    return (
+      outcome: PurchaseOutcome.completed,
+      entitlement: StoreEntitlement(
+        productId: product.identifier,
+        expiresAt: product.identifier == 'premium_monthly'
+            ? DateTime.now().add(const Duration(days: 30))
+            : null,
+      ),
+    );
   }
 
   @override
-  Future<void> restorePurchases() async {
+  Future<({PurchaseOutcome outcome, StoreEntitlement? entitlement})>
+  restorePurchases() async {
     restoreCallCount++;
+    if (restoreOutcome != PurchaseOutcome.completed) {
+      return (outcome: restoreOutcome, entitlement: null);
+    }
+    return (
+      outcome: PurchaseOutcome.completed,
+      entitlement: restoredEntitlement,
+    );
   }
-
-  @override
-  Future<void> completePurchase(PurchaseDetails purchase) async {
-    completedPurchases.add(purchase);
-  }
-}
-
-PurchaseDetails buildPurchaseDetails({
-  required PurchaseStatus status,
-  String? productID,
-  bool pendingCompletePurchase = false,
-  String? transactionDate,
-}) {
-  return PurchaseDetails(
-    productID: productID ?? PremiumPlan.lifetime.productId,
-    verificationData: PurchaseVerificationData(
-      localVerificationData: 'local',
-      serverVerificationData: 'server',
-      source: 'test',
-    ),
-    transactionDate: transactionDate,
-    status: status,
-  )..pendingCompletePurchase = pendingCompletePurchase;
 }

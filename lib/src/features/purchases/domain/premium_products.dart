@@ -1,8 +1,8 @@
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 /// A purchasable plan paired with its store product.
-typedef PremiumOffer = ({PremiumPlan plan, ProductDetails product});
+typedef PremiumOffer = ({PremiumPlan plan, StoreProduct product});
 
 /// The store products for the premium plans.
 ///
@@ -10,8 +10,8 @@ typedef PremiumOffer = ({PremiumPlan plan, ProductDetails product});
 class PremiumProducts {
   const PremiumProducts({this.monthly, this.lifetime});
 
-  final ProductDetails? monthly;
-  final ProductDetails? lifetime;
+  final StoreProduct? monthly;
+  final StoreProduct? lifetime;
 
   bool get isEmpty => monthly == null && lifetime == null;
 
@@ -21,7 +21,7 @@ class PremiumProducts {
     if (lifetime != null) PremiumPlan.lifetime,
   ];
 
-  ProductDetails? productFor(PremiumPlan plan) {
+  StoreProduct? productFor(PremiumPlan plan) {
     return switch (plan) {
       PremiumPlan.monthly => monthly,
       PremiumPlan.lifetime => lifetime,
