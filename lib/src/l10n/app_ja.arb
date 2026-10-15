@@ -49,6 +49,7 @@
   "premiumFeatureWidgetEmphasis": "ウィジェット",
   "oneTimePurchaseLabel": "買い切り",
   "monthlyPlanLabel": "月額",
+  "recommendedPlanBadgeLabel": "おすすめ",
   "monthlyPriceLabel": "{price}/月",
   "@monthlyPriceLabel": {
     "placeholders": {
@@ -57,8 +58,8 @@
       }
     }
   },
-  "monthlySubscriptionDescription": "毎月自動更新。いつでも解約できます。",
-  "oneTimePurchaseDescription": "お支払いは一度だけ。すべての機能をずっとご利用いただけます。",
+  "monthlySubscriptionDescription": "いつでも解約できます",
+  "oneTimePurchaseDescription": "一度の支払いでずっと使えます",
   "purchaseButtonLabel": "購入",
   "storeUnavailableContent": "現在ストアを利用できません。",
   "purchaseSuccessContent": "ご購入ありがとうございます。プレミアム機能を利用できるようになりました。",

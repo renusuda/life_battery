@@ -15,7 +15,8 @@ import 'package:life_battery/src/features/purchases/presentation/providers/purch
 import 'package:life_battery/src/features/purchases/presentation/widgets/five_star_rating.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_feature_list.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_legal_links.dart';
-import 'package:life_battery/src/features/purchases/presentation/widgets/premium_price_card.dart';
+import 'package:life_battery/src/features/purchases/presentation/widgets/premium_plan_selector.dart';
+import 'package:life_battery/src/features/purchases/presentation/widgets/price_card_frame.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/restore_purchases_button.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/app_haptics.dart';
@@ -112,9 +113,9 @@ class PremiumBottomSheet extends HookConsumerWidget {
                       child: switch (productsAsyncValue) {
                         AsyncValue(value: final PremiumProducts details)
                             when offer != null =>
-                          PremiumPriceCard(
+                          PremiumPlanSelector(
                             products: details,
-                            offer: offer,
+                            selectedPlan: offer.plan,
                             onPlanChanged: (plan) => selectedPlan.value = plan,
                           ),
                         AsyncValue(isLoading: true) => PriceCardFrame(

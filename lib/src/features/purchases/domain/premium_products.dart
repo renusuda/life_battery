@@ -15,10 +15,11 @@ class PremiumProducts {
 
   bool get isEmpty => monthly == null && lifetime == null;
 
-  /// The purchasable plans, in display order.
+  /// The purchasable plans, in display order: the recommended one-time
+  /// plan comes first.
   List<PremiumPlan> get availablePlans => [
-    if (monthly != null) PremiumPlan.monthly,
     if (lifetime != null) PremiumPlan.lifetime,
+    if (monthly != null) PremiumPlan.monthly,
   ];
 
   StoreProduct? productFor(PremiumPlan plan) {

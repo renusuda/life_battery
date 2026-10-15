@@ -49,6 +49,7 @@
   "premiumFeatureWidgetEmphasis": "widget",
   "oneTimePurchaseLabel": "One-time purchase",
   "monthlyPlanLabel": "Monthly",
+  "recommendedPlanBadgeLabel": "Best value",
   "monthlyPriceLabel": "{price}/mo",
   "@monthlyPriceLabel": {
     "placeholders": {
@@ -57,8 +58,8 @@
       }
     }
   },
-  "monthlySubscriptionDescription": "Renews monthly. Cancel anytime.",
-  "oneTimePurchaseDescription": "Pay once, yours forever.",
+  "monthlySubscriptionDescription": "Cancel anytime",
+  "oneTimePurchaseDescription": "Pay once, use forever",
   "purchaseButtonLabel": "Purchase",
   "storeUnavailableContent": "The store is currently unavailable.",
   "purchaseSuccessContent": "Thank you! Premium features are now unlocked.",

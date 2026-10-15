@@ -356,6 +356,12 @@ abstract class AppLocalizations {
   /// **'Monthly'**
   String get monthlyPlanLabel;
 
+  /// No description provided for @recommendedPlanBadgeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Best value'**
+  String get recommendedPlanBadgeLabel;
+
   /// No description provided for @monthlyPriceLabel.
   ///
   /// In en, this message translates to:
@@ -365,13 +371,13 @@ abstract class AppLocalizations {
   /// No description provided for @monthlySubscriptionDescription.
   ///
   /// In en, this message translates to:
-  /// **'Renews monthly. Cancel anytime.'**
+  /// **'Cancel anytime'**
   String get monthlySubscriptionDescription;
 
   /// No description provided for @oneTimePurchaseDescription.
   ///
   /// In en, this message translates to:
-  /// **'Pay once, yours forever.'**
+  /// **'Pay once, use forever'**
   String get oneTimePurchaseDescription;
 
   /// No description provided for @purchaseButtonLabel.

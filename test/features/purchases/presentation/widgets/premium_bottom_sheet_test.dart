@@ -10,6 +10,7 @@ import 'package:life_battery/src/features/purchases/domain/purchase_outcome.dart
 import 'package:life_battery/src/features/purchases/domain/store_entitlement.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_bottom_sheet.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_list_tile.dart';
+import 'package:life_battery/src/features/purchases/presentation/widgets/premium_plan_card.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../../../../test_helpers/fake_analytics.dart';
@@ -50,6 +51,14 @@ void main() {
 
     await tester.tap(find.text(locale == 'ja' ? 'プレミアム' : 'Premium'));
     await tester.pumpAndSettle();
+  }
+
+  // The monthly card sits below the fold of the 800x600 test window, under
+  // the purchase button.
+  Future<void> tapMonthly(WidgetTester tester) async {
+    await tester.ensureVisible(find.text('Monthly'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Monthly'));
   }
 
   testWidgets(
@@ -116,9 +125,13 @@ void main() {
       find.text('Check at a glance with the widget', findRichText: true),
       findsOneWidget,
     );
-    expect(find.text(r'$1.00'), findsOneWidget);
+    expect(find.text('Monthly'), findsOneWidget);
+    expect(find.text(r'$0.99/mo'), findsOneWidget);
+    expect(find.text('Cancel anytime'), findsOneWidget);
     expect(find.text('One-time purchase'), findsOneWidget);
-    expect(find.text('Pay once, yours forever.'), findsOneWidget);
+    expect(find.text('Best value'), findsOneWidget);
+    expect(find.text(r'$1.00'), findsOneWidget);
+    expect(find.text('Pay once, use forever'), findsOneWidget);
     expect(find.text('Purchase'), findsOneWidget);
     expect(fakeApi.boughtProducts, isEmpty);
   });
@@ -170,10 +183,31 @@ void main() {
 
     expect(find.text('¥1,000'), findsOneWidget);
     expect(find.text('買い切り'), findsOneWidget);
-    expect(
-      find.text('お支払いは一度だけ。すべての機能をずっとご利用いただけます。'),
-      findsOneWidget,
-    );
+    expect(find.text('おすすめ'), findsOneWidget);
+    expect(find.text('一度の支払いでずっと使えます'), findsOneWidget);
+    expect(find.text('月額'), findsOneWidget);
+    expect(find.text(r'$0.99/月'), findsOneWidget);
+    expect(find.text('いつでも解約できます'), findsOneWidget);
+  });
+
+  testWidgets('Shows only the one-time plan when the monthly plan is missing', (
+    tester,
+  ) async {
+    fakeApi.monthlyProduct = null;
+
+    await openSheet(tester);
+
+    expect(find.text('Monthly'), findsNothing);
+    expect(find.text('Pay once, use forever'), findsOneWidget);
+  });
+
+  testWidgets('Selects the one-time plan by default', (tester) async {
+    await openSheet(tester);
+
+    final cards = tester
+        .widgetList<PremiumPlanCard>(find.byType(PremiumPlanCard))
+        .toList();
+    expect(cards.map((card) => card.isSelected), [true, false]);
   });
 
   testWidgets('Switches to the monthly plan on the bottom sheet', (
@@ -181,26 +215,13 @@ void main() {
   ) async {
     await openSheet(tester);
 
-    expect(find.text('Monthly'), findsOneWidget);
-    expect(find.text('One-time purchase'), findsOneWidget);
-
-    await tester.tap(find.text('Monthly'));
+    await tapMonthly(tester);
     await tester.pumpAndSettle();
 
-    expect(find.text(r'$0.99/mo'), findsOneWidget);
-    expect(find.text('Renews monthly. Cancel anytime.'), findsOneWidget);
-  });
-
-  testWidgets('Switches to the monthly plan on the Japanese bottom sheet', (
-    tester,
-  ) async {
-    await openSheet(tester, locale: 'ja');
-
-    await tester.tap(find.text('月額'));
-    await tester.pumpAndSettle();
-
-    expect(find.text(r'$0.99/月'), findsOneWidget);
-    expect(find.text('毎月自動更新。いつでも解約できます。'), findsOneWidget);
+    final cards = tester
+        .widgetList<PremiumPlanCard>(find.byType(PremiumPlanCard))
+        .toList();
+    expect(cards.map((card) => card.isSelected), [false, true]);
   });
 
   testWidgets('Purchases the monthly plan from the bottom sheet', (
@@ -208,7 +229,7 @@ void main() {
   ) async {
     await openSheet(tester);
 
-    await tester.tap(find.text('Monthly'));
+    await tapMonthly(tester);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Purchase'));
     await tester.pumpAndSettle();
@@ -318,7 +339,7 @@ void main() {
     await openSheet(tester);
 
     // Rebuild the sheet to confirm the event does not fire again.
-    await tester.tap(find.text('Monthly'));
+    await tapMonthly(tester);
     await tester.pumpAndSettle();
 
     expect(fakeAnalytics.paywallViews, [PaywallSource.settings]);
@@ -337,7 +358,7 @@ void main() {
 
     expect(fakeAnalytics.purchaseStarts, [PremiumPlan.lifetime]);
 
-    await tester.tap(find.text('Monthly'));
+    await tapMonthly(tester);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Purchase'));
     await tester.pumpAndSettle();
