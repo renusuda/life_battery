@@ -21,15 +21,13 @@ class PremiumFeatureList extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         _FeatureRow(
-          icon: Icons.block,
-          color: Colors.red.shade400,
+          icon: '🙈',
           label: l10n.premiumFeatureAdRemovalLabel,
           emphasis: l10n.premiumFeatureAdRemovalEmphasis,
         ),
         const SizedBox(height: 16),
         _FeatureRow(
-          icon: Icons.widgets,
-          color: Theme.of(context).colorScheme.primary,
+          icon: '👀',
           label: l10n.premiumFeatureWidgetLabel,
           emphasis: l10n.premiumFeatureWidgetEmphasis,
         ),
@@ -41,13 +39,11 @@ class PremiumFeatureList extends StatelessWidget {
 class _FeatureRow extends StatelessWidget {
   const _FeatureRow({
     required this.icon,
-    required this.color,
     required this.label,
     required this.emphasis,
   });
 
-  final IconData icon;
-  final Color color;
+  final String icon;
   final String label;
   final String emphasis;
 
@@ -75,11 +71,7 @@ class _FeatureRow extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        CircleAvatar(
-          radius: 16,
-          backgroundColor: color,
-          child: Icon(icon, size: 18, color: Colors.white),
-        ),
+        Text(icon, style: const TextStyle(fontSize: 24)),
         const SizedBox(width: 12),
         Text.rich(TextSpan(style: baseStyle, children: spans)),
       ],
