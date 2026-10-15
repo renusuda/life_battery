@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・Fixed an issue where the share sheet did not open.\n・Fixed an issue where the share button did not appear until the app was restarted after the first setup."
+    "text": "・Redesigned the premium screen so the monthly and one-time plans can be compared at a glance.\n・Fixed a crash on iOS related to the home screen widget."
   },
   {
     "language": "ja",
-    "text": "・共有シートが開かない不具合を修正しました。\n・初回設定の後、アプリを再起動するまで共有ボタンが表示されない不具合を修正しました。"
+    "text": "・プレミアム画面を刷新し、月額と買い切りのプランをひと目で比較できるようにしました。\n・iOSでホーム画面ウィジェットに関連するクラッシュを修正しました。"
   }
 ]
