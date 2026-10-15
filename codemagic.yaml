@@ -127,6 +127,7 @@ workflows:
         bundle_identifier: com.rururu.lifebt
       groups:
         - firebase
+        - revenuecat
         - shorebird
       vars:
         APP_STORE_APPLE_ID: 6449723058
@@ -157,7 +158,8 @@ workflows:
             --flutter-version="$FLUTTER_VERSION" \
             --build-name="$BUILD_NAME" \
             --build-number=$BUILD_NUMBER \
-            --export-options-plist=/Users/builder/export_options.plist
+            --export-options-plist=/Users/builder/export_options.plist \
+            -- --dart-define=REVENUECAT_IOS_API_KEY="$REVENUECAT_IOS_API_KEY"
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
@@ -179,6 +181,7 @@ workflows:
         bundle_identifier: com.rururu.lifebt
       groups:
         - firebase
+        - revenuecat
         - shorebird
       vars:
         APP_STORE_APPLE_ID: 6449723058
@@ -206,7 +209,8 @@ workflows:
           shorebird patch ios \
             --release-version="$RELEASE_VERSION" \
             --allow-asset-diffs \
-            --export-options-plist=/Users/builder/export_options.plist
+            --export-options-plist=/Users/builder/export_options.plist \
+            -- --dart-define=REVENUECAT_IOS_API_KEY="$REVENUECAT_IOS_API_KEY"
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
