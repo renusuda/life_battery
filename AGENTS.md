@@ -5,10 +5,6 @@
 - Many small files over few large files
 - Keep files under 200 lines (400 max)
 
-## Code Style
-
-- No emojis in code, comments, or documentation
-
 ## Testing
 
 - Unit tests for models, utils, and providers in `test/`
