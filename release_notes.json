@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・Redesigned the premium screen so the monthly and one-time plans can be compared at a glance.\n・Fixed a crash on iOS related to the home screen widget."
+    "text": "・Added a supporter plan for those who want to support development. It unlocks the same features as the one-time purchase.\n・Fixed a layout issue on the premium screen in English."
   },
   {
     "language": "ja",
-    "text": "・プレミアム画面を刷新し、月額と買い切りのプランをひと目で比較できるようにしました。\n・iOSでホーム画面ウィジェットに関連するクラッシュを修正しました。"
+    "text": "・開発を応援したい方向けに、応援プランを追加しました。機能は買い切りと同じです。\n・英語表示でプレミアム画面のレイアウトが崩れる問題を修正しました。"
   }
 ]
