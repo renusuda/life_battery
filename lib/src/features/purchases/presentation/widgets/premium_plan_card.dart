@@ -51,7 +51,10 @@ class PremiumPlanCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 4,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       Text(
                         title,
@@ -59,8 +62,7 @@ class PremiumPlanCard extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      if (isRecommended) ...[
-                        const SizedBox(width: 8),
+                      if (isRecommended)
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
@@ -78,7 +80,6 @@ class PremiumPlanCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ],
                     ],
                   ),
                   const SizedBox(height: 4),
