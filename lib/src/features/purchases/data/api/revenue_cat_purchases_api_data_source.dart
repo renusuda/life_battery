@@ -43,7 +43,10 @@ class RevenueCatPurchasesApiDataSource implements PurchasesApiDataSource {
     final results = await Future.wait([
       Purchases.getProducts([PremiumPlan.monthly.productId]),
       Purchases.getProducts(
-        [PremiumPlan.lifetime.productId],
+        [
+          PremiumPlan.lifetime.productId,
+          PremiumPlan.lifetimeSupport.productId,
+        ],
         productCategory: ProductCategory.nonSubscription,
       ),
     ]);

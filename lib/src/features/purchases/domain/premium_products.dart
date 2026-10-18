@@ -8,17 +8,20 @@ typedef PremiumOffer = ({PremiumPlan plan, StoreProduct product});
 ///
 /// A product is null when it is not registered on the store.
 class PremiumProducts {
-  const PremiumProducts({this.monthly, this.lifetime});
+  const PremiumProducts({this.monthly, this.lifetime, this.lifetimeSupport});
 
   final StoreProduct? monthly;
   final StoreProduct? lifetime;
+  final StoreProduct? lifetimeSupport;
 
-  bool get isEmpty => monthly == null && lifetime == null;
+  bool get isEmpty =>
+      monthly == null && lifetime == null && lifetimeSupport == null;
 
   /// The purchasable plans, in display order: the recommended one-time
-  /// plan comes first.
+  /// plan comes first and the subscription last.
   List<PremiumPlan> get availablePlans => [
     if (lifetime != null) PremiumPlan.lifetime,
+    if (lifetimeSupport != null) PremiumPlan.lifetimeSupport,
     if (monthly != null) PremiumPlan.monthly,
   ];
 
@@ -26,6 +29,7 @@ class PremiumProducts {
     return switch (plan) {
       PremiumPlan.monthly => monthly,
       PremiumPlan.lifetime => lifetime,
+      PremiumPlan.lifetimeSupport => lifetimeSupport,
     };
   }
 

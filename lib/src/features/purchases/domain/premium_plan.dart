@@ -7,7 +7,11 @@ enum PremiumPlan {
   monthly('premium_monthly'),
 
   /// One-time lifetime purchase.
-  lifetime('premium_lifetime');
+  lifetime('premium_lifetime'),
+
+  /// The lifetime purchase at a higher price for users who want to
+  /// support development. It unlocks the same features.
+  lifetimeSupport('premium_lifetime_support');
 
   const PremiumPlan(this.productId);
 

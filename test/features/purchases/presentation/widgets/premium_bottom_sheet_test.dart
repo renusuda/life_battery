@@ -81,6 +81,7 @@ void main() {
     (tester) async {
       fakeApi
         ..lifetimeProduct = null
+        ..lifetimeSupportProduct = null
         ..monthlyProduct = null;
 
       await openSheet(tester);
@@ -132,6 +133,12 @@ void main() {
     expect(find.text('Best value'), findsOneWidget);
     expect(find.text(r'$1.00'), findsOneWidget);
     expect(find.text('Pay once, use forever'), findsOneWidget);
+    expect(find.text('One-time + support'), findsOneWidget);
+    expect(find.text(r'$3.00'), findsOneWidget);
+    expect(
+      find.text('Same as one-time, plus supports development'),
+      findsOneWidget,
+    );
     expect(find.text('Purchase'), findsOneWidget);
     expect(fakeApi.boughtProducts, isEmpty);
   });
@@ -185,6 +192,8 @@ void main() {
     expect(find.text('買い切り'), findsOneWidget);
     expect(find.text('おすすめ'), findsOneWidget);
     expect(find.text('一度の支払いでずっと使えます'), findsOneWidget);
+    expect(find.text('買い切り + 応援'), findsOneWidget);
+    expect(find.text('買い切りと同じ内容。開発を応援できます'), findsOneWidget);
     expect(find.text('月額'), findsOneWidget);
     expect(find.text(r'$0.99/月'), findsOneWidget);
     expect(find.text('いつでも解約できます'), findsOneWidget);
@@ -207,7 +216,7 @@ void main() {
     final cards = tester
         .widgetList<PremiumPlanCard>(find.byType(PremiumPlanCard))
         .toList();
-    expect(cards.map((card) => card.isSelected), [true, false]);
+    expect(cards.map((card) => card.isSelected), [true, false, false]);
   });
 
   testWidgets('Switches to the monthly plan on the bottom sheet', (
@@ -221,7 +230,23 @@ void main() {
     final cards = tester
         .widgetList<PremiumPlanCard>(find.byType(PremiumPlanCard))
         .toList();
-    expect(cards.map((card) => card.isSelected), [false, true]);
+    expect(cards.map((card) => card.isSelected), [false, false, true]);
+  });
+
+  testWidgets('Purchases the support plan from the bottom sheet', (
+    tester,
+  ) async {
+    await openSheet(tester);
+
+    await tester.ensureVisible(find.text('One-time + support'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('One-time + support'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Purchase'));
+    await tester.pumpAndSettle();
+
+    expect(fakeApi.boughtProducts, [fakeApi.lifetimeSupportProduct]);
+    expect(fakeAnalytics.purchaseStarts, [PremiumPlan.lifetimeSupport]);
   });
 
   testWidgets('Purchases the monthly plan from the bottom sheet', (

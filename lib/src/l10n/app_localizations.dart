@@ -380,6 +380,18 @@ abstract class AppLocalizations {
   /// **'Pay once, use forever'**
   String get oneTimePurchaseDescription;
 
+  /// No description provided for @lifetimeSupportPlanLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'One-time + support'**
+  String get lifetimeSupportPlanLabel;
+
+  /// No description provided for @lifetimeSupportDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Same as one-time, plus supports development'**
+  String get lifetimeSupportDescription;
+
   /// No description provided for @purchaseButtonLabel.
   ///
   /// In en, this message translates to:

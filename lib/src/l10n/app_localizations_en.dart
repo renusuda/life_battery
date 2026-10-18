@@ -164,6 +164,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get oneTimePurchaseDescription => 'Pay once, use forever';
 
   @override
+  String get lifetimeSupportPlanLabel => 'One-time + support';
+
+  @override
+  String get lifetimeSupportDescription =>
+      'Same as one-time, plus supports development';
+
+  @override
   String get purchaseButtonLabel => 'Purchase';
 
   @override

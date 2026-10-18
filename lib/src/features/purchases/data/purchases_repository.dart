@@ -31,6 +31,10 @@ class PurchasesRepository {
       lifetime: products.firstWhereOrNull(
         (product) => product.identifier == PremiumPlan.lifetime.productId,
       ),
+      lifetimeSupport: products.firstWhereOrNull(
+        (product) =>
+            product.identifier == PremiumPlan.lifetimeSupport.productId,
+      ),
     );
   }
 

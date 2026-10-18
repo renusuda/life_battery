@@ -125,7 +125,8 @@ class PurchaseUpdates extends _$PurchaseUpdates {
     final hasChanged = switch (PremiumPlan.fromProductId(
       entitlement.productId,
     )) {
-      PremiumPlan.lifetime => await repository.markPremiumPurchased(),
+      PremiumPlan.lifetime ||
+      PremiumPlan.lifetimeSupport => await repository.markPremiumPurchased(),
       PremiumPlan.monthly => await repository.markPremiumSubscribed(
         expiresAt:
             entitlement.expiresAt ??

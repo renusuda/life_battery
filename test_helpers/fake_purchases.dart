@@ -24,6 +24,14 @@ class FakePurchasesApiDataSource implements PurchasesApiDataSource {
       r'$0.99',
       'USD',
     ),
+    this.lifetimeSupportProduct = const StoreProduct(
+      'premium_lifetime_support',
+      'Removes ads, unlocks the widget, and supports development',
+      'Premium Supporter',
+      3,
+      r'$3.00',
+      'USD',
+    ),
     this.purchaseOutcome = PurchaseOutcome.completed,
     this.restoreOutcome = PurchaseOutcome.completed,
     this.restoredEntitlement,
@@ -34,6 +42,7 @@ class FakePurchasesApiDataSource implements PurchasesApiDataSource {
   bool available;
   StoreProduct? lifetimeProduct;
   StoreProduct? monthlyProduct;
+  StoreProduct? lifetimeSupportProduct;
   PurchaseOutcome purchaseOutcome;
   PurchaseOutcome restoreOutcome;
   StoreEntitlement? restoredEntitlement;
@@ -50,6 +59,7 @@ class FakePurchasesApiDataSource implements PurchasesApiDataSource {
   @override
   Future<List<StoreProduct>> fetchPremiumProducts() async => [
     ?lifetimeProduct,
+    ?lifetimeSupportProduct,
     ?monthlyProduct,
   ];
 

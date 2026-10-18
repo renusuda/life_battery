@@ -156,6 +156,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get oneTimePurchaseDescription => '一度の支払いでずっと使えます';
 
   @override
+  String get lifetimeSupportPlanLabel => '買い切り + 応援';
+
+  @override
+  String get lifetimeSupportDescription => '買い切りと同じ内容。開発を応援できます';
+
+  @override
   String get purchaseButtonLabel => '購入';
 
   @override

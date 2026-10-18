@@ -85,6 +85,14 @@ void main() {
       expect(fakeEntitlements.isPremium, isTrue);
     });
 
+    test('Grants premium on a support plan entitlement', () async {
+      await emit(productId: PremiumPlan.lifetimeSupport.productId);
+
+      expect(status(), PremiumPurchaseStatus.purchased);
+      expect(fakeEntitlements.isPremium, isTrue);
+      expect(fakeEntitlements.entitlement.hasLifetime, isTrue);
+    });
+
     test('Ignores entitlements of unrelated products', () async {
       await emit(productId: 'other_product');
 
