@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・Added a supporter plan for those who want to support development. It unlocks the same features as the one-time purchase.\n・Fixed a layout issue on the premium screen in English."
+    "text": "・Replaced the ideal lifespan slider with − and + buttons for one-year adjustments.\n・Added hold-to-repeat on the − and + buttons so the ideal lifespan changes faster.\n・Added preset ages so you can pick a common ideal lifespan in one tap.\n・Fixed the premium screen not closing when dragged down."
   },
   {
     "language": "ja",
-    "text": "・開発を応援したい方向けに、応援プランを追加しました。機能は買い切りと同じです。\n・英語表示でプレミアム画面のレイアウトが崩れる問題を修正しました。"
+    "text": "・理想の寿命のスライダーを−と+のボタンに変更し、1歳ずつ調整できるようにしました。\n・理想の寿命の−と+のボタンを長押しで素早く進められるようにしました。\n・理想の寿命をよく使う年齢からワンタップで選べるボタンを追加しました。\n・プレミアム画面を下に引いても閉じられないことがある問題を修正しました。"
   }
 ]
