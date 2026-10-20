@@ -43,7 +43,7 @@ void main() {
   }
 
   Future<void> dismissSheet(WidgetTester tester) async {
-    await tester.tap(find.byType(ModalBarrier).last);
+    await tester.tapAt(const Offset(400, 10));
     await tester.pump();
     await tester.pumpUntilGone(
       find.byType(DateInputBottomSheet),

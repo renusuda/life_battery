@@ -115,18 +115,20 @@ void main() {
       final idealAgeFinder = find.byKey(const Key('idealAgeText'));
       final initialAge = tester.widget<Text>(idealAgeFinder).data ?? '';
 
-      final sliderFinder = find.byType(Slider);
+      final decrementFinder = find.byKey(const Key('idealAgeDecrement'));
       await tester.pumpUntilFound(
-        sliderFinder.hitTestable(),
+        decrementFinder.hitTestable(),
         timeout: const Duration(seconds: 1),
       );
-      await tester.drag(sliderFinder, const Offset(100, 0));
-      await tester.pump();
+      for (var i = 0; i < 5; i++) {
+        await tester.tap(decrementFinder);
+        await tester.pump();
+      }
 
       final newAge = tester.widget<Text>(idealAgeFinder).data ?? '';
       expect(newAge, isNot(equals(initialAge)));
 
-      await tester.tap(find.byType(ModalBarrier).last);
+      await tester.tapAt(const Offset(400, 10));
       await tester.pump();
       await tester.pumpUntilGone(
         find.byType(DateInputBottomSheet),
@@ -162,18 +164,20 @@ void main() {
       final idealAgeFinder = find.byKey(const Key('idealAgeText'));
       final initialAge = tester.widget<Text>(idealAgeFinder).data ?? '';
 
-      final sliderFinder = find.byType(Slider);
+      final decrementFinder = find.byKey(const Key('idealAgeDecrement'));
       await tester.pumpUntilFound(
-        sliderFinder.hitTestable(),
+        decrementFinder.hitTestable(),
         timeout: const Duration(seconds: 1),
       );
-      await tester.drag(sliderFinder, const Offset(100, 0));
-      await tester.pump();
+      for (var i = 0; i < 5; i++) {
+        await tester.tap(decrementFinder);
+        await tester.pump();
+      }
 
       final newAge = tester.widget<Text>(idealAgeFinder).data ?? '';
       expect(newAge, isNot(equals(initialAge)));
 
-      await tester.tap(find.byType(ModalBarrier).last);
+      await tester.tapAt(const Offset(400, 10));
       await tester.pump();
       await tester.pumpUntilGone(
         find.byType(DateInputBottomSheet),
@@ -223,7 +227,7 @@ void main() {
       final newPercent = tester.widget<Text>(percentFinder).data ?? '';
       expect(newPercent, isNot(equals(initialPercent)));
 
-      await tester.tap(find.byType(ModalBarrier).last);
+      await tester.tapAt(const Offset(400, 10));
       await tester.pump();
       await tester.pumpUntilGone(
         find.byType(DateInputBottomSheet),

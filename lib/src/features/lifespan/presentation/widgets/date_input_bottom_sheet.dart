@@ -8,13 +8,16 @@ class DateInputBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.45,
-      child: const Column(
-        children: <Widget>[
-          SizedBox(height: 25),
-          DateRangePicker(),
-        ],
+    return const SafeArea(
+      top: false,
+      child: Padding(
+        padding: EdgeInsets.only(top: 25, bottom: 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            DateRangePicker(),
+          ],
+        ),
       ),
     );
   }
