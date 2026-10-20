@@ -24,10 +24,16 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// A modal sheet that starts the purchase of the premium product.
 class PremiumBottomSheet extends HookConsumerWidget {
-  const PremiumBottomSheet({required this.source, super.key});
+  const PremiumBottomSheet({
+    required this.source,
+    required this.scrollController,
+    super.key,
+  });
 
   /// Where the sheet was opened from, reported with the paywall_view event.
   final PaywallSource source;
+
+  final ScrollController scrollController;
 
   static Future<void> show(
     BuildContext context, {
@@ -35,7 +41,10 @@ class PremiumBottomSheet extends HookConsumerWidget {
   }) {
     return showCupertinoSheet<void>(
       context: context,
-      scrollableBuilder: (_, _) => PremiumBottomSheet(source: source),
+      scrollableBuilder: (_, scrollController) => PremiumBottomSheet(
+        source: source,
+        scrollController: scrollController,
+      ),
     );
   }
 
@@ -88,6 +97,7 @@ class PremiumBottomSheet extends HookConsumerWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
+                controller: scrollController,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
