@@ -18,6 +18,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get idealLifespanLabel => '理想の寿命';
 
   @override
+  String idealAgePresetLabel(int age) {
+    return '$age歳';
+  }
+
+  @override
   String get ageUnit => '歳';
 
   @override

@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'Ideal Lifespan'**
   String get idealLifespanLabel;
 
+  /// No description provided for @idealAgePresetLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{age} yrs'**
+  String idealAgePresetLabel(int age);
+
   /// No description provided for @ageUnit.
   ///
   /// In en, this message translates to:

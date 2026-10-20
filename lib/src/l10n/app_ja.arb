@@ -2,6 +2,12 @@
   "generalError": "エラーが発生しました。",
   "birthDateLabel": "生年月日",
   "idealLifespanLabel": "理想の寿命",
+  "idealAgePresetLabel": "{age}歳",
+  "@idealAgePresetLabel": {
+    "placeholders": {
+      "age": {"type": "int"}
+    }
+  },
   "ageUnit": "歳",
   "dayUnit": "日",
   "reviewAppLabel": "アプリをレビューする",

@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
+import 'package:life_battery/src/features/lifespan/presentation/widgets/ideal_age_preset_button.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/ideal_age_stepper_button.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/age_utils.dart';
 import 'package:life_battery/src/utils/app_haptics.dart';
 
 const _maxAge = 150;
+const _presetAges = [70, 80, 90, 100];
 
 class IdealAgeStepperField extends ConsumerWidget {
   const IdealAgeStepperField({
@@ -29,16 +31,19 @@ class IdealAgeStepperField extends ConsumerWidget {
 
     // Reads the latest value because a held button's timer keeps calling
     // the closure captured when the hold started.
-    Future<void> step(int delta) async {
-      final current =
-          ref.read(lifespanRangeManagerProvider).value?.idealAge ?? idealAge;
-      final next = (current + delta).clamp(minAge, _maxAge);
-      if (next == current) return;
+    int currentIdealAge() =>
+        ref.read(lifespanRangeManagerProvider).value?.idealAge ?? idealAge;
+
+    Future<void> update(int next) async {
+      if (next == currentIdealAge()) return;
       unawaited(AppHaptics.selectionClick());
       await ref
           .read(lifespanRangeManagerProvider.notifier)
           .updateLifespanRange(birthDate: birthDate, idealAge: next);
     }
+
+    Future<void> step(int delta) =>
+        update((currentIdealAge() + delta).clamp(minAge, _maxAge));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,6 +72,21 @@ class IdealAgeStepperField extends ConsumerWidget {
               enabled: safeIdealAge < _maxAge,
               onPressed: () => step(1),
             ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          spacing: 8,
+          children: [
+            for (final age in _presetAges)
+              Expanded(
+                child: IdealAgePresetButton(
+                  key: Key('idealAgePreset$age'),
+                  age: age,
+                  enabled: age >= minAge,
+                  onPressed: () => update(age),
+                ),
+              ),
           ],
         ),
       ],

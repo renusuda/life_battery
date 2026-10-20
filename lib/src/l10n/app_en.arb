@@ -2,6 +2,12 @@
   "generalError": "Error occurred.",
   "birthDateLabel": "Birth Date",
   "idealLifespanLabel": "Ideal Lifespan",
+  "idealAgePresetLabel": "{age} yrs",
+  "@idealAgePresetLabel": {
+    "placeholders": {
+      "age": {"type": "int"}
+    }
+  },
   "ageUnit": "years",
   "dayUnit": "d",
   "reviewAppLabel": "Rate this app",
