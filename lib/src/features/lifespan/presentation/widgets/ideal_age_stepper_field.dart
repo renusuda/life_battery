@@ -27,12 +27,17 @@ class IdealAgeStepperField extends ConsumerWidget {
     final minAge = currentAge(birthDate: birthDate, now: DateTime.now()) + 1;
     final safeIdealAge = idealAge.clamp(minAge, _maxAge);
 
-    Future<void> update(int newIdealAge) async {
-      if (newIdealAge == safeIdealAge) return;
+    // Reads the latest value because a held button's timer keeps calling
+    // the closure captured when the hold started.
+    Future<void> step(int delta) async {
+      final current =
+          ref.read(lifespanRangeManagerProvider).value?.idealAge ?? idealAge;
+      final next = (current + delta).clamp(minAge, _maxAge);
+      if (next == current) return;
       unawaited(AppHaptics.selectionClick());
       await ref
           .read(lifespanRangeManagerProvider.notifier)
-          .updateLifespanRange(birthDate: birthDate, idealAge: newIdealAge);
+          .updateLifespanRange(birthDate: birthDate, idealAge: next);
     }
 
     return Column(
@@ -53,14 +58,14 @@ class IdealAgeStepperField extends ConsumerWidget {
               key: const Key('idealAgeDecrement'),
               icon: Icons.remove,
               enabled: safeIdealAge > minAge,
-              onPressed: () => update(safeIdealAge - 1),
+              onPressed: () => step(-1),
             ),
             IdealAgeValue(idealAge: safeIdealAge),
             IdealAgeStepperButton(
               key: const Key('idealAgeIncrement'),
               icon: Icons.add,
               enabled: safeIdealAge < _maxAge,
-              onPressed: () => update(safeIdealAge + 1),
+              onPressed: () => step(1),
             ),
           ],
         ),
