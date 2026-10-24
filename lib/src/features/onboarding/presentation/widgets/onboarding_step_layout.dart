@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_battery/src/common_widgets/primary_button.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
 class OnboardingStepLayout extends StatelessWidget {
@@ -50,17 +51,7 @@ class OnboardingStepLayout extends StatelessWidget {
         Expanded(child: Center(child: child)),
         Padding(
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
-          child: FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: theme.colorScheme.inverseSurface,
-              foregroundColor: theme.colorScheme.onInverseSurface,
-              minimumSize: const Size.fromHeight(56),
-              shape: const StadiumBorder(),
-              textStyle: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          child: PrimaryButton(
             onPressed: onPressed,
             child: Text(l10n.onboardingContinueLabel),
           ),

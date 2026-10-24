@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_battery/src/common_widgets/primary_button.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
@@ -167,19 +168,7 @@ class PremiumBottomSheet extends HookConsumerWidget {
             ],
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.inverseSurface,
-                  foregroundColor: Theme.of(
-                    context,
-                  ).colorScheme.onInverseSurface,
-                  minimumSize: const Size.fromHeight(56),
-                  shape: const StadiumBorder(),
-                  textStyle: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+              child: PrimaryButton(
                 onPressed: offer == null || isPremium || isPurchasing.value
                     ? null
                     : () async {
