@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
@@ -91,6 +92,34 @@ void main() {
     expect(find.text('How long do you want to live?'), findsOneWidget);
     expect(find.byKey(const Key('idealAgeText')), findsOneWidget);
     expect(fakeAnalytics.onboardingCompleteCount, 0);
+  });
+
+  testWidgets('Enables the back button from the second step only', (
+    tester,
+  ) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+
+    final backFinder = find.byKey(const Key('onboardingBack'));
+    expect(tester.widget<IconButton>(backFinder).onPressed, isNull);
+
+    await goToIdealAge(tester);
+
+    expect(tester.widget<IconButton>(backFinder).onPressed, isNotNull);
+  });
+
+  testWidgets('Goes back to the birth date step', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+    await goToIdealAge(tester);
+
+    await tester.tap(find.byKey(const Key('onboardingBack')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(find.text('When were you born?'), findsOneWidget);
   });
 
   testWidgets('Saves the stepped ideal lifespan', (tester) async {
