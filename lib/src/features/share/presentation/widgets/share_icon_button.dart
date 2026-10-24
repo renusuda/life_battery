@@ -17,9 +17,7 @@ class ShareIconButton extends ConsumerWidget {
     final lifespanProgressState = ref
         .watch(lifespanProgressStateProvider)
         .value;
-    // Hidden during onboarding because the percentage is meaningless until
-    // a birth date has been entered.
-    if (lifespanProgressState == null || lifespanProgressState.isInitialUser) {
+    if (lifespanProgressState == null) {
       return const SizedBox.shrink();
     }
 

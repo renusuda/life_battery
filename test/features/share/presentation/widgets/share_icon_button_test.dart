@@ -13,12 +13,9 @@ import '../../../../../test_helpers/test_app.dart';
 void main() {
   late FakeShareApiDataSource fakeShare;
 
-  LifespanProgressState buildState({
-    bool isInitialUser = false,
-    bool isPercentageMode = true,
-  }) {
+  LifespanProgressState buildState({bool isPercentageMode = true}) {
     return (
-      isInitialUser: isInitialUser,
+      isInitialUser: false,
       lifespanRange: LifespanRange(
         birthDate: DateTime.now().subtract(const Duration(days: 365 * 30)),
         idealAge: 80,
@@ -47,13 +44,6 @@ void main() {
 
   setUp(() {
     fakeShare = FakeShareApiDataSource();
-  });
-
-  testWidgets('Hides the button for an initial user', (tester) async {
-    await tester.pumpWidget(buildButton(buildState(isInitialUser: true)));
-    await tester.pumpAndSettle();
-
-    expect(find.byType(IconButton), findsNothing);
   });
 
   testWidgets('Shares the card with the percentage message', (tester) async {
