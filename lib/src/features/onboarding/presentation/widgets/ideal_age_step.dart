@@ -25,7 +25,7 @@ class IdealAgeStep extends StatelessWidget {
       onPressed: onNext,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: IdealAgeStepperField(
+        child: IdealAgeStepper(
           birthDate: lifespanRange.birthDate,
           idealAge: lifespanRange.idealAge,
         ),

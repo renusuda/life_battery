@@ -12,7 +12,7 @@ import 'package:life_battery/src/utils/app_haptics.dart';
 const _maxAge = 150;
 const _presetAges = [70, 80, 90, 100];
 
-class IdealAgeStepperField extends ConsumerWidget {
+class IdealAgeStepperField extends StatelessWidget {
   const IdealAgeStepperField({
     required this.birthDate,
     required this.idealAge,
@@ -24,8 +24,40 @@ class IdealAgeStepperField extends ConsumerWidget {
   final int idealAge;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text(
+            l10n.idealLifespanLabel,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        const SizedBox(height: 8),
+        IdealAgeStepper(birthDate: birthDate, idealAge: idealAge),
+      ],
+    );
+  }
+}
+
+class IdealAgeStepper extends ConsumerWidget {
+  const IdealAgeStepper({
+    required this.birthDate,
+    required this.idealAge,
+    super.key,
+  });
+
+  final DateTime birthDate;
+
+  final int idealAge;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     final minAge = currentAge(birthDate: birthDate, now: DateTime.now()) + 1;
     final safeIdealAge = idealAge.clamp(minAge, _maxAge);
 
@@ -47,16 +79,7 @@ class IdealAgeStepperField extends ConsumerWidget {
 
     return Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Text(
-            l10n.idealLifespanLabel,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
