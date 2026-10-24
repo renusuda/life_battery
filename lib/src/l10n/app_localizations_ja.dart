@@ -214,7 +214,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get onboardingBirthDateDescription => '残りの人生の計算に使います。';
 
   @override
-  String get onboardingContinueLabel => '続ける';
+  String get onboardingContinueLabel => '次へ';
 
   @override
   String get onboardingIdealAgeTitle => '何歳まで生きたいですか？';

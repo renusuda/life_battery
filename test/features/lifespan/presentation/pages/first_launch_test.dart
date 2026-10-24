@@ -53,7 +53,7 @@ void main() {
     await tester.pump();
 
     expect(find.text('誕生日はいつですか？'), findsOneWidget);
-    expect(find.text('続ける'), findsOneWidget);
+    expect(find.text('次へ'), findsOneWidget);
   });
 
   testWidgets('Saves the picked date as the birth date', (tester) async {
