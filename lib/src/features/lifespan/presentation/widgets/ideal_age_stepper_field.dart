@@ -46,6 +46,7 @@ class IdealAgeStepperField extends ConsumerWidget {
         update((currentIdealAge() + delta).clamp(minAge, _maxAge));
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(

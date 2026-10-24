@@ -493,6 +493,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue'**
   String get onboardingContinueLabel;
+
+  /// No description provided for @onboardingIdealAgeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How long do you want to live?'**
+  String get onboardingIdealAgeTitle;
+
+  /// No description provided for @onboardingIdealAgeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Go with your ideal. You can change it later.'**
+  String get onboardingIdealAgeDescription;
 }
 
 class _AppLocalizationsDelegate

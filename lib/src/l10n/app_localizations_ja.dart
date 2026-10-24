@@ -215,4 +215,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get onboardingContinueLabel => '続ける';
+
+  @override
+  String get onboardingIdealAgeTitle => '何歳まで生きたいですか？';
+
+  @override
+  String get onboardingIdealAgeDescription => '理想で大丈夫です。あとから変更できます。';
 }

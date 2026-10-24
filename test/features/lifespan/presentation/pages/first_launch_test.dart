@@ -73,12 +73,46 @@ void main() {
     expect(fakeLifespanRangeManager.state.value?.idealAge, 90);
   });
 
+  Future<void> goToIdealAge(WidgetTester tester) async {
+    await tester.tap(find.text('Continue'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+  }
+
+  testWidgets('Asks for the ideal lifespan after the birth date', (
+    tester,
+  ) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+
+    await goToIdealAge(tester);
+
+    expect(find.text('How long do you want to live?'), findsOneWidget);
+    expect(find.byKey(const Key('idealAgeText')), findsOneWidget);
+    expect(fakeAnalytics.onboardingCompleteCount, 0);
+  });
+
+  testWidgets('Saves the stepped ideal lifespan', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+    await goToIdealAge(tester);
+
+    await tester.tap(find.byKey(const Key('idealAgePreset80')));
+    await tester.pump();
+
+    expect(fakeLifespanRangeManager.state.value?.idealAge, 80);
+    expect(fakeLifespanRangeManager.state.value?.birthDate, DateTime(1990));
+  });
+
   testWidgets(
-    'Finishes onboarding and logs onboarding_complete on Continue',
+    'Finishes onboarding and logs onboarding_complete on the last step',
     (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildPage());
       await tester.pump();
+      await goToIdealAge(tester);
 
       await tester.tap(find.text('Continue'));
       await tester.pump();

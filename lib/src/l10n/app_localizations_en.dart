@@ -228,4 +228,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingContinueLabel => 'Continue';
+
+  @override
+  String get onboardingIdealAgeTitle => 'How long do you want to live?';
+
+  @override
+  String get onboardingIdealAgeDescription =>
+      'Go with your ideal. You can change it later.';
 }

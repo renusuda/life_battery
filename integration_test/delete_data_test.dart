@@ -6,6 +6,7 @@ import 'package:life_battery/src/app.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/data_deletion/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/ideal_age_step.dart';
 
 import '../test_helpers/extensions.dart';
 import '../test_helpers/fake_analytics.dart';
@@ -28,7 +29,18 @@ void main() {
       );
       await tester.pumpUntilFound(find.byType(OnboardingPage));
 
+      // Birth date step
       await tester.tap(find.text('Continue'));
+      final idealAgeContinue = find
+          .descendant(
+            of: find.byType(IdealAgeStep),
+            matching: find.text('Continue'),
+          )
+          .hitTestable();
+      await tester.pumpUntilFound(idealAgeContinue);
+
+      // Ideal lifespan step
+      await tester.tap(idealAgeContinue);
       await tester.pumpUntilGone(find.byType(OnboardingPage));
 
       // Go to settings page

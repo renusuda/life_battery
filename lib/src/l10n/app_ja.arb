@@ -90,5 +90,7 @@
   "shareErrorContent": "現在共有できません。",
   "onboardingBirthDateTitle": "誕生日はいつですか？",
   "onboardingBirthDateDescription": "残りの人生の計算に使います。",
-  "onboardingContinueLabel": "続ける"
+  "onboardingContinueLabel": "続ける",
+  "onboardingIdealAgeTitle": "何歳まで生きたいですか？",
+  "onboardingIdealAgeDescription": "理想で大丈夫です。あとから変更できます。"
 }

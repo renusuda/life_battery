@@ -90,5 +90,7 @@
   "shareErrorContent": "Sharing is unavailable right now.",
   "onboardingBirthDateTitle": "When were you born?",
   "onboardingBirthDateDescription": "This is used to calculate how much of your life is left.",
-  "onboardingContinueLabel": "Continue"
+  "onboardingContinueLabel": "Continue",
+  "onboardingIdealAgeTitle": "How long do you want to live?",
+  "onboardingIdealAgeDescription": "Go with your ideal. You can change it later."
 }

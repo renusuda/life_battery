@@ -8,6 +8,7 @@ import 'package:life_battery/src/features/analytics/data/analytics_repository_pr
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/ideal_age_step.dart';
 
 /// The initial-user flag is cleared only on finishing, so leaving midway
 /// restarts the flow on the next launch.
@@ -16,6 +17,7 @@ class OnboardingPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final pageController = usePageController();
     final isFinishing = useState(false);
     final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
 
@@ -23,6 +25,13 @@ class OnboardingPage extends HookConsumerWidget {
       unawaited(ref.read(analyticsRepositoryProvider).logOnboardingStart());
       return null;
     }, const []);
+
+    Future<void> goToNextStep() {
+      return pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
 
     Future<void> finish() async {
       if (isFinishing.value) return;
@@ -37,8 +46,17 @@ class OnboardingPage extends HookConsumerWidget {
       body: SafeArea(
         child: AsyncValueWidget(
           asyncValue: lifespanRangeManager,
-          data: (lifespanRange) =>
-              BirthDateStep(lifespanRange: lifespanRange, onNext: finish),
+          data: (lifespanRange) => PageView(
+            controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              BirthDateStep(
+                lifespanRange: lifespanRange,
+                onNext: goToNextStep,
+              ),
+              IdealAgeStep(lifespanRange: lifespanRange, onNext: finish),
+            ],
+          ),
         ),
       ),
     );
