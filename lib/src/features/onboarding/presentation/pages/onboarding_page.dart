@@ -1,0 +1,46 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_battery/src/common_widgets/async_value_widget.dart';
+import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
+
+/// The initial-user flag is cleared only on finishing, so leaving midway
+/// restarts the flow on the next launch.
+class OnboardingPage extends HookConsumerWidget {
+  const OnboardingPage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isFinishing = useState(false);
+    final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
+
+    useEffect(() {
+      unawaited(ref.read(analyticsRepositoryProvider).logOnboardingStart());
+      return null;
+    }, const []);
+
+    Future<void> finish() async {
+      if (isFinishing.value) return;
+      isFinishing.value = true;
+      unawaited(ref.read(analyticsRepositoryProvider).logOnboardingComplete());
+      await ref
+          .read(isInitialUserProvider.notifier)
+          .updateUserIsNotInitialUser();
+    }
+
+    return Scaffold(
+      body: SafeArea(
+        child: AsyncValueWidget(
+          asyncValue: lifespanRangeManager,
+          data: (lifespanRange) =>
+              BirthDateStep(lifespanRange: lifespanRange, onNext: finish),
+        ),
+      ),
+    );
+  }
+}

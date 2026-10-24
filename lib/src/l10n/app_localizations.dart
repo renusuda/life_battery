@@ -475,6 +475,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sharing is unavailable right now.'**
   String get shareErrorContent;
+
+  /// No description provided for @onboardingBirthDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'When were you born?'**
+  String get onboardingBirthDateTitle;
+
+  /// No description provided for @onboardingBirthDateDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This is used to calculate how much of your life is left.'**
+  String get onboardingBirthDateDescription;
+
+  /// No description provided for @onboardingContinueLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get onboardingContinueLabel;
 }
 
 class _AppLocalizationsDelegate

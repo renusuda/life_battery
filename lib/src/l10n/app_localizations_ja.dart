@@ -206,4 +206,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get shareErrorContent => '現在共有できません。';
+
+  @override
+  String get onboardingBirthDateTitle => '誕生日はいつですか？';
+
+  @override
+  String get onboardingBirthDateDescription => '残りの人生の計算に使います。';
+
+  @override
+  String get onboardingContinueLabel => '続ける';
 }

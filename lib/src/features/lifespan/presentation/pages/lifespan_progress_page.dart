@@ -7,19 +7,17 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/common_widgets/async_value_widget.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/ads/presentation/widgets/banner_ad_widget.dart';
-import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/launch_count/presentation/providers/review_request_provider.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/has_long_pressed_battery_provider.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_progress_state_provider.dart';
-import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/life_progress_shimmer.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/features/notifications/presentation/providers/notification_schedule_provider.dart';
+import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:life_battery/src/features/share/presentation/widgets/share_icon_button.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/routing/app_route.dart';
@@ -31,6 +29,10 @@ class LifespanProgressPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lifespanProgressState = ref.watch(lifespanProgressStateProvider);
+
+    if (lifespanProgressState.value?.isInitialUser ?? false) {
+      return const OnboardingPage();
+    }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -53,14 +55,8 @@ class LifespanProgressPage extends ConsumerWidget {
         data: (state) => Center(
           child: LifeProgressContent(
             lifespanRange: state.lifespanRange,
-            isInitialUser: state.isInitialUser,
             hasLongPressedBattery: state.hasLongPressedBattery,
             isPercentageMode: state.isPercentageMode,
-            updateUserIsNotInitialUser: () async {
-              await ref
-                  .read(isInitialUserProvider.notifier)
-                  .updateUserIsNotInitialUser();
-            },
             updateHasLongPressedBattery: () async {
               await ref
                   .read(hasLongPressedBatteryProvider.notifier)
@@ -76,23 +72,17 @@ class LifespanProgressPage extends ConsumerWidget {
 class LifeProgressContent extends HookConsumerWidget {
   const LifeProgressContent({
     required this.lifespanRange,
-    required this.isInitialUser,
     required this.hasLongPressedBattery,
     required this.isPercentageMode,
-    required this.updateUserIsNotInitialUser,
     required this.updateHasLongPressedBattery,
     super.key,
   });
 
   final LifespanRange lifespanRange;
 
-  final bool isInitialUser;
-
   final bool hasLongPressedBattery;
 
   final bool isPercentageMode;
-
-  final Future<void> Function() updateUserIsNotInitialUser;
 
   final Future<void> Function() updateHasLongPressedBattery;
 
@@ -139,33 +129,12 @@ class LifeProgressContent extends HookConsumerWidget {
 
     useEffect(() {
       Timer? timer;
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        if (isInitialUser) {
-          unawaited(
-            ref.read(analyticsRepositoryProvider).logOnboardingStart(),
-          );
-          final birthDateBefore = lifespanRange.birthDate;
-          await showDateInputBottomSheet();
-          final birthDateAfter = ref
-              .read(lifespanRangeManagerProvider)
-              .value
-              ?.birthDate;
-          // Compares values, not picker interaction: a user whose real
-          // birth date equals the default is not counted, which is an
-          // acceptable loss for this metric.
-          if (birthDateAfter != null && birthDateAfter != birthDateBefore) {
-            unawaited(
-              ref.read(analyticsRepositoryProvider).logOnboardingComplete(),
-            );
-          }
-          if (!context.mounted) return;
-        }
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         timer = Timer(
           const Duration(seconds: 3),
           () => unawaited(scheduleNotification()),
         );
       });
-      unawaited(updateUserIsNotInitialUser());
       return () => timer?.cancel();
     }, const []);
 

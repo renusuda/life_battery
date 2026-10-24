@@ -277,10 +277,8 @@ class TestLifeProgressContent extends HookWidget {
                   birthDate: DateTime(1990),
                   idealAge: 90,
                 ),
-                isInitialUser: false,
                 hasLongPressedBattery: hasLongPressedBattery.value,
                 isPercentageMode: isPercentageMode,
-                updateUserIsNotInitialUser: () async {},
                 updateHasLongPressedBattery: () async {
                   hasLongPressedBattery.value = true;
                 },
@@ -358,10 +356,8 @@ class TestEditableLifeProgressContent extends HookWidget {
                   ref.watch(displayModeManagerProvider).value ?? true;
               return LifeProgressContent(
                 lifespanRange: lifespanRange.value,
-                isInitialUser: false,
                 hasLongPressedBattery: true,
                 isPercentageMode: isPercentageMode,
-                updateUserIsNotInitialUser: () async {},
                 updateHasLongPressedBattery: () async {},
               );
             },

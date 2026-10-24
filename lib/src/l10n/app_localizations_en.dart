@@ -218,4 +218,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareErrorContent => 'Sharing is unavailable right now.';
+
+  @override
+  String get onboardingBirthDateTitle => 'When were you born?';
+
+  @override
+  String get onboardingBirthDateDescription =>
+      'This is used to calculate how much of your life is left.';
+
+  @override
+  String get onboardingContinueLabel => 'Continue';
 }

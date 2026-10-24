@@ -1,129 +1,98 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
-import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
-import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 
-import '../../../../../test_helpers/extensions.dart';
 import '../../../../../test_helpers/fake_analytics.dart';
 import '../../../../../test_helpers/test_app.dart';
 
 void main() {
   late FakeAnalyticsApiDataSource fakeAnalytics;
+  late _FakeIsInitialUser fakeIsInitialUser;
+  late _FakeLifespanRangeManager fakeLifespanRangeManager;
 
   setUp(() {
     fakeAnalytics = FakeAnalyticsApiDataSource();
+    fakeIsInitialUser = _FakeIsInitialUser();
+    fakeLifespanRangeManager = _FakeLifespanRangeManager();
   });
 
-  Widget buildFirstLaunchPage() {
+  Widget buildPage() {
     return ProviderScope(
       overrides: [
         analyticsApiDataSourceProvider.overrideWithValue(fakeAnalytics),
-        lifespanRangeManagerProvider.overrideWith(FakeLifespanRangeManager.new),
-      ],
-      child: TestApp(
-        home: Scaffold(
-          body: LifeProgressContent(
-            lifespanRange: LifespanRange(
-              birthDate: DateTime(2000),
-              idealAge: 100,
-            ),
-            isInitialUser: true,
-            hasLongPressedBattery: false,
-            isPercentageMode: true,
-            updateUserIsNotInitialUser: () async {},
-            updateHasLongPressedBattery: () async {},
-          ),
+        lifespanRangeManagerProvider.overrideWith(
+          () => fakeLifespanRangeManager,
         ),
-      ),
+        isInitialUserProvider.overrideWith(() => fakeIsInitialUser),
+      ],
+      child: const TestApp(home: OnboardingPage()),
     );
   }
 
-  Future<void> dismissSheet(WidgetTester tester) async {
-    await tester.tapAt(const Offset(400, 10));
+  testWidgets('Asks for the birth date and logs onboarding_start', (
+    tester,
+  ) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
     await tester.pump();
-    await tester.pumpUntilGone(
-      find.byType(DateInputBottomSheet),
-      timeout: const Duration(seconds: 1),
-    );
-  }
 
-  group('First launch', () {
-    testWidgets('Shows date input bottom sheet for initial user', (
-      tester,
-    ) async {
-      tester.platformDispatcher.localesTestValue = [const Locale('en')];
-
-      await tester.pumpWidget(buildFirstLaunchPage());
-      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
-
-      expect(find.byType(DateInputBottomSheet), findsOneWidget);
-    });
-
-    testWidgets('Logs onboarding_start when the sheet is shown', (
-      tester,
-    ) async {
-      tester.platformDispatcher.localesTestValue = [const Locale('en')];
-
-      await tester.pumpWidget(buildFirstLaunchPage());
-      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
-
-      expect(fakeAnalytics.onboardingStartCount, 1);
-    });
-
-    testWidgets(
-      'Logs onboarding_complete when the sheet closes after a '
-      'birth date change',
-      (tester) async {
-        tester.platformDispatcher.localesTestValue = [const Locale('en')];
-
-        await tester.pumpWidget(buildFirstLaunchPage());
-        await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
-
-        final container = ProviderScope.containerOf(
-          tester.element(find.byType(DateInputBottomSheet)),
-        );
-        await container
-            .read(lifespanRangeManagerProvider.notifier)
-            .updateLifespanRange(
-              birthDate: DateTime(1995),
-              idealAge: 100,
-            );
-        await tester.pump();
-
-        await dismissSheet(tester);
-
-        expect(fakeAnalytics.onboardingCompleteCount, 1);
-      },
-    );
-
-    testWidgets(
-      'Does not log onboarding_complete when the sheet closes without a '
-      'birth date change',
-      (tester) async {
-        tester.platformDispatcher.localesTestValue = [const Locale('en')];
-
-        await tester.pumpWidget(buildFirstLaunchPage());
-        await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
-
-        await dismissSheet(tester);
-
-        expect(fakeAnalytics.onboardingCompleteCount, 0);
-      },
-    );
+    expect(find.text('When were you born?'), findsOneWidget);
+    expect(find.byType(CupertinoDatePicker), findsOneWidget);
+    expect(fakeAnalytics.onboardingStartCount, 1);
   });
+
+  testWidgets('Shows the Japanese copy', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('ja')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+
+    expect(find.text('誕生日はいつですか？'), findsOneWidget);
+    expect(find.text('続ける'), findsOneWidget);
+  });
+
+  testWidgets('Saves the picked date as the birth date', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+
+    final picker = tester.widget<CupertinoDatePicker>(
+      find.byType(CupertinoDatePicker),
+    );
+    picker.onDateTimeChanged(DateTime(1985, 6, 15));
+    await tester.pump();
+
+    expect(
+      fakeLifespanRangeManager.state.value?.birthDate,
+      DateTime(1985, 6, 15),
+    );
+    expect(fakeLifespanRangeManager.state.value?.idealAge, 90);
+  });
+
+  testWidgets(
+    'Finishes onboarding and logs onboarding_complete on Continue',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+
+      await tester.tap(find.text('Continue'));
+      await tester.pump();
+
+      expect(fakeAnalytics.onboardingCompleteCount, 1);
+      expect(fakeIsInitialUser.isInitialUser, isFalse);
+    },
+  );
 }
 
-class FakeLifespanRangeManager extends LifespanRangeManager {
+class _FakeLifespanRangeManager extends LifespanRangeManager {
   @override
   Future<LifespanRange> build() async {
-    return LifespanRange(
-      birthDate: DateTime(2000),
-      idealAge: 100,
-    );
+    return LifespanRange(birthDate: DateTime(1990), idealAge: 90);
   }
 
   @override
@@ -131,11 +100,19 @@ class FakeLifespanRangeManager extends LifespanRangeManager {
     required DateTime birthDate,
     required int idealAge,
   }) async {
-    state = AsyncData(
-      LifespanRange(
-        birthDate: birthDate,
-        idealAge: idealAge,
-      ),
-    );
+    state = AsyncData(LifespanRange(birthDate: birthDate, idealAge: idealAge));
+  }
+}
+
+class _FakeIsInitialUser extends IsInitialUser {
+  bool isInitialUser = true;
+
+  @override
+  Future<bool> build() async => isInitialUser;
+
+  @override
+  Future<void> updateUserIsNotInitialUser() async {
+    isInitialUser = false;
+    state = const AsyncData(false);
   }
 }
