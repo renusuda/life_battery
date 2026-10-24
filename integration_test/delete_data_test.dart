@@ -5,7 +5,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/src/app.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/data_deletion/presentation/pages/user_deleted_page.dart';
-import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 
 import '../test_helpers/extensions.dart';
 import '../test_helpers/fake_analytics.dart';
@@ -26,11 +26,10 @@ void main() {
           child: const App(),
         ),
       );
-      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
+      await tester.pumpUntilFound(find.byType(OnboardingPage));
 
-      // Close the date input bottom sheet
-      await tester.tap(find.byType(ModalBarrier).last);
-      await tester.pumpUntilGone(find.byType(DateInputBottomSheet));
+      await tester.tap(find.text('Continue'));
+      await tester.pumpUntilGone(find.byType(OnboardingPage));
 
       // Go to settings page
       await tester.tap(find.byIcon(Icons.settings_outlined));

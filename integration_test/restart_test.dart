@@ -5,7 +5,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/src/app.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
-import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
+import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 
 import '../test_helpers/extensions.dart';
 import '../test_helpers/fake_analytics.dart';
@@ -14,7 +14,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Restart', () {
-    testWidgets('Shows battery page instead of date input after restart', (
+    testWidgets('Shows battery page instead of onboarding after restart', (
       tester,
     ) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
@@ -28,11 +28,10 @@ void main() {
           child: const App(),
         ),
       );
-      await tester.pumpUntilFound(find.byType(DateInputBottomSheet));
+      await tester.pumpUntilFound(find.byType(OnboardingPage));
 
-      // Close the date input bottom sheet
-      await tester.tap(find.byType(ModalBarrier).last);
-      await tester.pumpUntilGone(find.byType(DateInputBottomSheet));
+      await tester.tap(find.text('Continue'));
+      await tester.pumpUntilGone(find.byType(OnboardingPage));
 
       expect(find.byType(LifeProgressContent), findsOneWidget);
 
@@ -49,9 +48,8 @@ void main() {
       );
       await tester.pumpUntilFound(find.byType(LifeProgressContent));
 
-      // Verify battery page shows first (not DateInputBottomSheet)
       expect(find.byType(LifeProgressContent), findsOneWidget);
-      expect(find.byType(DateInputBottomSheet), findsNothing);
+      expect(find.byType(OnboardingPage), findsNothing);
     });
   });
 }
