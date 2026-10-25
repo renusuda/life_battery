@@ -171,14 +171,20 @@ void main() {
     final now = DateTime.now();
     final range = LifespanRange(birthDate: DateTime(1990), idealAge: 90);
     final percentage = range.remainingLifePercentage(now: now);
+    BatteryIndicator battery() =>
+        tester.widget<BatteryIndicator>(find.byType(BatteryIndicator));
+
     expect(
       find.text('You have $percentage% of your life left'),
       findsOneWidget,
     );
-    expect(
-      tester.widget<BatteryIndicator>(find.byType(BatteryIndicator)).value,
-      percentage,
-    );
+    // Starts full, then drains to the real value.
+    expect(battery().value, 100);
+
+    await tester.pumpAndSettle();
+
+    expect(battery().value, percentage);
+    expect(battery().text, '$percentage%');
     expect(fakeAnalytics.onboardingCompleteCount, 0);
   });
 
