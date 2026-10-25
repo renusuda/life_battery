@@ -23,23 +23,24 @@ class ResultStep extends HookWidget {
 
   // Lets the page slide finish before anything moves.
   static const _delay = 360;
-  static const _appear = 450;
-  static const _decrease = 2000;
+  static const _batteryAppear = 450;
+  static const _batteryDecrease = 2000;
   static const _textFadeIn = 500;
-  static const int _total = _delay + _appear + _decrease + _textFadeIn;
+  static const int _total =
+      _delay + _batteryAppear + _batteryDecrease + _textFadeIn;
 
-  static const _appearCurve = Interval(
+  static const _batteryAppearCurve = Interval(
     _delay / _total,
-    (_delay + _appear) / _total,
+    (_delay + _batteryAppear) / _total,
     curve: Curves.easeOutCubic,
   );
-  static const _decreaseCurve = Interval(
-    (_delay + _appear) / _total,
-    (_delay + _appear + _decrease) / _total,
+  static const _batteryDecreaseCurve = Interval(
+    (_delay + _batteryAppear) / _total,
+    (_delay + _batteryAppear + _batteryDecrease) / _total,
     curve: Curves.easeOutQuart,
   );
   static const _textFadeInCurve = Interval(
-    (_delay + _appear + _decrease) / _total,
+    (_delay + _batteryAppear + _batteryDecrease) / _total,
     1,
     curve: Curves.easeOut,
   );
@@ -60,11 +61,11 @@ class ResultStep extends HookWidget {
     }, const []);
     final progress = useAnimation(controller);
 
-    final appear = _appearCurve.transform(progress);
+    final batteryAppear = _batteryAppearCurve.transform(progress);
     final value = IntTween(
       begin: 100,
       end: percentage,
-    ).transform(_decreaseCurve.transform(progress));
+    ).transform(_batteryDecreaseCurve.transform(progress));
     final textFadeIn = _textFadeInCurve.transform(progress);
 
     return Column(
@@ -85,9 +86,9 @@ class ResultStep extends HookWidget {
         Expanded(
           child: Center(
             child: Opacity(
-              opacity: appear,
+              opacity: batteryAppear,
               child: Transform.scale(
-                scale: 0.6 + 0.4 * appear,
+                scale: 0.6 + 0.4 * batteryAppear,
                 child: BatteryIndicator(
                   value: value,
                   text: '$value%',
