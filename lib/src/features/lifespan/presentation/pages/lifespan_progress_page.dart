@@ -14,7 +14,6 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/has_lo
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_progress_state_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
-import 'package:life_battery/src/features/lifespan/presentation/widgets/life_progress_shimmer.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/features/notifications/presentation/providers/notification_schedule_provider.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
@@ -30,6 +29,11 @@ class LifespanProgressPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final lifespanProgressState = ref.watch(lifespanProgressStateProvider);
 
+    // Draws nothing until the initial-user flag is known, so first-time users
+    // never glimpse the home page before onboarding.
+    if (!lifespanProgressState.hasValue && !lifespanProgressState.hasError) {
+      return const Scaffold();
+    }
     if (lifespanProgressState.value?.isInitialUser ?? false) {
       return const OnboardingPage();
     }
@@ -51,7 +55,6 @@ class LifespanProgressPage extends ConsumerWidget {
       bottomNavigationBar: const BannerAdWidget(),
       body: AsyncValueWidget(
         asyncValue: lifespanProgressState,
-        loading: const Center(child: LifeProgressShimmer()),
         data: (state) => Center(
           child: LifeProgressContent(
             lifespanRange: state.lifespanRange,
