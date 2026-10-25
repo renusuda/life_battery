@@ -173,18 +173,20 @@ void main() {
     final percentage = range.remainingLifePercentage(now: now);
     BatteryIndicator battery() =>
         tester.widget<BatteryIndicator>(find.byType(BatteryIndicator));
-
-    expect(
-      find.text('You have $percentage% of your life left'),
-      findsOneWidget,
+    final titleFinder = find.text('You have $percentage% of your life left');
+    Opacity titleOpacity() => tester.widget<Opacity>(
+      find.ancestor(of: titleFinder, matching: find.byType(Opacity)).first,
     );
-    // Starts full, then drains to the real value.
+
+    // Starts full with the words hidden, then decreases and reveals them.
     expect(battery().value, 100);
+    expect(titleOpacity().opacity, 0);
 
     await tester.pumpAndSettle();
 
     expect(battery().value, percentage);
     expect(battery().text, '$percentage%');
+    expect(titleOpacity().opacity, 1);
     expect(fakeAnalytics.onboardingCompleteCount, 0);
   });
 
