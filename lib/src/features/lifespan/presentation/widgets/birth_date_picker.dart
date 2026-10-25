@@ -19,12 +19,21 @@ class BirthDatePicker extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
+    // The ideal age is fixed, so the birth date is limited to dates that
+    // keep the current age below it.
+    final minimumDate = DateTime(
+      today.year - idealAge,
+      today.month,
+      today.day + 1,
+    );
 
     return SizedBox(
       height: 216,
       child: CupertinoDatePicker(
-        initialDateTime: birthDate,
-        minimumDate: DateTime(1900),
+        initialDateTime: birthDate.isBefore(minimumDate)
+            ? minimumDate
+            : birthDate,
+        minimumDate: minimumDate,
         maximumDate: today,
         mode: CupertinoDatePickerMode.date,
         onDateTimeChanged: (newBirthDate) {

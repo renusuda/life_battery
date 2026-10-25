@@ -52,11 +52,11 @@ class OnboardingPage extends HookConsumerWidget {
           asyncValue: lifespanRangeManager,
           data: (lifespanRange) {
             final steps = [
-              BirthDateStep(
+              IdealAgeStep(
                 lifespanRange: lifespanRange,
                 onNext: () => goToStep(1),
               ),
-              IdealAgeStep(lifespanRange: lifespanRange, onNext: finish),
+              BirthDateStep(lifespanRange: lifespanRange, onNext: finish),
             ];
 
             return Column(

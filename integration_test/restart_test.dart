@@ -6,7 +6,7 @@ import 'package:life_battery/src/app.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
-import 'package:life_battery/src/features/onboarding/presentation/widgets/ideal_age_step.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
 
 import '../test_helpers/extensions.dart';
 import '../test_helpers/fake_analytics.dart';
@@ -31,18 +31,18 @@ void main() {
       );
       await tester.pumpUntilFound(find.byType(OnboardingPage));
 
-      // Birth date step
+      // Ideal lifespan step
       await tester.tap(find.text('Continue'));
-      final idealAgeContinue = find
+      final birthDateContinue = find
           .descendant(
-            of: find.byType(IdealAgeStep),
+            of: find.byType(BirthDateStep),
             matching: find.text('Continue'),
           )
           .hitTestable();
-      await tester.pumpUntilFound(idealAgeContinue);
+      await tester.pumpUntilFound(birthDateContinue);
 
-      // Ideal lifespan step
-      await tester.tap(idealAgeContinue);
+      // Birth date step
+      await tester.tap(birthDateContinue);
       await tester.pumpUntilGone(find.byType(OnboardingPage));
 
       expect(find.byType(LifeProgressContent), findsOneWidget);

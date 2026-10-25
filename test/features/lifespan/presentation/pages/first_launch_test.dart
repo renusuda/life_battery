@@ -35,15 +35,15 @@ void main() {
     );
   }
 
-  testWidgets('Asks for the birth date and logs onboarding_start', (
+  testWidgets('Asks for the ideal lifespan and logs onboarding_start', (
     tester,
   ) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildPage());
     await tester.pump();
 
-    expect(find.text('When were you born?'), findsOneWidget);
-    expect(find.byType(CupertinoDatePicker), findsOneWidget);
+    expect(find.text('How long do you want to live?'), findsOneWidget);
+    expect(find.byKey(const Key('idealAgeText')), findsOneWidget);
     expect(fakeAnalytics.onboardingStartCount, 1);
   });
 
@@ -52,14 +52,47 @@ void main() {
     await tester.pumpWidget(buildPage());
     await tester.pump();
 
-    expect(find.text('誕生日はいつですか？'), findsOneWidget);
+    expect(find.text('何歳まで生きたいですか？'), findsOneWidget);
     expect(find.text('次へ'), findsOneWidget);
+  });
+
+  testWidgets('Saves the stepped ideal lifespan', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+
+    await tester.tap(find.byKey(const Key('idealAgePreset80')));
+    await tester.pump();
+
+    expect(fakeLifespanRangeManager.state.value?.idealAge, 80);
+    expect(fakeLifespanRangeManager.state.value?.birthDate, DateTime(1990));
+  });
+
+  Future<void> goToBirthDate(WidgetTester tester) async {
+    await tester.tap(find.text('Continue'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+  }
+
+  testWidgets('Asks for the birth date after the ideal lifespan', (
+    tester,
+  ) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+
+    await goToBirthDate(tester);
+
+    expect(find.text('When were you born?'), findsOneWidget);
+    expect(find.byType(CupertinoDatePicker), findsOneWidget);
+    expect(fakeAnalytics.onboardingCompleteCount, 0);
   });
 
   testWidgets('Saves the picked date as the birth date', (tester) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildPage());
     await tester.pump();
+    await goToBirthDate(tester);
 
     final picker = tester.widget<CupertinoDatePicker>(
       find.byType(CupertinoDatePicker),
@@ -74,24 +107,21 @@ void main() {
     expect(fakeLifespanRangeManager.state.value?.idealAge, 90);
   });
 
-  Future<void> goToIdealAge(WidgetTester tester) async {
-    await tester.tap(find.text('Continue'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 400));
-  }
-
-  testWidgets('Asks for the ideal lifespan after the birth date', (
-    tester,
-  ) async {
+  testWidgets('Limits the birth date so the current age stays under the '
+      'ideal lifespan', (tester) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildPage());
     await tester.pump();
+    await goToBirthDate(tester);
 
-    await goToIdealAge(tester);
-
-    expect(find.text('How long do you want to live?'), findsOneWidget);
-    expect(find.byKey(const Key('idealAgeText')), findsOneWidget);
-    expect(fakeAnalytics.onboardingCompleteCount, 0);
+    final picker = tester.widget<CupertinoDatePicker>(
+      find.byType(CupertinoDatePicker),
+    );
+    final now = DateTime.now();
+    expect(
+      picker.minimumDate,
+      DateTime(now.year - 90, now.month, now.day + 1),
+    );
   });
 
   testWidgets('Enables the back button from the second step only', (
@@ -104,35 +134,22 @@ void main() {
     final backFinder = find.byKey(const Key('onboardingBack'));
     expect(tester.widget<IconButton>(backFinder).onPressed, isNull);
 
-    await goToIdealAge(tester);
+    await goToBirthDate(tester);
 
     expect(tester.widget<IconButton>(backFinder).onPressed, isNotNull);
   });
 
-  testWidgets('Goes back to the birth date step', (tester) async {
+  testWidgets('Goes back to the ideal lifespan step', (tester) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildPage());
     await tester.pump();
-    await goToIdealAge(tester);
+    await goToBirthDate(tester);
 
     await tester.tap(find.byKey(const Key('onboardingBack')));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
 
-    expect(find.text('When were you born?'), findsOneWidget);
-  });
-
-  testWidgets('Saves the stepped ideal lifespan', (tester) async {
-    tester.platformDispatcher.localesTestValue = [const Locale('en')];
-    await tester.pumpWidget(buildPage());
-    await tester.pump();
-    await goToIdealAge(tester);
-
-    await tester.tap(find.byKey(const Key('idealAgePreset80')));
-    await tester.pump();
-
-    expect(fakeLifespanRangeManager.state.value?.idealAge, 80);
-    expect(fakeLifespanRangeManager.state.value?.birthDate, DateTime(1990));
+    expect(find.text('How long do you want to live?'), findsOneWidget);
   });
 
   testWidgets(
@@ -141,7 +158,7 @@ void main() {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildPage());
       await tester.pump();
-      await goToIdealAge(tester);
+      await goToBirthDate(tester);
 
       await tester.tap(find.text('Continue'));
       await tester.pump();
