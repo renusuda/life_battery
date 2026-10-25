@@ -7,6 +7,7 @@ import 'package:life_battery/src/common_widgets/async_value_widget.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
+import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/ideal_age_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_progress_bar.dart';
@@ -23,12 +24,22 @@ class OnboardingPage extends HookConsumerWidget {
     final pageController = usePageController();
     final currentStep = useState(0);
     final isFinishing = useState(false);
+    // Each step is reported once so the funnel counts users, not retries
+    // after going back.
+    final passedSteps = useRef(<OnboardingStep>{});
     final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
 
     useEffect(() {
       unawaited(ref.read(analyticsRepositoryProvider).logOnboardingStart());
       return null;
     }, const []);
+
+    void logStepPassed(OnboardingStep step) {
+      if (!passedSteps.value.add(step)) return;
+      unawaited(
+        ref.read(analyticsRepositoryProvider).logOnboardingStep(step: step),
+      );
+    }
 
     Future<void> goToStep(int step) {
       currentStep.value = step;
@@ -56,17 +67,31 @@ class OnboardingPage extends HookConsumerWidget {
             final steps = [
               IdealAgeStep(
                 lifespanRange: lifespanRange,
-                onNext: () => goToStep(1),
+                onNext: () {
+                  logStepPassed(OnboardingStep.idealAge);
+                  unawaited(goToStep(1));
+                },
               ),
               BirthDateStep(
                 lifespanRange: lifespanRange,
-                onNext: () => goToStep(2),
+                onNext: () {
+                  logStepPassed(OnboardingStep.birthDate);
+                  unawaited(goToStep(2));
+                },
               ),
               ResultStep(
                 lifespanRange: lifespanRange,
-                onNext: () => goToStep(3),
+                onNext: () {
+                  logStepPassed(OnboardingStep.result);
+                  unawaited(goToStep(3));
+                },
               ),
-              WidgetStep(onNext: finish),
+              WidgetStep(
+                onNext: () {
+                  logStepPassed(OnboardingStep.widget);
+                  unawaited(finish());
+                },
+              ),
             ];
 
             return Column(

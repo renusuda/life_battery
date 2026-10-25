@@ -7,6 +7,7 @@ import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
+import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:life_battery/src/features/purchases/data/entitlements_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
@@ -166,6 +167,22 @@ void main() {
     expect(find.text('How long do you want to live?'), findsOneWidget);
   });
 
+  testWidgets('Logs each passed step once, even after going back', (
+    tester,
+  ) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+    await goToBirthDate(tester);
+
+    await tester.tap(find.byKey(const Key('onboardingBack')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    await goToBirthDate(tester);
+
+    expect(fakeAnalytics.onboardingSteps, [OnboardingStep.idealAge]);
+  });
+
   Future<void> goToResult(WidgetTester tester) async {
     await goToBirthDate(tester);
     await tester.tap(find.text('Continue'));
@@ -256,6 +273,7 @@ void main() {
       await tester.tap(find.text('Continue'));
       await tester.pump();
 
+      expect(fakeAnalytics.onboardingSteps, OnboardingStep.values);
       expect(fakeAnalytics.onboardingCompleteCount, 1);
       expect(fakeIsInitialUser.isInitialUser, isFalse);
     },

@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:life_battery/src/features/analytics/data/api/firebase_analytics_api_data_source.dart';
+import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
 
@@ -34,21 +35,35 @@ void main() {
     expect(analytics.events.single.parameters, isNull);
   });
 
-  test('Sends the onboarding completion as an onboarding_complete event',
-      () async {
-    await dataSource.logOnboardingComplete();
+  test(
+    'Sends a passed step as an onboarding_step event with the step',
+    () async {
+      await dataSource.logOnboardingStep(step: OnboardingStep.birthDate);
 
-    expect(analytics.events.single.name, 'onboarding_complete');
-    expect(analytics.events.single.parameters, isNull);
-  });
+      expect(analytics.events.single.name, 'onboarding_step');
+      expect(analytics.events.single.parameters, {'step': 'birth_date'});
+    },
+  );
 
-  test('Sends the paywall view as a paywall_view event with the source',
-      () async {
-    await dataSource.logPaywallView(source: PaywallSource.settings);
+  test(
+    'Sends the onboarding completion as an onboarding_complete event',
+    () async {
+      await dataSource.logOnboardingComplete();
 
-    expect(analytics.events.single.name, 'paywall_view');
-    expect(analytics.events.single.parameters, {'source': 'settings'});
-  });
+      expect(analytics.events.single.name, 'onboarding_complete');
+      expect(analytics.events.single.parameters, isNull);
+    },
+  );
+
+  test(
+    'Sends the paywall view as a paywall_view event with the source',
+    () async {
+      await dataSource.logPaywallView(source: PaywallSource.settings);
+
+      expect(analytics.events.single.name, 'paywall_view');
+      expect(analytics.events.single.parameters, {'source': 'settings'});
+    },
+  );
 
   test('Sends the ad paywall source as ad', () async {
     await dataSource.logPaywallView(source: PaywallSource.ad);
@@ -56,37 +71,45 @@ void main() {
     expect(analytics.events.single.parameters, {'source': 'ad'});
   });
 
-  test('Sends the purchase start as a purchase_start event with the plan',
-      () async {
-    await dataSource.logPurchaseStart(plan: PremiumPlan.monthly);
+  test(
+    'Sends the purchase start as a purchase_start event with the plan',
+    () async {
+      await dataSource.logPurchaseStart(plan: PremiumPlan.monthly);
 
-    expect(analytics.events.single.name, 'purchase_start');
-    expect(analytics.events.single.parameters, {'plan': 'monthly'});
-  });
+      expect(analytics.events.single.name, 'purchase_start');
+      expect(analytics.events.single.parameters, {'plan': 'monthly'});
+    },
+  );
 
-  test('Sends the purchase complete as a purchase_complete event with the plan',
-      () async {
-    await dataSource.logPurchaseComplete(plan: PremiumPlan.lifetime);
+  test(
+    'Sends the purchase complete as a purchase_complete event with the plan',
+    () async {
+      await dataSource.logPurchaseComplete(plan: PremiumPlan.lifetime);
 
-    expect(analytics.events.single.name, 'purchase_complete');
-    expect(analytics.events.single.parameters, {'plan': 'lifetime'});
-  });
+      expect(analytics.events.single.name, 'purchase_complete');
+      expect(analytics.events.single.parameters, {'plan': 'lifetime'});
+    },
+  );
 
-  test('Sends the purchase cancel as a purchase_cancel event with the plan',
-      () async {
-    await dataSource.logPurchaseCancel(plan: PremiumPlan.monthly);
+  test(
+    'Sends the purchase cancel as a purchase_cancel event with the plan',
+    () async {
+      await dataSource.logPurchaseCancel(plan: PremiumPlan.monthly);
 
-    expect(analytics.events.single.name, 'purchase_cancel');
-    expect(analytics.events.single.parameters, {'plan': 'monthly'});
-  });
+      expect(analytics.events.single.name, 'purchase_cancel');
+      expect(analytics.events.single.parameters, {'plan': 'monthly'});
+    },
+  );
 
-  test('Sends the purchase error as a purchase_error event with the plan',
-      () async {
-    await dataSource.logPurchaseError(plan: PremiumPlan.lifetime);
+  test(
+    'Sends the purchase error as a purchase_error event with the plan',
+    () async {
+      await dataSource.logPurchaseError(plan: PremiumPlan.lifetime);
 
-    expect(analytics.events.single.name, 'purchase_error');
-    expect(analytics.events.single.parameters, {'plan': 'lifetime'});
-  });
+      expect(analytics.events.single.name, 'purchase_error');
+      expect(analytics.events.single.parameters, {'plan': 'lifetime'});
+    },
+  );
 
   test('Sends the subscription renew as a subscription_renew event', () async {
     await dataSource.logSubscriptionRenew();
@@ -95,8 +118,7 @@ void main() {
     expect(analytics.events.single.parameters, isNull);
   });
 
-  test(
-      'Sends the notification permission result as a '
+  test('Sends the notification permission result as a '
       'notification_permission_result event with the granted flag', () async {
     await dataSource.logNotificationPermissionResult(granted: true);
 

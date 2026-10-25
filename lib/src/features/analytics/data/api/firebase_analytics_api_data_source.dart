@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:life_battery/src/features/analytics/data/api/analytics_api_data_source.dart';
+import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
 
@@ -26,6 +27,14 @@ class FirebaseAnalyticsApiDataSource implements AnalyticsApiDataSource {
   @override
   Future<void> logOnboardingStart() {
     return _logEvent('onboarding_start');
+  }
+
+  @override
+  Future<void> logOnboardingStep({required OnboardingStep step}) {
+    return _logEvent(
+      'onboarding_step',
+      parameters: {'step': step.paramValue},
+    );
   }
 
   @override
