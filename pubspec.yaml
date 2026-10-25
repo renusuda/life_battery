@@ -36,7 +36,6 @@ dependencies:
   purchases_flutter: ^10.15.2
   riverpod_annotation: ^3.0.3
   share_plus: ^13.3.0
-  shimmer: ^3.0.0
   sqflite: ^2.4.2
   timezone: ^0.11.0
   url_launcher: ^6.3.2
