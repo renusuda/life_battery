@@ -2,7 +2,8 @@
 /// parameter of the paywall_view analytics event.
 enum PaywallSource {
   settings('settings'),
-  ad('ad');
+  ad('ad'),
+  onboarding('onboarding');
 
   const PaywallSource(this.paramValue);
 

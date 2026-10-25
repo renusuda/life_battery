@@ -8,9 +8,14 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/is_ini
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:life_battery/src/features/purchases/data/entitlements_repository_provider.dart';
+import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
+import 'package:life_battery/src/features/purchases/presentation/widgets/premium_bottom_sheet.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/widget_guide_steps.dart';
 
 import '../../../../../test_helpers/fake_analytics.dart';
+import '../../../../../test_helpers/fake_entitlements.dart';
+import '../../../../../test_helpers/fake_purchases.dart';
 import '../../../../../test_helpers/test_app.dart';
 
 void main() {
@@ -28,6 +33,13 @@ void main() {
     return ProviderScope(
       overrides: [
         analyticsApiDataSourceProvider.overrideWithValue(fakeAnalytics),
+        // Needed by the paywall sheet.
+        entitlementsLocalDataSourceProvider.overrideWithValue(
+          FakeEntitlementsLocalDataSource(),
+        ),
+        purchasesApiDataSourceProvider.overrideWithValue(
+          FakePurchasesApiDataSource(),
+        ),
         lifespanRangeManagerProvider.overrideWith(
           () => fakeLifespanRangeManager,
         ),
@@ -211,6 +223,29 @@ void main() {
   });
 
   testWidgets(
+    'Shows the paywall before finishing on iOS where the widget is paid',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToWidget(tester);
+
+      await tester.tap(find.text('Continue'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(PremiumBottomSheet), findsOneWidget);
+      expect(fakeAnalytics.onboardingCompleteCount, 0);
+
+      Navigator.of(tester.element(find.byType(PremiumBottomSheet))).pop();
+      await tester.pumpAndSettle();
+
+      expect(fakeAnalytics.onboardingCompleteCount, 1);
+      expect(fakeIsInitialUser.isInitialUser, isFalse);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+  );
+
+  testWidgets(
     'Finishes onboarding and logs onboarding_complete on the last step',
     (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
@@ -224,6 +259,7 @@ void main() {
       expect(fakeAnalytics.onboardingCompleteCount, 1);
       expect(fakeIsInitialUser.isInitialUser, isFalse);
     },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
   );
 }
 
