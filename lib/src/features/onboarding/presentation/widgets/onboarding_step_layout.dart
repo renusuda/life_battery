@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:life_battery/src/common_widgets/primary_button.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_step_header.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/utils/app_haptics.dart';
 
 class OnboardingStepLayout extends StatelessWidget {
   const OnboardingStepLayout({
@@ -32,7 +35,12 @@ class OnboardingStepLayout extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
           child: PrimaryButton(
-            onPressed: onPressed,
+            onPressed: onPressed == null
+                ? null
+                : () {
+                    unawaited(AppHaptics.lightImpact());
+                    onPressed!();
+                  },
             child: Text(l10n.onboardingContinueLabel),
           ),
         ),
