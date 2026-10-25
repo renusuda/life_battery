@@ -7,6 +7,7 @@ import 'package:life_battery/src/features/analytics/data/analytics_repository_pr
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/result_step.dart';
 
 import '../test_helpers/extensions.dart';
 import '../test_helpers/fake_analytics.dart';
@@ -43,6 +44,16 @@ void main() {
 
       // Birth date step
       await tester.tap(birthDateContinue);
+      final resultContinue = find
+          .descendant(
+            of: find.byType(ResultStep),
+            matching: find.text('Continue'),
+          )
+          .hitTestable();
+      await tester.pumpUntilFound(resultContinue);
+
+      // Result step
+      await tester.tap(resultContinue);
       await tester.pumpUntilGone(find.byType(OnboardingPage));
 
       expect(find.byType(LifeProgressContent), findsOneWidget);

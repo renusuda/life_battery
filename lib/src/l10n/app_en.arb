@@ -92,5 +92,21 @@
   "onboardingBirthDateDescription": "This is used to calculate how much of your life is left.",
   "onboardingContinueLabel": "Continue",
   "onboardingIdealAgeTitle": "How long do you want to live?",
-  "onboardingIdealAgeDescription": "Go with your ideal. You can change it later."
+  "onboardingIdealAgeDescription": "Go with your ideal. You can change it later.",
+  "onboardingResultTitle": "You have {percentage}% of your life left",
+  "@onboardingResultTitle": {
+    "placeholders": {
+      "percentage": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingResultDescription": "That's {days} days to go.",
+  "@onboardingResultDescription": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -221,4 +221,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get onboardingIdealAgeDescription => '理想で大丈夫です。あとから変更できます。';
+
+  @override
+  String onboardingResultTitle(int percentage) {
+    return '残りの人生は$percentage%';
+  }
+
+  @override
+  String onboardingResultDescription(String days) {
+    return '日数にすると、あと$days日です。';
+  }
 }

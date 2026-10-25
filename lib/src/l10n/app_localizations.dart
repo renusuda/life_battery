@@ -505,6 +505,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Go with your ideal. You can change it later.'**
   String get onboardingIdealAgeDescription;
+
+  /// No description provided for @onboardingResultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You have {percentage}% of your life left'**
+  String onboardingResultTitle(int percentage);
+
+  /// No description provided for @onboardingResultDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s {days} days to go.'**
+  String onboardingResultDescription(String days);
 }
 
 class _AppLocalizationsDelegate

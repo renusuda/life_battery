@@ -92,5 +92,21 @@
   "onboardingBirthDateDescription": "残りの人生の計算に使います。",
   "onboardingContinueLabel": "次へ",
   "onboardingIdealAgeTitle": "何歳まで生きたいですか？",
-  "onboardingIdealAgeDescription": "理想で大丈夫です。あとから変更できます。"
+  "onboardingIdealAgeDescription": "理想で大丈夫です。あとから変更できます。",
+  "onboardingResultTitle": "残りの人生は{percentage}%",
+  "@onboardingResultTitle": {
+    "placeholders": {
+      "percentage": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingResultDescription": "日数にすると、あと{days}日です。",
+  "@onboardingResultDescription": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -6,6 +6,7 @@ import 'package:life_battery/src/features/analytics/data/analytics_repository_pr
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
+import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 
 import '../../../../../test_helpers/fake_analytics.dart';
@@ -152,13 +153,42 @@ void main() {
     expect(find.text('How long do you want to live?'), findsOneWidget);
   });
 
+  Future<void> goToResult(WidgetTester tester) async {
+    await goToBirthDate(tester);
+    await tester.tap(find.text('Continue'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+  }
+
+  testWidgets('Shows the remaining life as a battery on the result step', (
+    tester,
+  ) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+    await goToResult(tester);
+
+    final now = DateTime.now();
+    final range = LifespanRange(birthDate: DateTime(1990), idealAge: 90);
+    final percentage = range.remainingLifePercentage(now: now);
+    expect(
+      find.text('You have $percentage% of your life left'),
+      findsOneWidget,
+    );
+    expect(
+      tester.widget<BatteryIndicator>(find.byType(BatteryIndicator)).value,
+      percentage,
+    );
+    expect(fakeAnalytics.onboardingCompleteCount, 0);
+  });
+
   testWidgets(
     'Finishes onboarding and logs onboarding_complete on the last step',
     (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildPage());
       await tester.pump();
-      await goToBirthDate(tester);
+      await goToResult(tester);
 
       await tester.tap(find.text('Continue'));
       await tester.pump();

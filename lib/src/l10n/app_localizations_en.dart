@@ -235,4 +235,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboardingIdealAgeDescription =>
       'Go with your ideal. You can change it later.';
+
+  @override
+  String onboardingResultTitle(int percentage) {
+    return 'You have $percentage% of your life left';
+  }
+
+  @override
+  String onboardingResultDescription(String days) {
+    return 'That\'s $days days to go.';
+  }
 }
