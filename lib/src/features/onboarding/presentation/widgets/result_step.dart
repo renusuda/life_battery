@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_battery/src/common_widgets/primary_button.dart';
@@ -6,6 +8,7 @@ import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_step_header.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
+import 'package:life_battery/src/utils/app_haptics.dart';
 
 /// Scales the battery in before decreasing it, unlike the home page which
 /// only decreases, to make the first result memorable. The words wait until
@@ -66,6 +69,13 @@ class ResultStep extends HookWidget {
       begin: 100,
       end: percentage,
     ).transform(_batteryDecreaseCurve.transform(progress));
+    // A click per percent makes the decrease felt, slowing down with the
+    // curve until it stops.
+    final shownValue = useRef(value);
+    if (shownValue.value != value) {
+      shownValue.value = value;
+      unawaited(AppHaptics.selectionClick());
+    }
     final textFadeIn = _textFadeInCurve.transform(progress);
 
     return Column(
