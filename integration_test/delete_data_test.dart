@@ -8,6 +8,7 @@ import 'package:life_battery/src/features/data_deletion/presentation/pages/user_
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/result_step.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_step.dart';
 
 import '../test_helpers/extensions.dart';
 import '../test_helpers/fake_analytics.dart';
@@ -52,6 +53,16 @@ void main() {
 
       // Result step
       await tester.tap(resultContinue);
+      final widgetContinue = find
+          .descendant(
+            of: find.byType(WidgetStep),
+            matching: find.text('Continue'),
+          )
+          .hitTestable();
+      await tester.pumpUntilFound(widgetContinue);
+
+      // Widget step
+      await tester.tap(widgetContinue);
       await tester.pumpUntilGone(find.byType(OnboardingPage));
 
       // Go to settings page

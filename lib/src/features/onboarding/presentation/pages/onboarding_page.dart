@@ -11,6 +11,7 @@ import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_
 import 'package:life_battery/src/features/onboarding/presentation/widgets/ideal_age_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_progress_bar.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/result_step.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_step.dart';
 
 /// The initial-user flag is cleared only on finishing, so leaving midway
 /// restarts the flow on the next launch.
@@ -61,7 +62,11 @@ class OnboardingPage extends HookConsumerWidget {
                 lifespanRange: lifespanRange,
                 onNext: () => goToStep(2),
               ),
-              ResultStep(lifespanRange: lifespanRange, onNext: finish),
+              ResultStep(
+                lifespanRange: lifespanRange,
+                onNext: () => goToStep(3),
+              ),
+              WidgetStep(onNext: finish),
             ];
 
             return Column(

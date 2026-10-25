@@ -8,6 +8,7 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/is_ini
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:life_battery/src/features/settings/presentation/widgets/widget_guide_steps.dart';
 
 import '../../../../../test_helpers/fake_analytics.dart';
 import '../../../../../test_helpers/test_app.dart';
@@ -190,13 +191,32 @@ void main() {
     expect(fakeAnalytics.onboardingCompleteCount, 0);
   });
 
+  Future<void> goToWidget(WidgetTester tester) async {
+    await goToResult(tester);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Continue'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+  }
+
+  testWidgets('Explains how to add the home screen widget', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+    await goToWidget(tester);
+
+    expect(find.text('Add the widget to your Home Screen'), findsOneWidget);
+    expect(find.byType(WidgetGuideSteps), findsOneWidget);
+    expect(fakeAnalytics.onboardingCompleteCount, 0);
+  });
+
   testWidgets(
     'Finishes onboarding and logs onboarding_complete on the last step',
     (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildPage());
       await tester.pump();
-      await goToResult(tester);
+      await goToWidget(tester);
 
       await tester.tap(find.text('Continue'));
       await tester.pump();
