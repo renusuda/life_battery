@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_battery/src/common_widgets/primary_button.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_step_header.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
 class OnboardingStepLayout extends StatelessWidget {
@@ -22,32 +23,11 @@ class OnboardingStepLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                description,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-        ),
+        OnboardingStepHeader(title: title, description: description),
         Expanded(child: Center(child: child)),
         Padding(
           padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
