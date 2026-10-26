@@ -360,6 +360,25 @@ void main() {
   );
 
   testWidgets(
+    'Skips the paywall on iOS when premium is already held',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      fakeEntitlements.isPremium = true;
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToWidget(tester);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Continue'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(PremiumBottomSheet), findsNothing);
+      expect(fakeAnalytics.onboardingCompleteCount, 1);
+      expect(fakeIsInitialUser.isInitialUser, isFalse);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+  );
+  testWidgets(
     'Finishes onboarding and logs onboarding_complete on the last step',
     (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];

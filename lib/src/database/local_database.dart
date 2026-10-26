@@ -8,7 +8,7 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 13;
+  static const _databaseVersion = 14;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
@@ -171,6 +171,11 @@ class LocalDatabase {
               'ALTER TABLE $_tableName '
               'ADD COLUMN $_columnWidgetTrialExpiresAt INTEGER',
             );
+          }
+          if (oldVersion < 14) {
+            // Sends existing users through onboarding once more so they see
+            // the result step with sharing and the widget guide video.
+            await db.update(_tableName, {_columnIsInitialUser: 1});
           }
         },
       );
