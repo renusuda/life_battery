@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/common_widgets/async_value_widget.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
+import 'package:life_battery/src/features/launch_count/presentation/providers/review_request_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
@@ -54,9 +55,13 @@ class OnboardingPage extends HookConsumerWidget {
       if (isFinishing.value) return;
       isFinishing.value = true;
       unawaited(ref.read(analyticsRepositoryProvider).logOnboardingComplete());
+      // Taken before the await: finishing navigates away and disposes this
+      // page's ref, while the notifier is kept alive.
+      final reviewRequest = ref.read(reviewRequestProvider.notifier);
       await ref
           .read(isInitialUserProvider.notifier)
           .updateUserIsNotInitialUser();
+      unawaited(reviewRequest.requestAfterOnboarding());
     }
 
     return Scaffold(

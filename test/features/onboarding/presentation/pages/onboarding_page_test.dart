@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
+import 'package:life_battery/src/features/launch_count/presentation/providers/in_app_review_provider.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
@@ -19,6 +20,7 @@ import 'package:life_battery/src/features/share/data/share_repository_provider.d
 
 import '../../../../../test_helpers/fake_analytics.dart';
 import '../../../../../test_helpers/fake_entitlements.dart';
+import '../../../../../test_helpers/fake_in_app_review.dart';
 import '../../../../../test_helpers/fake_purchases.dart';
 import '../../../../../test_helpers/fake_share.dart';
 import '../../../../../test_helpers/share_test_pump.dart';
@@ -30,6 +32,7 @@ void main() {
   late _FakeLifespanRangeManager fakeLifespanRangeManager;
   late FakeEntitlementsLocalDataSource fakeEntitlements;
   late FakeShareApiDataSource fakeShare;
+  late FakeInAppReview fakeInAppReview;
 
   setUp(() {
     // The guide video is a native view, which has no host in widget tests.
@@ -42,6 +45,7 @@ void main() {
     fakeLifespanRangeManager = _FakeLifespanRangeManager();
     fakeEntitlements = FakeEntitlementsLocalDataSource();
     fakeShare = FakeShareApiDataSource();
+    fakeInAppReview = FakeInAppReview();
   });
 
   Widget buildPage() {
@@ -62,6 +66,7 @@ void main() {
         ),
         isInitialUserProvider.overrideWith(() => fakeIsInitialUser),
         shareApiDataSourceProvider.overrideWithValue(fakeShare),
+        inAppReviewProvider.overrideWithValue(fakeInAppReview),
       ],
       child: const TestApp(home: OnboardingPage()),
     );
@@ -367,6 +372,24 @@ void main() {
       expect(fakeAnalytics.onboardingSteps, OnboardingStep.values);
       expect(fakeAnalytics.onboardingCompleteCount, 1);
       expect(fakeIsInitialUser.isInitialUser, isFalse);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
+  );
+
+  testWidgets(
+    'Asks for a store review once onboarding is finished',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToWidget(tester);
+      expect(fakeInAppReview.requestReviewCount, 0);
+
+      await tester.tap(find.text('Continue'));
+      await tester.pump();
+
+      expect(fakeInAppReview.requestReviewCount, 1);
+      expect(fakeAnalytics.reviewRequestCount, 1);
     },
     variant: TargetPlatformVariant.only(TargetPlatform.android),
   );

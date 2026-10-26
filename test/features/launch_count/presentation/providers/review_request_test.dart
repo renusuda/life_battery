@@ -29,6 +29,36 @@ void main() {
     addTearDown(container.dispose);
   });
 
+  group('requestAfterOnboarding', () {
+    test('Asks for a review and logs review_request', () async {
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAfterOnboarding();
+
+      expect(fakeInAppReview.requestReviewCount, 1);
+      expect(fakeAnalytics.reviewRequestCount, 1);
+    });
+
+    test('Leaves the one-time request for heavy users untouched', () async {
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAfterOnboarding();
+
+      expect(fakeLaunchCount.hasRequestedReview, isFalse);
+    });
+
+    test('Does nothing when the store prompt is unavailable', () async {
+      fakeInAppReview.available = false;
+
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAfterOnboarding();
+
+      expect(fakeInAppReview.requestReviewCount, 0);
+      expect(fakeAnalytics.reviewRequestCount, 0);
+    });
+  });
+
   group('requestIfHeavyUser', () {
     test('Asks once from the tenth launch and records it', () async {
       fakeLaunchCount.launchCount = reviewRequestLaunchCount;

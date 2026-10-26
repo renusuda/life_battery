@@ -10,7 +10,7 @@ part 'review_request_provider.g.dart';
 /// The launch count from which a user is asked for a store review.
 const reviewRequestLaunchCount = 10;
 
-// keepAlive so the ref stays valid across the awaits in requestIfHeavyUser;
+// keepAlive so the ref stays valid across the awaits in the request methods;
 // nothing listens to this provider, so autoDispose would drop it mid-call.
 @Riverpod(keepAlive: true)
 class ReviewRequest extends _$ReviewRequest {
@@ -31,6 +31,17 @@ class ReviewRequest extends _$ReviewRequest {
     if (await inAppReview.isAvailable()) {
       unawaited(ref.read(analyticsRepositoryProvider).logReviewRequest());
       await ref.read(launchCountRepositoryProvider).markReviewRequested();
+      await inAppReview.requestReview();
+    }
+  }
+
+  /// Asks right after the first result while it is still fresh. It is not
+  /// recorded as the one-time request, so a heavy user is still asked later;
+  /// the OS throttles the prompt either way.
+  Future<void> requestAfterOnboarding() async {
+    final inAppReview = ref.read(inAppReviewProvider);
+    if (await inAppReview.isAvailable()) {
+      unawaited(ref.read(analyticsRepositoryProvider).logReviewRequest());
       await inAppReview.requestReview();
     }
   }
