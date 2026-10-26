@@ -50,7 +50,7 @@ final class PurchaseUpdatesProvider
   }
 }
 
-String _$purchaseUpdatesHash() => r'e1351ad1177df83a3955f65c1adbb7221fdcd11f';
+String _$purchaseUpdatesHash() => r'24812241ecff08fe256854385ae48a3b11bf7255';
 
 /// keepAlive because entitlements can change outside the settings screen:
 /// deferred purchases (Ask to Buy) may be approved days later and renewals
