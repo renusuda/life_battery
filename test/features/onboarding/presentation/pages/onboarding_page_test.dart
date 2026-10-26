@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
@@ -9,6 +10,7 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/lifesp
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_guide_video.dart';
 import 'package:life_battery/src/features/purchases/data/entitlements_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_bottom_sheet.dart';
@@ -25,6 +27,11 @@ void main() {
   late _FakeLifespanRangeManager fakeLifespanRangeManager;
 
   setUp(() {
+    // The guide video is a native view, which has no host in widget tests.
+    TestWidgetsFlutterBinding.ensureInitialized().defaultBinaryMessenger
+        .setMockMethodCallHandler(SystemChannels.platform_views, (_) async {
+          return null;
+        });
     fakeAnalytics = FakeAnalyticsApiDataSource();
     fakeIsInitialUser = _FakeIsInitialUser();
     fakeLifespanRangeManager = _FakeLifespanRangeManager();
@@ -235,9 +242,36 @@ void main() {
     await goToWidget(tester);
 
     expect(find.text('Add the widget to your Home Screen'), findsOneWidget);
-    expect(find.byType(WidgetGuideSteps), findsOneWidget);
     expect(fakeAnalytics.onboardingCompleteCount, 0);
   });
+
+  testWidgets(
+    'Plays the guide video on iOS where it can continue as Picture in Picture',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToWidget(tester);
+
+      expect(find.byType(WidgetGuideVideo), findsOneWidget);
+      expect(find.byType(WidgetGuideSteps), findsNothing);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+  );
+
+  testWidgets(
+    'Shows the steps only on Android',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToWidget(tester);
+
+      expect(find.byType(WidgetGuideVideo), findsNothing);
+      expect(find.byType(WidgetGuideSteps), findsOneWidget);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
+  );
 
   testWidgets(
     'Shows the paywall before finishing on iOS where the widget is paid',

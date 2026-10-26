@@ -15,5 +15,8 @@ import UIKit
 
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
+    engineBridge.pluginRegistry
+      .registrar(forPlugin: "WidgetGuideVideo")?
+      .register(WidgetGuideVideoViewFactory(), withId: WidgetGuideVideoViewFactory.viewType)
   }
 }

@@ -60,4 +60,5 @@ flutter:
   assets:
     - shorebird.yaml
     - assets/images/laurel_leading.svg
+    - assets/videos/
 
