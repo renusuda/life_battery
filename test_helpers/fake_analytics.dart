@@ -1,4 +1,5 @@
 import 'package:life_battery/src/features/analytics/data/api/analytics_api_data_source.dart';
+import 'package:life_battery/src/features/launch_count/domain/review_request_source.dart';
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
@@ -14,7 +15,8 @@ class FakeAnalyticsApiDataSource implements AnalyticsApiDataSource {
   final List<PremiumPlan> purchaseErrors = [];
   int subscriptionRenewCount = 0;
   int reviewTapCount = 0;
-  int reviewRequestCount = 0;
+  final List<({ReviewRequestSource source, int? launchCount})> reviewRequests =
+      [];
   int widgetGuideViewCount = 0;
   final List<bool> notificationPermissionResults = [];
 
@@ -69,8 +71,11 @@ class FakeAnalyticsApiDataSource implements AnalyticsApiDataSource {
   }
 
   @override
-  Future<void> logReviewRequest() async {
-    reviewRequestCount++;
+  Future<void> logReviewRequest({
+    required ReviewRequestSource source,
+    int? launchCount,
+  }) async {
+    reviewRequests.add((source: source, launchCount: launchCount));
   }
 
   @override

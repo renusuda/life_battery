@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
+import 'package:life_battery/src/features/launch_count/domain/review_request_source.dart';
 import 'package:life_battery/src/features/launch_count/presentation/providers/in_app_review_provider.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
@@ -389,7 +390,9 @@ void main() {
       await tester.pump();
 
       expect(fakeInAppReview.requestReviewCount, 1);
-      expect(fakeAnalytics.reviewRequestCount, 1);
+      final request = fakeAnalytics.reviewRequests.single;
+      expect(request.source, ReviewRequestSource.onboarding);
+      expect(request.launchCount, isNull);
     },
     variant: TargetPlatformVariant.only(TargetPlatform.android),
   );

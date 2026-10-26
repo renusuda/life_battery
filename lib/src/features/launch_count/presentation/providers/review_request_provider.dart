@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/launch_count/data/launch_count_repository_provider.dart';
+import 'package:life_battery/src/features/launch_count/domain/review_request_source.dart';
 import 'package:life_battery/src/features/launch_count/presentation/providers/in_app_review_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -29,7 +30,14 @@ class ReviewRequest extends _$ReviewRequest {
 
     final inAppReview = ref.read(inAppReviewProvider);
     if (await inAppReview.isAvailable()) {
-      unawaited(ref.read(analyticsRepositoryProvider).logReviewRequest());
+      unawaited(
+        ref
+            .read(analyticsRepositoryProvider)
+            .logReviewRequest(
+              source: ReviewRequestSource.launchCount,
+              launchCount: reviewRequestLaunchCount,
+            ),
+      );
       await ref.read(launchCountRepositoryProvider).markReviewRequested();
       await inAppReview.requestReview();
     }
@@ -41,7 +49,11 @@ class ReviewRequest extends _$ReviewRequest {
   Future<void> requestAfterOnboarding() async {
     final inAppReview = ref.read(inAppReviewProvider);
     if (await inAppReview.isAvailable()) {
-      unawaited(ref.read(analyticsRepositoryProvider).logReviewRequest());
+      unawaited(
+        ref
+            .read(analyticsRepositoryProvider)
+            .logReviewRequest(source: ReviewRequestSource.onboarding),
+      );
       await inAppReview.requestReview();
     }
   }

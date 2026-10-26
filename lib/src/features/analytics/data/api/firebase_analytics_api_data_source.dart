@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:life_battery/src/features/analytics/data/api/analytics_api_data_source.dart';
+import 'package:life_battery/src/features/launch_count/domain/review_request_source.dart';
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
@@ -93,8 +94,17 @@ class FirebaseAnalyticsApiDataSource implements AnalyticsApiDataSource {
   }
 
   @override
-  Future<void> logReviewRequest() {
-    return _logEvent('review_request');
+  Future<void> logReviewRequest({
+    required ReviewRequestSource source,
+    int? launchCount,
+  }) {
+    return _logEvent(
+      'review_request',
+      parameters: {
+        'source': source.paramValue,
+        'launch_count': ?launchCount,
+      },
+    );
   }
 
   @override

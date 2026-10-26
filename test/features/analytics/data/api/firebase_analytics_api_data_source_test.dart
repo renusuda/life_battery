@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:life_battery/src/features/analytics/data/api/firebase_analytics_api_data_source.dart';
+import 'package:life_battery/src/features/launch_count/domain/review_request_source.dart';
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
@@ -133,11 +134,26 @@ void main() {
     expect(analytics.events.single.parameters, isNull);
   });
 
-  test('Sends the review prompt as a review_request event', () async {
-    await dataSource.logReviewRequest();
+  test(
+    'Sends the review prompt as a review_request event with the source',
+    () async {
+      await dataSource.logReviewRequest(
+        source: ReviewRequestSource.launchCount,
+        launchCount: 10,
+      );
 
-    expect(analytics.events.single.name, 'review_request');
-    expect(analytics.events.single.parameters, isNull);
+      expect(analytics.events.single.name, 'review_request');
+      expect(analytics.events.single.parameters, {
+        'source': 'launch_count',
+        'launch_count': 10,
+      });
+    },
+  );
+
+  test('Sends the onboarding review source as onboarding', () async {
+    await dataSource.logReviewRequest(source: ReviewRequestSource.onboarding);
+
+    expect(analytics.events.single.parameters, {'source': 'onboarding'});
   });
 
   test('Sends the widget guide view as a widget_guide_view event', () async {

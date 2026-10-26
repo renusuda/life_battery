@@ -1,4 +1,5 @@
 import 'package:life_battery/src/features/analytics/data/api/analytics_api_data_source.dart';
+import 'package:life_battery/src/features/launch_count/domain/review_request_source.dart';
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
@@ -53,8 +54,14 @@ class AnalyticsRepository {
     return _apiDataSource.logReviewTap();
   }
 
-  Future<void> logReviewRequest() {
-    return _apiDataSource.logReviewRequest();
+  Future<void> logReviewRequest({
+    required ReviewRequestSource source,
+    int? launchCount,
+  }) {
+    return _apiDataSource.logReviewRequest(
+      source: source,
+      launchCount: launchCount,
+    );
   }
 
   Future<void> logWidgetGuideView() {
