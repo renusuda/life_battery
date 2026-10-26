@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・New step-by-step onboarding when you open the app for the first time.\n・Fixed the home screen briefly flashing before onboarding on first launch."
+    "text": "・The widget guide is now a video that stays on screen in Picture in Picture while you add the widget.\n・Share your first result right from onboarding."
   },
   {
     "language": "ja",
-    "text": "・初回起動をステップ形式のオンボーディングに刷新しました。\n・初回起動時にオンボーディングの前にホーム画面が一瞬表示される問題を修正しました。"
+    "text": "・ウィジェットの追加手順が動画になり、ピクチャ・イン・ピクチャで見ながら追加できるようになりました。\n・オンボーディングの結果画面から結果を共有できるようになりました。"
   }
 ]
