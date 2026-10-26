@@ -52,8 +52,21 @@ final class WidgetGuideVideoView: NSObject, FlutterPlatformView {
       let controller = AVPictureInPictureController(playerLayer: playerView.playerLayer)
       controller?.canStartPictureInPictureAutomaticallyFromInline = true
       pipController = controller
+      // Picture in Picture only starts automatically; it is stopped here so
+      // the video is back inline when the user returns from the Home Screen.
+      NotificationCenter.default.addObserver(
+        self,
+        selector: #selector(stopPictureInPicture),
+        name: UIApplication.didBecomeActiveNotification,
+        object: nil
+      )
     }
     player.play()
+  }
+
+  @objc private func stopPictureInPicture() {
+    guard let pipController, pipController.isPictureInPictureActive else { return }
+    pipController.stopPictureInPicture()
   }
 
   func view() -> UIView {
@@ -61,6 +74,7 @@ final class WidgetGuideVideoView: NSObject, FlutterPlatformView {
   }
 
   deinit {
+    NotificationCenter.default.removeObserver(self)
     player.pause()
     try? AVAudioSession.sharedInstance().setActive(false, options: [.notifyOthersOnDeactivation])
   }
