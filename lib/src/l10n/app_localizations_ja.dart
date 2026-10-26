@@ -41,6 +41,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get widgetGuideDescription => 'ホーム画面で残りの人生をひと目でチェックできます。';
 
   @override
+  String get widgetTrialNote => '🎁 今日はウィジェットを無料でお試しできます。';
+
+  @override
   String get widgetGuideIosStep1 => 'ホーム画面の何もない場所を長押しします。';
 
   @override

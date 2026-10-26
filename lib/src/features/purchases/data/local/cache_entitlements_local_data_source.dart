@@ -14,6 +14,7 @@ class CacheEntitlementsLocalDataSource implements EntitlementsLocalDataSource {
   static const _columnHasPremiumLifetime = 'hasPremiumLifetime';
   static const _columnPremiumSubscriptionExpiresAt =
       'premiumSubscriptionExpiresAt';
+  static const _columnWidgetTrialExpiresAt = 'widgetTrialExpiresAt';
 
   @override
   Future<PremiumEntitlement> getEntitlement() async {
@@ -24,6 +25,7 @@ class CacheEntitlementsLocalDataSource implements EntitlementsLocalDataSource {
         columns: [
           _columnHasPremiumLifetime,
           _columnPremiumSubscriptionExpiresAt,
+          _columnWidgetTrialExpiresAt,
         ],
       );
 
@@ -33,11 +35,15 @@ class CacheEntitlementsLocalDataSource implements EntitlementsLocalDataSource {
 
       final row = result.first;
       final expiresAtMillis = row[_columnPremiumSubscriptionExpiresAt] as int?;
+      final trialExpiresAtMillis = row[_columnWidgetTrialExpiresAt] as int?;
       return PremiumEntitlement(
         hasLifetime: row[_columnHasPremiumLifetime] == 1,
         subscriptionExpiresAt: expiresAtMillis == null
             ? null
             : DateTime.fromMillisecondsSinceEpoch(expiresAtMillis),
+        widgetTrialExpiresAt: trialExpiresAtMillis == null
+            ? null
+            : DateTime.fromMillisecondsSinceEpoch(trialExpiresAtMillis),
       );
     } on DatabaseException catch (_) {
       // Falls back to the locked state on failure so that a database error
@@ -65,6 +71,19 @@ class CacheEntitlementsLocalDataSource implements EntitlementsLocalDataSource {
       if (response.isNotEmpty) {
         await db.update(_tableName, {
           _columnPremiumSubscriptionExpiresAt: expiresAt.millisecondsSinceEpoch,
+        });
+      }
+    } on DatabaseException catch (_) {}
+  }
+
+  @override
+  Future<void> markWidgetTrialUntil(DateTime expiresAt) async {
+    try {
+      final db = await _localDatabase.database;
+      final response = await db.query(_tableName);
+      if (response.isNotEmpty) {
+        await db.update(_tableName, {
+          _columnWidgetTrialExpiresAt: expiresAt.millisecondsSinceEpoch,
         });
       }
     } on DatabaseException catch (_) {}

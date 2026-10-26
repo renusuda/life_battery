@@ -96,6 +96,31 @@ void main() {
     },
   );
 
+  test('Syncs the expiry of an active widget trial', () async {
+    final expiresAt = DateTime.now().add(const Duration(hours: 5));
+    fakeEntitlements.entitlement = PremiumEntitlement(
+      hasLifetime: false,
+      widgetTrialExpiresAt: expiresAt,
+    );
+
+    await container.read(premiumWidgetSyncProvider.future);
+
+    expect(fakeWidget.syncedValues, [true]);
+    expect(fakeWidget.syncedExpiries, [expiresAt]);
+  });
+
+  test('Syncs the locked state once the widget trial ended', () async {
+    fakeEntitlements.entitlement = PremiumEntitlement(
+      hasLifetime: false,
+      widgetTrialExpiresAt: DateTime.now().subtract(const Duration(hours: 1)),
+    );
+
+    await container.read(premiumWidgetSyncProvider.future);
+
+    expect(fakeWidget.syncedValues, [false]);
+    expect(fakeWidget.syncedExpiries, [null]);
+  });
+
   test('Unlocks the widget after an entitlement update', () async {
     container
       ..read(purchaseUpdatesProvider)

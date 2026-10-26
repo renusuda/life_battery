@@ -8,7 +8,7 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 12;
+  static const _databaseVersion = 13;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
@@ -30,6 +30,9 @@ class LocalDatabase {
   // since epoch; NULL when the user never subscribed.
   static const _columnPremiumSubscriptionExpiresAt =
       'premiumSubscriptionExpiresAt';
+  // End of the free widget trial in milliseconds since epoch; NULL when it
+  // never started.
+  static const _columnWidgetTrialExpiresAt = 'widgetTrialExpiresAt';
   // Cold starts recorded so far.
   static const _columnLaunchCount = 'launchCount';
   // Whether the store review prompt has been requested for this user.
@@ -69,6 +72,7 @@ class LocalDatabase {
             $_columnHasRemovedAds INTEGER NOT NULL,
             $_columnHasPremiumLifetime INTEGER NOT NULL,
             $_columnPremiumSubscriptionExpiresAt INTEGER,
+            $_columnWidgetTrialExpiresAt INTEGER,
             $_columnLaunchCount INTEGER NOT NULL,
             $_columnHasRequestedReview INTEGER NOT NULL
           )
@@ -160,6 +164,12 @@ class LocalDatabase {
               'ALTER TABLE $_tableName '
               'ADD COLUMN $_columnHasRequestedReview INTEGER NOT NULL '
               'DEFAULT 0',
+            );
+          }
+          if (oldVersion < 13) {
+            await db.execute(
+              'ALTER TABLE $_tableName '
+              'ADD COLUMN $_columnWidgetTrialExpiresAt INTEGER',
             );
           }
         },

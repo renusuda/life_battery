@@ -22,6 +22,7 @@ class FakeEntitlementsLocalDataSource implements EntitlementsLocalDataSource {
     entitlement = PremiumEntitlement(
       hasLifetime: true,
       subscriptionExpiresAt: entitlement.subscriptionExpiresAt,
+      widgetTrialExpiresAt: entitlement.widgetTrialExpiresAt,
     );
   }
 
@@ -30,6 +31,16 @@ class FakeEntitlementsLocalDataSource implements EntitlementsLocalDataSource {
     entitlement = PremiumEntitlement(
       hasLifetime: entitlement.hasLifetime,
       subscriptionExpiresAt: expiresAt,
+      widgetTrialExpiresAt: entitlement.widgetTrialExpiresAt,
+    );
+  }
+
+  @override
+  Future<void> markWidgetTrialUntil(DateTime expiresAt) async {
+    entitlement = PremiumEntitlement(
+      hasLifetime: entitlement.hasLifetime,
+      subscriptionExpiresAt: entitlement.subscriptionExpiresAt,
+      widgetTrialExpiresAt: expiresAt,
     );
   }
 }

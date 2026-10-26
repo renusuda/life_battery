@@ -42,6 +42,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'See how much life you have left at a glance, right on your Home Screen.';
 
   @override
+  String get widgetTrialNote => '🎁 Try the widget free today.';
+
+  @override
   String get widgetGuideIosStep1 =>
       'Touch and hold an empty area on the Home Screen.';
 

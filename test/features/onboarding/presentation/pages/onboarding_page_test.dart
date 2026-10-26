@@ -25,6 +25,7 @@ void main() {
   late FakeAnalyticsApiDataSource fakeAnalytics;
   late _FakeIsInitialUser fakeIsInitialUser;
   late _FakeLifespanRangeManager fakeLifespanRangeManager;
+  late FakeEntitlementsLocalDataSource fakeEntitlements;
 
   setUp(() {
     // The guide video is a native view, which has no host in widget tests.
@@ -35,15 +36,18 @@ void main() {
     fakeAnalytics = FakeAnalyticsApiDataSource();
     fakeIsInitialUser = _FakeIsInitialUser();
     fakeLifespanRangeManager = _FakeLifespanRangeManager();
+    fakeEntitlements = FakeEntitlementsLocalDataSource();
   });
 
   Widget buildPage() {
     return ProviderScope(
       overrides: [
         analyticsApiDataSourceProvider.overrideWithValue(fakeAnalytics),
-        // Needed by the paywall sheet.
         entitlementsLocalDataSourceProvider.overrideWithValue(
-          FakeEntitlementsLocalDataSource(),
+          fakeEntitlements,
+        ),
+        entitlementsHomeWidgetDataSourceProvider.overrideWithValue(
+          FakeEntitlementsHomeWidgetDataSource(),
         ),
         purchasesApiDataSourceProvider.overrideWithValue(
           FakePurchasesApiDataSource(),
@@ -257,6 +261,39 @@ void main() {
       expect(find.byType(WidgetGuideSteps), findsNothing);
     },
     variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+  );
+
+  testWidgets(
+    'Starts the free widget trial for today when the widget step is shown',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToWidget(tester);
+
+      expect(find.text('🎁 Try the widget free today.'), findsOneWidget);
+      final now = DateTime.now();
+      expect(
+        fakeEntitlements.entitlement.widgetTrialExpiresAt,
+        DateTime(now.year, now.month, now.day + 1),
+      );
+      expect(fakeEntitlements.entitlement.isActive(now), isFalse);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+  );
+
+  testWidgets(
+    'Starts no widget trial on Android where the widget is free',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToWidget(tester);
+
+      expect(find.text('🎁 Try the widget free today.'), findsNothing);
+      expect(fakeEntitlements.entitlement.widgetTrialExpiresAt, isNull);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
   );
 
   testWidgets(

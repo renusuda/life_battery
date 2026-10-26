@@ -158,6 +158,12 @@ abstract class AppLocalizations {
   /// **'See how much life you have left at a glance, right on your Home Screen.'**
   String get widgetGuideDescription;
 
+  /// No description provided for @widgetTrialNote.
+  ///
+  /// In en, this message translates to:
+  /// **'🎁 Try the widget free today.'**
+  String get widgetTrialNote;
+
   /// No description provided for @widgetGuideIosStep1.
   ///
   /// In en, this message translates to:

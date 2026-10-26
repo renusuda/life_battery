@@ -43,4 +43,46 @@ void main() {
 
     expect(entitlement.isActive(now), isTrue);
   });
+
+  test('Widget is locked without a purchase or a trial', () {
+    const entitlement = PremiumEntitlement.none();
+
+    expect(entitlement.isWidgetUnlocked(now), isFalse);
+    expect(entitlement.widgetUnlockExpiresAt(now), isNull);
+  });
+
+  test('Widget trial unlocks the widget until its expiry without premium', () {
+    final expiresAt = now.add(const Duration(hours: 5));
+    final entitlement = PremiumEntitlement(
+      hasLifetime: false,
+      widgetTrialExpiresAt: expiresAt,
+    );
+
+    expect(entitlement.isActive(now), isFalse);
+    expect(entitlement.isWidgetUnlocked(now), isTrue);
+    expect(entitlement.widgetUnlockExpiresAt(now), expiresAt);
+    expect(entitlement.isWidgetUnlocked(expiresAt), isFalse);
+    expect(entitlement.widgetUnlockExpiresAt(expiresAt), isNull);
+  });
+
+  test('Lifetime purchase outranks the widget trial', () {
+    final entitlement = PremiumEntitlement(
+      hasLifetime: true,
+      widgetTrialExpiresAt: now.add(const Duration(hours: 5)),
+    );
+
+    expect(entitlement.isWidgetUnlocked(now), isTrue);
+    expect(entitlement.widgetUnlockExpiresAt(now), isNull);
+  });
+
+  test('Subscription expiry outranks the widget trial', () {
+    final subscriptionExpiresAt = now.add(const Duration(days: 30));
+    final entitlement = PremiumEntitlement(
+      hasLifetime: false,
+      subscriptionExpiresAt: subscriptionExpiresAt,
+      widgetTrialExpiresAt: now.add(const Duration(hours: 5)),
+    );
+
+    expect(entitlement.widgetUnlockExpiresAt(now), subscriptionExpiresAt);
+  });
 }

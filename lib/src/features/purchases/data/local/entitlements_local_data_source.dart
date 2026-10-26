@@ -8,4 +8,7 @@ abstract interface class EntitlementsLocalDataSource {
 
   /// Stores the subscription expiry.
   Future<void> markSubscribedUntil(DateTime expiresAt);
+
+  /// Stores the end of the free widget trial.
+  Future<void> markWidgetTrialUntil(DateTime expiresAt);
 }

@@ -39,18 +39,30 @@ class EntitlementsRepository {
     return true;
   }
 
-  /// Pushes the premium entitlement to the home screen widget.
+  /// Unlocks the widget until the end of the local day so the user can try
+  /// the one just added during onboarding. Granted once per install;
+  /// skipped when premium is already held.
+  Future<bool> startWidgetTrialIfNeeded({required DateTime now}) async {
+    final entitlement = await _localDataSource.getEntitlement();
+    if (entitlement.isActive(now) || entitlement.widgetTrialExpiresAt != null) {
+      return false;
+    }
+
+    final endOfToday = DateTime(now.year, now.month, now.day + 1);
+    await _localDataSource.markWidgetTrialUntil(endOfToday);
+    return true;
+  }
+
+  /// Pushes the widget unlock to the home screen widget.
   ///
   /// The expiry is sent along so the widget locks itself even when the
-  /// app is never opened again after a cancellation.
+  /// app is never opened again after a cancellation or a trial.
   Future<void> syncEntitlementToWidget() async {
     final entitlement = await _localDataSource.getEntitlement();
-    final isUnlocked = entitlement.isActive(DateTime.now());
+    final now = DateTime.now();
     return _homeWidgetDataSource.syncWidgetUnlock(
-      isUnlocked: isUnlocked,
-      expiresAt: isUnlocked && !entitlement.hasLifetime
-          ? entitlement.subscriptionExpiresAt
-          : null,
+      isUnlocked: entitlement.isWidgetUnlocked(now),
+      expiresAt: entitlement.widgetUnlockExpiresAt(now),
     );
   }
 }
