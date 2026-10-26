@@ -15,10 +15,13 @@ import 'package:life_battery/src/features/purchases/data/entitlements_repository
 import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/widgets/premium_bottom_sheet.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/widget_guide_steps.dart';
+import 'package:life_battery/src/features/share/data/share_repository_provider.dart';
 
 import '../../../../../test_helpers/fake_analytics.dart';
 import '../../../../../test_helpers/fake_entitlements.dart';
 import '../../../../../test_helpers/fake_purchases.dart';
+import '../../../../../test_helpers/fake_share.dart';
+import '../../../../../test_helpers/share_test_pump.dart';
 import '../../../../../test_helpers/test_app.dart';
 
 void main() {
@@ -26,6 +29,7 @@ void main() {
   late _FakeIsInitialUser fakeIsInitialUser;
   late _FakeLifespanRangeManager fakeLifespanRangeManager;
   late FakeEntitlementsLocalDataSource fakeEntitlements;
+  late FakeShareApiDataSource fakeShare;
 
   setUp(() {
     // The guide video is a native view, which has no host in widget tests.
@@ -37,6 +41,7 @@ void main() {
     fakeIsInitialUser = _FakeIsInitialUser();
     fakeLifespanRangeManager = _FakeLifespanRangeManager();
     fakeEntitlements = FakeEntitlementsLocalDataSource();
+    fakeShare = FakeShareApiDataSource();
   });
 
   Widget buildPage() {
@@ -56,6 +61,7 @@ void main() {
           () => fakeLifespanRangeManager,
         ),
         isInitialUserProvider.overrideWith(() => fakeIsInitialUser),
+        shareApiDataSourceProvider.overrideWithValue(fakeShare),
       ],
       child: const TestApp(home: OnboardingPage()),
     );
@@ -229,6 +235,20 @@ void main() {
     expect(battery().text, '$percentage%');
     expect(titleOpacity().opacity, 1);
     expect(fakeAnalytics.onboardingCompleteCount, 0);
+  });
+
+  testWidgets('Shares the first result from the result step', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+    await goToResult(tester);
+    await tester.pumpAndSettle();
+
+    await tester.tapAndAwaitShare(find.text('Share'));
+
+    expect(fakeShare.sharedImages, hasLength(1));
+    expect(fakeShare.sharedTexts.single, contains('% of my life left.'));
+    expect(find.text('Continue'), findsOneWidget);
   });
 
   Future<void> goToWidget(WidgetTester tester) async {

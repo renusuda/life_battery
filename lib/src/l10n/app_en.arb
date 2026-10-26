@@ -77,6 +77,7 @@
   "restorePurchasesLabel": "Restore purchases",
   "termsOfUseLabel": "Terms of Use",
   "todaysMessageHint": "This moment is the youngest you'll ever be.",
+  "shareLabel": "Share",
   "shareMessage": "{percentage}% of my life left. What's yours?",
   "@shareMessage": {
     "placeholders": {

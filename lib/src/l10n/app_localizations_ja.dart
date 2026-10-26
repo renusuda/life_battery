@@ -194,6 +194,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get todaysMessageHint => 'この瞬間が、一番若い自分';
 
   @override
+  String get shareLabel => '共有';
+
+  @override
   String shareMessage(int percentage) {
     return '人生あと$percentage%だった。みんなは？';
   }

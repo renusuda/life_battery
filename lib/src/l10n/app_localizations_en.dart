@@ -206,6 +206,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'This moment is the youngest you\'ll ever be.';
 
   @override
+  String get shareLabel => 'Share';
+
+  @override
   String shareMessage(int percentage) {
     return '$percentage% of my life left. What\'s yours?';
   }

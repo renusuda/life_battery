@@ -452,6 +452,12 @@ abstract class AppLocalizations {
   /// **'This moment is the youngest you\'ll ever be.'**
   String get todaysMessageHint;
 
+  /// No description provided for @shareLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareLabel;
+
   /// No description provided for @shareMessage.
   ///
   /// In en, this message translates to:
