@@ -28,6 +28,7 @@ class CacheDataDeletionLocalDataSource implements DataDeletionLocalDataSource {
   static const _columnHasPremiumLifetime = 'hasPremiumLifetime';
   static const _columnPremiumSubscriptionExpiresAt =
       'premiumSubscriptionExpiresAt';
+  static const _columnWidgetTrialExpiresAt = 'widgetTrialExpiresAt';
   static const _columnLaunchCount = 'launchCount';
   static const _columnHasRequestedReview = 'hasRequestedReview';
 
@@ -67,6 +68,7 @@ class CacheDataDeletionLocalDataSource implements DataDeletionLocalDataSource {
         _columnIsPercentageMode: 1,
         _columnHasPremiumLifetime: 0,
         _columnPremiumSubscriptionExpiresAt: null,
+        _columnWidgetTrialExpiresAt: null,
         _columnLaunchCount: 0,
         _columnHasRequestedReview: 0,
       });
