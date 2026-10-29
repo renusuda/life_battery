@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・The widget guide is now a video that stays on screen in Picture in Picture while you add the widget.\n・Share your first result right from onboarding."
+    "text": "・Added support for iPhone Duo."
   },
   {
     "language": "ja",
-    "text": "・ウィジェットの追加手順が動画になり、ピクチャ・イン・ピクチャで見ながら追加できるようになりました。\n・オンボーディングの結果画面から結果を共有できるようになりました。"
+    "text": "・iPhone Duoに対応しました。"
   }
 ]
