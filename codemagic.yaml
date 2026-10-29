@@ -122,6 +122,7 @@ workflows:
       app_store_connect: codemagic-ci-cd
     environment:
       flutter: fvm
+      xcode: 27.1
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.rururu.lifebt
@@ -176,6 +177,7 @@ workflows:
     name: iOS Patch
     environment:
       flutter: fvm
+      xcode: 27.1
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.rururu.lifebt
