@@ -364,6 +364,7 @@
 				mr,
 				ko,
 				ms,
+				nl,
 				or,
 				pa,
 				pt,

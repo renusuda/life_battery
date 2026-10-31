@@ -83,6 +83,12 @@
             "value" : "Life Battery"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "or" : {
           "stringUnit" : {
             "state" : "translated",

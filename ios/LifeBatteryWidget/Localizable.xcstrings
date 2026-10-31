@@ -81,6 +81,12 @@
             "value": " hari"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " dagen"
+          }
+        },
         "or": {
           "stringUnit": {
             "state": "translated",
@@ -223,6 +229,12 @@
             "value": "Lihat baki hidup anda dengan sekali pandang."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je resterende leven in één oogopslag."
+          }
+        },
         "or": {
           "stringUnit": {
             "state": "translated",
@@ -360,6 +372,12 @@
           }
         },
         "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -507,6 +525,12 @@
             "value": "Buka dalam aplikasi"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontgrendel in de app"
+          }
+        },
         "or": {
           "stringUnit": {
             "state": "translated",
@@ -649,6 +673,12 @@
             "value": "Ciri Premium"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium-functie"
+          }
+        },
         "or": {
           "stringUnit": {
             "state": "translated",
@@ -789,6 +819,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "BAKI HIDUP"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RESTEREND LEVEN"
           }
         },
         "or": {
