@@ -16,6 +16,12 @@
             "state" : "translated",
             "value" : "ライフバッテリー"
           }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
         }
       }
     },
