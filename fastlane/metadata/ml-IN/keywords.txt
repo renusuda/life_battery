@@ -1,0 +1,1 @@
+widget,വിജറ്റ്,ജന്മദിനം,മരണം,ക്ലോക്ക്,കലണ്ടർ,ആയുസ്സ്,ദിവസം,age,calculator,death,clock,memento mori
