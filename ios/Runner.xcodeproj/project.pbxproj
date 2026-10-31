@@ -357,6 +357,7 @@
 				es,
 				fr,
 				gu,
+				he,
 				hi,
 				id,
 				ja,

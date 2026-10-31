@@ -41,6 +41,12 @@
             "value" : "Life Battery"
           }
         },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
