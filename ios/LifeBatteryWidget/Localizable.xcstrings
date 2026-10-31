@@ -141,6 +141,12 @@
             "value": " วัน"
           }
         },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " دن"
+          }
+        },
         "vi": {
           "stringUnit": {
             "state": "translated",
@@ -301,6 +307,12 @@
             "value": "ดูชีวิตที่เหลืออยู่ได้ในพริบตา"
           }
         },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "باقی زندگی، ایک نظر میں۔"
+          }
+        },
         "vi": {
           "stringUnit": {
             "state": "translated",
@@ -456,6 +468,12 @@
           }
         },
         "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "ur": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -621,6 +639,12 @@
             "value": "ปลดล็อกได้ในแอป"
           }
         },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ایپ میں ان لاک کریں"
+          }
+        },
         "vi": {
           "stringUnit": {
             "state": "translated",
@@ -781,6 +805,12 @@
             "value": "ฟีเจอร์พรีเมียม"
           }
         },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "پریمیم فیچر"
+          }
+        },
         "vi": {
           "stringUnit": {
             "state": "translated",
@@ -939,6 +969,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ชีวิตที่เหลือ"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "باقی زندگی"
           }
         },
         "vi": {

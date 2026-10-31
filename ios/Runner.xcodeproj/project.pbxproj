@@ -374,6 +374,7 @@
 				ta,
 				te,
 				th,
+				ur,
 				vi,
 				"zh-Hans",
 				"zh-Hant",

@@ -143,6 +143,12 @@
             "value" : "Life Battery"
           }
         },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
