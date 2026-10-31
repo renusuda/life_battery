@@ -11,6 +11,12 @@
             "value" : "Life Battery"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
