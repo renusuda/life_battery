@@ -1,0 +1,1 @@
+widget,ୱିଜେଟ୍,ଜନ୍ମଦିନ,ମୃତ୍ୟୁ,ଘଡ଼ି,କ୍ୟାଲେଣ୍ଡର୍,ଦିନ,ଜୀବନକାଳ,age,calculator,death,clock,memento mori
