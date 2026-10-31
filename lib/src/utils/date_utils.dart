@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/birth_date_picker.dart';
 
 String formatDate(
@@ -10,7 +9,7 @@ String formatDate(
   DateTime date,
 ) {
   return DateFormat.yMd(
-    context.isJapanese ? 'ja' : 'en',
+    Localizations.localeOf(context).languageCode,
   ).format(date);
 }
 
