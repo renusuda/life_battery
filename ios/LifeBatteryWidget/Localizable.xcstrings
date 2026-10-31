@@ -27,6 +27,12 @@
             "value": "日"
           }
         },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " дн."
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -71,6 +77,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生をひと目で確認"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оставшаяся жизнь с одного взгляда."
           }
         },
         "th": {
@@ -119,6 +131,12 @@
             "value": "ライフバッテリー"
           }
         },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -163,6 +181,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "アプリ内で解除できます"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Разблокируйте в приложении"
           }
         },
         "th": {
@@ -211,6 +235,12 @@
             "value": "プレミアム機能"
           }
         },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Функция Premium"
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -255,6 +285,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ОСТАЛОСЬ ЖИЗНИ"
           }
         },
         "th": {

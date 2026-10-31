@@ -355,6 +355,7 @@
 				es,
 				fr,
 				ja,
+				ru,
 				th,
 				vi,
 				"zh-Hans",
