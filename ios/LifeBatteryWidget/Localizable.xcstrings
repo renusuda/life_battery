@@ -69,6 +69,12 @@
             "value": " ദിവസം"
           }
         },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " दिवस"
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -181,6 +187,12 @@
             "value": "ശേഷിക്കുന്ന ജീവിതം ഒറ്റനോട്ടത്തിൽ കാണൂ."
           }
         },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उरलेले आयुष्य एका नजरेत पाहा."
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -288,6 +300,12 @@
           }
         },
         "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "mr": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -405,6 +423,12 @@
             "value": "ആപ്പിൽ അൺലോക്ക് ചെയ്യൂ"
           }
         },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ॲपमध्ये अनलॉक करा"
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -517,6 +541,12 @@
             "value": "പ്രീമിയം ഫീച്ചർ"
           }
         },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रीमियम फीचर"
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -627,6 +657,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ശേഷിക്കുന്ന ജീവിതം"
+          }
+        },
+        "mr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उरलेले आयुष्य"
           }
         },
         "ms": {

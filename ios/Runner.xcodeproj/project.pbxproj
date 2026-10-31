@@ -361,6 +361,7 @@
 				ja,
 				kn,
 				ml,
+				mr,
 				ko,
 				ms,
 				pt,
