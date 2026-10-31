@@ -23,6 +23,12 @@
             "value" : "Life Battery"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",

@@ -21,6 +21,12 @@
             "value": " jours"
           }
         },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " दिन"
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
@@ -91,6 +97,12 @@
             "value": "Votre vie restante d’un coup d’œil."
           }
         },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना बचा हुआ जीवन एक नज़र में देखें।"
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
@@ -156,6 +168,12 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -231,6 +249,12 @@
             "value": "À débloquer dans l’app"
           }
         },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऐप में अनलॉक करें"
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
@@ -301,6 +325,12 @@
             "value": "Fonctionnalité Premium"
           }
         },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रीमियम सुविधा"
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
@@ -369,6 +399,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "VIE RESTANTE"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बचा हुआ जीवन"
           }
         },
         "ja": {

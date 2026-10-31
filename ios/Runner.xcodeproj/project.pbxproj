@@ -354,6 +354,7 @@
 				Base,
 				es,
 				fr,
+				hi,
 				ja,
 				ms,
 				pt,
