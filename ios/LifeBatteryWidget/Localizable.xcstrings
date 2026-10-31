@@ -27,6 +27,12 @@
             "value": " jours"
           }
         },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " દિવસ"
+          }
+        },
         "hi": {
           "stringUnit": {
             "state": "translated",
@@ -121,6 +127,12 @@
             "value": "Votre vie restante d’un coup d’œil."
           }
         },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "તમારું બાકી જીવન એક નજરમાં જુઓ."
+          }
+        },
         "hi": {
           "stringUnit": {
             "state": "translated",
@@ -210,6 +222,12 @@
           }
         },
         "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "gu": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -309,6 +327,12 @@
             "value": "À débloquer dans l’app"
           }
         },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ઍપમાં અનલૉક કરો"
+          }
+        },
         "hi": {
           "stringUnit": {
             "state": "translated",
@@ -403,6 +427,12 @@
             "value": "Fonctionnalité Premium"
           }
         },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "પ્રીમિયમ સુવિધા"
+          }
+        },
         "hi": {
           "stringUnit": {
             "state": "translated",
@@ -495,6 +525,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "VIE RESTANTE"
+          }
+        },
+        "gu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "બાકી જીવન"
           }
         },
         "hi": {

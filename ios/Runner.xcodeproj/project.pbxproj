@@ -355,6 +355,7 @@
 				bn,
 				es,
 				fr,
+				gu,
 				hi,
 				id,
 				ja,
