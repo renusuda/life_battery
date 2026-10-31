@@ -3,6 +3,12 @@
   "strings": {
     "widget.dayUnit": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " يوم"
+          }
+        },
         "bn": {
           "stringUnit": {
             "state": "translated",
@@ -151,6 +157,12 @@
     },
     "widget.description": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اعرف ما تبقّى من عمرك بنظرة سريعة."
+          }
+        },
         "bn": {
           "stringUnit": {
             "state": "translated",
@@ -299,6 +311,12 @@
     },
     "widget.displayName": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
         "bn": {
           "stringUnit": {
             "state": "translated",
@@ -447,6 +465,12 @@
     },
     "widget.lockedDescription": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "افتحها من التطبيق"
+          }
+        },
         "bn": {
           "stringUnit": {
             "state": "translated",
@@ -595,6 +619,12 @@
     },
     "widget.lockedTitle": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ميزة بريميوم"
+          }
+        },
         "bn": {
           "stringUnit": {
             "state": "translated",
@@ -743,6 +773,12 @@
     },
     "widget.titleLabel": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العمر المتبقي"
+          }
+        },
         "bn": {
           "stringUnit": {
             "state": "translated",
