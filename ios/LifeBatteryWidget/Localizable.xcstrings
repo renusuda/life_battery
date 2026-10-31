@@ -63,6 +63,12 @@
             "value": "일"
           }
         },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " ദിവസം"
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -169,6 +175,12 @@
             "value": "남은 인생을 한눈에 확인하세요."
           }
         },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ശേഷിക്കുന്ന ജീവിതം ഒറ്റനോട്ടത്തിൽ കാണൂ."
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -270,6 +282,12 @@
           }
         },
         "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "ml": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -381,6 +399,12 @@
             "value": "앱에서 잠금 해제"
           }
         },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ആപ്പിൽ അൺലോക്ക് ചെയ്യൂ"
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -487,6 +511,12 @@
             "value": "프리미엄 기능"
           }
         },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "പ്രീമിയം ഫീച്ചർ"
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -591,6 +621,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "남은 인생"
+          }
+        },
+        "ml": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ശേഷിക്കുന്ന ജീവിതം"
           }
         },
         "ms": {

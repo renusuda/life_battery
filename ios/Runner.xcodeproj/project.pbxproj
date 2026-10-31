@@ -360,6 +360,7 @@
 				id,
 				ja,
 				kn,
+				ml,
 				ko,
 				ms,
 				pt,

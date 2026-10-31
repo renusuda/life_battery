@@ -65,6 +65,12 @@
             "value" : "Life Battery"
           }
         },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
