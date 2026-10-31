@@ -89,6 +89,12 @@
             "value" : "Life Battery"
           }
         },
+        "pa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",

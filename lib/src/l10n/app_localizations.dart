@@ -19,6 +19,7 @@ import 'app_localizations_ml.dart';
 import 'app_localizations_mr.dart';
 import 'app_localizations_ms.dart';
 import 'app_localizations_or.dart';
+import 'app_localizations_pa.dart';
 import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
 import 'app_localizations_th.dart';
@@ -125,6 +126,7 @@ abstract class AppLocalizations {
     Locale('mr'),
     Locale('ms'),
     Locale('or'),
+    Locale('pa'),
     Locale('pt'),
     Locale('ru'),
     Locale('th'),
@@ -591,6 +593,7 @@ class _AppLocalizationsDelegate
     'mr',
     'ms',
     'or',
+    'pa',
     'pt',
     'ru',
     'th',
@@ -645,6 +648,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsMs();
     case 'or':
       return AppLocalizationsOr();
+    case 'pa':
+      return AppLocalizationsPa();
     case 'pt':
       return AppLocalizationsPt();
     case 'ru':

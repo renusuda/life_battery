@@ -87,6 +87,12 @@
             "value": " ଦିନ"
           }
         },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " ਦਿਨ"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -211,6 +217,12 @@
             "value": "ଆପଣଙ୍କ ବାକି ଜୀବନ ଏକ ନଜରରେ ଦେଖନ୍ତୁ।"
           }
         },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਆਪਣੀ ਬਾਕੀ ਜ਼ਿੰਦਗੀ ਇੱਕ ਨਜ਼ਰ ਵਿੱਚ ਦੇਖੋ।"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -330,6 +342,12 @@
           }
         },
         "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "pa": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -459,6 +477,12 @@
             "value": "ଆପ୍‌ରେ ଅନ୍‌ଲକ୍ କରନ୍ତୁ"
           }
         },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਐਪ ਵਿੱਚ ਅਨਲੌਕ ਕਰੋ"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -583,6 +607,12 @@
             "value": "ପ୍ରିମିୟମ୍ ଫିଚର୍"
           }
         },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਪ੍ਰੀਮੀਅਮ ਫ਼ੀਚਰ"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -705,6 +735,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ବାକି ଜୀବନ"
+          }
+        },
+        "pa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ਬਾਕੀ ਜ਼ਿੰਦਗੀ"
           }
         },
         "pt": {
