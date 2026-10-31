@@ -1,0 +1,1 @@
+widget,kalendar,minggu,hari,tahun,kematian,mati,ajal,detik,masa,kalkulator,hidup,usia,lahir,stoik
