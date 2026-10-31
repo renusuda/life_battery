@@ -1,0 +1,1 @@
+widget,విడ్జెట్,ఆయుష్షు,జీవితకాలం,పుట్టినరోజు,మరణం,age,calculator,death,clock,countdown,memento mori
