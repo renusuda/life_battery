@@ -286,6 +286,22 @@ void main() {
       );
       expect(find.text('给应用评分'), findsOneWidget);
     });
+    testWidgets(
+      'Device locale is Traditional Chinese when set to Traditional Chinese',
+      (tester) async {
+        tester.platformDispatcher.localesTestValue = [
+          const Locale.fromSubtags(
+            languageCode: 'zh',
+            scriptCode: 'Hant',
+            countryCode: 'TW',
+          ),
+        ];
+        await tester.pumpWidget(
+          const TestSettingsPage(),
+        );
+        expect(find.text('為這個App評分'), findsOneWidget);
+      },
+    );
     testWidgets('Device locale is Japanese when set to Japanese', (
       tester,
     ) async {

@@ -64,6 +64,12 @@
             "state" : "translated",
             "value" : "Life Battery"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
         }
       }
     },

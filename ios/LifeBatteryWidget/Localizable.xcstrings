@@ -62,6 +62,12 @@
             "state": "translated",
             "value": "天"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "天"
+          }
         }
       }
     },
@@ -126,6 +132,12 @@
             "state": "translated",
             "value": "一眼看到余生还剩多少"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一眼看出餘生還剩多少"
+          }
         }
       }
     },
@@ -186,6 +198,12 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -254,6 +272,12 @@
             "state": "translated",
             "value": "可在应用内解锁"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可在App內解鎖"
+          }
         }
       }
     },
@@ -318,6 +342,12 @@
             "state": "translated",
             "value": "高级版功能"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "進階版功能"
+          }
         }
       }
     },
@@ -381,6 +411,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "剩余人生"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剩餘人生"
           }
         }
       }
