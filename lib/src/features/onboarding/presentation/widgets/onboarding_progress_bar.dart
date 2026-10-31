@@ -21,7 +21,7 @@ class OnboardingProgressBar extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 24, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 24, 0),
       child: Row(
         children: [
           IconButton(
