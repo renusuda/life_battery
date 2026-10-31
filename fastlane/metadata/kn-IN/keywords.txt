@@ -1,0 +1,1 @@
+widget,ವಿಜೆಟ್,ಜನ್ಮದಿನ,ಸಾವು,ಗಡಿಯಾರ,ಕ್ಯಾಲೆಂಡರ್,ಆಯುಷ್ಯ,ಆಯಸ್ಸು,age,calculator,death,clock,memento mori
