@@ -111,6 +111,12 @@
             "value": " நாட்கள்"
           }
         },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " రోజులు"
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -247,6 +253,12 @@
             "value": "மீதமுள்ள வாழ்நாளை ஒரே பார்வையில் பாருங்கள்."
           }
         },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "మిగిలిన జీవితాన్ని ఒక్క చూపులో చూడండి."
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -378,6 +390,12 @@
           }
         },
         "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "te": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -519,6 +537,12 @@
             "value": "செயலியில் அன்லாக் செய்யுங்கள்"
           }
         },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "యాప్‌లో అన్‌లాక్ చేయండి"
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -655,6 +679,12 @@
             "value": "பிரீமியம் அம்சம்"
           }
         },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ప్రీమియం ఫీచర్"
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -789,6 +819,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "மீதமுள்ள வாழ்நாள்"
+          }
+        },
+        "te": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "మిగిలిన జీవితం"
           }
         },
         "th": {
