@@ -1,0 +1,1 @@
+widget,উইজেট,জন্মদিন,মৃত্যু,ঘড়ি,ক্যালেন্ডার,দিন,সপ্তাহ,age,calculator,death,clock,memento mori
