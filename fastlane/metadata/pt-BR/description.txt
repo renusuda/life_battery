@@ -1,0 +1,8 @@
+Veja quanto da sua vida ainda resta, em porcentagem, representado como uma bateria.
+Confira de relance com o widget da Tela de Início.
+Basta informar sua data de nascimento e sua expectativa de vida ideal para ver quantos dias ainda restam.
+
+O Life Battery lembra você de que a vida é finita e de que o hoje importa.
+
+Termos de uso (EULA):
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/

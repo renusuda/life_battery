@@ -1,0 +1,1 @@
+widget,contagem,regressiva,calculadora,idade,anos,morte,morrer,calendário,semanas,longevidade,tempo
