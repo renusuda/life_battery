@@ -189,12 +189,12 @@ class BatteryKnob extends StatelessWidget {
     return Container(
       width: knobWidth,
       height: knobHeight,
-      margin: const EdgeInsets.only(left: 5),
+      margin: const EdgeInsetsDirectional.only(start: 5),
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.tertiary,
-          borderRadius: const BorderRadius.horizontal(
-            right: Radius.circular(knobWidth),
+          borderRadius: const BorderRadiusDirectional.horizontal(
+            end: Radius.circular(knobWidth),
           ),
         ),
       ),
