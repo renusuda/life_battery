@@ -159,14 +159,18 @@ class BatteryText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Some translations of the remaining days are wider than the battery, so
+    // they shrink to fit instead of being cut off.
     return Center(
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 40,
-          fontWeight: FontWeight.bold,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        overflow: TextOverflow.ellipsis,
       ),
     );
   }
