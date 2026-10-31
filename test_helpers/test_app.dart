@@ -28,10 +28,7 @@ class TestApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('ja'),
-        Locale('en'),
-      ],
+      supportedLocales: AppLocalizations.supportedLocales,
       localeResolutionCallback: (locale, supportedLocales) {
         const defaultLocale = Locale('en');
         return supportedLocales.firstWhereOrNull(
