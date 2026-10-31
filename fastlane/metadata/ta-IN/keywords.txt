@@ -1,0 +1,1 @@
+widget,விட்ஜெட்,வாழ்நாள்,பிறந்தநாள்,மரணம்,age,calculator,death,clock,countdown,memento mori,life
