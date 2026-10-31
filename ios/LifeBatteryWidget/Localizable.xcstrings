@@ -81,6 +81,12 @@
             "value": " hari"
           }
         },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " ଦିନ"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -199,6 +205,12 @@
             "value": "Lihat baki hidup anda dengan sekali pandang."
           }
         },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଆପଣଙ୍କ ବାକି ଜୀବନ ଏକ ନଜରରେ ଦେଖନ୍ତୁ।"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -312,6 +324,12 @@
           }
         },
         "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "or": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -435,6 +453,12 @@
             "value": "Buka dalam aplikasi"
           }
         },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ଆପ୍‌ରେ ଅନ୍‌ଲକ୍ କରନ୍ତୁ"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -553,6 +577,12 @@
             "value": "Ciri Premium"
           }
         },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ପ୍ରିମିୟମ୍ ଫିଚର୍"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -669,6 +699,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "BAKI HIDUP"
+          }
+        },
+        "or": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ବାକି ଜୀବନ"
           }
         },
         "pt": {

@@ -364,6 +364,7 @@
 				mr,
 				ko,
 				ms,
+				or,
 				pt,
 				ru,
 				th,
