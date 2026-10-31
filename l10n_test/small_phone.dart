@@ -28,8 +28,8 @@ Locale get targetLocale {
 /// device. SF Pro, installed on the Mac from developer.apple.com/fonts,
 /// stands in for the iOS system font. It has no Japanese, Chinese, Korean,
 /// Thai, Devanagari, Bengali, Gujarati, Kannada, Malayalam, Odia, Gurmukhi,
-/// Tamil, Telugu or Arabic glyphs and the test engine has no font fallback,
-/// so those languages need their own font here.
+/// Tamil, Telugu, Arabic or Hebrew glyphs and the test engine has no font
+/// fallback, so those languages need their own font here.
 Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'zh') {
     return _loadPingFang(targetLocale.scriptCode == 'Hant' ? 'TC' : 'SC');
@@ -48,6 +48,7 @@ Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'ta') return _loadTamilSangamMN();
   if (targetLocale.languageCode == 'te') return _loadKohinoorTelugu();
   if (targetLocale.languageCode == 'ar') return _loadSFArabic();
+  if (targetLocale.languageCode == 'he') return _loadSFHebrew();
   const families = {
     'CupertinoSystemText': 'SF-Pro-Text',
     'CupertinoSystemDisplay': 'SF-Pro-Display',
@@ -255,6 +256,20 @@ Future<void> _loadKohinoorTelugu() async {
 /// covers every weight.
 Future<void> _loadSFArabic() async {
   final bytes = File('/System/Library/Fonts/SFArabic.ttf').readAsBytes();
+  for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
+    final loader = FontLoader(family)
+      ..addFont(bytes.then(ByteData.sublistView));
+    await loader.load();
+  }
+}
+
+/// iOS draws Hebrew with SF Hebrew, whose Hebrew glyphs and line height
+/// decide the layout. It stands in for SF Pro too. It has no Latin letters,
+/// Western digits, % or commas, so "Life Battery", numbers and that
+/// punctuation are measured with its placeholder glyph, wider than SF Pro.
+/// It is a variable font, so one file covers every weight.
+Future<void> _loadSFHebrew() async {
+  final bytes = File('/System/Library/Fonts/SFHebrew.ttf').readAsBytes();
   for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
     final loader = FontLoader(family)
       ..addFont(bytes.then(ByteData.sublistView));
