@@ -353,6 +353,7 @@
 				en,
 				Base,
 				ja,
+				th,
 				vi,
 				"zh-Hans",
 			);

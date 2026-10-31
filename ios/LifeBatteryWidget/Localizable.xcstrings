@@ -15,6 +15,12 @@
             "value": "日"
           }
         },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " วัน"
+          }
+        },
         "vi": {
           "stringUnit": {
             "state": "translated",
@@ -41,6 +47,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生をひと目で確認"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ดูชีวิตที่เหลืออยู่ได้ในพริบตา"
           }
         },
         "vi": {
@@ -71,6 +83,12 @@
             "value": "ライフバッテリー"
           }
         },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
         "vi": {
           "stringUnit": {
             "state": "translated",
@@ -97,6 +115,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "アプリ内で解除できます"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ปลดล็อกได้ในแอป"
           }
         },
         "vi": {
@@ -127,6 +151,12 @@
             "value": "プレミアム機能"
           }
         },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ฟีเจอร์พรีเมียม"
+          }
+        },
         "vi": {
           "stringUnit": {
             "state": "translated",
@@ -153,6 +183,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ชีวิตที่เหลือ"
           }
         },
         "vi": {
