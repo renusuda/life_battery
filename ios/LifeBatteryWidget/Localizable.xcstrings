@@ -105,6 +105,12 @@
             "value": " дн."
           }
         },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " நாட்கள்"
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -235,6 +241,12 @@
             "value": "Оставшаяся жизнь с одного взгляда."
           }
         },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மீதமுள்ள வாழ்நாளை ஒரே பார்வையில் பாருங்கள்."
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -360,6 +372,12 @@
           }
         },
         "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "ta": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -495,6 +513,12 @@
             "value": "Разблокируйте в приложении"
           }
         },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "செயலியில் அன்லாக் செய்யுங்கள்"
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -625,6 +649,12 @@
             "value": "Функция Premium"
           }
         },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பிரீமியம் அம்சம்"
+          }
+        },
         "th": {
           "stringUnit": {
             "state": "translated",
@@ -753,6 +783,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ОСТАЛОСЬ ЖИЗНИ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மீதமுள்ள வாழ்நாள்"
           }
         },
         "th": {

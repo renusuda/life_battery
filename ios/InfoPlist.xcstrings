@@ -107,6 +107,12 @@
             "value" : "Life Battery"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "th" : {
           "stringUnit" : {
             "state" : "translated",

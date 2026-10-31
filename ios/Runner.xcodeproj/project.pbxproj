@@ -368,6 +368,7 @@
 				pa,
 				pt,
 				ru,
+				ta,
 				th,
 				vi,
 				"zh-Hans",
