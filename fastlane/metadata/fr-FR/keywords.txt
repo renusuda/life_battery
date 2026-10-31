@@ -1,0 +1,1 @@
+widget,longévité,durée,âge,calcul,mort,mourir,décès,jours,semaines,calendrier,stoïcisme,horloge
