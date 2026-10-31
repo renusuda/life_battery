@@ -1,0 +1,8 @@
+以电池的形式，显示你的人生还剩下百分之多少。
+通过主屏幕小组件，随时一眼查看。
+只需设置出生日期和理想寿命，就能看到你还剩多少天。
+
+Life Battery提醒你：人生有限，今天弥足珍贵。
+
+使用条款（EULA）：
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
