@@ -27,6 +27,12 @@
             "value": "日"
           }
         },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " hari"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -83,6 +89,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生をひと目で確認"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lihat baki hidup anda dengan sekali pandang."
           }
         },
         "pt": {
@@ -143,6 +155,12 @@
             "value": "ライフバッテリー"
           }
         },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -199,6 +217,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "アプリ内で解除できます"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka dalam aplikasi"
           }
         },
         "pt": {
@@ -259,6 +283,12 @@
             "value": "プレミアム機能"
           }
         },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ciri Premium"
+          }
+        },
         "pt": {
           "stringUnit": {
             "state": "translated",
@@ -315,6 +345,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BAKI HIDUP"
           }
         },
         "pt": {
