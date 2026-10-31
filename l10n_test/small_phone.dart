@@ -27,9 +27,9 @@ Locale get targetLocale {
 /// The test font draws every glyph as a 1em square, far wider than on a
 /// device. SF Pro, installed on the Mac from developer.apple.com/fonts,
 /// stands in for the iOS system font. It has no Japanese, Chinese, Korean,
-/// Thai, Devanagari, Bengali, Gujarati, Kannada, Malayalam, Odia, Gurmukhi or
-/// Tamil glyphs and the test engine has no font fallback, so those languages
-/// need their own font here.
+/// Thai, Devanagari, Bengali, Gujarati, Kannada, Malayalam, Odia, Gurmukhi,
+/// Tamil or Telugu glyphs and the test engine has no font fallback, so those
+/// languages need their own font here.
 Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'zh') {
     return _loadPingFang(targetLocale.scriptCode == 'Hant' ? 'TC' : 'SC');
@@ -46,6 +46,7 @@ Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'or') return _loadNotoSansOriya();
   if (targetLocale.languageCode == 'pa') return _loadMuktaMahee();
   if (targetLocale.languageCode == 'ta') return _loadTamilSangamMN();
+  if (targetLocale.languageCode == 'te') return _loadKohinoorTelugu();
   const families = {
     'CupertinoSystemText': 'SF-Pro-Text',
     'CupertinoSystemDisplay': 'SF-Pro-Display',
@@ -225,6 +226,21 @@ Future<void> _loadTamilSangamMN() async {
   for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
     final loader = FontLoader(family);
     for (final name in ['TamilSangamMN', 'TamilSangamMN-Bold']) {
+      loader.addFont(Future.value(fontFromCollection(file, name)));
+    }
+    await loader.load();
+  }
+}
+
+/// iOS draws Telugu with Kohinoor Telugu, whose Telugu glyphs and tall line
+/// height decide the layout. It stands in for SF Pro too, Latin text and
+/// digits included, since there is no fallback between the two.
+Future<void> _loadKohinoorTelugu() async {
+  final file = File('/System/Library/Fonts/KohinoorTelugu.ttc');
+  for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
+    final loader = FontLoader(family);
+    for (final weight in ['Regular', 'Medium', 'Semibold', 'Bold']) {
+      final name = 'KohinoorTelugu-$weight';
       loader.addFont(Future.value(fontFromCollection(file, name)));
     }
     await loader.load();
