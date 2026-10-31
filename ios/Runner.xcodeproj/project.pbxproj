@@ -352,6 +352,7 @@
 			knownRegions = (
 				en,
 				Base,
+				bn,
 				es,
 				fr,
 				hi,

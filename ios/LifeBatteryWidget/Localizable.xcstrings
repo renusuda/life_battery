@@ -3,6 +3,12 @@
   "strings": {
     "widget.dayUnit": {
       "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " দিন"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -91,6 +97,12 @@
     },
     "widget.description": {
       "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আপনার বাকি জীবন এক নজরে দেখুন।"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -179,6 +191,12 @@
     },
     "widget.displayName": {
       "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -267,6 +285,12 @@
     },
     "widget.lockedDescription": {
       "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "অ্যাপে আনলক করুন"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -355,6 +379,12 @@
     },
     "widget.lockedTitle": {
       "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "প্রিমিয়াম ফিচার"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
@@ -443,6 +473,12 @@
     },
     "widget.titleLabel": {
       "localizations": {
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "বাকি জীবন"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
