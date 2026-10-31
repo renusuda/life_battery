@@ -251,6 +251,9 @@ struct LifeBatteryWidgetEntryView: View {
             : "\(entry.remainingDays)\(String(localized: "widget.dayUnit"))")
             .font(.system(size: 26, weight: .bold, design: .rounded))
             .foregroundColor(.primary)
+            // Long translations of the day unit shrink instead of wrapping.
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
         }
         .frame(height: 56)
 
