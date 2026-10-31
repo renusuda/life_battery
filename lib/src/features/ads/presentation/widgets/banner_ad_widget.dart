@@ -22,9 +22,9 @@ class BannerAdWidget extends ConsumerWidget {
           SizedBox(
             width: bannerAd.size.width.toDouble(),
             child: const Align(
-              alignment: Alignment.centerRight,
+              alignment: AlignmentDirectional.centerEnd,
               child: Padding(
-                padding: EdgeInsets.only(right: 8),
+                padding: EdgeInsetsDirectional.only(end: 8),
                 child: _AdCloseButton(),
               ),
             ),
