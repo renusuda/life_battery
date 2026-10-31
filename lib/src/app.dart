@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -13,6 +12,7 @@ import 'package:life_battery/src/features/settings/presentation/providers/app_th
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/routing/app_router.dart';
 import 'package:life_battery/src/theme/app_theme.dart';
+import 'package:life_battery/src/utils/locale_resolution.dart';
 
 class App extends HookConsumerWidget {
   const App({super.key});
@@ -51,14 +51,7 @@ class App extends HookConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      localeResolutionCallback: (locale, supportedLocales) {
-        const defaultLocale = Locale('en');
-        return supportedLocales.firstWhereOrNull(
-              (supportedLocale) =>
-                  supportedLocale.languageCode == locale?.languageCode,
-            ) ??
-            defaultLocale;
-      },
+      localeResolutionCallback: resolveLocale,
     );
   }
 }

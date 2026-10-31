@@ -1,8 +1,8 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/theme/app_theme.dart';
+import 'package:life_battery/src/utils/locale_resolution.dart';
 
 class TestApp extends StatelessWidget {
   const TestApp({
@@ -29,14 +29,7 @@ class TestApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      localeResolutionCallback: (locale, supportedLocales) {
-        const defaultLocale = Locale('en');
-        return supportedLocales.firstWhereOrNull(
-              (supportedLocale) =>
-                  supportedLocale.languageCode == locale?.languageCode,
-            ) ??
-            defaultLocale;
-      },
+      localeResolutionCallback: resolveLocale,
     );
   }
 }
