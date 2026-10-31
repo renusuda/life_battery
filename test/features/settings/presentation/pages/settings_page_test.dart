@@ -264,12 +264,27 @@ void main() {
       );
       expect(find.text('Rate this app'), findsOneWidget);
     });
-    testWidgets('Device locale is Chinese when set to English', (tester) async {
-      tester.platformDispatcher.localesTestValue = [const Locale('zh')];
+    testWidgets('Device locale is German when set to English', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('de')];
       await tester.pumpWidget(
         const TestSettingsPage(),
       );
       expect(find.text('Rate this app'), findsOneWidget);
+    });
+    testWidgets('Device locale is Simplified Chinese when set to Chinese', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [
+        const Locale.fromSubtags(
+          languageCode: 'zh',
+          scriptCode: 'Hans',
+          countryCode: 'CN',
+        ),
+      ];
+      await tester.pumpWidget(
+        const TestSettingsPage(),
+      );
+      expect(find.text('给应用评分'), findsOneWidget);
     });
     testWidgets('Device locale is Japanese when set to Japanese', (
       tester,

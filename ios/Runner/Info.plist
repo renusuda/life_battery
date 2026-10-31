@@ -11,6 +11,7 @@
 		<string>en</string>
 		<string>ja</string>
 		<string>vi</string>
+		<string>zh-Hans</string>
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Life Battery</string>

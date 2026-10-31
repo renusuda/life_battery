@@ -22,6 +22,12 @@
             "state" : "translated",
             "value" : "Life Battery"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
         }
       }
     },
