@@ -359,6 +359,7 @@
 				hi,
 				id,
 				ja,
+				kn,
 				ko,
 				ms,
 				pt,

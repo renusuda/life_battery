@@ -51,6 +51,12 @@
             "value": "日"
           }
         },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " ದಿನ"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -149,6 +155,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生をひと目で確認"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ನಿಮ್ಮ ಉಳಿದ ಜೀವನವನ್ನು ಒಂದೇ ನೋಟದಲ್ಲಿ ನೋಡಿ."
           }
         },
         "ko": {
@@ -251,6 +263,12 @@
             "value": "ライフバッテリー"
           }
         },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -349,6 +367,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "アプリ内で解除できます"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಆ್ಯಪ್‌ನಲ್ಲಿ ಅನ್‌ಲಾಕ್ ಮಾಡಿ"
           }
         },
         "ko": {
@@ -451,6 +475,12 @@
             "value": "プレミアム機能"
           }
         },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಪ್ರೀಮಿಯಂ ಫೀಚರ್"
+          }
+        },
         "ko": {
           "stringUnit": {
             "state": "translated",
@@ -549,6 +579,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生"
+          }
+        },
+        "kn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ಉಳಿದ ಜೀವನ"
           }
         },
         "ko": {
