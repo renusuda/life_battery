@@ -1,0 +1,8 @@
+Visualisez le pourcentage de vie qu’il vous reste, affiché sous forme de batterie.
+Consultez-le d’un coup d’œil grâce au widget de l’écran d’accueil.
+Indiquez simplement votre date de naissance et votre durée de vie idéale pour connaître le nombre de jours qu’il vous reste.
+
+Life Battery vous rappelle que la vie a une fin, et que chaque jour compte.
+
+Conditions d’utilisation (CLUF) :
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
