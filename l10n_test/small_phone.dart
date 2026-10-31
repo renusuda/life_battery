@@ -27,8 +27,8 @@ Locale get targetLocale {
 /// The test font draws every glyph as a 1em square, far wider than on a
 /// device. SF Pro, installed on the Mac from developer.apple.com/fonts,
 /// stands in for the iOS system font. It has no Japanese, Chinese, Thai or
-/// Devanagari glyphs and the test engine has no font fallback, so those languages need
-/// their own font here.
+/// Devanagari glyphs and the test engine has no font fallback, so those
+/// languages need their own font here.
 Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'zh') {
     return _loadPingFang(targetLocale.scriptCode == 'Hant' ? 'TC' : 'SC');
