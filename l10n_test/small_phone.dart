@@ -30,7 +30,9 @@ Locale get targetLocale {
 /// glyphs and the test engine has no font fallback, so those languages need
 /// their own font here.
 Future<void> loadIosSystemFonts() async {
-  if (targetLocale.languageCode == 'zh') return _loadPingFang('SC');
+  if (targetLocale.languageCode == 'zh') {
+    return _loadPingFang(targetLocale.scriptCode == 'Hant' ? 'TC' : 'SC');
+  }
   if (targetLocale.languageCode == 'th') return _loadThonburi();
   const families = {
     'CupertinoSystemText': 'SF-Pro-Text',
