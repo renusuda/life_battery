@@ -31,6 +31,7 @@ Locale get targetLocale {
 /// their own font here.
 Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'zh') return _loadPingFang('SC');
+  if (targetLocale.languageCode == 'th') return _loadThonburi();
   const families = {
     'CupertinoSystemText': 'SF-Pro-Text',
     'CupertinoSystemDisplay': 'SF-Pro-Display',
@@ -49,10 +50,27 @@ Future<void> loadIosSystemFonts() async {
 /// since there is no fallback between the two. It has no Bold, so bold text
 /// uses Semibold.
 Future<void> _loadPingFang(String region) async {
+  final file = pingFangCollection;
   for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
     final loader = FontLoader(family);
     for (final weight in ['Regular', 'Medium', 'Semibold']) {
-      loader.addFont(Future.value(pingFangFont('PingFang$region-$weight')));
+      final name = 'PingFang$region-$weight';
+      loader.addFont(Future.value(fontFromCollection(file, name)));
+    }
+    await loader.load();
+  }
+}
+
+/// iOS draws Thai with Thonburi, whose Thai glyphs and tall line height
+/// decide the layout. Thonburi stands in for SF Pro too, since there is no
+/// fallback between the two. It has no Medium or Semibold, so those use the
+/// nearest of Regular and Bold.
+Future<void> _loadThonburi() async {
+  final file = File('/System/Library/Fonts/Supplemental/Thonburi.ttc');
+  for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
+    final loader = FontLoader(family);
+    for (final name in ['Thonburi', 'Thonburi-Bold']) {
+      loader.addFont(Future.value(fontFromCollection(file, name)));
     }
     await loader.load();
   }
