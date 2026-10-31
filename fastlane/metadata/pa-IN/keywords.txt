@@ -1,0 +1,1 @@
+widget,ਵਿਜੇਟ,ਜਨਮਦਿਨ,ਮੌਤ,ਘੜੀ,ਕੈਲੰਡਰ,ਦਿਨ,ਹਫ਼ਤੇ,ਜ਼ਿੰਦਗੀ,ਆਯੂ,age,calculator,death,clock,memento mori
