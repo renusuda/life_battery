@@ -1,6 +1,8 @@
 default_platform(:ios)
 
 RELEASE_NOTES_JSON = File.expand_path("../release_notes.json", __dir__)
+# Fixed notes for the languages that release_notes.json does not cover.
+DEFAULT_RELEASE_NOTES_JSON = File.expand_path("default_release_notes.json", __dir__)
 METADATA_DIR = File.expand_path("metadata", __dir__)
 
 platform :ios do
@@ -26,14 +28,22 @@ platform :ios do
     deliver(api_key_path: api_key_json_path)
   end
 
-  desc "Write metadata/<locale>/release_notes.txt from release_notes.json"
+  desc "Write metadata/<locale>/release_notes.txt from release_notes.json and default_release_notes.json"
   lane :sync_release_notes do
+    defaults = JSON.parse(File.read(DEFAULT_RELEASE_NOTES_JSON))
     notes = JSON.parse(File.read(RELEASE_NOTES_JSON))
-    notes.each do |entry|
+    # Written last, so release_notes.json wins for a language in both files.
+    entries = defaults + notes
+    entries.each do |entry|
       dir = File.join(METADATA_DIR, entry["language"])
       FileUtils.mkdir_p(dir)
       File.write(File.join(dir, "release_notes.txt"), entry["text"])
     end
+
+    # App Store Connect requires notes in every language to submit an update.
+    locales = Dir.glob(File.join(METADATA_DIR, "*", "name.txt")).map { |path| File.basename(File.dirname(path)) }
+    missing = locales - entries.map { |entry| entry["language"] }
+    UI.user_error!("No release notes for #{missing.join(', ')}. Add them to default_release_notes.json.") unless missing.empty?
   end
 end
 
