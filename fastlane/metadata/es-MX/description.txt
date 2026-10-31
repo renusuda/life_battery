@@ -1,0 +1,8 @@
+Mira qué porcentaje de tu vida te queda, representado como una batería.
+Consúltalo de un vistazo con el widget de la pantalla de inicio.
+Solo ingresa tu fecha de nacimiento y tu esperanza de vida ideal para ver los días que te quedan.
+
+Life Battery te recuerda que la vida es finita y que el día de hoy importa.
+
+Términos de uso (EULA):
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
