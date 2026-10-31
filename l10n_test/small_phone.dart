@@ -27,9 +27,9 @@ Locale get targetLocale {
 /// The test font draws every glyph as a 1em square, far wider than on a
 /// device. SF Pro, installed on the Mac from developer.apple.com/fonts,
 /// stands in for the iOS system font. It has no Japanese, Chinese, Korean,
-/// Thai, Devanagari, Bengali, Gujarati, Kannada or Malayalam glyphs and the
-/// test engine has no font fallback, so those languages need their own font
-/// here.
+/// Thai, Devanagari, Bengali, Gujarati, Kannada, Malayalam or Odia glyphs and
+/// the test engine has no font fallback, so those languages need their own
+/// font here.
 Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'zh') {
     return _loadPingFang(targetLocale.scriptCode == 'Hant' ? 'TC' : 'SC');
@@ -43,6 +43,7 @@ Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'gu') return _loadKohinoorGujarati();
   if (targetLocale.languageCode == 'kn') return _loadNotoSansKannada();
   if (targetLocale.languageCode == 'ml') return _loadMalayalamSangamMN();
+  if (targetLocale.languageCode == 'or') return _loadNotoSansOriya();
   const families = {
     'CupertinoSystemText': 'SF-Pro-Text',
     'CupertinoSystemDisplay': 'SF-Pro-Display',
@@ -176,6 +177,22 @@ Future<void> _loadMalayalamSangamMN() async {
   for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
     final loader = FontLoader(family);
     for (final name in ['MalayalamSangamMN', 'MalayalamSangamMN-Bold']) {
+      loader.addFont(Future.value(fontFromCollection(file, name)));
+    }
+    await loader.load();
+  }
+}
+
+/// iOS draws Odia with Noto Sans Oriya, whose Odia glyphs and line height
+/// decide the layout. It stands in for SF Pro too, digits included. It has
+/// no Latin letters, so "Life Battery" is measured with its 0.6em
+/// placeholder glyph, a little wider than SF Pro. It has only Regular and
+/// Bold, so Medium and Semibold use the nearest of the two.
+Future<void> _loadNotoSansOriya() async {
+  final file = File('/System/Library/Fonts/NotoSansOriya.ttc');
+  for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
+    final loader = FontLoader(family);
+    for (final name in ['NotoSansOriya', 'NotoSansOriya-Bold']) {
       loader.addFont(Future.value(fontFromCollection(file, name)));
     }
     await loader.load();
