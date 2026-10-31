@@ -27,8 +27,9 @@ Locale get targetLocale {
 /// The test font draws every glyph as a 1em square, far wider than on a
 /// device. SF Pro, installed on the Mac from developer.apple.com/fonts,
 /// stands in for the iOS system font. It has no Japanese, Chinese, Korean,
-/// Thai, Devanagari, Bengali, Gujarati or Kannada glyphs and the test engine
-/// has no font fallback, so those languages need their own font here.
+/// Thai, Devanagari, Bengali, Gujarati, Kannada or Malayalam glyphs and the
+/// test engine has no font fallback, so those languages need their own font
+/// here.
 Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'zh') {
     return _loadPingFang(targetLocale.scriptCode == 'Hant' ? 'TC' : 'SC');
@@ -39,6 +40,7 @@ Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'bn') return _loadKohinoorBangla();
   if (targetLocale.languageCode == 'gu') return _loadKohinoorGujarati();
   if (targetLocale.languageCode == 'kn') return _loadNotoSansKannada();
+  if (targetLocale.languageCode == 'ml') return _loadMalayalamSangamMN();
   const families = {
     'CupertinoSystemText': 'SF-Pro-Text',
     'CupertinoSystemDisplay': 'SF-Pro-Display',
@@ -155,6 +157,23 @@ Future<void> _loadNotoSansKannada() async {
     final loader = FontLoader(family);
     for (final weight in ['Regular', 'Bold']) {
       final name = 'NotoSansKannada-$weight';
+      loader.addFont(Future.value(fontFromCollection(file, name)));
+    }
+    await loader.load();
+  }
+}
+
+/// iOS draws Malayalam with Malayalam Sangam MN, whose Malayalam glyphs and
+/// line height decide the layout. It stands in for SF Pro too, Latin text
+/// and digits included, since there is no fallback between the two. It has
+/// no Medium or Semibold, so those use the nearest of Regular and Bold.
+Future<void> _loadMalayalamSangamMN() async {
+  final file = File(
+    '/System/Library/Fonts/Supplemental/Malayalam Sangam MN.ttc',
+  );
+  for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
+    final loader = FontLoader(family);
+    for (final name in ['MalayalamSangamMN', 'MalayalamSangamMN-Bold']) {
       loader.addFont(Future.value(fontFromCollection(file, name)));
     }
     await loader.load();
