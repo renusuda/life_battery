@@ -41,6 +41,12 @@
             "value" : "ライフバッテリー"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "ms" : {
           "stringUnit" : {
             "state" : "translated",

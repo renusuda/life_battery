@@ -39,6 +39,12 @@
             "value": "日"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일"
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -119,6 +125,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生をひと目で確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "남은 인생을 한눈에 확인하세요."
           }
         },
         "ms": {
@@ -203,6 +215,12 @@
             "value": "ライフバッテリー"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -283,6 +301,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "アプリ内で解除できます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱에서 잠금 해제"
           }
         },
         "ms": {
@@ -367,6 +391,12 @@
             "value": "プレミアム機能"
           }
         },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프리미엄 기능"
+          }
+        },
         "ms": {
           "stringUnit": {
             "state": "translated",
@@ -447,6 +477,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "남은 인생"
           }
         },
         "ms": {
