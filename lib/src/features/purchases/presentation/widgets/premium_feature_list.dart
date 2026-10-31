@@ -73,7 +73,9 @@ class _FeatureRow extends StatelessWidget {
       children: [
         Text(icon, style: const TextStyle(fontSize: 24)),
         const SizedBox(width: 12),
-        Text.rich(TextSpan(style: baseStyle, children: spans)),
+        Flexible(
+          child: Text.rich(TextSpan(style: baseStyle, children: spans)),
+        ),
       ],
     );
   }
