@@ -28,8 +28,8 @@ Locale get targetLocale {
 /// device. SF Pro, installed on the Mac from developer.apple.com/fonts,
 /// stands in for the iOS system font. It has no Japanese, Chinese, Korean,
 /// Thai, Devanagari, Bengali, Gujarati, Kannada, Malayalam, Odia, Gurmukhi,
-/// Tamil, Telugu, Arabic or Hebrew glyphs and the test engine has no font
-/// fallback, so those languages need their own font here.
+/// Tamil, Telugu, Arabic, Hebrew or Urdu glyphs and the test engine has no
+/// font fallback, so those languages need their own font here.
 Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'zh') {
     return _loadPingFang(targetLocale.scriptCode == 'Hant' ? 'TC' : 'SC');
@@ -49,6 +49,7 @@ Future<void> loadIosSystemFonts() async {
   if (targetLocale.languageCode == 'te') return _loadKohinoorTelugu();
   if (targetLocale.languageCode == 'ar') return _loadSFArabic();
   if (targetLocale.languageCode == 'he') return _loadSFHebrew();
+  if (targetLocale.languageCode == 'ur') return _loadNotoNastaliqUrdu();
   const families = {
     'CupertinoSystemText': 'SF-Pro-Text',
     'CupertinoSystemDisplay': 'SF-Pro-Display',
@@ -273,6 +274,31 @@ Future<void> _loadSFHebrew() async {
   for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
     final loader = FontLoader(family)
       ..addFont(bytes.then(ByteData.sublistView));
+    await loader.load();
+  }
+}
+
+/// iOS draws Urdu with Noto Nastaliq Urdu UI, whose Nastaliq glyphs and very
+/// tall line height decide the layout. It stands in for SF Pro too, digits
+/// included. It has no Latin letters or %, so "Life Battery" and % are
+/// measured with its 0.75em placeholder glyph, wider than SF Pro. The Mac
+/// copy has a unitsPerEm of 1440, but iOS ships the same glyphs with 1200, so
+/// that is patched in to render at the iOS size.
+Future<void> _loadNotoNastaliqUrdu() async {
+  const headTag = 0x68656164;
+  const iosUnitsPerEm = 1200;
+  final file = File('/System/Library/Fonts/NotoNastaliq.ttc');
+  for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
+    final loader = FontLoader(family);
+    for (final name in ['.NotoNastaliqUrduUI', '.NotoNastaliqUrduUI-Bold']) {
+      final font = fontFromCollection(file, name);
+      final tableCount = font.getUint16(4);
+      for (var i = 0; i < tableCount; i++) {
+        if (font.getUint32(12 + i * 16) != headTag) continue;
+        font.setUint16(font.getUint32(20 + i * 16) + 18, iosUnitsPerEm);
+      }
+      loader.addFont(Future.value(font));
+    }
     await loader.load();
   }
 }
