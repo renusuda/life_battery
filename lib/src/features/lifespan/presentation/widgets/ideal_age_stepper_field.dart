@@ -32,7 +32,7 @@ class IdealAgeStepperField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 8),
+          padding: const EdgeInsetsDirectional.only(start: 8),
           child: Text(
             l10n.idealLifespanLabel,
             style: const TextStyle(fontWeight: FontWeight.bold),
