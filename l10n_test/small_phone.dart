@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
+import 'font_collection.dart';
+
 /// The locale from `--dart-define=LOCALE=<tag>`. An unsupported tag would
 /// silently fall back to English, so anything but a supported one throws.
 Locale get targetLocale {
@@ -28,6 +30,7 @@ Locale get targetLocale {
 /// glyphs and the test engine has no font fallback, so those languages need
 /// their own font here.
 Future<void> loadIosSystemFonts() async {
+  if (targetLocale.languageCode == 'zh') return _loadPingFang('SC');
   const families = {
     'CupertinoSystemText': 'SF-Pro-Text',
     'CupertinoSystemDisplay': 'SF-Pro-Display',
@@ -37,6 +40,19 @@ Future<void> loadIosSystemFonts() async {
     for (final weight in ['Regular', 'Medium', 'Semibold', 'Bold']) {
       final bytes = File('/Library/Fonts/$fileName-$weight.otf').readAsBytes();
       loader.addFont(bytes.then(ByteData.sublistView));
+    }
+    await loader.load();
+  }
+}
+
+/// PingFang stands in for SF Pro entirely, Latin text and digits included,
+/// since there is no fallback between the two. It has no Bold, so bold text
+/// uses Semibold.
+Future<void> _loadPingFang(String region) async {
+  for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
+    final loader = FontLoader(family);
+    for (final weight in ['Regular', 'Medium', 'Semibold']) {
+      loader.addFont(Future.value(pingFangFont('PingFang$region-$weight')));
     }
     await loader.load();
   }
