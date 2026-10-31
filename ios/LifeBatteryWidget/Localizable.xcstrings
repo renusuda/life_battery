@@ -9,6 +9,12 @@
             "value": "d"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " días"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -49,6 +55,12 @@
             "value": "See your remaining life at a glance."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu vida restante de un vistazo."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -84,6 +96,12 @@
     "widget.displayName": {
       "localizations": {
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -129,6 +147,12 @@
             "value": "Unlock in the app"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloquéalo en la app"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -169,6 +193,12 @@
             "value": "Premium feature"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Función Premium"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -207,6 +237,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "LIFE LEFT"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VIDA RESTANTE"
           }
         },
         "fr": {
