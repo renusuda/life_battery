@@ -1,0 +1,1 @@
+widget,વિજેટ,જન્મદિવસ,મૃત્યુ,ઘડિયાળ,કેલેન્ડર,દિવસ,આયુષ્ય,age,calculator,death,clock,memento mori
