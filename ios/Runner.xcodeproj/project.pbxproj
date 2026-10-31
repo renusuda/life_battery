@@ -355,6 +355,7 @@
 				es,
 				fr,
 				ja,
+				pt,
 				ru,
 				th,
 				vi,

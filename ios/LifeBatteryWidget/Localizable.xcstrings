@@ -27,6 +27,12 @@
             "value": "日"
           }
         },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " dias"
+          }
+        },
         "ru": {
           "stringUnit": {
             "state": "translated",
@@ -77,6 +83,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生をひと目で確認"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua vida restante de relance."
           }
         },
         "ru": {
@@ -131,6 +143,12 @@
             "value": "ライフバッテリー"
           }
         },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
         "ru": {
           "stringUnit": {
             "state": "translated",
@@ -181,6 +199,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "アプリ内で解除できます"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloqueie no app"
           }
         },
         "ru": {
@@ -235,6 +259,12 @@
             "value": "プレミアム機能"
           }
         },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recurso Premium"
+          }
+        },
         "ru": {
           "stringUnit": {
             "state": "translated",
@@ -285,6 +315,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "残りの人生"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VIDA RESTANTE"
           }
         },
         "ru": {

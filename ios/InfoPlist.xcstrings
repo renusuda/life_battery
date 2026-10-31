@@ -29,6 +29,12 @@
             "value" : "ライフバッテリー"
           }
         },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Battery"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
