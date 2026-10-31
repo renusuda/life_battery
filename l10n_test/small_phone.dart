@@ -35,7 +35,9 @@ Future<void> loadIosSystemFonts() async {
     return _loadPingFang(targetLocale.scriptCode == 'Hant' ? 'TC' : 'SC');
   }
   if (targetLocale.languageCode == 'th') return _loadThonburi();
-  if (targetLocale.languageCode == 'hi') return _loadKohinoorDevanagari();
+  if (['hi', 'mr'].contains(targetLocale.languageCode)) {
+    return _loadKohinoorDevanagari();
+  }
   if (targetLocale.languageCode == 'ko') return _loadAppleSDGothicNeo();
   if (targetLocale.languageCode == 'bn') return _loadKohinoorBangla();
   if (targetLocale.languageCode == 'gu') return _loadKohinoorGujarati();
@@ -85,9 +87,9 @@ Future<void> _loadThonburi() async {
   }
 }
 
-/// iOS draws Hindi with Kohinoor Devanagari, whose Devanagari glyphs and
-/// line height decide the layout. It stands in for SF Pro too, Latin text
-/// and digits included, since there is no fallback between the two.
+/// iOS draws Hindi and Marathi with Kohinoor Devanagari, whose Devanagari
+/// glyphs and line height decide the layout. It stands in for SF Pro too,
+/// Latin text and digits included, since there is no fallback between the two.
 Future<void> _loadKohinoorDevanagari() async {
   final file = File('/System/Library/Fonts/Kohinoor.ttc');
   for (final family in ['CupertinoSystemText', 'CupertinoSystemDisplay']) {
