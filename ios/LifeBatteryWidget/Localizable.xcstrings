@@ -27,6 +27,12 @@
             "value": " दिन"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " hari"
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
@@ -103,6 +109,12 @@
             "value": "अपना बचा हुआ जीवन एक नज़र में देखें।"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lihat sisa hidup Anda sekilas."
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
@@ -174,6 +186,12 @@
           }
         },
         "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Life Battery"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "Life Battery"
@@ -255,6 +273,12 @@
             "value": "ऐप में अनलॉक करें"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka di aplikasi"
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
@@ -331,6 +355,12 @@
             "value": "प्रीमियम सुविधा"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fitur Premium"
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
@@ -405,6 +435,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "बचा हुआ जीवन"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SISA HIDUP"
           }
         },
         "ja": {
