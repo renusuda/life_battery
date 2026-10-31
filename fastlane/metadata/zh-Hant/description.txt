@@ -1,0 +1,8 @@
+以電池的形式，顯示你的人生還剩下百分之多少。
+透過主畫面小工具，隨時一眼查看。
+只要設定出生日期和理想壽命，就能看到你還剩多少天。
+
+Life Battery提醒你：人生有限，今天彌足珍貴。
+
+使用條款（EULA）：
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
