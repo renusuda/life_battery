@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_guide_video.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/widget_guide_list_tile.dart';
+import 'package:life_battery/src/features/settings/presentation/widgets/widget_guide_steps.dart';
 
 import '../../../../../test_helpers/fake_analytics.dart';
 import '../../../../../test_helpers/test_app.dart';
@@ -26,7 +28,7 @@ void main() {
   });
 
   testWidgets(
-    'Shows the guide steps in the sheet',
+    'Shows the guide video in the sheet like the onboarding step',
     (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildTile());
@@ -36,10 +38,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Add the widget to your Home Screen'), findsOneWidget);
-      expect(
-        find.text('Tap Edit in the top-left corner, then tap Add Widget.'),
-        findsOneWidget,
-      );
+      expect(find.byType(WidgetGuideVideo), findsOneWidget);
+      expect(find.byType(WidgetGuideSteps), findsNothing);
     },
     variant: TargetPlatformVariant.only(TargetPlatform.iOS),
   );
