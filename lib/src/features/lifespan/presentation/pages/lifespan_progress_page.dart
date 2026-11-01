@@ -177,6 +177,15 @@ class LifeProgressContent extends HookConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Text(
+            l10n.remainingLifeCaption,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.tertiary,
+            ),
+          ),
+          const SizedBox(height: 24),
           AnimatedScale(
             scale: isPressed.value ? 0.90 : 1.0,
             duration: const Duration(milliseconds: 100),

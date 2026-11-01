@@ -220,7 +220,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'Life remaining';
+  String get remainingLifeCaption => 'Life remaining';
 
   @override
   String get shareErrorContent => 'Sharing is unavailable right now.';

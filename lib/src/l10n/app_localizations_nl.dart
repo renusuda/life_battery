@@ -222,7 +222,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'Resterend leven';
+  String get remainingLifeCaption => 'Resterend leven';
 
   @override
   String get shareErrorContent => 'Delen is op dit moment niet mogelijk.';

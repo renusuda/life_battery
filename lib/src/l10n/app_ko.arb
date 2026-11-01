@@ -62,7 +62,7 @@
   "shareMessage": "내 인생은 {percentage}% 남았대. 너는?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "남은 인생",
+  "remainingLifeCaption": "남은 인생",
   "shareErrorContent": "지금은 공유할 수 없어요.",
   "onboardingBirthDateTitle": "생일이 언제인가요?",
   "onboardingBirthDateDescription": "남은 인생을 계산하는 데 사용돼요.",

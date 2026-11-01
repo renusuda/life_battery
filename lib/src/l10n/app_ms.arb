@@ -62,7 +62,7 @@
   "shareMessage": "Hidup saya berbaki {percentage}%. Anda pula?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "Baki hidup",
+  "remainingLifeCaption": "Baki hidup",
   "shareErrorContent": "Perkongsian tidak tersedia buat masa ini.",
   "onboardingBirthDateTitle": "Bilakah anda dilahirkan?",
   "onboardingBirthDateDescription": "Ini digunakan untuk mengira baki hidup anda.",

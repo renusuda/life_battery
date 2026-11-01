@@ -62,7 +62,7 @@
   "shareMessage": "എന്റെ ജീവിതത്തിന്റെ {percentage}% ശേഷിക്കുന്നു. നിങ്ങളുടേതോ?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "ശേഷിക്കുന്ന ജീവിതം",
+  "remainingLifeCaption": "ശേഷിക്കുന്ന ജീവിതം",
   "shareErrorContent": "ഇപ്പോൾ പങ്കിടാനാകില്ല.",
   "onboardingBirthDateTitle": "നിങ്ങൾ എപ്പോഴാണ് ജനിച്ചത്?",
   "onboardingBirthDateDescription": "നിങ്ങളുടെ ജീവിതം എത്ര ശേഷിക്കുന്നുവെന്ന് കണക്കാക്കാൻ ഇത് ഉപയോഗിക്കുന്നു.",

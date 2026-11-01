@@ -62,7 +62,7 @@
   "shareMessage": "Me queda el {percentage}% de mi vida. ¿Y a ti?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "Vida restante",
+  "remainingLifeCaption": "Vida restante",
   "shareErrorContent": "No se puede compartir en este momento.",
   "onboardingBirthDateTitle": "¿Cuándo naciste?",
   "onboardingBirthDateDescription": "Se usa para calcular cuánta vida te queda.",

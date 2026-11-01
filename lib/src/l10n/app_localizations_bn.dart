@@ -220,7 +220,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'বাকি জীবন';
+  String get remainingLifeCaption => 'বাকি জীবন';
 
   @override
   String get shareErrorContent => 'এই মুহূর্তে শেয়ার করা যাচ্ছে না।';

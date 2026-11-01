@@ -215,7 +215,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'العمر المتبقي';
+  String get remainingLifeCaption => 'العمر المتبقي';
 
   @override
   String get shareErrorContent => 'المشاركة غير متاحة حاليًا.';

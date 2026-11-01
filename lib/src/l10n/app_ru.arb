@@ -62,7 +62,7 @@
   "shareMessage": "Мне осталось {percentage}% жизни. А тебе?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "Осталось жизни",
+  "remainingLifeCaption": "Осталось жизни",
   "shareErrorContent": "Сейчас поделиться невозможно.",
   "onboardingBirthDateTitle": "Когда вы родились?",
   "onboardingBirthDateDescription": "Это нужно, чтобы рассчитать, сколько жизни у вас осталось.",

@@ -62,7 +62,7 @@
   "shareMessage": "تبقّى {percentage}% من عمري. وأنت؟",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "العمر المتبقي",
+  "remainingLifeCaption": "العمر المتبقي",
   "shareErrorContent": "المشاركة غير متاحة حاليًا.",
   "onboardingBirthDateTitle": "متى وُلدت؟",
   "onboardingBirthDateDescription": "نستخدمه لحساب ما تبقّى من عمرك.",

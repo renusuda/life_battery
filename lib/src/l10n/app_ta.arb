@@ -62,7 +62,7 @@
   "shareMessage": "என் வாழ்நாளில் {percentage}% மீதமுள்ளது. உங்களுக்கு?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "மீதமுள்ள வாழ்நாள்",
+  "remainingLifeCaption": "மீதமுள்ள வாழ்நாள்",
   "shareErrorContent": "இப்போது பகிர முடியவில்லை.",
   "onboardingBirthDateTitle": "நீங்கள் எப்போது பிறந்தீர்கள்?",
   "onboardingBirthDateDescription": "உங்கள் வாழ்நாளில் எவ்வளவு மீதமுள்ளது என்று கணக்கிட இது பயன்படும்.",

@@ -62,7 +62,7 @@
   "shareMessage": "আমার জীবনের {percentage}% বাকি। আপনার কত?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "বাকি জীবন",
+  "remainingLifeCaption": "বাকি জীবন",
   "shareErrorContent": "এই মুহূর্তে শেয়ার করা যাচ্ছে না।",
   "onboardingBirthDateTitle": "আপনার জন্ম কবে?",
   "onboardingBirthDateDescription": "আপনার জীবনের কতটা বাকি আছে, তা হিসাব করতে এটি ব্যবহার করা হয়।",

@@ -88,7 +88,7 @@
   },
   "shareHashtag": "#ライフバッテリー",
   "shareCardAppName": "ライフバッテリー",
-  "shareCardCaption": "残りの人生",
+  "remainingLifeCaption": "残りの人生",
   "shareErrorContent": "現在共有できません。",
   "onboardingBirthDateTitle": "誕生日はいつですか？",
   "onboardingBirthDateDescription": "残りの人生の計算に使います。",

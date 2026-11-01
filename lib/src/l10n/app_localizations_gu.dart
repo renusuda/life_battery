@@ -219,7 +219,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'બાકી જીવન';
+  String get remainingLifeCaption => 'બાકી જીવન';
 
   @override
   String get shareErrorContent => 'હાલમાં શેર કરી શકાતું નથી.';

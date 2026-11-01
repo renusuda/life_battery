@@ -206,7 +206,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => '剩余人生';
+  String get remainingLifeCaption => '剩余人生';
 
   @override
   String get shareErrorContent => '暂时无法分享。';
@@ -439,7 +439,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => '剩餘人生';
+  String get remainingLifeCaption => '剩餘人生';
 
   @override
   String get shareErrorContent => '目前無法分享。';

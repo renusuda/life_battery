@@ -220,7 +220,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'ಉಳಿದ ಜೀವನ';
+  String get remainingLifeCaption => 'ಉಳಿದ ಜೀವನ';
 
   @override
   String get shareErrorContent => 'ಸದ್ಯಕ್ಕೆ ಹಂಚಿಕೊಳ್ಳಲು ಸಾಧ್ಯವಿಲ್ಲ.';

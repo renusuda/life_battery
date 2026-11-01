@@ -220,7 +220,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'Sisa hidup';
+  String get remainingLifeCaption => 'Sisa hidup';
 
   @override
   String get shareErrorContent => 'Fitur berbagi sedang tidak tersedia.';

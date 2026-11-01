@@ -62,7 +62,7 @@
   "shareMessage": "נותרו לי {percentage}% מהחיים. ולך?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "החיים שנותרו",
+  "remainingLifeCaption": "החיים שנותרו",
   "shareErrorContent": "לא ניתן לשתף כרגע.",
   "onboardingBirthDateTitle": "מתי נולדת?",
   "onboardingBirthDateDescription": "המידע משמש לחישוב כמה נותר מהחיים שלך.",

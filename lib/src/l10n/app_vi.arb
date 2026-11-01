@@ -62,7 +62,7 @@
   "shareMessage": "Cuộc đời mình còn {percentage}%. Còn bạn thì sao?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "Quãng đời còn lại",
+  "remainingLifeCaption": "Quãng đời còn lại",
   "shareErrorContent": "Hiện không thể chia sẻ.",
   "onboardingBirthDateTitle": "Bạn sinh ngày nào?",
   "onboardingBirthDateDescription": "Thông tin này được dùng để tính quãng đời còn lại của bạn.",

@@ -222,7 +222,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'ശേഷിക്കുന്ന ജീവിതം';
+  String get remainingLifeCaption => 'ശേഷിക്കുന്ന ജീവിതം';
 
   @override
   String get shareErrorContent => 'ഇപ്പോൾ പങ്കിടാനാകില്ല.';

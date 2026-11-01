@@ -222,7 +222,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'Осталось жизни';
+  String get remainingLifeCaption => 'Осталось жизни';
 
   @override
   String get shareErrorContent => 'Сейчас поделиться невозможно.';

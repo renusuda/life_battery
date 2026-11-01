@@ -214,7 +214,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'ชีวิตที่เหลือ';
+  String get remainingLifeCaption => 'ชีวิตที่เหลือ';
 
   @override
   String get shareErrorContent => 'ขณะนี้ไม่สามารถแชร์ได้';

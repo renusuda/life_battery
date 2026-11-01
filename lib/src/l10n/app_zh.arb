@@ -62,7 +62,7 @@
   "shareMessage": "我的人生还剩{percentage}%。你呢？",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "剩余人生",
+  "remainingLifeCaption": "剩余人生",
   "shareErrorContent": "暂时无法分享。",
   "onboardingBirthDateTitle": "你的生日是哪天？",
   "onboardingBirthDateDescription": "用于计算你还剩多少人生。",

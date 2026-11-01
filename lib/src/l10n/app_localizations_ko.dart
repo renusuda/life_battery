@@ -208,7 +208,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => '남은 인생';
+  String get remainingLifeCaption => '남은 인생';
 
   @override
   String get shareErrorContent => '지금은 공유할 수 없어요.';

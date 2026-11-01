@@ -218,7 +218,7 @@ class AppLocalizationsPa extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'ਬਾਕੀ ਜ਼ਿੰਦਗੀ';
+  String get remainingLifeCaption => 'ਬਾਕੀ ਜ਼ਿੰਦਗੀ';
 
   @override
   String get shareErrorContent => 'ਇਸ ਵੇਲੇ ਸਾਂਝਾ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।';

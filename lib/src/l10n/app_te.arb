@@ -62,7 +62,7 @@
   "shareMessage": "నా జీవితంలో {percentage}% మిగిలి ఉంది. మీది ఎంత?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "మిగిలిన జీవితం",
+  "remainingLifeCaption": "మిగిలిన జీవితం",
   "shareErrorContent": "ప్రస్తుతం షేర్ చేయడం సాధ్యం కాదు.",
   "onboardingBirthDateTitle": "మీరు ఎప్పుడు పుట్టారు?",
   "onboardingBirthDateDescription": "మీ జీవితంలో ఇంకా ఎంత మిగిలి ఉందో లెక్కించడానికి ఇది ఉపయోగపడుతుంది.",

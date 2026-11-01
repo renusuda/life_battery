@@ -229,7 +229,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'மீதமுள்ள வாழ்நாள்';
+  String get remainingLifeCaption => 'மீதமுள்ள வாழ்நாள்';
 
   @override
   String get shareErrorContent => 'இப்போது பகிர முடியவில்லை.';

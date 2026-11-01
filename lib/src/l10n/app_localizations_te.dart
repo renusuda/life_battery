@@ -222,7 +222,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'మిగిలిన జీవితం';
+  String get remainingLifeCaption => 'మిగిలిన జీవితం';
 
   @override
   String get shareErrorContent => 'ప్రస్తుతం షేర్ చేయడం సాధ్యం కాదు.';

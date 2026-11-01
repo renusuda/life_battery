@@ -62,7 +62,7 @@
   "shareMessage": "Ik heb nog {percentage}% van mijn leven over. En jij?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "Resterend leven",
+  "remainingLifeCaption": "Resterend leven",
   "shareErrorContent": "Delen is op dit moment niet mogelijk.",
   "onboardingBirthDateTitle": "Wanneer ben je geboren?",
   "onboardingBirthDateDescription": "Hiermee berekenen we hoeveel van je leven er nog over is.",

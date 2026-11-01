@@ -226,7 +226,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get shareCardCaption => 'Vie restante';
+  String get remainingLifeCaption => 'Vie restante';
 
   @override
   String get shareErrorContent => 'Le partage est indisponible pour le moment.';

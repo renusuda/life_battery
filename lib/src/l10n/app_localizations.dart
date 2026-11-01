@@ -525,11 +525,11 @@ abstract class AppLocalizations {
   /// **'Life Battery'**
   String get shareCardAppName;
 
-  /// No description provided for @shareCardCaption.
+  /// No description provided for @remainingLifeCaption.
   ///
   /// In en, this message translates to:
   /// **'Life remaining'**
-  String get shareCardCaption;
+  String get remainingLifeCaption;
 
   /// No description provided for @shareErrorContent.
   ///

@@ -62,7 +62,7 @@
   "shareMessage": "ชีวิตฉันเหลืออีก {percentage}% แล้วของคุณล่ะ?",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "ชีวิตที่เหลือ",
+  "remainingLifeCaption": "ชีวิตที่เหลือ",
   "shareErrorContent": "ขณะนี้ไม่สามารถแชร์ได้",
   "onboardingBirthDateTitle": "คุณเกิดเมื่อไหร่?",
   "onboardingBirthDateDescription": "ใช้สำหรับคำนวณว่าชีวิตของคุณเหลืออยู่เท่าไร",

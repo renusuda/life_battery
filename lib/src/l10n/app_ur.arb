@@ -62,7 +62,7 @@
   "shareMessage": "میری زندگی کا {percentage}% باقی ہے۔ آپ کا کتنا؟",
   "shareHashtag": "#LifeBattery",
   "shareCardAppName": "Life Battery",
-  "shareCardCaption": "باقی زندگی",
+  "remainingLifeCaption": "باقی زندگی",
   "shareErrorContent": "فی الحال شیئر نہیں کیا جا سکتا۔",
   "onboardingBirthDateTitle": "آپ کب پیدا ہوئے؟",
   "onboardingBirthDateDescription": "اس سے حساب لگایا جاتا ہے کہ آپ کی کتنی زندگی باقی ہے۔",
