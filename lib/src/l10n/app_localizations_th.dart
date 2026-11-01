@@ -79,6 +79,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get darkLabel => 'มืด';
 
   @override
+  String get batteryLabelTitle => 'ป้ายแบตเตอรี่';
+
+  @override
   String get deleteAllLabel => 'ลบข้อมูล';
 
   @override
@@ -214,7 +217,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => 'ชีวิตที่เหลือ';
+  String get remainingLifeLabel => 'ชีวิตที่เหลือ';
 
   @override
   String get shareErrorContent => 'ขณะนี้ไม่สามารถแชร์ได้';

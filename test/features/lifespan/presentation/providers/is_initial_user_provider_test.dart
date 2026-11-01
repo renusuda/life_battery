@@ -63,4 +63,10 @@ class _FakeLifespanLocalDataSource implements LifespanLocalDataSource {
 
   @override
   Future<void> updateHasLongPressed() async {}
+
+  @override
+  Future<String?> getBatteryLabel() async => null;
+
+  @override
+  Future<void> updateBatteryLabel({required String label}) async {}
 }

@@ -84,6 +84,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get darkLabel => 'Sombre';
 
   @override
+  String get batteryLabelTitle => 'Libellé de la batterie';
+
+  @override
   String get deleteAllLabel => 'Supprimer les données';
 
   @override
@@ -226,7 +229,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => 'Vie restante';
+  String get remainingLifeLabel => 'Vie restante';
 
   @override
   String get shareErrorContent => 'Le partage est indisponible pour le moment.';

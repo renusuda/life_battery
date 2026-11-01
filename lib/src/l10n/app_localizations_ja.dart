@@ -77,6 +77,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get darkLabel => 'ダーク';
 
   @override
+  String get batteryLabelTitle => 'バッテリーのラベル';
+
+  @override
   String get deleteAllLabel => 'データを削除';
 
   @override
@@ -208,7 +211,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get shareCardAppName => 'ライフバッテリー';
 
   @override
-  String get remainingLifeCaption => '残りの人生';
+  String get remainingLifeLabel => '残りの人生';
 
   @override
   String get shareErrorContent => '現在共有できません。';

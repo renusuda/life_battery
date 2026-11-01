@@ -13,6 +13,7 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/displa
 import 'package:life_battery/src/features/lifespan/presentation/providers/has_long_pressed_battery_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_progress_state_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
+import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_label.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/long_press_hint.dart';
 import 'package:life_battery/src/features/notifications/presentation/providers/notification_schedule_provider.dart';
@@ -60,6 +61,7 @@ class LifespanProgressPage extends ConsumerWidget {
             lifespanRange: state.lifespanRange,
             hasLongPressedBattery: state.hasLongPressedBattery,
             isPercentageMode: state.isPercentageMode,
+            batteryLabel: state.batteryLabel,
             updateHasLongPressedBattery: () async {
               await ref
                   .read(hasLongPressedBatteryProvider.notifier)
@@ -78,6 +80,7 @@ class LifeProgressContent extends HookConsumerWidget {
     required this.hasLongPressedBattery,
     required this.isPercentageMode,
     required this.updateHasLongPressedBattery,
+    this.batteryLabel,
     super.key,
   });
 
@@ -86,6 +89,8 @@ class LifeProgressContent extends HookConsumerWidget {
   final bool hasLongPressedBattery;
 
   final bool isPercentageMode;
+
+  final String? batteryLabel;
 
   final Future<void> Function() updateHasLongPressedBattery;
 
@@ -98,6 +103,7 @@ class LifeProgressContent extends HookConsumerWidget {
     Future<void> showDateInputBottomSheet() {
       return showModalBottomSheet<void>(
         context: context,
+        isScrollControlled: true,
         builder: (BuildContext context) {
           return const DateInputBottomSheet();
         },
@@ -177,15 +183,8 @@ class LifeProgressContent extends HookConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            l10n.remainingLifeCaption,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.tertiary,
-            ),
-          ),
-          const SizedBox(height: 24),
+          BatteryLabel(label: batteryLabel),
+          const SizedBox(height: 20),
           AnimatedScale(
             scale: isPressed.value ? 0.90 : 1.0,
             duration: const Duration(milliseconds: 100),

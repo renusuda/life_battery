@@ -82,6 +82,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get darkLabel => 'Tối';
 
   @override
+  String get batteryLabelTitle => 'Nhãn pin';
+
+  @override
   String get deleteAllLabel => 'Xóa dữ liệu';
 
   @override
@@ -219,7 +222,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => 'Quãng đời còn lại';
+  String get remainingLifeLabel => 'Quãng đời còn lại';
 
   @override
   String get shareErrorContent => 'Hiện không thể chia sẻ.';

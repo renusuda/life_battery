@@ -15,6 +15,7 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
   static const _columnIsInitialUser = 'isInitialUser';
   static const _columnHasLongPressedBattery = 'hasLongPressedBattery';
   static const _columnIsPercentageMode = 'isPercentageMode';
+  static const _columnBatteryLabel = 'batteryLabel';
 
   @override
   Future<LifespanRange> getLifespan() async {
@@ -97,6 +98,25 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
   }
 
   @override
+  Future<String?> getBatteryLabel() async {
+    try {
+      final db = await _localDatabase.database;
+      final result = await db.query(
+        _tableName,
+        columns: [_columnBatteryLabel],
+      );
+
+      if (result.isEmpty) {
+        return null;
+      } else {
+        return result.first[_columnBatteryLabel] as String?;
+      }
+    } on DatabaseException catch (_) {
+      return null;
+    }
+  }
+
+  @override
   Future<void> updateLifespan({
     required DateTime birthDate,
     required int idealAge,
@@ -151,6 +171,17 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
       final response = await db.query(_tableName);
       if (response.isNotEmpty) {
         await db.update(_tableName, {_columnHasLongPressedBattery: 1});
+      }
+    } on DatabaseException catch (_) {}
+  }
+
+  @override
+  Future<void> updateBatteryLabel({required String label}) async {
+    try {
+      final db = await _localDatabase.database;
+      final response = await db.query(_tableName);
+      if (response.isNotEmpty) {
+        await db.update(_tableName, {_columnBatteryLabel: label});
       }
     } on DatabaseException catch (_) {}
   }

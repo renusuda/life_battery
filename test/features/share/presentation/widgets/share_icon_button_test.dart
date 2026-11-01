@@ -22,6 +22,7 @@ void main() {
       ),
       hasLongPressedBattery: true,
       isPercentageMode: isPercentageMode,
+      batteryLabel: null,
     );
   }
 

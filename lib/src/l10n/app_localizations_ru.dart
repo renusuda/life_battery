@@ -83,6 +83,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get darkLabel => 'Тёмное';
 
   @override
+  String get batteryLabelTitle => 'Подпись батареи';
+
+  @override
   String get deleteAllLabel => 'Удалить данные';
 
   @override
@@ -222,7 +225,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => 'Осталось жизни';
+  String get remainingLifeLabel => 'Осталось жизни';
 
   @override
   String get shareErrorContent => 'Сейчас поделиться невозможно.';

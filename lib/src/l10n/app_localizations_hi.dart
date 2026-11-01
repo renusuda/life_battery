@@ -81,6 +81,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get darkLabel => 'डार्क';
 
   @override
+  String get batteryLabelTitle => 'बैटरी का लेबल';
+
+  @override
   String get deleteAllLabel => 'डेटा डिलीट करें';
 
   @override
@@ -219,7 +222,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => 'बचा हुआ जीवन';
+  String get remainingLifeLabel => 'बचा हुआ जीवन';
 
   @override
   String get shareErrorContent => 'अभी शेयर नहीं किया जा सकता।';

@@ -8,7 +8,7 @@ class LocalDatabase {
   static final _instance = LocalDatabase._internal();
 
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 14;
+  static const _databaseVersion = 15;
 
   static const _tableName = 'lifespan';
   static const _columnId = 'id';
@@ -37,6 +37,8 @@ class LocalDatabase {
   static const _columnLaunchCount = 'launchCount';
   // Whether the store review prompt has been requested for this user.
   static const _columnHasRequestedReview = 'hasRequestedReview';
+  // NULL means the localized default and '' hides the label.
+  static const _columnBatteryLabel = 'batteryLabel';
 
   Database? _database;
 
@@ -74,7 +76,8 @@ class LocalDatabase {
             $_columnPremiumSubscriptionExpiresAt INTEGER,
             $_columnWidgetTrialExpiresAt INTEGER,
             $_columnLaunchCount INTEGER NOT NULL,
-            $_columnHasRequestedReview INTEGER NOT NULL
+            $_columnHasRequestedReview INTEGER NOT NULL,
+            $_columnBatteryLabel TEXT
           )
         ''');
 
@@ -176,6 +179,11 @@ class LocalDatabase {
             // Sends existing users through onboarding once more so they see
             // the result step with sharing and the widget guide video.
             await db.update(_tableName, {_columnIsInitialUser: 1});
+          }
+          if (oldVersion < 15) {
+            await db.execute(
+              'ALTER TABLE $_tableName ADD COLUMN $_columnBatteryLabel TEXT',
+            );
           }
         },
       );

@@ -25,6 +25,10 @@ class LifespanRepository {
     return _localDataSource.getIsPercentageMode();
   }
 
+  Future<String?> getBatteryLabel() {
+    return _localDataSource.getBatteryLabel();
+  }
+
   Future<void> updateLifespan({
     required DateTime birthDate,
     required int idealAge,
@@ -47,6 +51,10 @@ class LifespanRepository {
 
   Future<void> updateHasLongPressed() {
     return _localDataSource.updateHasLongPressed();
+  }
+
+  Future<void> updateBatteryLabel({required String label}) {
+    return _localDataSource.updateBatteryLabel(label: label.trim());
   }
 
   Future<void> syncLifespanRangeToWidget({

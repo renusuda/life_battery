@@ -82,6 +82,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get darkLabel => 'Gelap';
 
   @override
+  String get batteryLabelTitle => 'Label baterai';
+
+  @override
   String get deleteAllLabel => 'Hapus data';
 
   @override
@@ -220,7 +223,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => 'Sisa hidup';
+  String get remainingLifeLabel => 'Sisa hidup';
 
   @override
   String get shareErrorContent => 'Fitur berbagi sedang tidak tersedia.';

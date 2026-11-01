@@ -77,6 +77,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get darkLabel => '深色';
 
   @override
+  String get batteryLabelTitle => '电池标签';
+
+  @override
   String get deleteAllLabel => '删除数据';
 
   @override
@@ -206,7 +209,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => '剩余人生';
+  String get remainingLifeLabel => '剩余人生';
 
   @override
   String get shareErrorContent => '暂时无法分享。';
@@ -308,6 +311,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get darkLabel => '深色';
+
+  @override
+  String get batteryLabelTitle => '電池標籤';
 
   @override
   String get deleteAllLabel => '刪除資料';
@@ -439,7 +445,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => '剩餘人生';
+  String get remainingLifeLabel => '剩餘人生';
 
   @override
   String get shareErrorContent => '目前無法分享。';

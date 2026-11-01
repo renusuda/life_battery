@@ -77,6 +77,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get darkLabel => '다크';
 
   @override
+  String get batteryLabelTitle => '배터리 라벨';
+
+  @override
   String get deleteAllLabel => '데이터 삭제';
 
   @override
@@ -208,7 +211,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => '남은 인생';
+  String get remainingLifeLabel => '남은 인생';
 
   @override
   String get shareErrorContent => '지금은 공유할 수 없어요.';

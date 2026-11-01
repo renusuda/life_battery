@@ -33,7 +33,7 @@ class ShareCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            l10n.remainingLifeCaption,
+            l10n.remainingLifeLabel,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

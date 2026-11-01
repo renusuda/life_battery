@@ -279,6 +279,12 @@ abstract class AppLocalizations {
   /// **'Dark'**
   String get darkLabel;
 
+  /// No description provided for @batteryLabelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery label'**
+  String get batteryLabelTitle;
+
   /// No description provided for @deleteAllLabel.
   ///
   /// In en, this message translates to:
@@ -525,11 +531,11 @@ abstract class AppLocalizations {
   /// **'Life Battery'**
   String get shareCardAppName;
 
-  /// No description provided for @remainingLifeCaption.
+  /// No description provided for @remainingLifeLabel.
   ///
   /// In en, this message translates to:
   /// **'Life remaining'**
-  String get remainingLifeCaption;
+  String get remainingLifeLabel;
 
   /// No description provided for @shareErrorContent.
   ///

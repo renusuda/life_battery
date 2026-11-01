@@ -8,6 +8,7 @@ import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_p
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
+import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_label.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 
 import '../../../../../test_helpers/extensions.dart';
@@ -69,6 +70,38 @@ void main() {
       await tester.pump();
 
       expect(fakeLaunchCount.getCallCount, 1);
+    });
+
+    testWidgets('Displays the default label above the battery', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestLifeProgressContent());
+      await tester.pump();
+
+      expect(find.text('Life remaining'), findsOneWidget);
+    });
+
+    testWidgets('Displays the custom label when one is set', (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(
+        const TestLifeProgressContent(batteryLabel: 'My life'),
+      );
+      await tester.pump();
+
+      expect(find.text('My life'), findsOneWidget);
+      expect(find.text('Life remaining'), findsNothing);
+    });
+
+    testWidgets('Renders the label slot even when it is empty', (
+      tester,
+    ) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(const TestLifeProgressContent(batteryLabel: ''));
+      await tester.pump();
+
+      expect(find.byType(BatteryLabel), findsOneWidget);
+      expect(find.text('Life remaining'), findsNothing);
     });
 
     testWidgets('Initially displays long press hint', (tester) async {
@@ -251,9 +284,15 @@ void main() {
 }
 
 class TestLifeProgressContent extends HookWidget {
-  const TestLifeProgressContent({this.fakeLaunchCount, super.key});
+  const TestLifeProgressContent({
+    this.fakeLaunchCount,
+    this.batteryLabel,
+    super.key,
+  });
 
   final FakeLaunchCountLocalDataSource? fakeLaunchCount;
+
+  final String? batteryLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -279,6 +318,7 @@ class TestLifeProgressContent extends HookWidget {
                 ),
                 hasLongPressedBattery: hasLongPressedBattery.value,
                 isPercentageMode: isPercentageMode,
+                batteryLabel: batteryLabel,
                 updateHasLongPressedBattery: () async {
                   hasLongPressedBattery.value = true;
                 },

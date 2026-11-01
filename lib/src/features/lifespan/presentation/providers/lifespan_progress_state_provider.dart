@@ -1,4 +1,5 @@
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/battery_label_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/has_long_pressed_battery_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
@@ -12,6 +13,7 @@ typedef LifespanProgressState = ({
   LifespanRange lifespanRange,
   bool hasLongPressedBattery,
   bool isPercentageMode,
+  String? batteryLabel,
 });
 
 @riverpod
@@ -21,16 +23,19 @@ Future<LifespanProgressState> lifespanProgressState(Ref ref) async {
     lifespanRange,
     hasLongPressedBattery,
     isPercentageMode,
+    batteryLabel,
   ) = await (
     ref.watch(isInitialUserProvider.future),
     ref.watch(lifespanRangeManagerProvider.future),
     ref.watch(hasLongPressedBatteryProvider.future),
     ref.watch(displayModeManagerProvider.future),
+    ref.watch(batteryLabelManagerProvider.future),
   ).wait;
   return (
     isInitialUser: isInitialUser,
     lifespanRange: lifespanRange,
     hasLongPressedBattery: hasLongPressedBattery,
     isPercentageMode: isPercentageMode,
+    batteryLabel: batteryLabel,
   );
 }

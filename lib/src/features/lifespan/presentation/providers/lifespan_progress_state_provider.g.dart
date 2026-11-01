@@ -49,4 +49,4 @@ final class LifespanProgressStateProvider
 }
 
 String _$lifespanProgressStateHash() =>
-    r'89afec1c30e8487af4b077bcc203bdb097cfe066';
+    r'506fdc3f887a0d9c9e02d3acfdc1c3a670a711ab';

@@ -9,6 +9,8 @@ abstract interface class LifespanLocalDataSource {
 
   Future<bool> getIsPercentageMode();
 
+  Future<String?> getBatteryLabel();
+
   Future<void> updateLifespan({
     required DateTime birthDate,
     required int idealAge,
@@ -19,4 +21,6 @@ abstract interface class LifespanLocalDataSource {
   Future<void> updateIsPercentageMode({required bool isPercentageMode});
 
   Future<void> updateHasLongPressed();
+
+  Future<void> updateBatteryLabel({required String label});
 }

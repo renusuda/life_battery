@@ -83,6 +83,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get darkLabel => 'Donker';
 
   @override
+  String get batteryLabelTitle => 'Batterijlabel';
+
+  @override
   String get deleteAllLabel => 'Verwijder gegevens';
 
   @override
@@ -222,7 +225,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get shareCardAppName => 'Life Battery';
 
   @override
-  String get remainingLifeCaption => 'Resterend leven';
+  String get remainingLifeLabel => 'Resterend leven';
 
   @override
   String get shareErrorContent => 'Delen is op dit moment niet mogelijk.';
