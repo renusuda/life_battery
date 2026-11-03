@@ -57,6 +57,7 @@
   "purchasePendingContent": "你的购买正在等待批准。",
   "purchaseErrorContent": "无法完成购买，请重试。",
   "restorePurchasesLabel": "恢复购买",
+  "paywallSkipLabel": "暂时不用",
   "termsOfUseLabel": "使用条款",
   "todaysMessageHint": "此刻的你，是余生中最年轻的自己。",
   "shareLabel": "分享",

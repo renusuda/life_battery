@@ -76,6 +76,7 @@
   "purchasePendingContent": "購入は承認待ちです。",
   "purchaseErrorContent": "購入を完了できませんでした。もう一度お試しください。",
   "restorePurchasesLabel": "以前の購入を復元",
+  "paywallSkipLabel": "今はしない",
   "termsOfUseLabel": "利用規約",
   "todaysMessageHint": "この瞬間が、一番若い自分",
   "shareLabel": "共有",

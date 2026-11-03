@@ -202,6 +202,9 @@ class AppLocalizationsUr extends AppLocalizations {
   String get restorePurchasesLabel => 'خریداریاں بحال کریں';
 
   @override
+  String get paywallSkipLabel => 'ابھی نہیں';
+
+  @override
   String get termsOfUseLabel => 'استعمال کی شرائط';
 
   @override

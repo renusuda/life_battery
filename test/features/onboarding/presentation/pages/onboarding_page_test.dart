@@ -13,10 +13,11 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/lifesp
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/paywall_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_guide_video.dart';
 import 'package:life_battery/src/features/purchases/data/entitlements_repository_provider.dart';
 import 'package:life_battery/src/features/purchases/data/purchases_repository_provider.dart';
-import 'package:life_battery/src/features/purchases/presentation/widgets/premium_bottom_sheet.dart';
+import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/widget_guide_steps.dart';
 import 'package:life_battery/src/features/share/data/share_repository_provider.dart';
 
@@ -355,25 +356,78 @@ void main() {
     variant: TargetPlatformVariant.only(TargetPlatform.android),
   );
 
+  Future<void> goToPaywall(WidgetTester tester) async {
+    await goToWidget(tester);
+    await tester.tap(find.text('Continue'));
+    await tester.pumpAndSettle();
+  }
+
   testWidgets(
-    'Shows the paywall before finishing on iOS where the widget is paid',
+    'Shows the paywall as the last step on iOS where the widget is paid',
     (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildPage());
       await tester.pump();
-      await goToWidget(tester);
+      await goToPaywall(tester);
 
-      await tester.tap(find.text('Continue'));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(PremiumBottomSheet), findsOneWidget);
+      expect(find.byType(PaywallStep), findsOneWidget);
+      expect(find.text('Make the most of your time'), findsOneWidget);
+      expect(find.text('Not now'), findsOneWidget);
+      expect(fakeAnalytics.paywallViews, [PaywallSource.onboarding]);
       expect(fakeAnalytics.onboardingCompleteCount, 0);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+  );
 
-      Navigator.of(tester.element(find.byType(PremiumBottomSheet))).pop();
-      await tester.pumpAndSettle();
+  testWidgets(
+    'Finishes onboarding from the paywall with "Not now"',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToPaywall(tester);
 
+      await tester.tap(find.text('Not now'));
+      await tester.pump();
+
+      expect(fakeAnalytics.onboardingSteps, OnboardingStep.values);
       expect(fakeAnalytics.onboardingCompleteCount, 1);
       expect(fakeIsInitialUser.isInitialUser, isFalse);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+  );
+
+  testWidgets(
+    'Finishes onboarding after purchasing from the paywall',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToPaywall(tester);
+
+      await tester.tap(find.text('Purchase'));
+      await tester.pumpAndSettle();
+
+      expect(fakeAnalytics.onboardingSteps, OnboardingStep.values);
+      expect(fakeAnalytics.onboardingCompleteCount, 1);
+      expect(fakeIsInitialUser.isInitialUser, isFalse);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+  );
+
+  testWidgets(
+    'Goes back from the paywall to the widget step',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToPaywall(tester);
+
+      await tester.tap(find.byKey(const Key('onboardingBack')));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Add the widget to your Home Screen'), findsOneWidget);
+      expect(fakeAnalytics.onboardingCompleteCount, 0);
     },
     variant: TargetPlatformVariant.only(TargetPlatform.iOS),
   );
@@ -391,14 +445,19 @@ void main() {
       await tester.tap(find.text('Continue'));
       await tester.pumpAndSettle();
 
-      expect(find.byType(PremiumBottomSheet), findsNothing);
+      expect(find.byType(PaywallStep), findsNothing);
+      expect(
+        fakeAnalytics.onboardingSteps,
+        isNot(contains(OnboardingStep.paywall)),
+      );
       expect(fakeAnalytics.onboardingCompleteCount, 1);
       expect(fakeIsInitialUser.isInitialUser, isFalse);
     },
     variant: TargetPlatformVariant.only(TargetPlatform.iOS),
   );
+
   testWidgets(
-    'Finishes onboarding and logs onboarding_complete on the last step',
+    'Finishes onboarding without a paywall on Android where the widget is free',
     (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildPage());
@@ -408,7 +467,13 @@ void main() {
       await tester.tap(find.text('Continue'));
       await tester.pump();
 
-      expect(fakeAnalytics.onboardingSteps, OnboardingStep.values);
+      expect(fakeAnalytics.onboardingSteps, [
+        OnboardingStep.idealAge,
+        OnboardingStep.birthDate,
+        OnboardingStep.result,
+        OnboardingStep.label,
+        OnboardingStep.widget,
+      ]);
       expect(fakeAnalytics.onboardingCompleteCount, 1);
       expect(fakeIsInitialUser.isInitialUser, isFalse);
     },

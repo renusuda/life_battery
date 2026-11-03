@@ -201,6 +201,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get restorePurchasesLabel => 'खरीदारी रीस्टोर करें';
 
   @override
+  String get paywallSkipLabel => 'अभी नहीं';
+
+  @override
   String get termsOfUseLabel => 'उपयोग की शर्तें';
 
   @override

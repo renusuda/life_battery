@@ -201,6 +201,9 @@ class AppLocalizationsGu extends AppLocalizations {
   String get restorePurchasesLabel => 'ખરીદીઓ રિસ્ટોર કરો';
 
   @override
+  String get paywallSkipLabel => 'હમણાં નહીં';
+
+  @override
   String get termsOfUseLabel => 'ઉપયોગની શરતો';
 
   @override

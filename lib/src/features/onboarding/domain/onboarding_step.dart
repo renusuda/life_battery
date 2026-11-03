@@ -4,7 +4,8 @@ enum OnboardingStep {
   birthDate('birth_date'),
   result('result'),
   label('label'),
-  widget('widget');
+  widget('widget'),
+  paywall('paywall');
 
   const OnboardingStep(this.paramValue);
 

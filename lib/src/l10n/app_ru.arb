@@ -57,6 +57,7 @@
   "purchasePendingContent": "Покупка ожидает подтверждения.",
   "purchaseErrorContent": "Не удалось завершить покупку. Попробуйте ещё раз.",
   "restorePurchasesLabel": "Восстановить покупки",
+  "paywallSkipLabel": "Не сейчас",
   "termsOfUseLabel": "Условия использования",
   "todaysMessageHint": "Моложе, чем сейчас, вы уже никогда не будете.",
   "shareLabel": "Поделиться",

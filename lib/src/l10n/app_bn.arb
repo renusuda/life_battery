@@ -57,6 +57,7 @@
   "purchasePendingContent": "আপনার কেনাকাটা অনুমোদনের অপেক্ষায় আছে।",
   "purchaseErrorContent": "কেনাকাটা সম্পন্ন করা যায়নি। আবার চেষ্টা করুন।",
   "restorePurchasesLabel": "কেনাকাটা রিস্টোর করুন",
+  "paywallSkipLabel": "এখন নয়",
   "termsOfUseLabel": "ব্যবহারের শর্তাবলি",
   "todaysMessageHint": "এখনকার চেয়ে কম বয়সী আপনি আর কখনো হবেন না।",
   "shareLabel": "শেয়ার করুন",

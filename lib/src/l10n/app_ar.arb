@@ -57,6 +57,7 @@
   "purchasePendingContent": "عملية الشراء بانتظار الموافقة.",
   "purchaseErrorContent": "تعذّر إتمام عملية الشراء. يُرجى المحاولة مرة أخرى.",
   "restorePurchasesLabel": "استعادة المشتريات",
+  "paywallSkipLabel": "ليس الآن",
   "termsOfUseLabel": "شروط الاستخدام",
   "todaysMessageHint": "أنت الآن أصغر مما ستكون عليه أبدًا.",
   "shareLabel": "مشاركة",

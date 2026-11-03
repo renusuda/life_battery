@@ -202,6 +202,9 @@ class AppLocalizationsMr extends AppLocalizations {
   String get restorePurchasesLabel => 'खरेदी रीस्टोअर करा';
 
   @override
+  String get paywallSkipLabel => 'आता नाही';
+
+  @override
   String get termsOfUseLabel => 'वापराच्या अटी';
 
   @override

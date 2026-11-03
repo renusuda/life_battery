@@ -204,6 +204,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get restorePurchasesLabel => 'Восстановить покупки';
 
   @override
+  String get paywallSkipLabel => 'Не сейчас';
+
+  @override
   String get termsOfUseLabel => 'Условия использования';
 
   @override

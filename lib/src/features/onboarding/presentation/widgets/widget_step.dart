@@ -6,17 +6,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_step_layout.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_guide_video.dart';
-import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
-import 'package:life_battery/src/features/purchases/presentation/providers/is_premium_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/widget_trial_provider.dart';
-import 'package:life_battery/src/features/purchases/presentation/widgets/premium_bottom_sheet.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/widget_guide_steps.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
-/// The paywall opens from the continue button instead of its own button so
-/// every eligible user sees it. Premium holders skip it: existing users are
-/// sent through onboarding again after an update. Restores happen inside
-/// the sheet.
 class WidgetStep extends HookConsumerWidget {
   const WidgetStep({required this.onNext, super.key});
 
@@ -29,7 +22,6 @@ class WidgetStep extends HookConsumerWidget {
     // The widget is sold on the App Store only; on Android it is free and
     // there is no video yet, so the written steps stay.
     final isIos = defaultTargetPlatform == TargetPlatform.iOS;
-    final isPremium = ref.watch(isPremiumProvider).value ?? false;
 
     useEffect(() {
       if (isIos) {
@@ -41,15 +33,7 @@ class WidgetStep extends HookConsumerWidget {
     return OnboardingStepLayout(
       title: l10n.widgetGuideSheetTitle,
       description: l10n.widgetGuideDescription,
-      onPressed: () async {
-        if (isIos && !isPremium) {
-          await PremiumBottomSheet.show(
-            context,
-            source: PaywallSource.onboarding,
-          );
-        }
-        onNext();
-      },
+      onPressed: onNext,
       child: isIos
           ? Column(
               mainAxisSize: MainAxisSize.min,

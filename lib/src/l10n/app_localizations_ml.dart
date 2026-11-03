@@ -204,6 +204,9 @@ class AppLocalizationsMl extends AppLocalizations {
   String get restorePurchasesLabel => 'വാങ്ങലുകൾ പുനഃസ്ഥാപിക്കൂ';
 
   @override
+  String get paywallSkipLabel => 'ഇപ്പോൾ വേണ്ട';
+
+  @override
   String get termsOfUseLabel => 'ഉപയോഗ നിബന്ധനകൾ';
 
   @override

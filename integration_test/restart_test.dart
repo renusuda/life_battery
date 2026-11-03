@@ -10,7 +10,6 @@ import 'package:life_battery/src/features/onboarding/presentation/pages/onboardi
 import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/result_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_step.dart';
-import 'package:life_battery/src/features/purchases/presentation/widgets/premium_bottom_sheet.dart';
 
 import '../test_helpers/extensions.dart';
 import '../test_helpers/fake_analytics.dart';
@@ -65,11 +64,12 @@ void main() {
           .hitTestable();
       await tester.pumpUntilFound(widgetContinue);
 
-      // Widget step; the premium sheet is only offered on iOS
+      // Widget step; the paywall step follows on iOS only
       await tester.tap(widgetContinue);
       if (defaultTargetPlatform == TargetPlatform.iOS) {
-        await tester.pumpUntilFound(find.byType(PremiumBottomSheet));
-        Navigator.of(tester.element(find.byType(PremiumBottomSheet))).pop();
+        final paywallSkip = find.byKey(const Key('paywallSkip')).hitTestable();
+        await tester.pumpUntilFound(paywallSkip);
+        await tester.tap(paywallSkip);
       }
       await tester.pumpUntilGone(find.byType(OnboardingPage));
 

@@ -57,6 +57,7 @@
   "purchasePendingContent": "Giao dịch mua của bạn đang chờ phê duyệt.",
   "purchaseErrorContent": "Không thể hoàn tất giao dịch mua. Vui lòng thử lại.",
   "restorePurchasesLabel": "Khôi phục giao dịch mua",
+  "paywallSkipLabel": "Để sau",
   "termsOfUseLabel": "Điều khoản sử dụng",
   "todaysMessageHint": "Khoảnh khắc này là lúc bạn trẻ nhất.",
   "shareLabel": "Chia sẻ",

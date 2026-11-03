@@ -57,6 +57,7 @@
   "purchasePendingContent": "הרכישה ממתינה לאישור.",
   "purchaseErrorContent": "לא ניתן היה להשלים את הרכישה. יש לנסות שוב.",
   "restorePurchasesLabel": "שחזור רכישות",
+  "paywallSkipLabel": "לא עכשיו",
   "termsOfUseLabel": "תנאי שימוש",
   "todaysMessageHint": "הרגע הזה הוא הצעיר ביותר בשארית חייך.",
   "shareLabel": "שיתוף",

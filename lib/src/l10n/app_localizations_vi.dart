@@ -202,6 +202,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get restorePurchasesLabel => 'Khôi phục giao dịch mua';
 
   @override
+  String get paywallSkipLabel => 'Để sau';
+
+  @override
   String get termsOfUseLabel => 'Điều khoản sử dụng';
 
   @override

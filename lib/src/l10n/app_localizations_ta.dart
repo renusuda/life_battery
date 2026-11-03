@@ -211,6 +211,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get restorePurchasesLabel => 'வாங்கியவற்றை மீட்டெடு';
 
   @override
+  String get paywallSkipLabel => 'இப்போது வேண்டாம்';
+
+  @override
   String get termsOfUseLabel => 'பயன்பாட்டு விதிமுறைகள்';
 
   @override

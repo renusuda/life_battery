@@ -200,6 +200,9 @@ class AppLocalizationsHe extends AppLocalizations {
   String get restorePurchasesLabel => 'שחזור רכישות';
 
   @override
+  String get paywallSkipLabel => 'לא עכשיו';
+
+  @override
   String get termsOfUseLabel => 'תנאי שימוש';
 
   @override

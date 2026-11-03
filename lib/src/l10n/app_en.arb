@@ -76,6 +76,7 @@
   "purchasePendingContent": "Your purchase is pending approval.",
   "purchaseErrorContent": "The purchase could not be completed. Please try again.",
   "restorePurchasesLabel": "Restore purchases",
+  "paywallSkipLabel": "Not now",
   "termsOfUseLabel": "Terms of Use",
   "todaysMessageHint": "This moment is the youngest you'll ever be.",
   "shareLabel": "Share",

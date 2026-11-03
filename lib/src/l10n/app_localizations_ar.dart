@@ -198,6 +198,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get restorePurchasesLabel => 'استعادة المشتريات';
 
   @override
+  String get paywallSkipLabel => 'ليس الآن';
+
+  @override
   String get termsOfUseLabel => 'شروط الاستخدام';
 
   @override

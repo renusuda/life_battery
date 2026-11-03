@@ -205,6 +205,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get restorePurchasesLabel => 'Herstel aankopen';
 
   @override
+  String get paywallSkipLabel => 'Niet nu';
+
+  @override
   String get termsOfUseLabel => 'Gebruiksvoorwaarden';
 
   @override

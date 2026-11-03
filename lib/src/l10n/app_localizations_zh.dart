@@ -189,6 +189,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get restorePurchasesLabel => '恢复购买';
 
   @override
+  String get paywallSkipLabel => '暂时不用';
+
+  @override
   String get termsOfUseLabel => '使用条款';
 
   @override
@@ -429,6 +432,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get restorePurchasesLabel => '回復購買項目';
+
+  @override
+  String get paywallSkipLabel => '暫時不用';
 
   @override
   String get termsOfUseLabel => '使用條款';

@@ -495,6 +495,12 @@ abstract class AppLocalizations {
   /// **'Restore purchases'**
   String get restorePurchasesLabel;
 
+  /// No description provided for @paywallSkipLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get paywallSkipLabel;
+
   /// No description provided for @termsOfUseLabel.
   ///
   /// In en, this message translates to:

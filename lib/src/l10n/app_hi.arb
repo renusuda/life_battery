@@ -57,6 +57,7 @@
   "purchasePendingContent": "आपकी खरीद अनुमोदन के लिए लंबित है।",
   "purchaseErrorContent": "खरीद पूरी नहीं हो सकी। कृपया फिर से कोशिश करें।",
   "restorePurchasesLabel": "खरीदारी रीस्टोर करें",
+  "paywallSkipLabel": "अभी नहीं",
   "termsOfUseLabel": "उपयोग की शर्तें",
   "todaysMessageHint": "इस पल से ज़्यादा जवान आप फिर कभी नहीं होंगे।",
   "shareLabel": "शेयर करें",

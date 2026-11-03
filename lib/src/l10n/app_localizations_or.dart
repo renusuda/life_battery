@@ -203,6 +203,9 @@ class AppLocalizationsOr extends AppLocalizations {
   String get restorePurchasesLabel => 'କ୍ରୟ ରିଷ୍ଟୋର୍ କରନ୍ତୁ';
 
   @override
+  String get paywallSkipLabel => 'ଏବେ ନୁହେଁ';
+
+  @override
   String get termsOfUseLabel => 'ବ୍ୟବହାରର ସର୍ତ୍ତାବଳୀ';
 
   @override

@@ -202,6 +202,9 @@ class AppLocalizationsKn extends AppLocalizations {
   String get restorePurchasesLabel => 'ಖರೀದಿಗಳನ್ನು ಮರುಸ್ಥಾಪಿಸಿ';
 
   @override
+  String get paywallSkipLabel => 'ಈಗ ಬೇಡ';
+
+  @override
   String get termsOfUseLabel => 'ಬಳಕೆಯ ನಿಯಮಗಳು';
 
   @override

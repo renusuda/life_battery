@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,8 +14,10 @@ import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_
 import 'package:life_battery/src/features/onboarding/presentation/widgets/ideal_age_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/label_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_progress_bar.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/paywall_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/result_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_step.dart';
+import 'package:life_battery/src/features/purchases/presentation/providers/is_premium_provider.dart';
 
 /// The initial-user flag is cleared only on finishing, so leaving midway
 /// restarts the flow on the next launch.
@@ -30,6 +33,12 @@ class OnboardingPage extends HookConsumerWidget {
     // after going back.
     final passedSteps = useRef(<OnboardingStep>{});
     final lifespanRangeManager = ref.watch(lifespanRangeManagerProvider);
+    // The widget is sold on the App Store only. Premium holders skip the
+    // paywall: existing users are sent through onboarding again after an
+    // update.
+    final isPremium = ref.watch(isPremiumProvider).value ?? false;
+    final showsPaywall =
+        defaultTargetPlatform == TargetPlatform.iOS && !isPremium;
 
     useEffect(() {
       unawaited(ref.read(analyticsRepositoryProvider).logOnboardingStart());
@@ -109,9 +118,16 @@ class OnboardingPage extends HookConsumerWidget {
               WidgetStep(
                 onNext: () {
                   logStepPassed(OnboardingStep.widget);
-                  unawaited(finish());
+                  unawaited(showsPaywall ? goToNextStep() : finish());
                 },
               ),
+              if (showsPaywall)
+                PaywallStep(
+                  onNext: () {
+                    logStepPassed(OnboardingStep.paywall);
+                    unawaited(finish());
+                  },
+                ),
             ];
 
             return Column(

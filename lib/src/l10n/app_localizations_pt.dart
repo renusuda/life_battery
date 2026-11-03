@@ -201,6 +201,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get restorePurchasesLabel => 'Restaurar compras';
 
   @override
+  String get paywallSkipLabel => 'Agora não';
+
+  @override
   String get termsOfUseLabel => 'Termos de uso';
 
   @override

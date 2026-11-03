@@ -203,6 +203,9 @@ class AppLocalizationsBn extends AppLocalizations {
   String get restorePurchasesLabel => 'কেনাকাটা রিস্টোর করুন';
 
   @override
+  String get paywallSkipLabel => 'এখন নয়';
+
+  @override
   String get termsOfUseLabel => 'ব্যবহারের শর্তাবলি';
 
   @override

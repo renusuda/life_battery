@@ -197,6 +197,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get restorePurchasesLabel => 'กู้คืนการซื้อ';
 
   @override
+  String get paywallSkipLabel => 'ไว้ทีหลัง';
+
+  @override
   String get termsOfUseLabel => 'ข้อกำหนดการใช้งาน';
 
   @override

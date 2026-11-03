@@ -204,6 +204,9 @@ class AppLocalizationsTe extends AppLocalizations {
   String get restorePurchasesLabel => 'కొనుగోళ్లను పునరుద్ధరించండి';
 
   @override
+  String get paywallSkipLabel => 'ఇప్పుడు కాదు';
+
+  @override
   String get termsOfUseLabel => 'ఉపయోగ నిబంధనలు';
 
   @override

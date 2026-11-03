@@ -201,6 +201,9 @@ class AppLocalizationsMs extends AppLocalizations {
   String get restorePurchasesLabel => 'Pulihkan pembelian';
 
   @override
+  String get paywallSkipLabel => 'Bukan sekarang';
+
+  @override
   String get termsOfUseLabel => 'Terma Penggunaan';
 
   @override

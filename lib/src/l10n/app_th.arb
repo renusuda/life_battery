@@ -57,6 +57,7 @@
   "purchasePendingContent": "การซื้อของคุณกำลังรอการอนุมัติ",
   "purchaseErrorContent": "ไม่สามารถทำการซื้อให้เสร็จสิ้นได้ โปรดลองอีกครั้ง",
   "restorePurchasesLabel": "กู้คืนการซื้อ",
+  "paywallSkipLabel": "ไว้ทีหลัง",
   "termsOfUseLabel": "ข้อกำหนดการใช้งาน",
   "todaysMessageHint": "วินาทีนี้คือตัวคุณที่อายุน้อยที่สุดแล้ว",
   "shareLabel": "แชร์",

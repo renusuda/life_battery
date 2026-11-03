@@ -57,6 +57,7 @@
   "purchasePendingContent": "Votre achat est en attente d’approbation.",
   "purchaseErrorContent": "L’achat n’a pas pu être finalisé. Veuillez réessayer.",
   "restorePurchasesLabel": "Restaurer les achats",
+  "paywallSkipLabel": "Pas maintenant",
   "termsOfUseLabel": "Conditions d’utilisation",
   "todaysMessageHint": "Vous ne serez jamais aussi jeune qu’en cet instant.",
   "shareLabel": "Partager",

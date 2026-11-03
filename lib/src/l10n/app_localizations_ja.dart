@@ -191,6 +191,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get restorePurchasesLabel => '以前の購入を復元';
 
   @override
+  String get paywallSkipLabel => '今はしない';
+
+  @override
   String get termsOfUseLabel => '利用規約';
 
   @override

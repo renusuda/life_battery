@@ -191,6 +191,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get restorePurchasesLabel => '구매 복원';
 
   @override
+  String get paywallSkipLabel => '나중에';
+
+  @override
   String get termsOfUseLabel => '이용약관';
 
   @override

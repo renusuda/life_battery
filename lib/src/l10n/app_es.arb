@@ -57,6 +57,7 @@
   "purchasePendingContent": "Tu compra está pendiente de aprobación.",
   "purchaseErrorContent": "No se pudo completar la compra. Inténtalo de nuevo.",
   "restorePurchasesLabel": "Restaurar compras",
+  "paywallSkipLabel": "Ahora no",
   "termsOfUseLabel": "Términos de uso",
   "todaysMessageHint": "Nunca volverás a ser tan joven como en este momento.",
   "shareLabel": "Compartir",

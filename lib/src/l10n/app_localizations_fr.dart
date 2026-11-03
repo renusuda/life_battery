@@ -208,6 +208,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get restorePurchasesLabel => 'Restaurer les achats';
 
   @override
+  String get paywallSkipLabel => 'Pas maintenant';
+
+  @override
   String get termsOfUseLabel => 'Conditions d’utilisation';
 
   @override

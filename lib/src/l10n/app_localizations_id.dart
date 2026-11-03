@@ -202,6 +202,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get restorePurchasesLabel => 'Pulihkan pembelian';
 
   @override
+  String get paywallSkipLabel => 'Nanti saja';
+
+  @override
   String get termsOfUseLabel => 'Ketentuan Penggunaan';
 
   @override

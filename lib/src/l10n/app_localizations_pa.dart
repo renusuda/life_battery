@@ -200,6 +200,9 @@ class AppLocalizationsPa extends AppLocalizations {
   String get restorePurchasesLabel => 'ਖ਼ਰੀਦਾਂ ਰੀਸਟੋਰ ਕਰੋ';
 
   @override
+  String get paywallSkipLabel => 'ਹੁਣ ਨਹੀਂ';
+
+  @override
   String get termsOfUseLabel => 'ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ';
 
   @override
