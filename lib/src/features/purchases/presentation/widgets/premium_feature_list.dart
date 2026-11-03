@@ -21,15 +21,15 @@ class PremiumFeatureList extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         _FeatureRow(
-          icon: '🙈',
-          label: l10n.premiumFeatureAdRemovalLabel,
-          emphasis: l10n.premiumFeatureAdRemovalEmphasis,
-        ),
-        const SizedBox(height: 16),
-        _FeatureRow(
           icon: '👀',
           label: l10n.premiumFeatureWidgetLabel,
           emphasis: l10n.premiumFeatureWidgetEmphasis,
+        ),
+        const SizedBox(height: 16),
+        _FeatureRow(
+          icon: '🙈',
+          label: l10n.premiumFeatureAdRemovalLabel,
+          emphasis: l10n.premiumFeatureAdRemovalEmphasis,
         ),
       ],
     );
