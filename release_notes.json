@@ -1,10 +1,10 @@
 [
   {
     "language": "en-US",
-    "text": "・We made some small improvements to make the app more comfortable to use."
+    "text": "・You can now add a label above the battery.\n・We added new steps to the onboarding for the label, sharing and notifications."
   },
   {
     "language": "ja",
-    "text": "・より快適にお使いいただけるよう、細かな改善を行いました。"
+    "text": "・バッテリーの上にラベルを付けられるようになりました。\n・オンボーディングに、ラベル、シェア、通知のステップを追加しました。"
   }
 ]
