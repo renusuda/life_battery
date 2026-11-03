@@ -14,6 +14,7 @@ class ShareCardDialog extends HookConsumerWidget {
   const ShareCardDialog({
     required this.percentage,
     required this.text,
+    required this.label,
     super.key,
   });
 
@@ -21,16 +22,20 @@ class ShareCardDialog extends HookConsumerWidget {
     BuildContext context, {
     required int percentage,
     required String text,
+    required String? label,
   }) {
     return showDialog<void>(
       context: context,
-      builder: (_) => ShareCardDialog(percentage: percentage, text: text),
+      builder: (_) =>
+          ShareCardDialog(percentage: percentage, text: text, label: label),
     );
   }
 
   final int percentage;
 
   final String text;
+
+  final String? label;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -91,7 +96,7 @@ class ShareCardDialog extends HookConsumerWidget {
       ),
       child: RepaintBoundary(
         key: cardKey,
-        child: ShareCard(value: percentage, text: text),
+        child: ShareCard(value: percentage, text: text, label: label),
       ),
     );
   }

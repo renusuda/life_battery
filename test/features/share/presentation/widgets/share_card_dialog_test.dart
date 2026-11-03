@@ -14,12 +14,12 @@ import '../../../../../test_helpers/test_app.dart';
 void main() {
   late FakeShareApiDataSource fakeShare;
 
-  Widget buildApp() {
+  Widget buildApp({String? label}) {
     return ProviderScope(
       overrides: [
         shareApiDataSourceProvider.overrideWithValue(fakeShare),
       ],
-      child: const TestApp(home: _DialogOpener()),
+      child: TestApp(home: _DialogOpener(label: label)),
     );
   }
 
@@ -72,6 +72,29 @@ void main() {
     expect(find.text('ライフバッテリー'), findsOneWidget);
   });
 
+  testWidgets('Shows the custom battery label on the card', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    fakeShare.outcome = ShareOutcome.dismissed;
+    await tester.pumpWidget(buildApp(label: 'Time left'));
+    await tester.tap(find.byType(TextButton));
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text('Time left'), findsOneWidget);
+    expect(find.text('Life remaining'), findsNothing);
+  });
+
+  testWidgets('Falls back to the default label when hidden', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    fakeShare.outcome = ShareOutcome.dismissed;
+    await tester.pumpWidget(buildApp(label: ''));
+    await tester.tap(find.byType(TextButton));
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text('Life remaining'), findsOneWidget);
+  });
+
   testWidgets('Closes the card once the share sheet is gone', (tester) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildApp());
@@ -82,7 +105,9 @@ void main() {
 }
 
 class _DialogOpener extends StatelessWidget {
-  const _DialogOpener();
+  const _DialogOpener({this.label});
+
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +117,7 @@ class _DialogOpener extends StatelessWidget {
           context,
           percentage: 54,
           text: '54%',
+          label: label,
         ),
         child: const Text('open'),
       ),

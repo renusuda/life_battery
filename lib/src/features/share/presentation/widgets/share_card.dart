@@ -6,6 +6,7 @@ class ShareCard extends StatelessWidget {
   const ShareCard({
     required this.value,
     required this.text,
+    required this.label,
     super.key,
   });
 
@@ -15,6 +16,8 @@ class ShareCard extends StatelessWidget {
   final int value;
 
   final String text;
+
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,10 @@ class ShareCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            l10n.remainingLifeLabel,
+            // The card always carries a title, so a hidden label falls back
+            // to the default instead of leaving a blank line.
+            label == null || label!.isEmpty ? l10n.remainingLifeLabel : label!,
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

@@ -145,6 +145,8 @@ class ResultStep extends HookWidget {
                           context,
                           percentage: percentage,
                           text: '$percentage%',
+                          // The label cannot be edited before onboarding ends.
+                          label: null,
                         );
                       },
                 icon: Icon(

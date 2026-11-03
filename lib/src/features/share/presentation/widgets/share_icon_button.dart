@@ -45,6 +45,7 @@ class ShareIconButton extends ConsumerWidget {
           context,
           percentage: percentage,
           text: text,
+          label: lifespanProgressState.batteryLabel,
         );
       },
     );
