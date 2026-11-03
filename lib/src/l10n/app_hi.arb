@@ -74,5 +74,7 @@
   "onboardingResultTitle": "आपके जीवन का {percentage}% बाकी है",
   "onboardingResultDescription": "यानी अभी {days} दिन बाकी हैं।",
   "onboardingLabelTitle": "अपने बचे हुए समय को आप क्या नाम देंगे?",
-  "onboardingLabelDescription": "आप इसे अपनी पसंद के किसी भी शब्द में बदल सकते हैं, या जैसा है वैसा रख सकते हैं।"
+  "onboardingLabelDescription": "आप इसे अपनी पसंद के किसी भी शब्द में बदल सकते हैं, या जैसा है वैसा रख सकते हैं।",
+  "onboardingNotificationTitle": "जिस दिन जीवन 1% घटेगा, उस दिन सूचना मिलेगी",
+  "onboardingNotificationDescription": "व्यस्त दिनों में भी, आपको याद रहेगा कि आपका समय सीमित है।"
 }

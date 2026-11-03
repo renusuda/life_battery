@@ -263,4 +263,12 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'Anda boleh menukarnya kepada apa-apa perkataan yang anda suka, atau biarkan seperti sedia ada.';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'Pemberitahuan dihantar pada hari hidup anda berkurang 1%';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'Walaupun pada hari yang sibuk, anda akan ingat bahawa masa anda terhad.';
 }

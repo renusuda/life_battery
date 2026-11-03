@@ -259,4 +259,11 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'يمكنك تغييرها إلى أي كلمات تريدها، أو تركها كما هي.';
+
+  @override
+  String get onboardingNotificationTitle => 'يصلك إشعار يوم ينقص عمرك 1%';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'حتى في أكثر أيامك انشغالًا، ستتذكر أن وقتك محدود.';
 }

@@ -74,5 +74,7 @@
   "onboardingResultTitle": "Il vous reste {percentage} % de votre vie",
   "onboardingResultDescription": "Soit encore {days} jours.",
   "onboardingLabelTitle": "Comment appelleriez-vous le temps qu'il vous reste ?",
-  "onboardingLabelDescription": "Vous pouvez le remplacer par les mots de votre choix, ou le laisser tel quel."
+  "onboardingLabelDescription": "Vous pouvez le remplacer par les mots de votre choix, ou le laisser tel quel.",
+  "onboardingNotificationTitle": "Une notification le jour où votre vie perd encore 1 %",
+  "onboardingNotificationDescription": "Même les jours chargés, vous vous rappellerez que votre temps est compté."
 }

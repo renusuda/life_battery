@@ -6,14 +6,17 @@ import 'package:integration_test/integration_test.dart';
 import 'package:life_battery/src/app.dart';
 import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/data_deletion/presentation/pages/user_deleted_page.dart';
+import 'package:life_battery/src/features/notifications/data/notification_repository_provider.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/label_step.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/notification_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/result_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_step.dart';
 
 import '../test_helpers/extensions.dart';
 import '../test_helpers/fake_analytics.dart';
+import '../test_helpers/fake_notifications.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +29,10 @@ void main() {
           overrides: [
             analyticsApiDataSourceProvider.overrideWithValue(
               FakeAnalyticsApiDataSource(),
+            ),
+            // The real system permission dialog would block the test.
+            notificationRepositoryProvider.overrideWith(
+              (ref) async => FakeNotificationRepository(),
             ),
           ],
           child: const App(),
@@ -73,8 +80,18 @@ void main() {
           .hitTestable();
       await tester.pumpUntilFound(widgetContinue);
 
-      // Widget step; the paywall step follows on iOS only
+      // Widget step
       await tester.tap(widgetContinue);
+      final notificationContinue = find
+          .descendant(
+            of: find.byType(NotificationStep),
+            matching: find.text('Continue'),
+          )
+          .hitTestable();
+      await tester.pumpUntilFound(notificationContinue);
+
+      // Notification step; the paywall step follows on iOS only
+      await tester.tap(notificationContinue);
       if (defaultTargetPlatform == TargetPlatform.iOS) {
         final paywallSkip = find.byKey(const Key('paywallSkip')).hitTestable();
         await tester.pumpUntilFound(paywallSkip);

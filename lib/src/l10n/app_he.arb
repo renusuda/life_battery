@@ -74,5 +74,7 @@
   "onboardingResultTitle": "נותרו לך {percentage}% מהחיים",
   "onboardingResultDescription": "כלומר, עוד {days} ימים.",
   "onboardingLabelTitle": "איך הייתם קוראים לזמן שנותר לכם?",
-  "onboardingLabelDescription": "אפשר לשנות לכל מילים שתרצו, או להשאיר כמו שזה."
+  "onboardingLabelDescription": "אפשר לשנות לכל מילים שתרצו, או להשאיר כמו שזה.",
+  "onboardingNotificationTitle": "התראה תגיע ביום שבו יירד עוד 1% מהחיים",
+  "onboardingNotificationDescription": "גם בימים העמוסים, תזכורת לכך שהזמן מוגבל."
 }

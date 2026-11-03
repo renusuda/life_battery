@@ -258,4 +258,12 @@ class AppLocalizationsTh extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'เปลี่ยนเป็นคำที่คุณชอบได้ หรือจะปล่อยไว้แบบนี้ก็ได้';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'รับการแจ้งเตือนในวันที่ชีวิตลดลง 1%';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'แม้ในวันที่ยุ่ง คุณก็จะนึกได้ว่าเวลามีจำกัด';
 }

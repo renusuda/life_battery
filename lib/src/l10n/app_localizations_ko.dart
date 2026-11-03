@@ -249,4 +249,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get onboardingLabelDescription => '원하는 말로 바꿔도 되고, 그대로 두어도 괜찮아요.';
+
+  @override
+  String get onboardingNotificationTitle => '인생이 1% 줄어든 날, 알림이 와요';
+
+  @override
+  String get onboardingNotificationDescription =>
+      '바쁜 하루 속에서도 시간이 한정되어 있다는 걸 떠올릴 수 있어요.';
 }

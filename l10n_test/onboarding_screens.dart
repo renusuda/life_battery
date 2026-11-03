@@ -66,4 +66,17 @@ void onboardingScreenTests() {
     expect(find.text(l10n.widgetGuideSheetTitle), findsOneWidget);
     expectNoLayoutIssues(tester);
   });
+
+  testScreen('Onboarding notification step', (tester) async {
+    await pumpOnboarding(tester);
+    await tapContinue(tester);
+    await tapContinue(tester);
+    await tester.pumpAndSettle();
+    await tapContinue(tester);
+    await tapContinue(tester);
+    await tapContinue(tester);
+
+    expect(find.text(l10n.onboardingNotificationTitle), findsOneWidget);
+    expectNoLayoutIssues(tester);
+  });
 }

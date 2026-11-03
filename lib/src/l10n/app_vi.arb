@@ -74,5 +74,7 @@
   "onboardingResultTitle": "Cuộc đời bạn còn {percentage}%",
   "onboardingResultDescription": "Tức là còn {days} ngày nữa.",
   "onboardingLabelTitle": "Bạn sẽ gọi thời gian còn lại của mình là gì?",
-  "onboardingLabelDescription": "Bạn có thể đổi thành bất kỳ lời nào mình thích, hoặc cứ giữ nguyên cũng được."
+  "onboardingLabelDescription": "Bạn có thể đổi thành bất kỳ lời nào mình thích, hoặc cứ giữ nguyên cũng được.",
+  "onboardingNotificationTitle": "Nhận thông báo vào ngày cuộc đời giảm thêm 1%",
+  "onboardingNotificationDescription": "Kể cả vào những ngày bận rộn, bạn vẫn sẽ nhớ rằng thời gian là có hạn."
 }

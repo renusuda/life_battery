@@ -13,6 +13,7 @@ import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart
 import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/ideal_age_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/label_step.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/notification_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_progress_bar.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/paywall_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/result_step.dart';
@@ -118,6 +119,12 @@ class OnboardingPage extends HookConsumerWidget {
               WidgetStep(
                 onNext: () {
                   logStepPassed(OnboardingStep.widget);
+                  unawaited(goToNextStep());
+                },
+              ),
+              NotificationStep(
+                onNext: () {
+                  logStepPassed(OnboardingStep.notification);
                   unawaited(showsPaywall ? goToNextStep() : finish());
                 },
               ),

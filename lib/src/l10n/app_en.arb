@@ -114,5 +114,7 @@
     }
   },
   "onboardingLabelTitle": "What would you call the time you have left?",
-  "onboardingLabelDescription": "Change it to any words you like, or leave it as it is."
+  "onboardingLabelDescription": "Change it to any words you like, or leave it as it is.",
+  "onboardingNotificationTitle": "Get notified when another 1% of your life is gone",
+  "onboardingNotificationDescription": "Even on busy days, you'll be reminded that your time is limited."
 }

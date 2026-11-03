@@ -275,4 +275,12 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'உங்களுக்குப் பிடித்த எந்த வார்த்தைகளாகவும் மாற்றலாம், அல்லது அப்படியே வைக்கலாம்.';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'வாழ்நாள் 1% குறையும் நாளில் அறிவிப்பு வரும்';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'பரபரப்பான நாட்களிலும், உங்கள் நேரம் வரம்புக்குட்பட்டது என்பது நினைவுக்கு வரும்.';
 }

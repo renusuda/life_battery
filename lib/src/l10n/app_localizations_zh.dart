@@ -247,6 +247,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get onboardingLabelDescription => '可以改成任何你喜欢的话，保持原样也没问题。';
+
+  @override
+  String get onboardingNotificationTitle => '人生减少1%的那天，你会收到通知';
+
+  @override
+  String get onboardingNotificationDescription => '即使在忙碌的日子里，也能想起时间是有限的。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -492,4 +498,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get onboardingLabelDescription => '可以改成任何你喜歡的話，保持原樣也沒問題。';
+
+  @override
+  String get onboardingNotificationTitle => '人生減少1%的那天，你會收到通知';
+
+  @override
+  String get onboardingNotificationDescription => '即使在忙碌的日子裡，也能想起時間是有限的。';
 }

@@ -74,5 +74,7 @@
   "onboardingResultTitle": "У вас осталось {percentage}% жизни",
   "onboardingResultDescription": "Осталось дней: {days}.",
   "onboardingLabelTitle": "Как бы вы назвали оставшееся время?",
-  "onboardingLabelDescription": "Можно заменить на любые слова по вашему вкусу или оставить как есть."
+  "onboardingLabelDescription": "Можно заменить на любые слова по вашему вкусу или оставить как есть.",
+  "onboardingNotificationTitle": "Уведомление в день, когда уйдёт ещё 1% жизни",
+  "onboardingNotificationDescription": "Даже в самые загруженные дни вы будете помнить, что время ограничено."
 }

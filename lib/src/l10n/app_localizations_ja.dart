@@ -249,4 +249,10 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get onboardingLabelDescription => '好きな言葉に書き換えられます。そのままでも構いません。';
+
+  @override
+  String get onboardingNotificationTitle => '1%減った日に、通知が届きます';
+
+  @override
+  String get onboardingNotificationDescription => '忙しい毎日の中でも、限りある時間を思い出せます。';
 }

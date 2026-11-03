@@ -74,5 +74,7 @@
   "onboardingResultTitle": "ನಿಮ್ಮ ಜೀವನದ {percentage}% ಉಳಿದಿದೆ",
   "onboardingResultDescription": "ಅಂದರೆ ಇನ್ನೂ {days} ದಿನಗಳು ಉಳಿದಿವೆ.",
   "onboardingLabelTitle": "ನಿಮ್ಮ ಉಳಿದ ಸಮಯವನ್ನು ಏನೆಂದು ಕರೆಯುತ್ತೀರಿ?",
-  "onboardingLabelDescription": "ನಿಮಗೆ ಇಷ್ಟವಾದ ಯಾವುದೇ ಪದಗಳಿಗೆ ಬದಲಾಯಿಸಬಹುದು, ಅಥವಾ ಹಾಗೆಯೇ ಇಡಬಹುದು."
+  "onboardingLabelDescription": "ನಿಮಗೆ ಇಷ್ಟವಾದ ಯಾವುದೇ ಪದಗಳಿಗೆ ಬದಲಾಯಿಸಬಹುದು, ಅಥವಾ ಹಾಗೆಯೇ ಇಡಬಹುದು.",
+  "onboardingNotificationTitle": "ಜೀವನ 1% ಕಡಿಮೆಯಾದ ದಿನ ಅಧಿಸೂಚನೆ ಬರುತ್ತದೆ",
+  "onboardingNotificationDescription": "ಬ್ಯುಸಿ ದಿನಗಳಲ್ಲೂ, ನಿಮ್ಮ ಸಮಯ ಸೀಮಿತ ಎಂಬುದು ನೆನಪಾಗುತ್ತದೆ."
 }

@@ -74,5 +74,7 @@
   "onboardingResultTitle": "ชีวิตของคุณเหลืออีก {percentage}%",
   "onboardingResultDescription": "คิดเป็นอีก {days} วัน",
   "onboardingLabelTitle": "คุณจะเรียกเวลาที่เหลือของคุณว่าอะไร",
-  "onboardingLabelDescription": "เปลี่ยนเป็นคำที่คุณชอบได้ หรือจะปล่อยไว้แบบนี้ก็ได้"
+  "onboardingLabelDescription": "เปลี่ยนเป็นคำที่คุณชอบได้ หรือจะปล่อยไว้แบบนี้ก็ได้",
+  "onboardingNotificationTitle": "รับการแจ้งเตือนในวันที่ชีวิตลดลง 1%",
+  "onboardingNotificationDescription": "แม้ในวันที่ยุ่ง คุณก็จะนึกได้ว่าเวลามีจำกัด"
 }

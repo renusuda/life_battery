@@ -266,4 +266,12 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'Можно заменить на любые слова по вашему вкусу или оставить как есть.';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'Уведомление в день, когда уйдёт ещё 1% жизни';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'Даже в самые загруженные дни вы будете помнить, что время ограничено.';
 }

@@ -74,5 +74,7 @@
   "onboardingResultTitle": "Sisa hidup Anda {percentage}%",
   "onboardingResultDescription": "Artinya, masih ada {days} hari lagi.",
   "onboardingLabelTitle": "Apa sebutan untuk sisa waktu Anda?",
-  "onboardingLabelDescription": "Anda bisa menggantinya dengan kata-kata apa pun yang Anda suka, atau membiarkannya apa adanya."
+  "onboardingLabelDescription": "Anda bisa menggantinya dengan kata-kata apa pun yang Anda suka, atau membiarkannya apa adanya.",
+  "onboardingNotificationTitle": "Notifikasi masuk saat hidup Anda berkurang 1%",
+  "onboardingNotificationDescription": "Bahkan di hari yang sibuk, Anda akan ingat bahwa waktu Anda terbatas."
 }

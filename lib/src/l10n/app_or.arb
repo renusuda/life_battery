@@ -74,5 +74,7 @@
   "onboardingResultTitle": "ଆପଣଙ୍କ ଜୀବନର {percentage}% ବାକି ଅଛି",
   "onboardingResultDescription": "ଅର୍ଥାତ୍ ଆଉ {days} ଦିନ ବାକି।",
   "onboardingLabelTitle": "ଆପଣଙ୍କ ବାକି ସମୟକୁ ଆପଣ କଣ ନାମ ଦେବେ?",
-  "onboardingLabelDescription": "ଆପଣଙ୍କ ପସନ୍ଦର ଯେକୌଣସି ଶବ୍ଦରେ ବଦଳାଇ ପାରିବେ, କିମ୍ବା ଯେମିତି ଅଛି ସେମିତି ରଖିପାରିବେ।"
+  "onboardingLabelDescription": "ଆପଣଙ୍କ ପସନ୍ଦର ଯେକୌଣସି ଶବ୍ଦରେ ବଦଳାଇ ପାରିବେ, କିମ୍ବା ଯେମିତି ଅଛି ସେମିତି ରଖିପାରିବେ।",
+  "onboardingNotificationTitle": "ଜୀବନ 1% କମିବା ଦିନ ନୋଟିଫିକେଶନ୍ ଆସିବ",
+  "onboardingNotificationDescription": "ବ୍ୟସ୍ତ ଦିନରେ ମଧ୍ୟ, ଆପଣଙ୍କ ସମୟ ସୀମିତ ବୋଲି ମନେ ପଡ଼ିବ।"
 }

@@ -602,6 +602,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change it to any words you like, or leave it as it is.'**
   String get onboardingLabelDescription;
+
+  /// No description provided for @onboardingNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Get notified when another 1% of your life is gone'**
+  String get onboardingNotificationTitle;
+
+  /// No description provided for @onboardingNotificationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Even on busy days, you\'ll be reminded that your time is limited.'**
+  String get onboardingNotificationDescription;
 }
 
 class _AppLocalizationsDelegate

@@ -74,5 +74,7 @@
   "onboardingResultTitle": "تبقّى لك {percentage}% من عمرك",
   "onboardingResultDescription": "أي أن أمامك {days} يومًا.",
   "onboardingLabelTitle": "ماذا تسمّي الوقت المتبقي لك؟",
-  "onboardingLabelDescription": "يمكنك تغييرها إلى أي كلمات تريدها، أو تركها كما هي."
+  "onboardingLabelDescription": "يمكنك تغييرها إلى أي كلمات تريدها، أو تركها كما هي.",
+  "onboardingNotificationTitle": "يصلك إشعار يوم ينقص عمرك 1%",
+  "onboardingNotificationDescription": "حتى في أكثر أيامك انشغالًا، ستتذكر أن وقتك محدود."
 }

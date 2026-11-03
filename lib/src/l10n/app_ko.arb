@@ -74,5 +74,7 @@
   "onboardingResultTitle": "남은 인생은 {percentage}%",
   "onboardingResultDescription": "일수로 환산하면 앞으로 {days}일이에요.",
   "onboardingLabelTitle": "남은 시간을 뭐라고 부르고 싶나요?",
-  "onboardingLabelDescription": "원하는 말로 바꿔도 되고, 그대로 두어도 괜찮아요."
+  "onboardingLabelDescription": "원하는 말로 바꿔도 되고, 그대로 두어도 괜찮아요.",
+  "onboardingNotificationTitle": "인생이 1% 줄어든 날, 알림이 와요",
+  "onboardingNotificationDescription": "바쁜 하루 속에서도 시간이 한정되어 있다는 걸 떠올릴 수 있어요."
 }

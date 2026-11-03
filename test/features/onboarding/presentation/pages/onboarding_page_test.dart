@@ -11,6 +11,7 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/batter
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
+import 'package:life_battery/src/features/notifications/data/notification_repository_provider.dart';
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/paywall_step.dart';
@@ -24,6 +25,7 @@ import 'package:life_battery/src/features/share/data/share_repository_provider.d
 import '../../../../../test_helpers/fake_analytics.dart';
 import '../../../../../test_helpers/fake_entitlements.dart';
 import '../../../../../test_helpers/fake_in_app_review.dart';
+import '../../../../../test_helpers/fake_notifications.dart';
 import '../../../../../test_helpers/fake_purchases.dart';
 import '../../../../../test_helpers/fake_share.dart';
 import '../../../../../test_helpers/share_test_pump.dart';
@@ -36,6 +38,7 @@ void main() {
   late FakeEntitlementsLocalDataSource fakeEntitlements;
   late FakeShareApiDataSource fakeShare;
   late FakeInAppReview fakeInAppReview;
+  late FakeNotificationRepository fakeNotifications;
 
   setUp(() {
     // The guide video is a native view, which has no host in widget tests.
@@ -49,6 +52,7 @@ void main() {
     fakeEntitlements = FakeEntitlementsLocalDataSource();
     fakeShare = FakeShareApiDataSource();
     fakeInAppReview = FakeInAppReview();
+    fakeNotifications = FakeNotificationRepository();
   });
 
   Widget buildPage() {
@@ -71,6 +75,9 @@ void main() {
         batteryLabelManagerProvider.overrideWith(_FakeBatteryLabelManager.new),
         shareApiDataSourceProvider.overrideWithValue(fakeShare),
         inAppReviewProvider.overrideWithValue(fakeInAppReview),
+        notificationRepositoryProvider.overrideWith(
+          (ref) async => fakeNotifications,
+        ),
       ],
       child: const TestApp(home: OnboardingPage()),
     );
@@ -356,8 +363,104 @@ void main() {
     variant: TargetPlatformVariant.only(TargetPlatform.android),
   );
 
-  Future<void> goToPaywall(WidgetTester tester) async {
+  // Settling would also run out the wait before the permission is asked.
+  Future<void> goToNotification(WidgetTester tester) async {
     await goToWidget(tester);
+    await tester.tap(find.text('Continue'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+  }
+
+  // The system dialog makes the app inactive until it is answered.
+  Future<void> answerPermissionDialog() async {
+    for (final state in [
+      AppLifecycleState.inactive,
+      AppLifecycleState.resumed,
+    ]) {
+      await TestWidgetsFlutterBinding.instance.defaultBinaryMessenger
+          .handlePlatformMessage(
+            SystemChannels.lifecycle.name,
+            SystemChannels.lifecycle.codec.encodeMessage(state.toString()),
+            (_) {},
+          );
+    }
+  }
+
+  testWidgets('Offers notifications after the widget step', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildPage());
+    await tester.pump();
+    await goToNotification(tester);
+
+    expect(
+      find.text('Get notified when another 1% of your life is gone'),
+      findsOneWidget,
+    );
+    expect(fakeNotifications.permissionRequestCount, 0);
+    expect(fakeAnalytics.onboardingCompleteCount, 0);
+  });
+
+  testWidgets(
+    'Asks for the notification permission and moves on once answered',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      fakeNotifications.onRequestPermission = answerPermissionDialog;
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToNotification(tester);
+
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+
+      expect(fakeNotifications.permissionRequestCount, 1);
+      expect(fakeAnalytics.notificationPermissionResults, [true]);
+      expect(fakeAnalytics.onboardingCompleteCount, 1);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
+  );
+
+  testWidgets(
+    'Stays on the notification step when no permission dialog appears',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToNotification(tester);
+
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle();
+
+      expect(fakeNotifications.permissionRequestCount, 1);
+      expect(
+        find.text('Get notified when another 1% of your life is gone'),
+        findsOneWidget,
+      );
+      expect(fakeAnalytics.onboardingCompleteCount, 0);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
+  );
+
+  testWidgets(
+    'Moves on without asking for the permission with "Continue" right away',
+    (tester) async {
+      tester.platformDispatcher.localesTestValue = [const Locale('en')];
+      await tester.pumpWidget(buildPage());
+      await tester.pump();
+      await goToNotification(tester);
+
+      await tester.tap(find.text('Continue'));
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 1));
+
+      expect(fakeNotifications.permissionRequestCount, 0);
+      expect(fakeAnalytics.notificationPermissionResults, isEmpty);
+      expect(fakeAnalytics.onboardingCompleteCount, 1);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
+  );
+
+  Future<void> goToPaywall(WidgetTester tester) async {
+    await goToNotification(tester);
     await tester.tap(find.text('Continue'));
     await tester.pumpAndSettle();
   }
@@ -416,7 +519,7 @@ void main() {
   );
 
   testWidgets(
-    'Goes back from the paywall to the widget step',
+    'Goes back from the paywall to the notification step',
     (tester) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildPage());
@@ -426,7 +529,10 @@ void main() {
       await tester.tap(find.byKey(const Key('onboardingBack')));
       await tester.pumpAndSettle();
 
-      expect(find.text('Add the widget to your Home Screen'), findsOneWidget);
+      expect(
+        find.text('Get notified when another 1% of your life is gone'),
+        findsOneWidget,
+      );
       expect(fakeAnalytics.onboardingCompleteCount, 0);
     },
     variant: TargetPlatformVariant.only(TargetPlatform.iOS),
@@ -439,8 +545,7 @@ void main() {
       fakeEntitlements.isPremium = true;
       await tester.pumpWidget(buildPage());
       await tester.pump();
-      await goToWidget(tester);
-      await tester.pumpAndSettle();
+      await goToNotification(tester);
 
       await tester.tap(find.text('Continue'));
       await tester.pumpAndSettle();
@@ -462,10 +567,10 @@ void main() {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildPage());
       await tester.pump();
-      await goToWidget(tester);
+      await goToNotification(tester);
 
       await tester.tap(find.text('Continue'));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(fakeAnalytics.onboardingSteps, [
         OnboardingStep.idealAge,
@@ -473,6 +578,7 @@ void main() {
         OnboardingStep.result,
         OnboardingStep.label,
         OnboardingStep.widget,
+        OnboardingStep.notification,
       ]);
       expect(fakeAnalytics.onboardingCompleteCount, 1);
       expect(fakeIsInitialUser.isInitialUser, isFalse);
@@ -486,11 +592,11 @@ void main() {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
       await tester.pumpWidget(buildPage());
       await tester.pump();
-      await goToWidget(tester);
+      await goToNotification(tester);
       expect(fakeInAppReview.requestReviewCount, 0);
 
       await tester.tap(find.text('Continue'));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(fakeInAppReview.requestReviewCount, 1);
       final request = fakeAnalytics.reviewRequests.single;

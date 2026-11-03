@@ -21,18 +21,13 @@ class NotificationRepository {
     );
   }
 
-  /// Requests permission, cancels existing notifications, and schedules a new
-  /// notification at the given [scheduledDate].
-  ///
-  /// Returns whether the notification permission is granted.
-  Future<bool> scheduleNotification({
+  /// Never asks for the permission: only onboarding does, where its use is
+  /// explained.
+  Future<void> scheduleNotification({
     required String title,
     required String body,
     required DateTime scheduledDate,
   }) async {
-    final granted = await _requestPermission();
-    if (!granted) return false;
-
     await _cancelAll();
 
     try {
@@ -59,10 +54,9 @@ class NotificationRepository {
         await FirebaseCrashlytics.instance.recordError(error, stack);
       }
     }
-    return true;
   }
 
-  Future<bool> _requestPermission() async {
+  Future<bool> requestPermission() async {
     final androidPlugin = _plugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin

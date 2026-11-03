@@ -13,10 +13,12 @@ class ScheduleNotificationUseCase {
 
   final AnalyticsRepository _analyticsRepository;
 
-  /// Scheduling runs on every launch and on every lifespan change, so the
-  /// permission result is logged at most once per session to avoid flooding
-  /// analytics with duplicate events.
-  bool _hasLoggedPermissionResult = false;
+  Future<void> requestPermission() async {
+    final granted = await _repository.requestPermission();
+    await _analyticsRepository.logNotificationPermissionResult(
+      granted: granted,
+    );
+  }
 
   Future<void> execute({
     required String title,
@@ -34,17 +36,10 @@ class ScheduleNotificationUseCase {
       dropDate.day,
       9,
     );
-    final granted = await _repository.scheduleNotification(
+    await _repository.scheduleNotification(
       title: title,
       body: body,
       scheduledDate: scheduledDate,
     );
-
-    if (!_hasLoggedPermissionResult) {
-      _hasLoggedPermissionResult = true;
-      await _analyticsRepository.logNotificationPermissionResult(
-        granted: granted,
-      );
-    }
   }
 }

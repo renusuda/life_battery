@@ -21,4 +21,9 @@ class NotificationSchedule extends _$NotificationSchedule {
       lifespanRange: lifespanRange,
     );
   }
+
+  Future<void> requestPermission() async {
+    final useCase = await ref.read(scheduleNotificationUseCaseProvider.future);
+    await useCase.requestPermission();
+  }
 }

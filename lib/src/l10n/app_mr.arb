@@ -74,5 +74,7 @@
   "onboardingResultTitle": "तुमच्या आयुष्याचे {percentage}% उरले आहे",
   "onboardingResultDescription": "म्हणजे अजून {days} दिवस बाकी आहेत.",
   "onboardingLabelTitle": "तुमच्या उरलेल्या वेळेला तुम्ही काय नाव द्याल?",
-  "onboardingLabelDescription": "तुम्हाला हवे ते शब्द लिहू शकता, किंवा आहे तसेच ठेवू शकता."
+  "onboardingLabelDescription": "तुम्हाला हवे ते शब्द लिहू शकता, किंवा आहे तसेच ठेवू शकता.",
+  "onboardingNotificationTitle": "आयुष्य 1% कमी झाल्याच्या दिवशी नोटिफिकेशन येईल",
+  "onboardingNotificationDescription": "व्यस्त दिवसांतही, तुमचा वेळ मर्यादित आहे याची आठवण राहील."
 }

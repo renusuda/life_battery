@@ -264,4 +264,12 @@ class AppLocalizationsKn extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'ನಿಮಗೆ ಇಷ್ಟವಾದ ಯಾವುದೇ ಪದಗಳಿಗೆ ಬದಲಾಯಿಸಬಹುದು, ಅಥವಾ ಹಾಗೆಯೇ ಇಡಬಹುದು.';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'ಜೀವನ 1% ಕಡಿಮೆಯಾದ ದಿನ ಅಧಿಸೂಚನೆ ಬರುತ್ತದೆ';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'ಬ್ಯುಸಿ ದಿನಗಳಲ್ಲೂ, ನಿಮ್ಮ ಸಮಯ ಸೀಮಿತ ಎಂಬುದು ನೆನಪಾಗುತ್ತದೆ.';
 }

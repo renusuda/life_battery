@@ -264,4 +264,12 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'Bạn có thể đổi thành bất kỳ lời nào mình thích, hoặc cứ giữ nguyên cũng được.';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'Nhận thông báo vào ngày cuộc đời giảm thêm 1%';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'Kể cả vào những ngày bận rộn, bạn vẫn sẽ nhớ rằng thời gian là có hạn.';
 }

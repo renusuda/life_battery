@@ -114,5 +114,7 @@
     }
   },
   "onboardingLabelTitle": "残りの時間を、なんて呼びますか？",
-  "onboardingLabelDescription": "好きな言葉に書き換えられます。そのままでも構いません。"
+  "onboardingLabelDescription": "好きな言葉に書き換えられます。そのままでも構いません。",
+  "onboardingNotificationTitle": "1%減った日に、通知が届きます",
+  "onboardingNotificationDescription": "忙しい毎日の中でも、限りある時間を思い出せます。"
 }

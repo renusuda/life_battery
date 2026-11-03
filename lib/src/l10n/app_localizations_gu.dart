@@ -263,4 +263,11 @@ class AppLocalizationsGu extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'તમને ગમે તે શબ્દોમાં બદલી શકો છો, અથવા જેમ છે તેમ રાખી શકો છો.';
+
+  @override
+  String get onboardingNotificationTitle => 'જીવન 1% ઘટે એ દિવસે સૂચના મળશે';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'વ્યસ્ત દિવસોમાં પણ, તમને યાદ રહેશે કે તમારો સમય મર્યાદિત છે.';
 }

@@ -74,5 +74,7 @@
   "onboardingResultTitle": "Baki hidup anda {percentage}%",
   "onboardingResultDescription": "Itu bermakna {days} hari lagi.",
   "onboardingLabelTitle": "Apa yang anda akan panggil baki masa anda?",
-  "onboardingLabelDescription": "Anda boleh menukarnya kepada apa-apa perkataan yang anda suka, atau biarkan seperti sedia ada."
+  "onboardingLabelDescription": "Anda boleh menukarnya kepada apa-apa perkataan yang anda suka, atau biarkan seperti sedia ada.",
+  "onboardingNotificationTitle": "Pemberitahuan dihantar pada hari hidup anda berkurang 1%",
+  "onboardingNotificationDescription": "Walaupun pada hari yang sibuk, anda akan ingat bahawa masa anda terhad."
 }

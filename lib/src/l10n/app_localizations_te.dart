@@ -267,4 +267,12 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'మీకు నచ్చిన మాటలకు మార్చుకోవచ్చు, లేదా అలాగే ఉంచవచ్చు.';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'జీవితం 1% తగ్గిన రోజున నోటిఫికేషన్ వస్తుంది';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'బిజీ రోజుల్లో కూడా, మీ సమయం పరిమితమని గుర్తుంటుంది.';
 }

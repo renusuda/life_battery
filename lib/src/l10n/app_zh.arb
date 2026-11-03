@@ -74,5 +74,7 @@
   "onboardingResultTitle": "你的人生还剩{percentage}%",
   "onboardingResultDescription": "换算成天数，还有{days}天。",
   "onboardingLabelTitle": "你会怎么称呼自己剩下的时间？",
-  "onboardingLabelDescription": "可以改成任何你喜欢的话，保持原样也没问题。"
+  "onboardingLabelDescription": "可以改成任何你喜欢的话，保持原样也没问题。",
+  "onboardingNotificationTitle": "人生减少1%的那天，你会收到通知",
+  "onboardingNotificationDescription": "即使在忙碌的日子里，也能想起时间是有限的。"
 }

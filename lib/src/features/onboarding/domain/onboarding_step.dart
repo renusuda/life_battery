@@ -5,6 +5,7 @@ enum OnboardingStep {
   result('result'),
   label('label'),
   widget('widget'),
+  notification('notification'),
   paywall('paywall');
 
   const OnboardingStep(this.paramValue);

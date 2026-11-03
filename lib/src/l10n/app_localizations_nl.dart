@@ -267,4 +267,12 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'Je kunt het veranderen in woorden die jij wilt, of het laten zoals het is.';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'Een melding op de dag dat er weer 1% van je leven af is';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'Zelfs op drukke dagen word je eraan herinnerd dat je tijd beperkt is.';
 }

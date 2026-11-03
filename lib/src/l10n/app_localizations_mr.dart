@@ -264,4 +264,12 @@ class AppLocalizationsMr extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'तुम्हाला हवे ते शब्द लिहू शकता, किंवा आहे तसेच ठेवू शकता.';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'आयुष्य 1% कमी झाल्याच्या दिवशी नोटिफिकेशन येईल';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'व्यस्त दिवसांतही, तुमचा वेळ मर्यादित आहे याची आठवण राहील.';
 }

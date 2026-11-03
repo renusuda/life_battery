@@ -263,4 +263,12 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'आप इसे अपनी पसंद के किसी भी शब्द में बदल सकते हैं, या जैसा है वैसा रख सकते हैं।';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'जिस दिन जीवन 1% घटेगा, उस दिन सूचना मिलेगी';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'व्यस्त दिनों में भी, आपको याद रहेगा कि आपका समय सीमित है।';
 }

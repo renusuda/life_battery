@@ -264,4 +264,12 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get onboardingLabelDescription =>
       'Você pode trocar pelas palavras que quiser ou deixar como está.';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'Receba uma notificação no dia em que sua vida cair mais 1%';
+
+  @override
+  String get onboardingNotificationDescription =>
+      'Mesmo nos dias corridos, você vai lembrar que seu tempo é limitado.';
 }

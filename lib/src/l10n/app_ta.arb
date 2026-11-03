@@ -74,5 +74,7 @@
   "onboardingResultTitle": "உங்கள் வாழ்நாளில் {percentage}% மீதமுள்ளது",
   "onboardingResultDescription": "அதாவது, இன்னும் {days} நாட்கள்.",
   "onboardingLabelTitle": "மீதமுள்ள நேரத்தை நீங்கள் என்ன பெயரில் அழைப்பீர்கள்?",
-  "onboardingLabelDescription": "உங்களுக்குப் பிடித்த எந்த வார்த்தைகளாகவும் மாற்றலாம், அல்லது அப்படியே வைக்கலாம்."
+  "onboardingLabelDescription": "உங்களுக்குப் பிடித்த எந்த வார்த்தைகளாகவும் மாற்றலாம், அல்லது அப்படியே வைக்கலாம்.",
+  "onboardingNotificationTitle": "வாழ்நாள் 1% குறையும் நாளில் அறிவிப்பு வரும்",
+  "onboardingNotificationDescription": "பரபரப்பான நாட்களிலும், உங்கள் நேரம் வரம்புக்குட்பட்டது என்பது நினைவுக்கு வரும்."
 }
