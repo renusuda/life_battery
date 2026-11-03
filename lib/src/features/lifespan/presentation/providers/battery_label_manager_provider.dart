@@ -10,14 +10,21 @@ part 'battery_label_manager_provider.g.dart';
 @riverpod
 class BatteryLabelManager extends _$BatteryLabelManager {
   @override
-  Future<String?> build() =>
-      ref.watch(lifespanRepositoryProvider).getBatteryLabel();
+  Future<String?> build() async {
+    final label = await ref.watch(lifespanRepositoryProvider).getBatteryLabel();
+    unawaited(
+      ref
+          .read(lifespanRepositoryProvider)
+          .syncBatteryLabelToWidget(label: label),
+    );
+    return label;
+  }
 
   Future<void> updateBatteryLabel(String label) async {
     final trimmed = label.trim();
     state = AsyncData(trimmed);
-    unawaited(
-      ref.read(lifespanRepositoryProvider).updateBatteryLabel(label: trimmed),
-    );
+    final repository = ref.read(lifespanRepositoryProvider);
+    unawaited(repository.updateBatteryLabel(label: trimmed));
+    unawaited(repository.syncBatteryLabelToWidget(label: trimmed));
   }
 }

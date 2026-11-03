@@ -28,8 +28,8 @@ class BatteryLabelFieldContent extends HookConsumerWidget {
 
   final String? label;
 
-  // Long enough for a short phrase, short enough to stay on one line above
-  // the battery on narrow phones.
+  // Long enough for a short phrase, short enough to fit in two lines on the
+  // small home screen widget.
   static const maxLength = 20;
 
   @override

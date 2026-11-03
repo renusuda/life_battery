@@ -81,6 +81,15 @@ class LifespanRepository {
     }
   }
 
+  Future<void> syncBatteryLabelToWidget({required String? label}) async {
+    try {
+      await HomeWidget.saveWidgetData('batteryLabel', label);
+      await _updateHomeWidget();
+    } on PlatformException catch (_) {
+      // Widget sync may fail in test environments.
+    }
+  }
+
   Future<void> _updateHomeWidget() async {
     await HomeWidget.updateWidget(
       name: 'LifeBatteryWidget',

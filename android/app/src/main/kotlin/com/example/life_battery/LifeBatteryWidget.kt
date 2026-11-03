@@ -56,6 +56,10 @@ class LifeBatteryWidget : GlanceAppWidget() {
         val percentage = computePercentage(state)
         val remainingDays = computeRemainingDays(state)
         val isPercentageMode = state.preferences.getBoolean("isPercentageMode", true)
+        // Mirrors the app: a missing key is the localized default and "" hides the label.
+        val label =
+            state.preferences.getString("batteryLabel", null)
+                ?: context.getString(R.string.widget_title)
         val displayText =
             if (isPercentageMode) {
                 "$percentage%"
@@ -77,11 +81,12 @@ class LifeBatteryWidget : GlanceAppWidget() {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = context.getString(R.string.widget_title),
+                text = label,
+                maxLines = 2,
                 style =
                     TextStyle(
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         textAlign = TextAlign.Center,
                         color = GlanceTheme.colors.onBackground,
                     ),

@@ -4,7 +4,8 @@ import WidgetKit
 struct Provider: TimelineProvider {
   func placeholder(in context: Context) -> LifeBatteryEntry {
     LifeBatteryEntry(
-      date: Date(), percentage: 100, remainingDays: 0, isPercentageMode: true, isUnlocked: true)
+      date: Date(), percentage: 100, remainingDays: 0, isPercentageMode: true, label: nil,
+      isUnlocked: true)
   }
 
   func getSnapshot(in context: Context, completion: @escaping (LifeBatteryEntry) -> Void) {
@@ -31,7 +32,7 @@ struct Provider: TimelineProvider {
     completion(timeline)
   }
 
-  private func loadUserData() -> (birthDate: Date, idealAge: Int, isPercentageMode: Bool)? {
+  private func loadUserData() -> UserData? {
     let defaults = UserDefaults(suiteName: "group.com.rururu.lifebt")
     guard let birthDateString = defaults?.string(forKey: "birthDate"),
       let birthDate = parseISO8601Date(birthDateString),
@@ -39,7 +40,9 @@ struct Provider: TimelineProvider {
       idealAge > 0
     else { return nil }
     let isPercentageMode = (defaults?.object(forKey: "isPercentageMode") as? Bool) ?? true
-    return (birthDate, idealAge, isPercentageMode)
+    let label = defaults?.string(forKey: "batteryLabel")
+    return UserData(
+      birthDate: birthDate, idealAge: idealAge, isPercentageMode: isPercentageMode, label: label)
   }
 
   // Written by the app when the premium entitlement changes. Defaults to
@@ -56,13 +59,13 @@ struct Provider: TimelineProvider {
 
   private func createEntry(
     date: Date,
-    userData: (birthDate: Date, idealAge: Int, isPercentageMode: Bool)?,
+    userData: UserData?,
     unlock: WidgetUnlock
   ) -> LifeBatteryEntry {
     let isUnlocked = unlock.isUnlocked(at: date)
     guard let userData else {
       return LifeBatteryEntry(
-        date: date, percentage: 100, remainingDays: 0, isPercentageMode: true,
+        date: date, percentage: 100, remainingDays: 0, isPercentageMode: true, label: nil,
         isUnlocked: isUnlocked)
     }
 
@@ -81,9 +84,18 @@ struct Provider: TimelineProvider {
       percentage: percentage,
       remainingDays: remainingDays,
       isPercentageMode: userData.isPercentageMode,
+      label: userData.label,
       isUnlocked: isUnlocked
     )
   }
+}
+
+struct UserData {
+  let birthDate: Date
+  let idealAge: Int
+  let isPercentageMode: Bool
+  // Mirrors the app: nil is the localized default and "" hides the label.
+  let label: String?
 }
 
 struct WidgetUnlock {
@@ -102,6 +114,7 @@ struct LifeBatteryEntry: TimelineEntry {
   let percentage: Int
   let remainingDays: Int
   let isPercentageMode: Bool
+  let label: String?
   let isUnlocked: Bool
 }
 
@@ -222,10 +235,15 @@ struct LifeBatteryWidgetEntryView: View {
 
   private var unlockedBody: some View {
     VStack(spacing: 8) {
-      Text(String(localized: "widget.titleLabel"))
+      // Only the built-in title is uppercased; a user's label is shown as typed,
+      // like on the home screen.
+      Text(entry.label ?? String(localized: "widget.titleLabel"))
         .font(.system(size: 12, weight: .bold))
-        .textCase(.uppercase)
+        .textCase(entry.label == nil ? .uppercase : nil)
         .foregroundColor(.primary)
+        .multilineTextAlignment(.center)
+        .lineLimit(2)
+        .minimumScaleFactor(0.8)
 
       HStack(spacing: 4) {
         ZStack {
@@ -294,15 +312,15 @@ struct LifeBatteryWidget: Widget {
   LifeBatteryWidget()
 } timeline: {
   LifeBatteryEntry(
-    date: .now, percentage: 100, remainingDays: 30000, isPercentageMode: true, isUnlocked: true)
+    date: .now, percentage: 100, remainingDays: 30000, isPercentageMode: true, label: nil, isUnlocked: true)
   LifeBatteryEntry(
-    date: .now, percentage: 65, remainingDays: 19500, isPercentageMode: true, isUnlocked: true)
+    date: .now, percentage: 65, remainingDays: 19500, isPercentageMode: true, label: nil, isUnlocked: true)
   LifeBatteryEntry(
-    date: .now, percentage: 35, remainingDays: 10500, isPercentageMode: false, isUnlocked: true)
+    date: .now, percentage: 35, remainingDays: 10500, isPercentageMode: false, label: nil, isUnlocked: true)
   LifeBatteryEntry(
-    date: .now, percentage: 10, remainingDays: 3000, isPercentageMode: false, isUnlocked: true)
+    date: .now, percentage: 10, remainingDays: 3000, isPercentageMode: false, label: nil, isUnlocked: true)
   LifeBatteryEntry(
-    date: .now, percentage: 0, remainingDays: 0, isPercentageMode: true, isUnlocked: true)
+    date: .now, percentage: 0, remainingDays: 0, isPercentageMode: true, label: nil, isUnlocked: true)
   LifeBatteryEntry(
-    date: .now, percentage: 100, remainingDays: 30000, isPercentageMode: true, isUnlocked: false)
+    date: .now, percentage: 100, remainingDays: 30000, isPercentageMode: true, label: nil, isUnlocked: false)
 }
