@@ -169,6 +169,7 @@ class BatteryText extends StatelessWidget {
           style: const TextStyle(
             fontSize: 40,
             fontWeight: FontWeight.bold,
+            fontFeatures: [FontFeature.tabularFigures()],
           ),
         ),
       ),
