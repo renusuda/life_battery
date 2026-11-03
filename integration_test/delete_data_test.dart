@@ -8,6 +8,7 @@ import 'package:life_battery/src/features/analytics/data/analytics_repository_pr
 import 'package:life_battery/src/features/data_deletion/presentation/pages/user_deleted_page.dart';
 import 'package:life_battery/src/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/label_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/result_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_step.dart';
 
@@ -54,6 +55,16 @@ void main() {
 
       // Result step
       await tester.tap(resultContinue);
+      final labelContinue = find
+          .descendant(
+            of: find.byType(LabelStep),
+            matching: find.text('Continue'),
+          )
+          .hitTestable();
+      await tester.pumpUntilFound(labelContinue);
+
+      // Label step
+      await tester.tap(labelContinue);
       final widgetContinue = find
           .descendant(
             of: find.byType(WidgetStep),
