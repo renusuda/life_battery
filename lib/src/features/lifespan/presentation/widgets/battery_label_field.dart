@@ -7,7 +7,9 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/batter
 import 'package:life_battery/src/l10n/app_localizations.dart';
 
 class BatteryLabelField extends ConsumerWidget {
-  const BatteryLabelField({super.key});
+  const BatteryLabelField({this.showTitle = true, super.key});
+
+  final bool showTitle;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,17 +18,23 @@ class BatteryLabelField extends ConsumerWidget {
     // value here.
     if (!batteryLabel.hasValue) return const SizedBox.shrink();
 
-    return BatteryLabelFieldContent(label: batteryLabel.value);
+    return BatteryLabelFieldContent(
+      label: batteryLabel.value,
+      showTitle: showTitle,
+    );
   }
 }
 
 class BatteryLabelFieldContent extends HookConsumerWidget {
   const BatteryLabelFieldContent({
     required this.label,
+    this.showTitle = true,
     super.key,
   });
 
   final String? label;
+
+  final bool showTitle;
 
   // Long enough for a short phrase, short enough to fit in two lines on the
   // small home screen widget.
@@ -44,14 +52,16 @@ class BatteryLabelFieldContent extends HookConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsetsDirectional.only(start: 8),
-          child: Text(
-            l10n.batteryLabelTitle,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+        if (showTitle) ...[
+          Padding(
+            padding: const EdgeInsetsDirectional.only(start: 8),
+            child: Text(
+              l10n.batteryLabelTitle,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
+          const SizedBox(height: 8),
+        ],
         TextField(
           controller: controller,
           maxLength: maxLength,

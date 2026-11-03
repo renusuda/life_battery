@@ -46,7 +46,8 @@ class LabelStep extends ConsumerWidget {
         const SizedBox(height: 24),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 24),
-          child: BatteryLabelField(),
+          // The step title already says what the field is for.
+          child: BatteryLabelField(showTitle: false),
         ),
         Expanded(
           child: Center(
