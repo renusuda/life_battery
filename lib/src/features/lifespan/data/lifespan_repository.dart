@@ -43,6 +43,10 @@ class LifespanRepository {
     return _localDataSource.updateUserIsNotInitialUser();
   }
 
+  Future<void> updateUserIsInitialUser() {
+    return _localDataSource.updateUserIsInitialUser();
+  }
+
   Future<void> updateIsPercentageMode({required bool isPercentageMode}) {
     return _localDataSource.updateIsPercentageMode(
       isPercentageMode: isPercentageMode,

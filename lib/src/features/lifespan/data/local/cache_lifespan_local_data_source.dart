@@ -150,6 +150,17 @@ class CacheLifespanLocalDataSource implements LifespanLocalDataSource {
   }
 
   @override
+  Future<void> updateUserIsInitialUser() async {
+    try {
+      final db = await _localDatabase.database;
+      final response = await db.query(_tableName);
+      if (response.isNotEmpty) {
+        await db.update(_tableName, {_columnIsInitialUser: 1});
+      }
+    } on DatabaseException catch (_) {}
+  }
+
+  @override
   Future<void> updateIsPercentageMode({
     required bool isPercentageMode,
   }) async {

@@ -18,6 +18,8 @@ abstract interface class LifespanLocalDataSource {
 
   Future<void> updateUserIsNotInitialUser();
 
+  Future<void> updateUserIsInitialUser();
+
   Future<void> updateIsPercentageMode({required bool isPercentageMode});
 
   Future<void> updateHasLongPressed();

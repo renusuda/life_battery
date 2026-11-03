@@ -13,4 +13,10 @@ class IsInitialUser extends _$IsInitialUser {
     await ref.read(lifespanRepositoryProvider).updateUserIsNotInitialUser();
     ref.invalidateSelf();
   }
+
+  /// Debug only: sends the user back through onboarding.
+  Future<void> updateUserIsInitialUser() async {
+    await ref.read(lifespanRepositoryProvider).updateUserIsInitialUser();
+    ref.invalidateSelf();
+  }
 }

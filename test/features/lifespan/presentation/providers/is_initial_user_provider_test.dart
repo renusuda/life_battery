@@ -43,6 +43,11 @@ class _FakeLifespanLocalDataSource implements LifespanLocalDataSource {
   }
 
   @override
+  Future<void> updateUserIsInitialUser() async {
+    _isInitialUser = true;
+  }
+
+  @override
   Future<LifespanRange> getLifespan() async =>
       LifespanRange(birthDate: DateTime(2000), idealAge: 100);
 
