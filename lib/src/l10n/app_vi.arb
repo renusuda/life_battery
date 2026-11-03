@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "Bạn muốn sống đến bao nhiêu tuổi?",
   "onboardingIdealAgeDescription": "Cứ chọn theo mong muốn của bạn. Bạn có thể thay đổi sau.",
   "onboardingResultTitle": "Cuộc đời bạn còn {percentage}%",
-  "onboardingResultDescription": "Tức là còn {days} ngày nữa."
+  "onboardingResultDescription": "Tức là còn {days} ngày nữa.",
+  "onboardingLabelTitle": "Bạn sẽ gọi thời gian còn lại của mình là gì?",
+  "onboardingLabelDescription": "Bạn có thể đổi thành bất kỳ lời nào mình thích, hoặc cứ giữ nguyên cũng được."
 }

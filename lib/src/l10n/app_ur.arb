@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "آپ کتنی عمر تک جینا چاہتے ہیں؟",
   "onboardingIdealAgeDescription": "اپنی خواہش کے مطابق چنیں۔ آپ اسے بعد میں بدل سکتے ہیں۔",
   "onboardingResultTitle": "آپ کی زندگی کا {percentage}% باقی ہے",
-  "onboardingResultDescription": "یعنی ابھی {days} دن باقی ہیں۔"
+  "onboardingResultDescription": "یعنی ابھی {days} دن باقی ہیں۔",
+  "onboardingLabelTitle": "اپنے باقی وقت کو آپ کیا نام دیں گے؟",
+  "onboardingLabelDescription": "آپ اسے اپنی پسند کے کسی بھی الفاظ میں بدل سکتے ہیں، یا جیسا ہے ویسا رہنے دیں۔"
 }

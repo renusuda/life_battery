@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "До скольких лет вы хотите прожить?",
   "onboardingIdealAgeDescription": "Укажите желаемый возраст. Его можно изменить позже.",
   "onboardingResultTitle": "У вас осталось {percentage}% жизни",
-  "onboardingResultDescription": "Осталось дней: {days}."
+  "onboardingResultDescription": "Осталось дней: {days}.",
+  "onboardingLabelTitle": "Как бы вы назвали оставшееся время?",
+  "onboardingLabelDescription": "Можно заменить на любые слова по вашему вкусу или оставить как есть."
 }

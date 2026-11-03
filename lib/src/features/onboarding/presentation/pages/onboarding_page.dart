@@ -66,7 +66,12 @@ class OnboardingPage extends HookConsumerWidget {
     }
 
     return Scaffold(
+      // The keyboard covers the label step rather than squeezing its battery;
+      // the field sits above it, and the bottom inset is kept so nothing
+      // shifts on focus.
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
+        maintainBottomViewPadding: true,
         child: AsyncValueWidget(
           asyncValue: lifespanRangeManager,
           data: (lifespanRange) {

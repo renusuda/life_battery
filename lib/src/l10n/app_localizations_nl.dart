@@ -256,4 +256,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'Dat zijn nog $days dagen.';
   }
+
+  @override
+  String get onboardingLabelTitle =>
+      'Hoe zou je de tijd die je nog hebt noemen?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'Je kunt het veranderen in woorden die jij wilt, of het laten zoals het is.';
 }

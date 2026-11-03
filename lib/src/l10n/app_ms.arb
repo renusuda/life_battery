@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "Berapa lama anda mahu hidup?",
   "onboardingIdealAgeDescription": "Pilih umur ideal anda. Anda boleh mengubahnya kemudian.",
   "onboardingResultTitle": "Baki hidup anda {percentage}%",
-  "onboardingResultDescription": "Itu bermakna {days} hari lagi."
+  "onboardingResultDescription": "Itu bermakna {days} hari lagi.",
+  "onboardingLabelTitle": "Apa yang anda akan panggil baki masa anda?",
+  "onboardingLabelDescription": "Anda boleh menukarnya kepada apa-apa perkataan yang anda suka, atau biarkan seperti sedia ada."
 }

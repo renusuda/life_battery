@@ -248,4 +248,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'คิดเป็นอีก $days วัน';
   }
+
+  @override
+  String get onboardingLabelTitle => 'คุณจะเรียกเวลาที่เหลือของคุณว่าอะไร';
+
+  @override
+  String get onboardingLabelDescription =>
+      'เปลี่ยนเป็นคำที่คุณชอบได้ หรือจะปล่อยไว้แบบนี้ก็ได้';
 }

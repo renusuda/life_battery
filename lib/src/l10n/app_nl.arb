@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "Hoe oud wil je worden?",
   "onboardingIdealAgeDescription": "Kies je ideaal. Je kunt het later nog wijzigen.",
   "onboardingResultTitle": "Je hebt nog {percentage}% van je leven over",
-  "onboardingResultDescription": "Dat zijn nog {days} dagen."
+  "onboardingResultDescription": "Dat zijn nog {days} dagen.",
+  "onboardingLabelTitle": "Hoe zou je de tijd die je nog hebt noemen?",
+  "onboardingLabelDescription": "Je kunt het veranderen in woorden die jij wilt, of het laten zoals het is."
 }

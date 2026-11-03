@@ -584,6 +584,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'That\'s {days} days to go.'**
   String onboardingResultDescription(String days);
+
+  /// No description provided for @onboardingLabelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What would you call the time you have left?'**
+  String get onboardingLabelTitle;
+
+  /// No description provided for @onboardingLabelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Change it to any words you like, or leave it as it is.'**
+  String get onboardingLabelDescription;
 }
 
 class _AppLocalizationsDelegate

@@ -252,4 +252,12 @@ class AppLocalizationsMs extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'Itu bermakna $days hari lagi.';
   }
+
+  @override
+  String get onboardingLabelTitle =>
+      'Apa yang anda akan panggil baki masa anda?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'Anda boleh menukarnya kepada apa-apa perkataan yang anda suka, atau biarkan seperti sedia ada.';
 }

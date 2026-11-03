@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "तुम्हाला किती वर्षे जगायचे आहे?",
   "onboardingIdealAgeDescription": "तुमचा आदर्श निवडा. तुम्ही हे नंतर बदलू शकता.",
   "onboardingResultTitle": "तुमच्या आयुष्याचे {percentage}% उरले आहे",
-  "onboardingResultDescription": "म्हणजे अजून {days} दिवस बाकी आहेत."
+  "onboardingResultDescription": "म्हणजे अजून {days} दिवस बाकी आहेत.",
+  "onboardingLabelTitle": "तुमच्या उरलेल्या वेळेला तुम्ही काय नाव द्याल?",
+  "onboardingLabelDescription": "तुम्हाला हवे ते शब्द लिहू शकता, किंवा आहे तसेच ठेवू शकता."
 }

@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "আপনি কত বছর বাঁচতে চান?",
   "onboardingIdealAgeDescription": "আপনার আদর্শটাই বেছে নিন। পরে এটি বদলাতে পারবেন।",
   "onboardingResultTitle": "আপনার জীবনের {percentage}% বাকি আছে",
-  "onboardingResultDescription": "অর্থাৎ আরও {days} দিন বাকি।"
+  "onboardingResultDescription": "অর্থাৎ আরও {days} দিন বাকি।",
+  "onboardingLabelTitle": "আপনার বাকি সময়কে আপনি কী নামে ডাকবেন?",
+  "onboardingLabelDescription": "পছন্দমতো যেকোনো কথায় বদলে নিতে পারেন, বা যেমন আছে তেমনই রাখতে পারেন।"
 }

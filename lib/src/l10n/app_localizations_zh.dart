@@ -238,6 +238,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return '换算成天数，还有$days天。';
   }
+
+  @override
+  String get onboardingLabelTitle => '你会怎么称呼自己剩下的时间？';
+
+  @override
+  String get onboardingLabelDescription => '可以改成任何你喜欢的话，保持原样也没问题。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -474,4 +480,10 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String onboardingResultDescription(String days) {
     return '換算成天數，還有$days天。';
   }
+
+  @override
+  String get onboardingLabelTitle => '你會怎麼稱呼自己剩下的時間？';
+
+  @override
+  String get onboardingLabelDescription => '可以改成任何你喜歡的話，保持原樣也沒問題。';
 }

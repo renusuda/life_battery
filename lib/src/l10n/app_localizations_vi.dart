@@ -253,4 +253,12 @@ class AppLocalizationsVi extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'Tức là còn $days ngày nữa.';
   }
+
+  @override
+  String get onboardingLabelTitle =>
+      'Bạn sẽ gọi thời gian còn lại của mình là gì?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'Bạn có thể đổi thành bất kỳ lời nào mình thích, hoặc cứ giữ nguyên cũng được.';
 }

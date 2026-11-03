@@ -254,4 +254,11 @@ class AppLocalizationsKn extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'ಅಂದರೆ ಇನ್ನೂ $days ದಿನಗಳು ಉಳಿದಿವೆ.';
   }
+
+  @override
+  String get onboardingLabelTitle => 'ನಿಮ್ಮ ಉಳಿದ ಸಮಯವನ್ನು ಏನೆಂದು ಕರೆಯುತ್ತೀರಿ?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'ನಿಮಗೆ ಇಷ್ಟವಾದ ಯಾವುದೇ ಪದಗಳಿಗೆ ಬದಲಾಯಿಸಬಹುದು, ಅಥವಾ ಹಾಗೆಯೇ ಇಡಬಹುದು.';
 }

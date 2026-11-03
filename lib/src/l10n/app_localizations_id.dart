@@ -254,4 +254,11 @@ class AppLocalizationsId extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'Artinya, masih ada $days hari lagi.';
   }
+
+  @override
+  String get onboardingLabelTitle => 'Apa sebutan untuk sisa waktu Anda?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'Anda bisa menggantinya dengan kata-kata apa pun yang Anda suka, atau membiarkannya apa adanya.';
 }

@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "كم سنة تريد أن تعيش؟",
   "onboardingIdealAgeDescription": "اختر ما تتمناه، ويمكنك تغييره لاحقًا.",
   "onboardingResultTitle": "تبقّى لك {percentage}% من عمرك",
-  "onboardingResultDescription": "أي أن أمامك {days} يومًا."
+  "onboardingResultDescription": "أي أن أمامك {days} يومًا.",
+  "onboardingLabelTitle": "ماذا تسمّي الوقت المتبقي لك؟",
+  "onboardingLabelDescription": "يمكنك تغييرها إلى أي كلمات تريدها، أو تركها كما هي."
 }

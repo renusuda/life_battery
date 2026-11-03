@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "Ingin hidup sampai usia berapa?",
   "onboardingIdealAgeDescription": "Isi sesuai harapan Anda. Bisa diubah nanti.",
   "onboardingResultTitle": "Sisa hidup Anda {percentage}%",
-  "onboardingResultDescription": "Artinya, masih ada {days} hari lagi."
+  "onboardingResultDescription": "Artinya, masih ada {days} hari lagi.",
+  "onboardingLabelTitle": "Apa sebutan untuk sisa waktu Anda?",
+  "onboardingLabelDescription": "Anda bisa menggantinya dengan kata-kata apa pun yang Anda suka, atau membiarkannya apa adanya."
 }

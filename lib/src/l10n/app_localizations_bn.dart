@@ -254,4 +254,11 @@ class AppLocalizationsBn extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'অর্থাৎ আরও $days দিন বাকি।';
   }
+
+  @override
+  String get onboardingLabelTitle => 'আপনার বাকি সময়কে আপনি কী নামে ডাকবেন?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'পছন্দমতো যেকোনো কথায় বদলে নিতে পারেন, বা যেমন আছে তেমনই রাখতে পারেন।';
 }

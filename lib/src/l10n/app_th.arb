@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "คุณอยากมีชีวิตอยู่ถึงอายุเท่าไหร่?",
   "onboardingIdealAgeDescription": "ตอบตามที่ใจอยากได้เลย เปลี่ยนภายหลังได้",
   "onboardingResultTitle": "ชีวิตของคุณเหลืออีก {percentage}%",
-  "onboardingResultDescription": "คิดเป็นอีก {days} วัน"
+  "onboardingResultDescription": "คิดเป็นอีก {days} วัน",
+  "onboardingLabelTitle": "คุณจะเรียกเวลาที่เหลือของคุณว่าอะไร",
+  "onboardingLabelDescription": "เปลี่ยนเป็นคำที่คุณชอบได้ หรือจะปล่อยไว้แบบนี้ก็ได้"
 }

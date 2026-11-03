@@ -7,6 +7,7 @@ import 'package:life_battery/src/features/analytics/data/analytics_repository_pr
 import 'package:life_battery/src/features/launch_count/domain/review_request_source.dart';
 import 'package:life_battery/src/features/launch_count/presentation/providers/in_app_review_provider.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/battery_label_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/is_initial_user_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_range_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
@@ -66,6 +67,7 @@ void main() {
           () => fakeLifespanRangeManager,
         ),
         isInitialUserProvider.overrideWith(() => fakeIsInitialUser),
+        batteryLabelManagerProvider.overrideWith(_FakeBatteryLabelManager.new),
         shareApiDataSourceProvider.overrideWithValue(fakeShare),
         inAppReviewProvider.overrideWithValue(fakeInAppReview),
       ],
@@ -249,18 +251,29 @@ void main() {
     await tester.tap(find.text('Continue'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
+    // The label field appears once the stored label has loaded.
+    await tester.pump();
   }
 
-  testWidgets('Shares the first result from the label step', (tester) async {
+  testWidgets('Shares the first result with the label just typed', (
+    tester,
+  ) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildPage());
     await tester.pump();
     await goToLabel(tester);
 
+    expect(
+      find.text('What would you call the time you have left?'),
+      findsOneWidget,
+    );
+    await tester.enterText(find.byType(TextField), 'Time left');
+    await tester.pump();
     await tester.tapAndAwaitShare(find.text('Share'));
 
     expect(fakeShare.sharedImages, hasLength(1));
     expect(fakeShare.sharedTexts.single, contains('% of my life left.'));
+    expect(find.text('Time left'), findsNWidgets(2));
     expect(find.text('Continue'), findsOneWidget);
   });
 
@@ -448,5 +461,15 @@ class _FakeIsInitialUser extends IsInitialUser {
   Future<void> updateUserIsNotInitialUser() async {
     isInitialUser = false;
     state = const AsyncData(false);
+  }
+}
+
+class _FakeBatteryLabelManager extends BatteryLabelManager {
+  @override
+  Future<String?> build() async => null;
+
+  @override
+  Future<void> updateBatteryLabel(String label) async {
+    state = AsyncData(label);
   }
 }

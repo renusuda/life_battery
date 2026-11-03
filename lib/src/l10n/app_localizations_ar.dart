@@ -249,4 +249,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'أي أن أمامك $days يومًا.';
   }
+
+  @override
+  String get onboardingLabelTitle => 'ماذا تسمّي الوقت المتبقي لك؟';
+
+  @override
+  String get onboardingLabelDescription =>
+      'يمكنك تغييرها إلى أي كلمات تريدها، أو تركها كما هي.';
 }

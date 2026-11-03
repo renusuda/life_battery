@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "עד איזה גיל היית רוצה לחיות?",
   "onboardingIdealAgeDescription": "אפשר לבחור את הגיל האידיאלי. ניתן לשנות אותו בהמשך.",
   "onboardingResultTitle": "נותרו לך {percentage}% מהחיים",
-  "onboardingResultDescription": "כלומר, עוד {days} ימים."
+  "onboardingResultDescription": "כלומר, עוד {days} ימים.",
+  "onboardingLabelTitle": "איך הייתם קוראים לזמן שנותר לכם?",
+  "onboardingLabelDescription": "אפשר לשנות לכל מילים שתרצו, או להשאיר כמו שזה."
 }

@@ -240,4 +240,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return '일수로 환산하면 앞으로 $days일이에요.';
   }
+
+  @override
+  String get onboardingLabelTitle => '남은 시간을 뭐라고 부르고 싶나요?';
+
+  @override
+  String get onboardingLabelDescription => '원하는 말로 바꿔도 되고, 그대로 두어도 괜찮아요.';
 }

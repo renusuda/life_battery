@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "몇 살까지 살고 싶나요?",
   "onboardingIdealAgeDescription": "이상적인 나이로 괜찮아요. 나중에 변경할 수 있어요.",
   "onboardingResultTitle": "남은 인생은 {percentage}%",
-  "onboardingResultDescription": "일수로 환산하면 앞으로 {days}일이에요."
+  "onboardingResultDescription": "일수로 환산하면 앞으로 {days}일이에요.",
+  "onboardingLabelTitle": "남은 시간을 뭐라고 부르고 싶나요?",
+  "onboardingLabelDescription": "원하는 말로 바꿔도 되고, 그대로 두어도 괜찮아요."
 }

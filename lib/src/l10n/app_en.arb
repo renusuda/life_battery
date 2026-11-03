@@ -111,5 +111,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "onboardingLabelTitle": "What would you call the time you have left?",
+  "onboardingLabelDescription": "Change it to any words you like, or leave it as it is."
 }

@@ -257,4 +257,11 @@ class AppLocalizationsTe extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'అంటే, ఇంకా $days రోజులు.';
   }
+
+  @override
+  String get onboardingLabelTitle => 'మిగిలిన సమయాన్ని మీరు ఏమని పిలుస్తారు?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'మీకు నచ్చిన మాటలకు మార్చుకోవచ్చు, లేదా అలాగే ఉంచవచ్చు.';
 }

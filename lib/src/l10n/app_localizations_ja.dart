@@ -240,4 +240,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return '日数にすると、あと$days日です。';
   }
+
+  @override
+  String get onboardingLabelTitle => '残りの時間を、なんて呼びますか？';
+
+  @override
+  String get onboardingLabelDescription => '好きな言葉に書き換えられます。そのままでも構いません。';
 }

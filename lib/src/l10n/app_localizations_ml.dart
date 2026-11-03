@@ -257,4 +257,12 @@ class AppLocalizationsMl extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'അതായത് ഇനിയും $days ദിവസം.';
   }
+
+  @override
+  String get onboardingLabelTitle =>
+      'ബാക്കിയുള്ള സമയത്തെ നിങ്ങൾ എന്ത് വിളിക്കും?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'ഇഷ്ടമുള്ള ഏത് വാക്കുകളിലേക്കും മാറ്റാം, അല്ലെങ്കിൽ അതുപോലെ തന്നെ വെക്കാം.';
 }

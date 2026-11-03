@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "你想活到幾歲？",
   "onboardingIdealAgeDescription": "依理想填寫就好，之後可以修改。",
   "onboardingResultTitle": "你的人生還剩{percentage}%",
-  "onboardingResultDescription": "換算成天數，還有{days}天。"
+  "onboardingResultDescription": "換算成天數，還有{days}天。",
+  "onboardingLabelTitle": "你會怎麼稱呼自己剩下的時間？",
+  "onboardingLabelDescription": "可以改成任何你喜歡的話，保持原樣也沒問題。"
 }

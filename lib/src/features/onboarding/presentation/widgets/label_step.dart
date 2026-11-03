@@ -2,17 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/common_widgets/primary_button.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
+import 'package:life_battery/src/features/lifespan/presentation/providers/battery_label_manager_provider.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_label.dart';
+import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_label_field.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_step_header.dart';
 import 'package:life_battery/src/features/share/presentation/widgets/share_card_dialog.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/app_haptics.dart';
 
 /// Sharing lives here rather than on the result step so the card carries
 /// the words the user just chose.
-class LabelStep extends StatelessWidget {
+class LabelStep extends ConsumerWidget {
   const LabelStep({
     required this.lifespanRange,
     required this.onNext,
@@ -24,9 +28,10 @@ class LabelStep extends StatelessWidget {
   final VoidCallback onNext;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
+    final label = ref.watch(batteryLabelManagerProvider).value;
     final percentage = lifespanRange.remainingLifePercentage(
       now: DateTime.now(),
     );
@@ -34,19 +39,36 @@ class LabelStep extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        OnboardingStepHeader(
+          title: l10n.onboardingLabelTitle,
+          description: l10n.onboardingLabelDescription,
+        ),
+        const SizedBox(height: 24),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: BatteryLabelField(),
+        ),
         Expanded(
           child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const BatteryLabel(label: null),
-                const SizedBox(height: 20),
-                BatteryIndicator(
-                  value: percentage,
-                  text: '$percentage%',
-                  animate: false,
+            // Short screens like the iPhone SE cannot fit the full-size
+            // battery below the field.
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: SizedBox(
+                width: MediaQuery.sizeOf(context).width,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    BatteryLabel(label: label),
+                    const SizedBox(height: 20),
+                    BatteryIndicator(
+                      value: percentage,
+                      text: '$percentage%',
+                      animate: false,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
@@ -69,7 +91,7 @@ class LabelStep extends StatelessWidget {
                 context,
                 percentage: percentage,
                 text: '$percentage%',
-                label: null,
+                label: label,
               );
             },
             icon: Icon(

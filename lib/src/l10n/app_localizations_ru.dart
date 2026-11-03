@@ -256,4 +256,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'Осталось дней: $days.';
   }
+
+  @override
+  String get onboardingLabelTitle => 'Как бы вы назвали оставшееся время?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'Можно заменить на любые слова по вашему вкусу или оставить как есть.';
 }

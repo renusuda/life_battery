@@ -252,4 +252,11 @@ class AppLocalizationsPa extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'ਯਾਨੀ ਅਜੇ $days ਦਿਨ ਬਾਕੀ ਹਨ।';
   }
+
+  @override
+  String get onboardingLabelTitle => 'ਆਪਣੇ ਬਚੇ ਸਮੇਂ ਨੂੰ ਤੁਸੀਂ ਕੀ ਨਾਮ ਦਿਓਗੇ?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'ਤੁਸੀਂ ਇਸਨੂੰ ਆਪਣੀ ਪਸੰਦ ਦੇ ਕਿਸੇ ਵੀ ਸ਼ਬਦਾਂ ਵਿੱਚ ਬਦਲ ਸਕਦੇ ਹੋ, ਜਾਂ ਜਿਵੇਂ ਹੈ ਉਵੇਂ ਰੱਖ ਸਕਦੇ ਹੋ।';
 }

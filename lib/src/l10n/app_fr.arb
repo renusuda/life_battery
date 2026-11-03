@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "Jusqu’à quel âge voulez-vous vivre ?",
   "onboardingIdealAgeDescription": "Choisissez votre idéal. Vous pourrez le modifier plus tard.",
   "onboardingResultTitle": "Il vous reste {percentage} % de votre vie",
-  "onboardingResultDescription": "Soit encore {days} jours."
+  "onboardingResultDescription": "Soit encore {days} jours.",
+  "onboardingLabelTitle": "Comment appelleriez-vous le temps qu'il vous reste ?",
+  "onboardingLabelDescription": "Vous pouvez le remplacer par les mots de votre choix, ou le laisser tel quel."
 }

@@ -56,6 +56,7 @@ class BatteryLabelFieldContent extends HookConsumerWidget {
           controller: controller,
           maxLength: maxLength,
           textInputAction: TextInputAction.done,
+          onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           onChanged: (value) => unawaited(
             ref

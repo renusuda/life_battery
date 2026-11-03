@@ -71,5 +71,7 @@
   "onboardingIdealAgeTitle": "ਤੁਸੀਂ ਕਿੰਨੇ ਸਾਲ ਜਿਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
   "onboardingIdealAgeDescription": "ਆਪਣਾ ਆਦਰਸ਼ ਚੁਣੋ। ਤੁਸੀਂ ਇਸ ਨੂੰ ਬਾਅਦ ਵਿੱਚ ਬਦਲ ਸਕਦੇ ਹੋ।",
   "onboardingResultTitle": "ਤੁਹਾਡੀ ਜ਼ਿੰਦਗੀ ਦਾ {percentage}% ਬਾਕੀ ਹੈ",
-  "onboardingResultDescription": "ਯਾਨੀ ਅਜੇ {days} ਦਿਨ ਬਾਕੀ ਹਨ।"
+  "onboardingResultDescription": "ਯਾਨੀ ਅਜੇ {days} ਦਿਨ ਬਾਕੀ ਹਨ।",
+  "onboardingLabelTitle": "ਆਪਣੇ ਬਚੇ ਸਮੇਂ ਨੂੰ ਤੁਸੀਂ ਕੀ ਨਾਮ ਦਿਓਗੇ?",
+  "onboardingLabelDescription": "ਤੁਸੀਂ ਇਸਨੂੰ ਆਪਣੀ ਪਸੰਦ ਦੇ ਕਿਸੇ ਵੀ ਸ਼ਬਦਾਂ ਵਿੱਚ ਬਦਲ ਸਕਦੇ ਹੋ, ਜਾਂ ਜਿਵੇਂ ਹੈ ਉਵੇਂ ਰੱਖ ਸਕਦੇ ਹੋ।"
 }

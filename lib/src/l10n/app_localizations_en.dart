@@ -254,4 +254,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'That\'s $days days to go.';
   }
+
+  @override
+  String get onboardingLabelTitle =>
+      'What would you call the time you have left?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'Change it to any words you like, or leave it as it is.';
 }

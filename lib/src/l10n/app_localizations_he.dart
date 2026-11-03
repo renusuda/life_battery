@@ -251,4 +251,11 @@ class AppLocalizationsHe extends AppLocalizations {
   String onboardingResultDescription(String days) {
     return 'כלומר, עוד $days ימים.';
   }
+
+  @override
+  String get onboardingLabelTitle => 'איך הייתם קוראים לזמן שנותר לכם?';
+
+  @override
+  String get onboardingLabelDescription =>
+      'אפשר לשנות לכל מילים שתרצו, או להשאיר כמו שזה.';
 }
