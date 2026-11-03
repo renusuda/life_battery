@@ -5,6 +5,7 @@ import 'package:life_battery/src/features/purchases/presentation/widgets/premium
 import 'package:life_battery/src/features/settings/presentation/widgets/appearance_list_tile.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/delete_all_list_tile.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/notification_settings_list_tile.dart';
+import 'package:life_battery/src/features/settings/presentation/widgets/premium_debug_switch_list_tile.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/privacy_policy_list_tile.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/replay_onboarding_list_tile.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/review_app_list_tile.dart';
@@ -36,7 +37,10 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
           const DeleteAllListTile(),
-          if (kDebugMode) const ReplayOnboardingListTile(),
+          if (kDebugMode) ...[
+            const ReplayOnboardingListTile(),
+            const PremiumDebugSwitchListTile(),
+          ],
         ],
       ),
     );

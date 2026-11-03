@@ -11,4 +11,8 @@ abstract interface class EntitlementsLocalDataSource {
 
   /// Stores the end of the free widget trial.
   Future<void> markWidgetTrialUntil(DateTime expiresAt);
+
+  /// Drops the lifetime purchase and the subscription expiry, keeping the
+  /// widget trial. Debug builds only.
+  Future<void> clearPremium();
 }

@@ -77,6 +77,20 @@ class CacheEntitlementsLocalDataSource implements EntitlementsLocalDataSource {
   }
 
   @override
+  Future<void> clearPremium() async {
+    try {
+      final db = await _localDatabase.database;
+      final response = await db.query(_tableName);
+      if (response.isNotEmpty) {
+        await db.update(_tableName, {
+          _columnHasPremiumLifetime: 0,
+          _columnPremiumSubscriptionExpiresAt: null,
+        });
+      }
+    } on DatabaseException catch (_) {}
+  }
+
+  @override
   Future<void> markWidgetTrialUntil(DateTime expiresAt) async {
     try {
       final db = await _localDatabase.database;

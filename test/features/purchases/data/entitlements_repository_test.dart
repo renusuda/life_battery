@@ -49,6 +49,20 @@ void main() {
     expect(fakeLocal.entitlement.widgetTrialExpiresAt, isNull);
   });
 
+  test('Clears premium but keeps the widget trial', () async {
+    fakeLocal.entitlement = PremiumEntitlement(
+      hasLifetime: true,
+      subscriptionExpiresAt: now.add(const Duration(days: 30)),
+      widgetTrialExpiresAt: DateTime(2026, 10, 27),
+    );
+
+    await repository.clearPremium();
+
+    expect(fakeLocal.entitlement.isActive(now), isFalse);
+    expect(fakeLocal.entitlement.subscriptionExpiresAt, isNull);
+    expect(fakeLocal.entitlement.widgetTrialExpiresAt, DateTime(2026, 10, 27));
+  });
+
   test('Syncs the trial expiry to the widget', () async {
     final expiresAt = DateTime.now().add(const Duration(hours: 5));
     fakeLocal.entitlement = PremiumEntitlement(

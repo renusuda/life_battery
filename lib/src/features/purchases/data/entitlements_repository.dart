@@ -39,6 +39,11 @@ class EntitlementsRepository {
     return true;
   }
 
+  /// Debug builds only: the store never revokes a stored entitlement.
+  Future<void> clearPremium() {
+    return _localDataSource.clearPremium();
+  }
+
   /// Unlocks the widget until the end of the local day so the user can try
   /// the one just added during onboarding. Granted once per install;
   /// skipped when premium is already held.

@@ -36,6 +36,14 @@ class FakeEntitlementsLocalDataSource implements EntitlementsLocalDataSource {
   }
 
   @override
+  Future<void> clearPremium() async {
+    entitlement = PremiumEntitlement(
+      hasLifetime: false,
+      widgetTrialExpiresAt: entitlement.widgetTrialExpiresAt,
+    );
+  }
+
+  @override
   Future<void> markWidgetTrialUntil(DateTime expiresAt) async {
     entitlement = PremiumEntitlement(
       hasLifetime: entitlement.hasLifetime,
