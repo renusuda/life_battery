@@ -52,6 +52,8 @@ class OnboardingPage extends HookConsumerWidget {
       );
     }
 
+    Future<void> goToNextStep() => goToStep(currentStep.value + 1);
+
     Future<void> finish() async {
       if (isFinishing.value) return;
       isFinishing.value = true;
@@ -80,28 +82,28 @@ class OnboardingPage extends HookConsumerWidget {
                 lifespanRange: lifespanRange,
                 onNext: () {
                   logStepPassed(OnboardingStep.idealAge);
-                  unawaited(goToStep(1));
+                  unawaited(goToNextStep());
                 },
               ),
               BirthDateStep(
                 lifespanRange: lifespanRange,
                 onNext: () {
                   logStepPassed(OnboardingStep.birthDate);
-                  unawaited(goToStep(2));
+                  unawaited(goToNextStep());
                 },
               ),
               ResultStep(
                 lifespanRange: lifespanRange,
                 onNext: () {
                   logStepPassed(OnboardingStep.result);
-                  unawaited(goToStep(3));
+                  unawaited(goToNextStep());
                 },
               ),
               LabelStep(
                 lifespanRange: lifespanRange,
                 onNext: () {
                   logStepPassed(OnboardingStep.label);
-                  unawaited(goToStep(4));
+                  unawaited(goToNextStep());
                 },
               ),
               WidgetStep(
