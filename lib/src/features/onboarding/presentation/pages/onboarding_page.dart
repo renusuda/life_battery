@@ -11,6 +11,7 @@ import 'package:life_battery/src/features/lifespan/presentation/providers/lifesp
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/birth_date_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/ideal_age_step.dart';
+import 'package:life_battery/src/features/onboarding/presentation/widgets/label_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_progress_bar.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/result_step.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/widget_step.dart';
@@ -89,6 +90,13 @@ class OnboardingPage extends HookConsumerWidget {
                 onNext: () {
                   logStepPassed(OnboardingStep.result);
                   unawaited(goToStep(3));
+                },
+              ),
+              LabelStep(
+                lifespanRange: lifespanRange,
+                onNext: () {
+                  logStepPassed(OnboardingStep.label);
+                  unawaited(goToStep(4));
                 },
               ),
               WidgetStep(

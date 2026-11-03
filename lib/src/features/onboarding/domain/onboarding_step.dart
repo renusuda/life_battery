@@ -3,6 +3,7 @@ enum OnboardingStep {
   idealAge('ideal_age'),
   birthDate('birth_date'),
   result('result'),
+  label('label'),
   widget('widget');
 
   const OnboardingStep(this.paramValue);

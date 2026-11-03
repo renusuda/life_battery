@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:life_battery/src/common_widgets/primary_button.dart';
@@ -8,7 +7,6 @@ import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_indicator.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_step_header.dart';
-import 'package:life_battery/src/features/share/presentation/widgets/share_card_dialog.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/app_haptics.dart';
 
@@ -31,9 +29,8 @@ class ResultStep extends HookWidget {
   static const _batteryAppear = 450;
   static const _batteryDecrease = 2000;
   static const _textFadeIn = 500;
-  static const _shareFadeIn = 300;
   static const int _total =
-      _delay + _batteryAppear + _batteryDecrease + _textFadeIn + _shareFadeIn;
+      _delay + _batteryAppear + _batteryDecrease + _textFadeIn;
 
   static const _batteryAppearCurve = Interval(
     _delay / _total,
@@ -47,11 +44,6 @@ class ResultStep extends HookWidget {
   );
   static const _textFadeInCurve = Interval(
     (_delay + _batteryAppear + _batteryDecrease) / _total,
-    (_delay + _batteryAppear + _batteryDecrease + _textFadeIn) / _total,
-    curve: Curves.easeOut,
-  );
-  static const _shareFadeInCurve = Interval(
-    (_delay + _batteryAppear + _batteryDecrease + _textFadeIn) / _total,
     1,
     curve: Curves.easeOut,
   );
@@ -59,7 +51,6 @@ class ResultStep extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final colorScheme = Theme.of(context).colorScheme;
     final now = DateTime.now();
     final percentage = lifespanRange.remainingLifePercentage(now: now);
     final days = lifespanRange.remainingLifeDays(now: now);
@@ -86,7 +77,6 @@ class ResultStep extends HookWidget {
       unawaited(AppHaptics.selectionClick());
     }
     final textFadeIn = _textFadeInCurve.transform(progress);
-    final shareFadeIn = _shareFadeInCurve.transform(progress);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -114,47 +104,6 @@ class ResultStep extends HookWidget {
                   text: '$value%',
                   animate: false,
                 ),
-              ),
-            ),
-          ),
-        ),
-        // Offered right after the first result, when the number is most
-        // worth telling someone; it arrives last so the words land first.
-        Opacity(
-          opacity: shareFadeIn,
-          child: Transform.translate(
-            offset: Offset(0, 16 * (1 - shareFadeIn)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: OutlinedButton.icon(
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: colorScheme.onSurface,
-                  side: BorderSide(color: colorScheme.outline),
-                  minimumSize: const Size.fromHeight(56),
-                  shape: const StadiumBorder(),
-                  textStyle: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onPressed: shareFadeIn < 1
-                    ? null
-                    : () async {
-                        unawaited(AppHaptics.lightImpact());
-                        await ShareCardDialog.show(
-                          context,
-                          percentage: percentage,
-                          text: '$percentage%',
-                          // The label cannot be edited before onboarding ends.
-                          label: null,
-                        );
-                      },
-                icon: Icon(
-                  defaultTargetPlatform == TargetPlatform.iOS
-                      ? Icons.ios_share
-                      : Icons.share_outlined,
-                ),
-                label: Text(l10n.shareLabel),
               ),
             ),
           ),

@@ -243,12 +243,19 @@ void main() {
     expect(fakeAnalytics.onboardingCompleteCount, 0);
   });
 
-  testWidgets('Shares the first result from the result step', (tester) async {
+  Future<void> goToLabel(WidgetTester tester) async {
+    await goToResult(tester);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Continue'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+  }
+
+  testWidgets('Shares the first result from the label step', (tester) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
     await tester.pumpWidget(buildPage());
     await tester.pump();
-    await goToResult(tester);
-    await tester.pumpAndSettle();
+    await goToLabel(tester);
 
     await tester.tapAndAwaitShare(find.text('Share'));
 
@@ -258,8 +265,7 @@ void main() {
   });
 
   Future<void> goToWidget(WidgetTester tester) async {
-    await goToResult(tester);
-    await tester.pumpAndSettle();
+    await goToLabel(tester);
     await tester.tap(find.text('Continue'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
