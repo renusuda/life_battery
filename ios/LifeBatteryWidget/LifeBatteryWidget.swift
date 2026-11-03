@@ -267,7 +267,7 @@ struct LifeBatteryWidgetEntryView: View {
           Text(verbatim: entry.isPercentageMode
             ? "\(entry.percentage)%"
             : "\(entry.remainingDays)\(String(localized: "widget.dayUnit"))")
-            .font(.system(size: 26, weight: .bold, design: .rounded))
+            .font(.system(size: 22, weight: .bold, design: .rounded).monospacedDigit())
             .foregroundColor(.primary)
             // Long translations of the day unit shrink instead of wrapping.
             .lineLimit(1)
