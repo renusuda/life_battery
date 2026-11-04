@@ -119,6 +119,9 @@ void main() {
             analyticsApiDataSourceProvider.overrideWithValue(
               FakeAnalyticsApiDataSource(),
             ),
+            notificationRepositoryProvider.overrideWith(
+              (ref) async => FakeNotificationRepository(),
+            ),
           ],
           child: const App(),
         ),
