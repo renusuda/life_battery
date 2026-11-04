@@ -69,7 +69,7 @@ Create `fastlane/metadata/<store locale>/`:
 - `description.txt`: translation of `en-US/description.txt`.
 - `promotional_text.txt`, `apple_tv_privacy_policy.txt`, `marketing_url.txt`, `privacy_url.txt`, `support_url.txt`: copy from `en-US`.
 
-Add the language to `fastlane/default_release_notes.json` in the same commit. The text is the translation of 「より快適にお使いいただけるよう、細かな改善を行いました。」. `sync_release_notes` fails when a metadata language has no notes.
+Add the language to `release_notes.json` in the same commit. The text is the translation of 「より快適にお使いいただけるよう、細かな改善を行いました。」. `sync_release_notes` fails when a metadata language has no notes.
 
 ## 5. Screenshots (`chore: Add <Language> App Store screenshots`)
 

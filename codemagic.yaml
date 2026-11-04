@@ -58,7 +58,9 @@ workflows:
         script: |
           file="release_notes.json"
           tmp="$(mktemp)"
-          jq 'map(if .language == "ja" then .language = "ja-JP" else . end)' "$file" > "$tmp"
+          # The Play listing is in English and Japanese only.
+          jq 'map(select(.language == "en-US" or .language == "ja"))
+            | map(if .language == "ja" then .language = "ja-JP" else . end)' "$file" > "$tmp"
           mv "$tmp" "$file"
       - name: Shorebird Release Android
         script: |

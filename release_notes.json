@@ -1,10 +1,114 @@
 [
   {
     "language": "en-US",
-    "text": "・You can now add a label above the battery.\n・We added new steps to the onboarding for the label, sharing and notifications."
+    "text": "・We made some small improvements to make the app more comfortable to use."
   },
   {
     "language": "ja",
-    "text": "・バッテリーの上にラベルを付けられるようになりました。\n・オンボーディングに、ラベル、シェア、通知のステップを追加しました。"
+    "text": "・より快適にお使いいただけるよう、細かな改善を行いました。"
+  },
+  {
+    "language": "ar-SA",
+    "text": "أجرينا بعض التحسينات الصغيرة لتستمتع باستخدام التطبيق بسلاسة أكبر."
+  },
+  {
+    "language": "bn-BD",
+    "text": "আপনি যাতে আরও স্বাচ্ছন্দ্যে ব্যবহার করতে পারেন, সেজন্য আমরা ছোটখাটো কিছু উন্নতি করেছি।"
+  },
+  {
+    "language": "es-MX",
+    "text": "Hicimos algunas pequeñas mejoras para que uses la app con más comodidad."
+  },
+  {
+    "language": "fr-CA",
+    "text": "Nous avons apporté quelques petites améliorations pour rendre l’app encore plus agréable à utiliser."
+  },
+  {
+    "language": "fr-FR",
+    "text": "Nous avons apporté quelques petites améliorations pour rendre l’app encore plus agréable à utiliser."
+  },
+  {
+    "language": "gu-IN",
+    "text": "તમે વધુ આરામથી ઉપયોગ કરી શકો, તે માટે અમે કેટલાક નાના સુધારા કર્યા છે."
+  },
+  {
+    "language": "he",
+    "text": "ביצענו כמה שיפורים קטנים כדי שהשימוש ביישום יהיה נוח עוד יותר."
+  },
+  {
+    "language": "hi",
+    "text": "आपके अनुभव को और बेहतर बनाने के लिए हमने कुछ छोटे सुधार किए हैं।"
+  },
+  {
+    "language": "id",
+    "text": "Kami melakukan beberapa penyempurnaan kecil agar aplikasi lebih nyaman digunakan."
+  },
+  {
+    "language": "kn-IN",
+    "text": "ನೀವು ಇನ್ನಷ್ಟು ಆರಾಮವಾಗಿ ಬಳಸಲು ಸಾಧ್ಯವಾಗುವಂತೆ ನಾವು ಕೆಲವು ಸಣ್ಣ ಸುಧಾರಣೆಗಳನ್ನು ಮಾಡಿದ್ದೇವೆ."
+  },
+  {
+    "language": "ko",
+    "text": "더 편리하게 사용하실 수 있도록 세부적인 부분을 개선했습니다."
+  },
+  {
+    "language": "ml-IN",
+    "text": "നിങ്ങൾക്ക് കൂടുതൽ സുഖകരമായി ഉപയോഗിക്കാൻ കഴിയുന്ന വിധത്തിൽ ഞങ്ങൾ ചില ചെറിയ മെച്ചപ്പെടുത്തലുകൾ വരുത്തി."
+  },
+  {
+    "language": "mr-IN",
+    "text": "तुम्हाला अधिक सोयीस्करपणे वापरता यावे यासाठी आम्ही काही छोट्या सुधारणा केल्या आहेत."
+  },
+  {
+    "language": "ms",
+    "text": "Kami telah membuat beberapa penambahbaikan kecil supaya anda dapat menggunakan aplikasi ini dengan lebih selesa."
+  },
+  {
+    "language": "nl-NL",
+    "text": "We hebben een paar kleine verbeteringen doorgevoerd, zodat je de app nog prettiger kunt gebruiken."
+  },
+  {
+    "language": "or-IN",
+    "text": "ଆପଣ ଅଧିକ ସୁବିଧାରେ ବ୍ୟବହାର କରିପାରିବେ ବୋଲି ଆମେ କିଛି ଛୋଟ ଛୋଟ ଉନ୍ନତି କରିଛୁ।"
+  },
+  {
+    "language": "pa-IN",
+    "text": "ਤੁਸੀਂ ਇਸ ਨੂੰ ਹੋਰ ਆਰਾਮ ਨਾਲ ਵਰਤ ਸਕੋ, ਇਸ ਲਈ ਅਸੀਂ ਕੁਝ ਛੋਟੇ-ਛੋਟੇ ਸੁਧਾਰ ਕੀਤੇ ਹਨ।"
+  },
+  {
+    "language": "pt-BR",
+    "text": "Fizemos pequenas melhorias para que você use o app com mais conforto."
+  },
+  {
+    "language": "ru",
+    "text": "Мы внесли небольшие улучшения, чтобы приложением было ещё удобнее пользоваться."
+  },
+  {
+    "language": "ta-IN",
+    "text": "நீங்கள் இன்னும் வசதியாகப் பயன்படுத்தும் வகையில் சில சிறிய மேம்பாடுகளைச் செய்துள்ளோம்."
+  },
+  {
+    "language": "te-IN",
+    "text": "మీరు మరింత సౌకర్యవంతంగా ఉపయోగించుకునేలా కొన్ని చిన్న మెరుగుదలలు చేశాము."
+  },
+  {
+    "language": "th",
+    "text": "เราได้ปรับปรุงรายละเอียดเล็กน้อย เพื่อให้คุณใช้งานได้สะดวกยิ่งขึ้น"
+  },
+  {
+    "language": "ur-PK",
+    "text": "ایپ کا استعمال مزید آسان بنانے کے لیے ہم نے کچھ چھوٹی بہتریاں کی ہیں۔"
+  },
+  {
+    "language": "vi",
+    "text": "Chúng tôi đã thực hiện một số cải tiến nhỏ để bạn sử dụng ứng dụng thoải mái hơn."
+  },
+  {
+    "language": "zh-Hans",
+    "text": "我们进行了一些细节优化，让你使用起来更加舒适。"
+  },
+  {
+    "language": "zh-Hant",
+    "text": "我們做了一些細節改善，讓你使用起來更順暢。"
   }
 ]
