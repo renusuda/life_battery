@@ -4,8 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/share/data/share_repository_provider.dart';
 import 'package:life_battery/src/features/share/domain/share_message.dart';
+import 'package:life_battery/src/features/share/domain/share_source.dart';
 import 'package:life_battery/src/features/share/presentation/widgets/share_card.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/repaint_boundary_image.dart';
@@ -15,6 +17,7 @@ class ShareCardDialog extends HookConsumerWidget {
     required this.percentage,
     required this.text,
     required this.label,
+    required this.source,
     super.key,
   });
 
@@ -23,11 +26,16 @@ class ShareCardDialog extends HookConsumerWidget {
     required int percentage,
     required String text,
     required String? label,
+    required ShareSource source,
   }) {
     return showDialog<void>(
       context: context,
-      builder: (_) =>
-          ShareCardDialog(percentage: percentage, text: text, label: label),
+      builder: (_) => ShareCardDialog(
+        percentage: percentage,
+        text: text,
+        label: label,
+        source: source,
+      ),
     );
   }
 
@@ -36,6 +44,8 @@ class ShareCardDialog extends HookConsumerWidget {
   final String text;
 
   final String? label;
+
+  final ShareSource source;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,7 +56,7 @@ class ShareCardDialog extends HookConsumerWidget {
       try {
         final imageBytes = await captureRepaintBoundaryPng(cardKey);
         final box = cardKey.currentContext!.findRenderObject()! as RenderBox;
-        await ref
+        final result = await ref
             .read(shareRepositoryProvider)
             .share(
               text: ShareMessage.build(
@@ -57,6 +67,11 @@ class ShareCardDialog extends HookConsumerWidget {
               imageBytes: imageBytes,
               sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
             );
+        unawaited(
+          ref
+              .read(analyticsRepositoryProvider)
+              .logShare(source: source, result: result),
+        );
       } on Exception {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(

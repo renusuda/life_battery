@@ -3,6 +3,8 @@ import 'package:life_battery/src/features/launch_count/domain/review_request_sou
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
+import 'package:life_battery/src/features/share/domain/share_outcome.dart';
+import 'package:life_battery/src/features/share/domain/share_source.dart';
 
 /// Records product analytics events.
 ///
@@ -70,5 +72,12 @@ class AnalyticsRepository {
 
   Future<void> logNotificationPermissionResult({required bool granted}) {
     return _apiDataSource.logNotificationPermissionResult(granted: granted);
+  }
+
+  Future<void> logShare({
+    required ShareSource source,
+    required ShareOutcome result,
+  }) {
+    return _apiDataSource.logShare(source: source, result: result);
   }
 }

@@ -6,6 +6,8 @@ import 'package:life_battery/src/features/launch_count/domain/review_request_sou
 import 'package:life_battery/src/features/onboarding/domain/onboarding_step.dart';
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/purchases/domain/premium_plan.dart';
+import 'package:life_battery/src/features/share/domain/share_outcome.dart';
+import 'package:life_battery/src/features/share/domain/share_source.dart';
 
 class _RecordingFirebaseAnalytics extends Fake implements FirebaseAnalytics {
   final List<({String name, Map<String, Object>? parameters})> events = [];
@@ -161,6 +163,31 @@ void main() {
 
     expect(analytics.events.single.name, 'widget_guide_view');
     expect(analytics.events.single.parameters, isNull);
+  });
+
+  test(
+    'Sends the share as a share event with the source and result',
+    () async {
+      await dataSource.logShare(
+        source: ShareSource.onboarding,
+        result: ShareOutcome.unavailable,
+      );
+
+      expect(analytics.events.single.name, 'share');
+      expect(analytics.events.single.parameters, {
+        'source': 'onboarding',
+        'result': 'unavailable',
+      });
+    },
+  );
+
+  test('Sends the home share source as home', () async {
+    await dataSource.logShare(
+      source: ShareSource.home,
+      result: ShareOutcome.success,
+    );
+
+    expect(analytics.events.single.parameters?['source'], 'home');
   });
 
   test('Prints events to the console in debug builds', () async {

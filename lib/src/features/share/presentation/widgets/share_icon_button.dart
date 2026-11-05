@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:life_battery/src/extensions/extensions.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/lifespan_progress_state_provider.dart';
+import 'package:life_battery/src/features/share/domain/share_source.dart';
 import 'package:life_battery/src/features/share/presentation/widgets/share_card_dialog.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/app_haptics.dart';
@@ -46,6 +47,7 @@ class ShareIconButton extends ConsumerWidget {
           percentage: percentage,
           text: text,
           label: lifespanProgressState.batteryLabel,
+          source: ShareSource.home,
         );
       },
     );

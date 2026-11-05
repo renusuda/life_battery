@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/share/data/share_repository_provider.dart';
 import 'package:life_battery/src/features/share/domain/share_outcome.dart';
+import 'package:life_battery/src/features/share/domain/share_source.dart';
 import 'package:life_battery/src/features/share/domain/share_store_url.dart';
 import 'package:life_battery/src/features/share/presentation/widgets/share_card.dart';
 import 'package:life_battery/src/features/share/presentation/widgets/share_card_dialog.dart';
 
+import '../../../../../test_helpers/fake_analytics.dart';
 import '../../../../../test_helpers/fake_share.dart';
 import '../../../../../test_helpers/share_test_pump.dart';
 import '../../../../../test_helpers/test_app.dart';
 
 void main() {
+  late FakeAnalyticsApiDataSource fakeAnalytics;
   late FakeShareApiDataSource fakeShare;
 
   Widget buildApp({String? label}) {
     return ProviderScope(
       overrides: [
+        analyticsApiDataSourceProvider.overrideWithValue(fakeAnalytics),
         shareApiDataSourceProvider.overrideWithValue(fakeShare),
       ],
       child: TestApp(home: _DialogOpener(label: label)),
@@ -24,6 +29,7 @@ void main() {
   }
 
   setUp(() {
+    fakeAnalytics = FakeAnalyticsApiDataSource();
     fakeShare = FakeShareApiDataSource();
   });
 
@@ -102,6 +108,28 @@ void main() {
 
     expect(find.byType(ShareCard), findsNothing);
   });
+
+  testWidgets('Logs the share with its source and result', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    await tester.pumpWidget(buildApp());
+    await tester.tapAndAwaitShare(find.byType(TextButton));
+
+    expect(fakeAnalytics.shares, [
+      (source: ShareSource.home, result: ShareOutcome.success),
+    ]);
+  });
+
+  testWidgets('Logs a dismissed share sheet as dismissed', (tester) async {
+    tester.platformDispatcher.localesTestValue = [const Locale('en')];
+    fakeShare.outcome = ShareOutcome.dismissed;
+    await tester.pumpWidget(buildApp());
+    await tester.tapAndAwaitShare(find.byType(TextButton));
+
+    expect(
+      fakeAnalytics.shares.map((share) => share.result),
+      [ShareOutcome.dismissed],
+    );
+  });
 }
 
 class _DialogOpener extends StatelessWidget {
@@ -118,6 +146,7 @@ class _DialogOpener extends StatelessWidget {
           percentage: 54,
           text: '54%',
           label: label,
+          source: ShareSource.home,
         ),
         child: const Text('open'),
       ),

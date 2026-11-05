@@ -10,6 +10,7 @@ import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_label.dart';
 import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_label_field.dart';
 import 'package:life_battery/src/features/onboarding/presentation/widgets/onboarding_step_header.dart';
+import 'package:life_battery/src/features/share/domain/share_source.dart';
 import 'package:life_battery/src/features/share/presentation/widgets/share_card_dialog.dart';
 import 'package:life_battery/src/l10n/app_localizations.dart';
 import 'package:life_battery/src/utils/app_haptics.dart';
@@ -93,6 +94,7 @@ class LabelStep extends ConsumerWidget {
                 percentage: percentage,
                 text: '$percentage%',
                 label: label,
+                source: ShareSource.onboarding,
               );
             },
             icon: Icon(

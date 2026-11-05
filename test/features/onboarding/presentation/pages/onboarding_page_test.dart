@@ -21,6 +21,7 @@ import 'package:life_battery/src/features/purchases/data/purchases_repository_pr
 import 'package:life_battery/src/features/purchases/domain/paywall_source.dart';
 import 'package:life_battery/src/features/settings/presentation/widgets/widget_guide_steps.dart';
 import 'package:life_battery/src/features/share/data/share_repository_provider.dart';
+import 'package:life_battery/src/features/share/domain/share_source.dart';
 
 import '../../../../../test_helpers/fake_analytics.dart';
 import '../../../../../test_helpers/fake_entitlements.dart';
@@ -283,6 +284,7 @@ void main() {
     expect(fakeShare.sharedTexts.single, contains('% of my life left.'));
     expect(find.text('Time left'), findsNWidgets(2));
     expect(find.text('Continue'), findsOneWidget);
+    expect(fakeAnalytics.shares.single.source, ShareSource.onboarding);
   });
 
   Future<void> goToWidget(WidgetTester tester) async {
