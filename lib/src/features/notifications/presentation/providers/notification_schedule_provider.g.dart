@@ -42,7 +42,7 @@ final class NotificationScheduleProvider
 }
 
 String _$notificationScheduleHash() =>
-    r'e13423f0d379c0d508a39d845de2dc2ad1de3af2';
+    r'247d71eb880f94c9a3428dcafc61e11c999f45db';
 
 abstract class _$NotificationSchedule extends $Notifier<void> {
   void build();

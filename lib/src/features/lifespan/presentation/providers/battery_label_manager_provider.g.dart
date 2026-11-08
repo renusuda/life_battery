@@ -40,7 +40,7 @@ final class BatteryLabelManagerProvider
 }
 
 String _$batteryLabelManagerHash() =>
-    r'0f3312d27a3ed0a1e752875a290cf3027143aa78';
+    r'597e5ba94a7cb6080aca8733ca3b671db8a93dfb';
 
 /// The user-entered label above the battery. Null means the localized
 /// default and an empty string hides the label.

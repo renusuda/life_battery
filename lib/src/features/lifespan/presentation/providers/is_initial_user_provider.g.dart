@@ -33,7 +33,7 @@ final class IsInitialUserProvider
   IsInitialUser create() => IsInitialUser();
 }
 
-String _$isInitialUserHash() => r'8b583ab0d73e83852bf322355aa9adbd6ec7d344';
+String _$isInitialUserHash() => r'2128fda1b7eb8c8f80bf7f630f11e64f55b55719';
 
 abstract class _$IsInitialUser extends $AsyncNotifier<bool> {
   FutureOr<bool> build();
