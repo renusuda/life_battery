@@ -319,7 +319,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get appearanceLabel => '外觀';
 
   @override
-  String get systemLabel => '跟隨系統';
+  String get systemLabel => '依系統設定';
 
   @override
   String get lightLabel => '淺色';
@@ -440,7 +440,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get restorePurchasesLabel => '回復購買項目';
 
   @override
-  String get paywallSkipLabel => '暫時不用';
+  String get paywallSkipLabel => '稍後再說';
 
   @override
   String get termsOfUseLabel => '使用條款';
