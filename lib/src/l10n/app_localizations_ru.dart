@@ -244,7 +244,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get onboardingContinueLabel => 'Продолжить';
 
   @override
-  String get onboardingIdealAgeTitle => 'До скольких лет вы хотите прожить?';
+  String get onboardingIdealAgeTitle => 'До скольких лет вы хотите дожить?';
 
   @override
   String get onboardingIdealAgeDescription =>
