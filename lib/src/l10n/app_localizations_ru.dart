@@ -23,7 +23,17 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get ageUnit => 'лет';
+  String ageUnit(int age) {
+    String _temp0 = intl.Intl.pluralLogic(
+      age,
+      locale: localeName,
+      other: 'года',
+      many: 'лет',
+      few: 'года',
+      one: 'год',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get dayUnit => ' дн.';

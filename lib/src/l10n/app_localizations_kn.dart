@@ -23,7 +23,9 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String get ageUnit => 'ವರ್ಷ';
+  String ageUnit(int age) {
+    return 'ವರ್ಷ';
+  }
 
   @override
   String get dayUnit => ' ದಿನ';

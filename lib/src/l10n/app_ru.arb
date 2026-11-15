@@ -3,7 +3,7 @@
   "birthDateLabel": "Дата рождения",
   "idealLifespanLabel": "Желаемая продолжительность жизни",
   "idealAgePresetLabel": "{age} лет",
-  "ageUnit": "лет",
+  "ageUnit": "{age, plural, one{год} few{года} many{лет} other{года}}",
   "dayUnit": " дн.",
   "reviewAppLabel": "Оценить приложение",
   "widgetGuideLabel": "Добавить виджет",

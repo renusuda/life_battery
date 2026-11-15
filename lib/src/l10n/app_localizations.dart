@@ -175,7 +175,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'years'**
-  String get ageUnit;
+  String ageUnit(int age);
 
   /// No description provided for @dayUnit.
   ///

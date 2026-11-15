@@ -23,7 +23,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get ageUnit => '세';
+  String ageUnit(int age) {
+    return '세';
+  }
 
   @override
   String get dayUnit => '일';

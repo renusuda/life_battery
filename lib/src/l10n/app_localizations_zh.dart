@@ -23,7 +23,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get ageUnit => '岁';
+  String ageUnit(int age) {
+    return '岁';
+  }
 
   @override
   String get dayUnit => '天';
@@ -274,7 +276,9 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get ageUnit => '歲';
+  String ageUnit(int age) {
+    return '歲';
+  }
 
   @override
   String get dayUnit => '天';

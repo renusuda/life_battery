@@ -23,7 +23,9 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
-  String get ageUnit => 'വയസ്സ്';
+  String ageUnit(int age) {
+    return 'വയസ്സ്';
+  }
 
   @override
   String get dayUnit => ' ദിവസം';

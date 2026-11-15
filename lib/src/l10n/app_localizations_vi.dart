@@ -23,7 +23,9 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get ageUnit => 'tuổi';
+  String ageUnit(int age) {
+    return 'tuổi';
+  }
 
   @override
   String get dayUnit => ' ngày';

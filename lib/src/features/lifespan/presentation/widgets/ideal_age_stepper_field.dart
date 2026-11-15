@@ -138,7 +138,7 @@ class IdealAgeValue extends StatelessWidget {
           style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
         ),
         Text(
-          l10n.ageUnit,
+          l10n.ageUnit(idealAge),
           style: TextStyle(
             fontSize: 16,
             color: theme.colorScheme.secondary,

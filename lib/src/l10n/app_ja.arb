@@ -9,6 +9,11 @@
     }
   },
   "ageUnit": "歳",
+  "@ageUnit": {
+    "placeholders": {
+      "age": {"type": "int"}
+    }
+  },
   "dayUnit": "日",
   "reviewAppLabel": "アプリをレビューする",
   "widgetGuideLabel": "ウィジェットを追加",

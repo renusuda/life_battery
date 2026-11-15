@@ -9,6 +9,11 @@
     }
   },
   "ageUnit": "years",
+  "@ageUnit": {
+    "placeholders": {
+      "age": {"type": "int"}
+    }
+  },
   "dayUnit": "d",
   "reviewAppLabel": "Rate this app",
   "widgetGuideLabel": "Add the widget",
