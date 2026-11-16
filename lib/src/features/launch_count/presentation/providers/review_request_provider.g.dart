@@ -41,7 +41,7 @@ final class ReviewRequestProvider
   }
 }
 
-String _$reviewRequestHash() => r'6eaab434d8a5c974cc98716b2c86e6e8be671320';
+String _$reviewRequestHash() => r'2389403b83ece155a6eaeeefad4a87bf8038141d';
 
 abstract class _$ReviewRequest extends $Notifier<void> {
   void build();

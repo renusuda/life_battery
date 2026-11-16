@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:life_battery/src/features/launch_count/data/launch_count_repository_provider.dart';
+import 'package:life_battery/src/features/launch_count/presentation/providers/launch_count_increment_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/premium_widget_sync_provider.dart';
 import 'package:life_battery/src/features/purchases/presentation/providers/purchase_updates_provider.dart';
 import 'package:life_battery/src/features/settings/presentation/providers/app_theme_mode_provider.dart';
@@ -20,9 +20,7 @@ class App extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     useEffect(() {
-      unawaited(
-        ref.read(launchCountRepositoryProvider).incrementLaunchCount(),
-      );
+      unawaited(ref.read(launchCountIncrementProvider.future));
       return null;
     }, const []);
 

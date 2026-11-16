@@ -98,7 +98,6 @@ class LifeProgressContent extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isPressed = useState(false);
     final isNotificationScheduled = useRef(false);
-    final hasRequestedReview = useRef(false);
 
     Future<void> showDateInputBottomSheet() {
       return showModalBottomSheet<void>(
@@ -148,6 +147,16 @@ class LifeProgressContent extends HookConsumerWidget {
     }, const []);
 
     useEffect(() {
+      final timer = Timer(
+        reviewRequestDelay,
+        () => unawaited(
+          ref.read(reviewRequestProvider.notifier).requestAtLaunchMilestone(),
+        ),
+      );
+      return timer.cancel;
+    }, const []);
+
+    useEffect(() {
       if (!isNotificationScheduled.value) return null;
       final timer = Timer(
         const Duration(seconds: 1),
@@ -170,12 +179,6 @@ class LifeProgressContent extends HookConsumerWidget {
       onTap: () {
         unawaited(AppHaptics.selectionClick());
         ref.read(displayModeManagerProvider.notifier).toggle();
-        if (!hasRequestedReview.value) {
-          hasRequestedReview.value = true;
-          unawaited(
-            ref.read(reviewRequestProvider.notifier).requestIfHeavyUser(),
-          );
-        }
       },
       onTapDown: (_) => isPressed.value = true,
       onTapUp: (_) => isPressed.value = false,

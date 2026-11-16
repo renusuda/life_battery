@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:life_battery/src/features/analytics/data/analytics_repository_provider.dart';
 import 'package:life_battery/src/features/launch_count/data/launch_count_repository_provider.dart';
+import 'package:life_battery/src/features/launch_count/presentation/providers/in_app_review_provider.dart';
+import 'package:life_battery/src/features/launch_count/presentation/providers/review_request_provider.dart';
 import 'package:life_battery/src/features/lifespan/domain/lifespan_range.dart';
 import 'package:life_battery/src/features/lifespan/presentation/pages/lifespan_progress_page.dart';
 import 'package:life_battery/src/features/lifespan/presentation/providers/display_mode_manager_provider.dart';
@@ -12,6 +15,8 @@ import 'package:life_battery/src/features/lifespan/presentation/widgets/battery_
 import 'package:life_battery/src/features/lifespan/presentation/widgets/date_input_bottom_sheet.dart';
 
 import '../../../../../test_helpers/extensions.dart';
+import '../../../../../test_helpers/fake_analytics.dart';
+import '../../../../../test_helpers/fake_in_app_review.dart';
 import '../../../../../test_helpers/fake_launch_count.dart';
 import '../../../../../test_helpers/test_app.dart';
 
@@ -54,22 +59,24 @@ void main() {
       expect(find.textContaining(RegExp(r'\d+d')), findsNothing);
     });
 
-    testWidgets('Checks the review request only on the first tap', (
+    testWidgets('Asks for a review shortly after the fifth launch is shown', (
       tester,
     ) async {
       tester.platformDispatcher.localesTestValue = [const Locale('en')];
-      final fakeLaunchCount = FakeLaunchCountLocalDataSource();
+      final fakeInAppReview = FakeInAppReview();
       await tester.pumpWidget(
-        TestLifeProgressContent(fakeLaunchCount: fakeLaunchCount),
+        TestLifeProgressContent(
+          fakeLaunchCount: FakeLaunchCountLocalDataSource(launchCount: 4),
+          fakeInAppReview: fakeInAppReview,
+        ),
       );
       await tester.pump();
+      expect(fakeInAppReview.requestReviewCount, 0);
 
-      await tester.tap(find.byType(LifeProgressContent));
-      await tester.pump();
-      await tester.tap(find.byType(LifeProgressContent));
+      await tester.pump(reviewRequestDelay);
       await tester.pump();
 
-      expect(fakeLaunchCount.getCallCount, 1);
+      expect(fakeInAppReview.requestReviewCount, 1);
     });
 
     testWidgets('Displays the default label above the battery', (
@@ -286,11 +293,14 @@ void main() {
 class TestLifeProgressContent extends HookWidget {
   const TestLifeProgressContent({
     this.fakeLaunchCount,
+    this.fakeInAppReview,
     this.batteryLabel,
     super.key,
   });
 
   final FakeLaunchCountLocalDataSource? fakeLaunchCount;
+
+  final FakeInAppReview? fakeInAppReview;
 
   final String? batteryLabel;
 
@@ -303,6 +313,12 @@ class TestLifeProgressContent extends HookWidget {
         displayModeManagerProvider.overrideWith(FakeDisplayModeManager.new),
         launchCountLocalDataSourceProvider.overrideWithValue(
           fakeLaunchCount ?? FakeLaunchCountLocalDataSource(),
+        ),
+        analyticsApiDataSourceProvider.overrideWithValue(
+          FakeAnalyticsApiDataSource(),
+        ),
+        inAppReviewProvider.overrideWithValue(
+          fakeInAppReview ?? FakeInAppReview(),
         ),
       ],
       child: TestApp(

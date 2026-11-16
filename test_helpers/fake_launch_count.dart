@@ -10,11 +10,8 @@ class FakeLaunchCountLocalDataSource implements LaunchCountLocalDataSource {
 
   bool hasRequestedReview;
 
-  int getCallCount = 0;
-
   @override
   Future<int> getLaunchCount() async {
-    getCallCount++;
     return launchCount;
   }
 

@@ -42,14 +42,6 @@ void main() {
       expect(request.launchCount, isNull);
     });
 
-    test('Leaves the one-time request for heavy users untouched', () async {
-      await container
-          .read(reviewRequestProvider.notifier)
-          .requestAfterOnboarding();
-
-      expect(fakeLaunchCount.hasRequestedReview, isFalse);
-    });
-
     test('Does nothing when the store prompt is unavailable', () async {
       fakeInAppReview.available = false;
 
@@ -62,26 +54,84 @@ void main() {
     });
   });
 
-  group('requestIfHeavyUser', () {
-    test('Asks once from the tenth launch and records it', () async {
-      fakeLaunchCount.launchCount = reviewRequestLaunchCount;
+  group('requestAtLaunchMilestone', () {
+    test('Asks on the fifth launch and logs review_request', () async {
+      fakeLaunchCount.launchCount = 4;
 
-      await container.read(reviewRequestProvider.notifier).requestIfHeavyUser();
-      await container.read(reviewRequestProvider.notifier).requestIfHeavyUser();
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAtLaunchMilestone();
 
       expect(fakeInAppReview.requestReviewCount, 1);
-      expect(fakeLaunchCount.hasRequestedReview, isTrue);
       final request = fakeAnalytics.reviewRequests.single;
       expect(request.source, ReviewRequestSource.launchCount);
-      expect(request.launchCount, reviewRequestLaunchCount);
+      expect(request.launchCount, 5);
     });
 
-    test('Does not ask before the tenth launch', () async {
-      fakeLaunchCount.launchCount = reviewRequestLaunchCount - 1;
+    test('Asks on the tenth launch', () async {
+      fakeLaunchCount.launchCount = 9;
 
-      await container.read(reviewRequestProvider.notifier).requestIfHeavyUser();
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAtLaunchMilestone();
+
+      expect(fakeInAppReview.requestReviewCount, 1);
+      expect(fakeAnalytics.reviewRequests.single.launchCount, 10);
+    });
+
+    for (final previousLaunchCount in [3, 5, 8, 10]) {
+      test('Does not ask on launch ${previousLaunchCount + 1}', () async {
+        fakeLaunchCount.launchCount = previousLaunchCount;
+
+        await container
+            .read(reviewRequestProvider.notifier)
+            .requestAtLaunchMilestone();
+
+        expect(fakeInAppReview.requestReviewCount, 0);
+        expect(fakeAnalytics.reviewRequests, isEmpty);
+      });
+    }
+
+    test('Asks only once in a launch', () async {
+      fakeLaunchCount.launchCount = 4;
+
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAtLaunchMilestone();
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAtLaunchMilestone();
+
+      expect(fakeInAppReview.requestReviewCount, 1);
+    });
+
+    test('Does not ask in the launch that finished onboarding', () async {
+      fakeLaunchCount.launchCount = 4;
+
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAfterOnboarding();
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAtLaunchMilestone();
+
+      expect(fakeInAppReview.requestReviewCount, 1);
+      expect(
+        fakeAnalytics.reviewRequests.single.source,
+        ReviewRequestSource.onboarding,
+      );
+    });
+
+    test('Does nothing when the store prompt is unavailable', () async {
+      fakeLaunchCount.launchCount = 4;
+      fakeInAppReview.available = false;
+
+      await container
+          .read(reviewRequestProvider.notifier)
+          .requestAtLaunchMilestone();
 
       expect(fakeInAppReview.requestReviewCount, 0);
+      expect(fakeAnalytics.reviewRequests, isEmpty);
     });
   });
 }
