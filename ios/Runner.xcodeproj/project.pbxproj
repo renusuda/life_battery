@@ -19,7 +19,6 @@
 		B5A9A4D32F40334E00F4C082 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A9A4D22F40334E00F4C082 /* WidgetKit.framework */; };
 		B5A9A4D52F40334E00F4C082 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A9A4D42F40334E00F4C082 /* SwiftUI.framework */; };
 		B5A9A4E02F40335000F4C082 /* LifeBatteryWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B5A9A4D12F40334E00F4C082 /* LifeBatteryWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B5AA52F02EF2FCBB004484CD /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = B5AA52EF2EF2FCBB004484CD /* AppIcon.icon */; };
 		B5B45D72303ABA5E00160CA2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B45D71303ABA5E00160CA2 /* StoreKit.framework */; };
 		B5C0FFEE2F5A000100A1B2C3 /* WidgetGuideVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0FFED2F5A000100A1B2C3 /* WidgetGuideVideoView.swift */; };
 		BE244E5019DA32EC98AF9FC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC36663C6075842BAE851D23 /* GoogleService-Info.plist */; };
@@ -91,7 +90,6 @@
 		B5A9A4D22F40334E00F4C082 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B5A9A4D42F40334E00F4C082 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		B5A9A59F2F4096D400F4C082 /* LifeBatteryWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeBatteryWidgetExtension.entitlements; sourceTree = "<group>"; };
-		B5AA52EF2EF2FCBB004484CD /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		B5B45D71303ABA5E00160CA2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B5C0FFED2F5A000100A1B2C3 /* WidgetGuideVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetGuideVideoView.swift; sourceTree = "<group>"; };
 		EC36663C6075842BAE851D23 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -209,7 +207,6 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
-				B5AA52EF2EF2FCBB004484CD /* AppIcon.icon */,
 				B51EDA862D3E6FA4005B3722 /* Runner.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
@@ -381,7 +378,6 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
-				B5AA52F02EF2FCBB004484CD /* AppIcon.icon in Resources */,
 				BE244E5019DA32EC98AF9FC2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
