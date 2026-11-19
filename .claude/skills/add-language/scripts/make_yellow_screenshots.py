@@ -87,11 +87,26 @@ def ink(f, text):
     return ImageDraw.Draw(Image.new("L", (1, 1))).textbbox((0, 0), text, font=f, anchor="mm")
 
 
+def stack(f, texts, size, cy):
+    """Line middles and ink boxes, spaced so that tall scripts don't collide."""
+    boxes = [ink(f, t) for t in texts]
+    step = 1.333 * size
+    for upper, lower in zip(boxes, boxes[1:]):
+        step = max(step, upper[3] - lower[1] + 0.12 * size)
+    return [cy + (i - (len(texts) - 1) / 2) * step for i in range(len(texts))], boxes
+
+
 def group_size(group):
+    """Largest size at which every headline of the type fits its box in width and height."""
     g = LAYOUTS[group]
-    texts = [t for n in FRAMES if FRAMES[n][0] == group for t in headline(n)]
-    widest = max(ink(font(100), t)[2] - ink(font(100), t)[0] for t in texts)
-    return min(g["size"], 100 * g["width"] / widest)
+    names = [n for n in FRAMES if FRAMES[n][0] == group]
+    f = font(100)
+    size = min(g["size"], min(100 * g["width"] / (b[2] - b[0]) for n in names for b in map(lambda t: ink(f, t), headline(n))))
+    for n in names:  # tall scripts such as Nastaliq run out of height before width
+        middles, boxes = stack(f, headline(n), 100, 0)
+        size = min(size, 100 * (g["cy"] - 60) / -(middles[0] + boxes[0][1]),
+                   100 * (g["tt"] - 60 - g["cy"]) / (middles[-1] + boxes[-1][3]))
+    return size
 
 
 def place_device(name, a, canvas):
@@ -133,12 +148,8 @@ def draw_headline(name, canvas, size):
     g = LAYOUTS[FRAMES[name][0]]
     f = font(size)
     texts = headline(name)
-    boxes = [ink(f, t) for t in texts]
-    step = 1.333 * size
-    for upper, lower in zip(boxes, boxes[1:]):
-        step = max(step, upper[3] - lower[1] + 0.12 * size)
-    middles = [g["cy"] + (i - (len(texts) - 1) / 2) * step for i in range(len(texts))]
-    if middles[0] + boxes[0][1] < 60 or middles[-1] + boxes[-1][3] > g["tt"] - 60:
+    middles, boxes = stack(f, texts, size, g["cy"])
+    if middles[0] + boxes[0][1] < 59 or middles[-1] + boxes[-1][3] > g["tt"] - 59:
         print(f"  warning: {name} headline is taller than its box")
     d = ImageDraw.Draw(canvas)
     for y, t in zip(middles, texts):

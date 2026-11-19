@@ -102,7 +102,7 @@ Yellow background (`#FBBF24`), navy headline (`#0F172A`) in the heaviest weight,
      --captions <captions.json> --font <font.ttf> [--variation Black] --review <scratchpad>/review.png
    ```
 
-   The script prints the font size of each screenshot type as a share of the largest size. Below 75%, shorten the wording or move the line break and run it again. Look at the review sheet: no leftover English, no broken or cut-off glyphs, headlines centered and clear of the device.
+   The script prints the font size of each screenshot type as a share of the largest size. Below 75%, shorten the wording or move the line break and run it again. Tall scripts such as Urdu Nastaliq are limited by height instead and stay below 75% however short the text is; never lengthen the text to make it fit. Look at the review sheet: no leftover English, no broken or cut-off glyphs, headlines centered and clear of the device.
 
 ## 6. In-app purchases (API, no commit)
 
