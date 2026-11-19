@@ -73,27 +73,36 @@ Add the language to `release_notes.json` in the same commit. The text is the tra
 
 ## 5. Screenshots (`chore: Add <Language> App Store screenshots`)
 
-Only the headline of the en-US screenshots is replaced; the screen inside the device stays English.
+Yellow background (`#FBBF24`), navy headline (`#0F172A`) in the heaviest weight, device enlarged so that only its upper part shows. Only the headline of the en-US screenshots is replaced; the screen inside the device stays English.
 
 1. Do not re-download the screenshots. A download rewrites every file with Apple's re-encoded bytes, and the next upload then re-sends them all.
-2. Set up the tools in the scratchpad: `python3 -m venv <scratchpad>/venv && <scratchpad>/venv/bin/pip install Pillow numpy fonttools`. Download `ofl/poppins/Poppins-Bold.ttf` from `https://github.com/google/fonts`. Thai, Indic and other scripts that need shaping only render correctly when Pillow has Raqm (`PIL.features.check("raqm")`); the script refuses to run without it. If it is missing, install FriBiDi and libraqm with Homebrew.
-3. Choose the headline font. Use Poppins Bold itself when it has every character of the captions. Otherwise pick the Google Font for the script that looks closest to Poppins Bold (Vietnamese used Be Vietnam Pro Bold). Check coverage with:
+2. Set up the tools in the scratchpad: `python3 -m venv <scratchpad>/venv && <scratchpad>/venv/bin/pip install Pillow numpy fonttools`. Pillow needs Raqm (`PIL.features.check("raqm")`) to shape Thai, Indic, Arabic and Hebrew; if it is missing, install FriBiDi and libraqm with Homebrew.
+3. Choose the headline font from `https://github.com/google/fonts` in its Black weight (a variable font takes `--variation Black`):
+
+   | Script | Font |
+   | --- | --- |
+   | Latin | Poppins Black (Vietnamese: Be Vietnam Pro Black) |
+   | Cyrillic | Montserrat |
+   | Japanese, Chinese, Korean | Noto Sans JP / SC / TC / KR |
+   | Thai | Prompt Black |
+   | Indic, Arabic, Hebrew | Noto Sans of the script (Urdu: Noto Nastaliq Urdu, `--variation Bold`) |
+
+   Check that the font has every character of the captions:
 
    ```bash
    <venv>/bin/python -I -c "import sys; from fontTools.ttLib import TTFont; m = TTFont(sys.argv[1]).getBestCmap(); print(sorted({c for c in sys.argv[2] if not c.isspace() and ord(c) not in m}))" <font.ttf> "<all caption text>"
    ```
 
-4. Translate the three headlines into two lines each (`{"0": [..], "1": [..], "2": [..]}`), keeping each line about as long as the English one. The en-US headlines are in `EN` in the script.
+4. Translate the three headlines into two lines each from en-US ("32% of your / life is left", "Always on your / Home Screen", "Just birth date / and ideal lifespan") and ja (「人生の残り時間 / あと32%」「ホーム画面で / いつでも見える」「入力は生年月日と / 理想の寿命だけ」), using the wording of the app's ARB file. Write `{"0": [..], "1": [..], "2": [..]}`. The iPhone Duo landscape shots join the two lines with a space; when that reads wrong (no spaces between words, different word order), add `"landscape": {"0": "..", "1": "..", "2": ".."}`.
 5. Generate and review:
 
    ```bash
-   <venv>/bin/python -I .claude/skills/add-language/scripts/replace_screenshot_headlines.py \
-     --poppins <Poppins-Bold.ttf> --font <font.ttf> [--variation Bold] \
-     --captions <captions.json> --src fastlane/screenshots/en-US \
-     --out fastlane/screenshots/<store locale> --review <scratchpad>/review.png
+   <venv>/bin/python -I .claude/skills/add-language/scripts/make_yellow_screenshots.py \
+     --src fastlane/screenshots/en-US --out fastlane/screenshots/<store locale> \
+     --captions <captions.json> --font <font.ttf> [--variation Black] --review <scratchpad>/review.png
    ```
 
-   Look at the review sheet: no leftover English, no broken or cut-off glyphs, headlines centered.
+   The script prints the font size of each screenshot type as a share of the largest size. Below 75%, shorten the wording or move the line break and run it again. Look at the review sheet: no leftover English, no broken or cut-off glyphs, headlines centered and clear of the device.
 
 ## 6. In-app purchases (API, no commit)
 
