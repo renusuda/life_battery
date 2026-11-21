@@ -203,20 +203,41 @@ func batteryColor(for percentage: Int) -> Color {
 }
 
 struct LockedWidgetView: View {
+  var entry: Provider.Entry
+
   var body: some View {
-    VStack(spacing: 8) {
-      Image(systemName: "lock.fill")
-        .font(.system(size: 24))
-        .foregroundColor(.secondary)
+    VStack(spacing: 6) {
+      // Teases the unlocked widget without letting the value itself be read.
+      BatteryLabelView(entry: entry, lineLimit: 1)
+        .blur(radius: 1)
+        .opacity(0.4)
+        .accessibilityHidden(true)
 
-      Text(String(localized: "widget.lockedTitle"))
-        .font(.system(size: 12, weight: .bold))
-        .foregroundColor(.primary)
+      ZStack {
+        BatteryGaugeView(entry: entry)
+          .blur(radius: 3)
+          .opacity(0.4)
+          .accessibilityHidden(true)
 
-      Text(String(localized: "widget.lockedDescription"))
-        .font(.system(size: 10))
-        .foregroundColor(.secondary)
-        .multilineTextAlignment(.center)
+        Image(systemName: "lock.fill")
+          .font(.system(size: 36))
+          .foregroundColor(.primary)
+      }
+
+      VStack(spacing: 2) {
+        Text(String(localized: "widget.lockedTitle"))
+          .font(.system(size: 12, weight: .bold))
+          .foregroundColor(.primary)
+          .lineLimit(1)
+          .minimumScaleFactor(0.8)
+
+        Text(String(localized: "widget.lockedDescription"))
+          .font(.system(size: 10))
+          .foregroundColor(.secondary)
+          .multilineTextAlignment(.center)
+          .lineLimit(2)
+          .minimumScaleFactor(0.8)
+      }
     }
     .padding(.horizontal, 4)
   }
@@ -227,64 +248,77 @@ struct LifeBatteryWidgetEntryView: View {
 
   var body: some View {
     if entry.isUnlocked {
-      unlockedBody
+      VStack(spacing: 8) {
+        BatteryLabelView(entry: entry, lineLimit: 2)
+
+        BatteryGaugeView(entry: entry)
+      }
+      .padding(.horizontal, 4)
     } else {
-      LockedWidgetView()
+      LockedWidgetView(entry: entry)
     }
   }
+}
 
-  private var unlockedBody: some View {
-    VStack(spacing: 8) {
-      // Only the built-in title is uppercased; a user's label is shown as typed,
-      // like on the home screen.
-      Text(entry.label ?? String(localized: "widget.titleLabel"))
-        .font(.system(size: 12, weight: .bold))
-        .textCase(entry.label == nil ? .uppercase : nil)
-        .foregroundColor(.primary)
-        .multilineTextAlignment(.center)
-        .lineLimit(2)
-        .minimumScaleFactor(0.8)
+struct BatteryLabelView: View {
+  var entry: Provider.Entry
+  var lineLimit: Int
 
-      HStack(spacing: 4) {
-        ZStack {
-          // Frame
-          RoundedRectangle(cornerRadius: 16)
-            .stroke(Color.primary, lineWidth: 4)
+  var body: some View {
+    // Only the built-in title is uppercased; a user's label is shown as typed,
+    // like on the home screen.
+    Text(entry.label ?? String(localized: "widget.titleLabel"))
+      .font(.system(size: 12, weight: .bold))
+      .textCase(entry.label == nil ? .uppercase : nil)
+      .foregroundColor(.primary)
+      .multilineTextAlignment(.center)
+      .lineLimit(lineLimit)
+      .minimumScaleFactor(0.8)
+  }
+}
 
-          // Filled bar (masked to percentage width)
-          RoundedRectangle(cornerRadius: 12)
-            .fill(batteryColor(for: entry.percentage))
-            .padding(6)
-            .mask(alignment: .leading) {
-              GeometryReader { geo in
-                let pct = CGFloat(max(min(entry.percentage, 100), 0))
-                Rectangle()
-                  .frame(width: geo.size.width * pct / 100)
-              }
+struct BatteryGaugeView: View {
+  var entry: Provider.Entry
+
+  var body: some View {
+    HStack(spacing: 4) {
+      ZStack {
+        // Frame
+        RoundedRectangle(cornerRadius: 16)
+          .stroke(Color.primary, lineWidth: 4)
+
+        // Filled bar (masked to percentage width)
+        RoundedRectangle(cornerRadius: 12)
+          .fill(batteryColor(for: entry.percentage))
+          .padding(6)
+          .mask(alignment: .leading) {
+            GeometryReader { geo in
+              let pct = CGFloat(max(min(entry.percentage, 100), 0))
+              Rectangle()
+                .frame(width: geo.size.width * pct / 100)
             }
+          }
 
-          // Display text (percentage or remaining days)
-          Text(verbatim: entry.isPercentageMode
-            ? "\(entry.percentage)%"
-            : "\(entry.remainingDays)\(String(localized: "widget.dayUnit"))")
-            .font(.system(size: 22, weight: .bold, design: .rounded).monospacedDigit())
-            .foregroundColor(.primary)
-            // Long translations of the day unit shrink instead of wrapping.
-            .lineLimit(1)
-            .minimumScaleFactor(0.5)
-        }
-        .frame(height: 56)
-
-        // Battery knob
-        UnevenRoundedRectangle(
-          bottomTrailingRadius: 10,
-          topTrailingRadius: 10
-        )
-        .fill(Color.primary)
-        .frame(width: 10, height: 20)
+        // Display text (percentage or remaining days)
+        Text(verbatim: entry.isPercentageMode
+          ? "\(entry.percentage)%"
+          : "\(entry.remainingDays)\(String(localized: "widget.dayUnit"))")
+          .font(.system(size: 22, weight: .bold, design: .rounded).monospacedDigit())
+          .foregroundColor(.primary)
+          // Long translations of the day unit shrink instead of wrapping.
+          .lineLimit(1)
+          .minimumScaleFactor(0.5)
       }
+      .frame(height: 56)
+
+      // Battery knob
+      UnevenRoundedRectangle(
+        bottomTrailingRadius: 10,
+        topTrailingRadius: 10
+      )
+      .fill(Color.primary)
+      .frame(width: 10, height: 20)
     }
-    .padding(.horizontal, 4)
   }
 }
 
