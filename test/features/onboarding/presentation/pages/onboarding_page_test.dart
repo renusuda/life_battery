@@ -173,7 +173,7 @@ void main() {
     );
   });
 
-  testWidgets('Enables the back button from the second step only', (
+  testWidgets('Shows the back button from the second step only', (
     tester,
   ) async {
     tester.platformDispatcher.localesTestValue = [const Locale('en')];
@@ -181,11 +181,11 @@ void main() {
     await tester.pump();
 
     final backFinder = find.byKey(const Key('onboardingBack'));
-    expect(tester.widget<IconButton>(backFinder).onPressed, isNull);
+    expect(backFinder, findsNothing);
 
     await goToBirthDate(tester);
 
-    expect(tester.widget<IconButton>(backFinder).onPressed, isNotNull);
+    expect(backFinder, findsOneWidget);
   });
 
   testWidgets('Goes back to the ideal lifespan step', (tester) async {
