@@ -13,8 +13,7 @@ class OnboardingProgressBar extends StatelessWidget {
 
   final int stepCount;
 
-  /// Null hides the back button on the first step, where the progress bar
-  /// takes the full width instead.
+  /// Null on the first step.
   final VoidCallback? onBack;
 
   @override
